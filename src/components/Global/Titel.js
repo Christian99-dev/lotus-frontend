@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Titel({ text, color }) {
-  return <Wrapper theme={color}>{text}</Wrapper>;
+export default function Titel({ text, color, spacing }) {
+  return (
+    <SpaceWrapper spacing={spacing}>
+      <Wrapper theme={color}>{text}</Wrapper>
+    </SpaceWrapper>
+  );
 }
 
 const Wrapper = styled.div`
   font-size: var(--fs-1);
   font-weight: var(--semibold);
-  color: ${props => props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
+  color: ${(props) =>
+    props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
   display: inline-block;
   position: relative;
 
@@ -20,7 +26,8 @@ const Wrapper = styled.div`
     left: 0;
     height: 4px;
     border-radius: 10px;
-    background-color: ${props => props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
+    background-color: ${(props) =>
+      props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
     transition: width 0.25s ease-out;
   }
 

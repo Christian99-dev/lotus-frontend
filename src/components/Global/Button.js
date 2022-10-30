@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SpaceWrapper from "../utils/SpaceWrapper";
+import SpaceWrapper from "../../utils/SpaceWrapper";
 
 export default function Button({ color, text, spacing }) {
   const theme = {
