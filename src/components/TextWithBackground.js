@@ -23,4 +23,11 @@ const Wrapper = styled.div`
   font-weight: var(--semibold);
   background-color: ${(props) => props.theme === "purple" ? "var(--primary)" : "var(--secondary)"};
   color: ${(props) => props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
+  
+  transition: all 0.2s;
+  :hover{
+    transition: all 0.2s;
+    background-color: ${(props) => props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
+    color: ${(props) => props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
+  }
 `;
