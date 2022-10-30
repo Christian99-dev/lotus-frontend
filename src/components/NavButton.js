@@ -1,26 +1,28 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Titel({ text, color }) {
-  return <Wrapper theme={color}>{text}</Wrapper>;
+export default function NavButton({ text, className }) {
+  return <Wrapper className={className}>{text}</Wrapper>;
 }
 
 const Wrapper = styled.div`
-  font-size: var(--fs-1);
+  font-size: var(--fs-3);
   font-weight: var(--semibold);
-  color: ${props => props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
+  color: var(--primary);
   display: inline-block;
   position: relative;
+
+ 
 
   &:after {
     content: "";
     position: absolute;
-    width: 30%;
+    width: 0;
     bottom: 0;
     left: 0;
-    height: 4px;
+    height: 2px;
     border-radius: 10px;
-    background-color: ${props => props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
+    background-color: var(--primary);
     transition: width 0.25s ease-out;
   }
 
@@ -28,4 +30,11 @@ const Wrapper = styled.div`
     transition: width 0.25s ease-out;
     width: 100%;
   }
+
+  &.active:after {
+    color: red;
+    width: 100%;
+  }
+
+  
 `;
