@@ -16,7 +16,9 @@ const GlobalStyle = createGlobalStyle`
     --black : #4C4452;
     --primary: #8C43CF;
     --primary-dim: rgba(140,67,207,0.40);
+    --primary-filter: invert(37%) sepia(45%) saturate(6819%) hue-rotate(256deg) brightness(86%) contrast(86%);
     --secondary: #FFE9FF;
+    --secondary-filter: invert(100%) sepia(18%) saturate(7496%) hue-rotate(188deg) brightness(106%) contrast(106%);
     --yellow: #FFC552;
 
     --semibold:600;
@@ -29,12 +31,16 @@ const GlobalStyle = createGlobalStyle`
 
     --transition-time: 0.2s;
 
+    --border: 250px;
+
     /** Tablet */
     @media (max-width: 820px) {
       --fs-1: 35px;
       --fs-2: 21.87px;
       --fs-3: 15.75px;
       --fs-4: 12.25px;
+
+      --border: 50px;
     }
 
     /** Mobile */
@@ -43,6 +49,8 @@ const GlobalStyle = createGlobalStyle`
       --fs-2: 18.75px;
       --fs-3: 13.5px;
       --fs-4: 10.5px;
+
+      --border: 20px;
     }
      
   }

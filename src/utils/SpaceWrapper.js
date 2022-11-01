@@ -4,7 +4,7 @@ const SpaceWrapper = ({ spacing, children, ...props }) => {
   /**
    * No Spacing declared - funnels children
    */
-  if (!spacing) return children;
+  if (!spacing) return <div {...props}>{children}</div>;
 
   const { top = spacing.top ? spacing.top : 0 } = spacing;
   const { right = spacing.right ? spacing.right : 0 } = spacing;
@@ -13,7 +13,7 @@ const SpaceWrapper = ({ spacing, children, ...props }) => {
 
   return (
     <div
-      style={{ margin: `${top}px ${right}px ${bottom}px ${left}px` }}
+      style={{ padding: `${top}px ${right}px ${bottom}px ${left}px` }}
       {...props}
     >
       {children}

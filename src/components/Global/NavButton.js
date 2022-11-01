@@ -12,8 +12,6 @@ const Wrapper = styled.div`
   display: inline-block;
   position: relative;
 
- 
-
   &:after {
     content: "";
     position: absolute;
@@ -23,18 +21,19 @@ const Wrapper = styled.div`
     height: 2px;
     border-radius: 10px;
     background-color: var(--primary);
-    transition: width 0.25s ease-out;
+    transition: width var(--transition-time) ease-out;
   }
 
-  &:hover:after {
-    transition: width 0.25s ease-out;
-    width: 100%;
+  &:hover {
+    cursor: pointer;
+    &:after {
+      transition: width var(--transition-time) ease-out;
+      width: 100%;
+    }
   }
 
   &.active:after {
     color: red;
     width: 100%;
   }
-
-  
 `;
