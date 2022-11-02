@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 
 const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
   /**
@@ -27,8 +26,3 @@ const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
 };
 
 export default SpaceWrapper;
-
-// CENTER
-
- const Wrapper = styled.div`
- `
