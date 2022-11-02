@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Titel({ text, color, spacing }) {
+export default function Titel({ text, color, spacing, center }) {
   return (
-    <SpaceWrapper spacing={spacing}>
+    <SpaceWrapper center={center} spacing={spacing}>
       <Wrapper theme={color}>{text}</Wrapper>
     </SpaceWrapper>
   );
@@ -17,6 +17,7 @@ const Wrapper = styled.div`
     props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
   display: inline-block;
   position: relative;
+  
 
   &:after {
     content: "";

@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
 
-const SpaceWrapper = ({ spacing, children, ...props }) => {
+const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
   /**
    * No Spacing declared - funnels children
    */
@@ -11,15 +12,23 @@ const SpaceWrapper = ({ spacing, children, ...props }) => {
   const { bottom = spacing.bottom ? spacing.bottom : 0 } = spacing;
   const { left = spacing.left ? spacing.left : 0 } = spacing;
 
+  let style = margin
+    ? { margin: `${top}px ${right}px ${bottom}px ${left}px` }
+    : { padding: `${top}px ${right}px ${bottom}px ${left}px` };
+
+  if(center)
+    style = {...style, textAlign:"center"}
+
   return (
-    <div
-      style={{ padding: `${top}px ${right}px ${bottom}px ${left}px` }}
-      {...props}
-    >
+    <div style={style} {...props}>
       {children}
     </div>
   );
-
 };
 
 export default SpaceWrapper;
+
+// CENTER
+
+ const Wrapper = styled.div`
+ `

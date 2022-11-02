@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import SpaceWrapper from "../utils/SpaceWrapper";
+import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function TextWithBackground ({ text, color, fontSize, spacing }) {
+export default function TextWithBackground ({ text, color, fontSize, spacing, ...props }) {
 
       console.log(color);
   return (
-    <SpaceWrapper spacing={spacing}>
+    <SpaceWrapper spacing={spacing} {...props}>
       <Wrapper theme={color} fontSize={`var(--fs-${fontSize})`}>
         {text}
       </Wrapper>
