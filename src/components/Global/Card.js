@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import SpaceWrapper from "../utils/SpaceWrapper";
-import Icon from "./Global/Icon";
+import SpaceWrapper from "../../utils/SpaceWrapper";
+import Icon from "./Icon";
 
 export default function Card({ title, text, icon }) {
   return (
