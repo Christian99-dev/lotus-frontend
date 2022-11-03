@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function TextWithBackground ({ text, color, fontSize, spacing, ...props }) {
-
-      console.log(color);
+export default function TextWithBackground({
+  text,
+  color,
+  fontSize,
+  spacing,
+  ...props
+}) {
   return (
     <SpaceWrapper spacing={spacing} {...props}>
       <Wrapper theme={color} fontSize={`var(--fs-${fontSize})`}>
@@ -12,7 +16,7 @@ export default function TextWithBackground ({ text, color, fontSize, spacing, ..
       </Wrapper>
     </SpaceWrapper>
   );
-};
+}
 
 const Wrapper = styled.div`
   padding: 1px;
@@ -21,13 +25,17 @@ const Wrapper = styled.div`
 
   font-size: ${(props) => props.fontSize};
   font-weight: var(--semibold);
-  background-color: ${(props) => props.theme === "purple" ? "var(--primary)" : "var(--secondary)"};
-  color: ${(props) => props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
-  
+  background-color: ${(props) =>
+    props.theme === "purple" ? "var(--primary)" : "var(--secondary)"};
+  color: ${(props) =>
+    props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
+
   transition: all 0.2s;
-  :hover{
+  :hover {
     transition: all 0.2s;
-    background-color: ${(props) => props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
-    color: ${(props) => props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
+    background-color: ${(props) =>
+      props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
+    color: ${(props) =>
+      props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
 `;

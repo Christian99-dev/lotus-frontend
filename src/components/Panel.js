@@ -42,6 +42,6 @@ display: flex;
   .img {
     margin-left: -300px;
     width: 75%;
-    background: center / cover no-repeat url(${(props) => props.bgImg});
+    background: center / cover no-repeat fixed url(${(props) => props.bgImg});
   }
 `;

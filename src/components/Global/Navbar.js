@@ -43,23 +43,25 @@ const TopWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 var(--border);
-  }
+    
 
-  .left {
-    color: var(--secondary);
-    font-size: var(--fs-3);
-    font-weight: var(--semibold);
-  }
+    .left {
+      color: var(--secondary);
+      font-size: var(--fs-3);
+      font-weight: var(--semibold);
+      flex: 1 1 0;
+    }
 
-  .right {
-    display: flex;
-    gap: 50px;
+    .right {
+      display: flex;
+      gap: 50px;
+      flex: 1 1 0;
+    }
   }
 `;
 
 const Info = ({ text, iconColor, iconName, iconHeight }) => (
   <InfoWrapper>
-    {console.log(iconColor)}
     <Icon height={iconHeight} name={iconName} color={iconColor} />
     <div>{text}</div>
   </InfoWrapper>
@@ -79,7 +81,7 @@ const InfoWrapper = styled.div`
 const Bottom = () => {
   return (
     <BottomWrapper>
-      <SpaceWrapper spacing={{top: 50, bottom: 50}}className="links">
+      <SpaceWrapper spacing={{ top: 50, bottom: 50 }} className="links">
         <NavButton text="Home" className="active" />
         <NavButton text="Leistungen" />
         <NavButton text="Arbeit" />
@@ -88,7 +90,7 @@ const Bottom = () => {
         <NavButton text="Rezensionen" />
         <NavButton text="Impressum" />
       </SpaceWrapper>
-      <SpaceWrapper spacing={{bottom: 50}} className="logo-container">
+      <SpaceWrapper spacing={{ bottom: 50 }} className="logo-container">
         <img src={LogoText} alt="logo-text" />
       </SpaceWrapper>
     </BottomWrapper>
@@ -105,7 +107,7 @@ const BottomWrapper = styled.div`
   }
 
   .logo-container {
-    img{
+    img {
       margin: 0 auto;
       display: block;
     }

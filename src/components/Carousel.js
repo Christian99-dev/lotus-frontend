@@ -32,7 +32,7 @@ export default function Carousel() {
 }
 
 const CarouselWrapper = styled.div`
-  background: center / cover no-repeat url(${props => props.bgFilter}) , center / cover no-repeat url(${props => props.bgImg});
+  background: center / cover no-repeat url(${props => props.bgFilter}) , center / cover no-repeat fixed url(${props => props.bgImg});
 
   .text1,
   .text2 {

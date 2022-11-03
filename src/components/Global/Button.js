@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Button({ color, text, spacing }) {
+export default function Button({ color, text, spacing, ...props }) {
   const theme = {
     shadow: "none",
     color: "var(--primary)",
@@ -28,7 +28,7 @@ export default function Button({ color, text, spacing }) {
   }
 
   return (
-    <SpaceWrapper spacing={spacing}>
+    <SpaceWrapper spacing={spacing} {...props}>
       <Wrapper theme={theme}>{text}</Wrapper>
     </SpaceWrapper>
   );
@@ -40,6 +40,7 @@ const Wrapper = styled.button`
   font-weight: var(--semibold);
   border-radius: 10px;
   border: none;
+  width: 100%;
 
   box-shadow: ${(props) => props.theme.shadow};
   color: ${(props) => props.theme.color};
