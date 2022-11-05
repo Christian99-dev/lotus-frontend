@@ -1,5 +1,7 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import Navbar from "../components/Global/Navbar";
+import Footer from "../components/Global/Footer";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -36,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --secondary: #FFE9FF;
     --secondary-filter: invert(100%) sepia(18%) saturate(7496%) hue-rotate(188deg) brightness(106%) contrast(106%);
     --yellow: #FFC552;
+    --yellow-filter: invert(94%) sepia(39%) saturate(4595%) hue-rotate(314deg) brightness(100%) contrast(101%);
 
     --semibold:600;
     --medium:500; 
@@ -76,7 +79,9 @@ export default function Layout({ children }) {
   return (
     <React.Fragment>
       <GlobalStyle />
+      <Navbar/>
       {children}
+      <Footer/>
     </React.Fragment>
   );
 }
