@@ -17,7 +17,6 @@ import Whatsapp from "../../media/icons/whatsapp.svg";
 
 export default function Icon({ name, height, color, ...props }) {
   let icon;
-
   if (name === "time") icon = Time;
   if (name === "mail") icon = Mail;
   if (name === "phone") icon = Phone;
@@ -31,7 +30,6 @@ export default function Icon({ name, height, color, ...props }) {
   if (name === "facebook") icon = Facebook;
   if (name === "instagram") icon = Instagram;
   if (name === "whatsapp") icon = Whatsapp;
-
 
   return (
     <Wrapper src={icon} alt="icon" height={height} color={color} {...props} />

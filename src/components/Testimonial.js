@@ -31,7 +31,6 @@ const Comment = () => (
       <img className="img" src={img} alt="img" />
       <img className="speech" src={speech} alt="speech" />
     </div>
-
     <TextWithBackground text="Christian David" fontSize={3} />
     <Stars spacing={{ top: 30, bottom: 30 }} />
     <SpaceWrapper spacing={{ bottom: 40 }} className="text">
@@ -60,8 +59,8 @@ const CommentWrapper = styled.div`
       position: absolute;
       top: 0;
       bottom: 0;
-      left:90%;
-      right:0;
+      left: 90%;
+      right: 0;
       z-index: -1;
     }
   }
@@ -69,6 +68,7 @@ const CommentWrapper = styled.div`
   .text {
     margin: 0 auto;
     width: 60%;
+    font-size: var(--fs-4);
   }
 
   .name {

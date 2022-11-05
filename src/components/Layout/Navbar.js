@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import NavButton from "./NavButton";
+import NavButton from "../Global/NavButton";
 import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
-import Icon from "./Icon";
+import Icon from "../Global/Icon";
 
 export default function Navbar() {
   return (

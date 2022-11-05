@@ -1,22 +1,21 @@
 import React from "react";
 
 const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
-  /**
-   * No Spacing declared - funnels children
-   */
+ 
+  // No Spacing declared - funnels children
   if (!spacing) return <div {...props}>{children}</div>;
 
-  const { top = spacing.top ? spacing.top : 0 } = spacing;
-  const { right = spacing.right ? spacing.right : 0 } = spacing;
-  const { bottom = spacing.bottom ? spacing.bottom : 0 } = spacing;
-  const { left = spacing.left ? spacing.left : 0 } = spacing;
+  // Pixel
+  const top = Asigne(spacing.top);
+  const right = Asigne(spacing.right);
+  const bottom = Asigne(spacing.bottom);
+  const left = Asigne(spacing.left);
 
-  let style = margin
-    ? { margin: `${top}px ${right}px ${bottom}px ${left}px` }
-    : { padding: `${top}px ${right}px ${bottom}px ${left}px` };
+  // Margin or Padding
+  let style = MarginOrPadding(margin, top, right, bottom, left);
 
-  if(center)
-    style = {...style, textAlign:"center"}
+  // Center inline childs
+  if (center) style = { ...style, textAlign: "center" };
 
   return (
     <div style={style} {...props}>
@@ -26,3 +25,14 @@ const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
 };
 
 export default SpaceWrapper;
+
+const Asigne = (value) => {
+  if(!value) return "0px"
+  if(value === "border") return "var(--border)";
+  if(value) return value + "px";
+}
+
+const MarginOrPadding = (margin, top, right, bottom, left) => {
+  if(margin) return { margin: `${top} ${right} ${bottom} ${left}` };
+  return { padding: `${top} ${right} ${bottom} ${left}` };
+}

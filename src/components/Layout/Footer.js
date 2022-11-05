@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Icon from "../Global/Icon";
+import SpaceWrapper from "../../utils/SpaceWrapper";
 export default function Footer() {
   return (
-    <FooterWrapper>
+    <FooterWrapper
+      spacing={{ top: 50, bottom: 50, left: "border", right: "border" }}
+    >
       <div className="col">
         <div className="head">Social Media</div>
         <div className="row icons">
@@ -40,11 +43,9 @@ export default function Footer() {
   );
 }
 
-const FooterWrapper = styled.div`
+const FooterWrapper = styled(SpaceWrapper)`
   color: var(--secondary);
   background-color: var(--primary);
-  padding: 50px var(--border);
-
   display: flex;
   justify-content: space-between;
 
@@ -60,7 +61,7 @@ const FooterWrapper = styled.div`
       justify-content: space-between;
     }
 
-    &.icon{
+    &.icon {
       display: flex;
       gap: 10px;
     }
