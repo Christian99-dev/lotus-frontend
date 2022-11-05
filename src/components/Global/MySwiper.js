@@ -13,6 +13,7 @@ export default function MySwiper({ array }) {
       pagination={{ clickable: true, dynamicBullets: true }}
       navigation={{ clickable: true }}
       loop={true}
+      slidesPerView={1}
     >
       {array.map((slide, key) => (
         <SwiperSlide key={key}>{slide}</SwiperSlide>
@@ -24,13 +25,16 @@ export default function MySwiper({ array }) {
 const MySwiperWrapper = styled(Swiper)`
   .swiper-pagination {
     bottom: 0 !important;
-    .swiper-pagination-bullet{
+    .swiper-pagination-bullet {
+      background-color: var(--primary);
     }
   }
   .swiper-button-next {
     right: var(--border);
+    color: var(--primary);
   }
   .swiper-button-prev {
     left: var(--border);
+    color: var(--primary);
   }
 `;
