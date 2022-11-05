@@ -7,6 +7,9 @@ import Wrench from "../../media/icons/wrench.svg";
 import Sync from "../../media/icons/sync.svg";
 import Drop from "../../media/icons/drop.svg";
 import Location from "../../media/icons/location.svg";
+import StarFull from "../../media/icons/star-full.svg";
+import StarHalf from "../../media/icons/star-half.svg";
+import StarEmpty from "../../media/icons/star-empty.svg";
 
 export default function Icon({ name, height, color, ...props }) {
   let icon;
@@ -18,8 +21,13 @@ export default function Icon({ name, height, color, ...props }) {
   if (name === "sync") icon = Sync;
   if (name === "drop") icon = Drop;
   if (name === "location") icon = Location;
+  if (name === "starFull") icon = StarFull;
+  if (name === "starHalf") icon = StarHalf;
+  if (name === "starEmpty") icon = StarEmpty;
 
-  return <Wrapper src={icon} alt="icon" height={height} color={color} {...props} />;
+  return (
+    <Wrapper src={icon} alt="icon" height={height} color={color} {...props} />
+  );
 }
 
 const Wrapper = styled.img`
@@ -27,5 +35,7 @@ const Wrapper = styled.img`
   filter: ${(props) =>
     props.color === "purple"
       ? "var(--primary-filter);"
+      : props.color === "yellow"
+      ? "var(--yellow-filter);"
       : "var(--secondary-filter);"};
 `;
