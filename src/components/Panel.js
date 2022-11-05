@@ -7,7 +7,10 @@ import bgImg from "./../media/images/img2.png";
 export default function Panel() {
   return (
     <PannelWrapper bgImg={bgImg}>
-      <SpaceWrapper spacing={{ top: 150, bottom: 150 }} className="box">
+      <SpaceWrapper
+        spacing={{ top: 150, bottom: 150, left: "border", right: "border" }}
+        className="box"
+      >
         <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
         <div className="text">
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -20,17 +23,15 @@ export default function Panel() {
           et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
         </div>
       </SpaceWrapper>
-        <div className="img"/>
+      <div className="img" />
     </PannelWrapper>
   );
 }
 
 const PannelWrapper = styled.div`
-display: flex;
+  display: flex;
   .box {
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
-    padding-left: var(--border) !important;
-    padding-right: var(--border) !important;
     background-color: var(--primary);
     width: 25%;
     .text {

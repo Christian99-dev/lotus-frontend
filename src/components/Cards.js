@@ -6,14 +6,14 @@ import Icon from "../components/Global/Icon";
 
 export default function Cards() {
   return (
-    <CardsWrapper>
+    <CardsWrapper spacing={{left: "border", right: "border", top: 100, bottom: 200}}>
       <Title
         center
         text="Unsere Leistung"
-        spacing={{ top: 100, bottom: 100 }}
+        spacing={{ bottom: 100 }}
         color="purple"
       />
-      <SpaceWrapper className="cards" spacing={{ bottom: 200 }}>
+      <div className="cards">
         <Card
           text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
           title="Reinigen"
@@ -29,15 +29,14 @@ export default function Cards() {
           title="Reinigen"
           icon="wrench"
         />
-      </SpaceWrapper>
+      </div>
     </CardsWrapper>
   );
 }
 
-const CardsWrapper = styled.div`
+const CardsWrapper = styled(SpaceWrapper)`
   .cards {
     display: flex;
-    margin: 0 var(--border);
     justify-content: space-between;
     gap: 40px;
   }

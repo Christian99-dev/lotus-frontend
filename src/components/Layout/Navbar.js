@@ -16,7 +16,7 @@ export default function Navbar() {
 
 // Top
 const Top = () => (
-  <TopWrapper>
+  <TopWrapper spacing={{ left: "border", right: "border" }}>
     <div className="container">
       <div className="left">Lotus-Entwässerungstechnik</div>
       <div className="right">
@@ -32,7 +32,7 @@ const Top = () => (
   </TopWrapper>
 );
 
-const TopWrapper = styled.div`
+const TopWrapper = styled(SpaceWrapper)`
   display: flex;
   height: 50px;
   background-color: var(--primary);
@@ -42,20 +42,15 @@ const TopWrapper = styled.div`
   .container {
     display: flex;
     justify-content: space-between;
-    margin: 0 var(--border);
-    
-
     .left {
       color: var(--secondary);
       font-size: var(--fs-3);
       font-weight: var(--semibold);
-      flex: 1 1 0;
     }
 
     .right {
       display: flex;
       gap: 50px;
-      flex: 1 1 0;
     }
   }
 `;

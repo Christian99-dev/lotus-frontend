@@ -8,14 +8,11 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 
 export default function Team() {
   return (
-    <TeamWrapper>
-      <Titel
-        center
-        text="Das Team"
-        spacing={{ top: 100, bottom: 100 }}
-        color="purple"
-      />
-      <SpaceWrapper spacing={{ bottom: 200 }} className="container">
+    <TeamWrapper
+      spacing={{ left: "border", right: "border", top: 100, bottom: 200 }}
+    >
+      <Titel center text="Das Team" spacing={{ bottom: 100 }} color="purple" />
+      <div className="container">
         <Person
           className="person"
           img={img1}
@@ -31,18 +28,17 @@ export default function Team() {
           name="Max Mustermann"
           right
         />
-      </SpaceWrapper>
+      </div>
     </TeamWrapper>
   );
 }
 
-const TeamWrapper = styled.div`
+const TeamWrapper = styled(SpaceWrapper)`
   .container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 10%;
-    margin: 0 var(--border);
     .person {
       flex: 1 1 0;
     }
