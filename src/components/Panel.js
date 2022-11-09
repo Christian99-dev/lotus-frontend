@@ -4,6 +4,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
 import bgImg from "./../media/images/img2.png";
 import { Parallax } from "react-parallax";
+import logo_transparent from "../media/illu/logo_transparent.svg";
 
 export default function Panel() {
   return (
@@ -14,6 +15,7 @@ export default function Panel() {
       >
         <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
         <div className="text">
+          <img className="logo" src={logo_transparent} alt="logo" />
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
           sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
@@ -31,16 +33,24 @@ export default function Panel() {
 
 const PannelWrapper = styled(Parallax)`
   display: flex;
+
   .box {
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     background-color: var(--primary);
     width: 25%;
+    position: relative;
     .text {
+      .logo {
+        top: 10%;
+        left: 10%;
+        position: absolute;
+      }
       color: var(--secondary);
       font-size: var(--fs-4);
       font-weight: var(--medium);
     }
   }
+
   .img {
     margin-left: -300px;
     width: 75%;
