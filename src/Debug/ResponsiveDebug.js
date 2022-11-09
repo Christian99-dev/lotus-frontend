@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 
-export default function ResponsiveDebug () {
+export default function ResponsiveDebug() {
   return <Wrapper></Wrapper>;
-};
+}
 
 const Wrapper = styled.div`
   color: white;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: grey;
-  
+
   @media ${device.desktopPlus} {
     background-color: salmon;
     &::after {
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
       content: "desktop";
     }
   } */
-  
+
   @media ${device.laptop} {
     color: black;
     background-color: yellow;
@@ -55,3 +55,24 @@ const Wrapper = styled.div`
     }
   }
 `;
+/** 
+  @media ${device.desktopPlus} {
+
+  }
+
+  @media ${device.desktop} {
+
+  } 
+
+  @media ${device.laptop} {
+
+  }
+
+  @media ${device.tablet} {
+
+  }
+
+  @media ${device.mobile} {
+
+  }
+*/

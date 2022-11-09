@@ -79,11 +79,11 @@ const CommentWrapper = styled.div`
 
 const Stars = ({ ...props }) => (
   <StarWrapper {...props}>
-    <Icon name="starFull" color="yellow" height="25px" />
-    <Icon name="starFull" color="yellow" height="25px" />
-    <Icon name="starFull" color="yellow" height="25px" />
-    <Icon name="starHalf" color="yellow" height="25px" />
-    <Icon name="starEmpty" color="yellow" height="25px" />
+    <Icon name="starFull" color="yellow" height="stars" />
+    <Icon name="starFull" color="yellow" height="stars" />
+    <Icon name="starFull" color="yellow" height="stars" />
+    <Icon name="starHalf" color="yellow" height="stars" />
+    <Icon name="starEmpty" color="yellow" height="stars" />
   </StarWrapper>
 );
 

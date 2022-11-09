@@ -46,7 +46,7 @@ const CardsWrapper = styled(SpaceWrapper)`
   .cards {
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 5%;
   }
 `;
 
@@ -57,7 +57,7 @@ function Card({ title, text, icon }) {
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
         {text}
       </SpaceWrapper>
-      <Icon name={icon} height="50px" color="purple" className="icon" />
+      <Icon name={icon} height="icon-l" color="purple" className="icon" />
     </CardWrapper>
   );
 }
@@ -67,7 +67,9 @@ const CardWrapper = styled.div`
   padding: 50px;
   border-radius: 20px;
   color: var(--primary);
+  display: flex;
   flex-basis: 23%;
+  flex-direction: column;
 
   .title {
     font-size: var(--fs-2);
@@ -77,14 +79,16 @@ const CardWrapper = styled.div`
   .text {
     font-size: var(--fs-4);
     font-weight: var(--medium);
-    height: 150px;
-    overflow: hidden;
-    overflow-y: scroll;
-    ${Scrollbar("2px")}
+    /* height: 150px; */
+    /* overflow: hidden; */
+    /* overflow-y: scroll; */
+    /* ${Scrollbar("2px")} */
   }
 
   .icon {
+    /* justify-content: flex-end; */
     display: block;
     margin: 0 auto;
+    margin-top: auto;
   }
 `;

@@ -9,9 +9,19 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 export default function Team() {
   return (
     <TeamWrapper
-      spacing={{ left: "border", right: "border", top: "white-component-inner-half", bottom: "white-component-inner" }}
+      spacing={{
+        left: "border",
+        right: "border",
+        top: "white-component-inner-half",
+        bottom: "white-component-inner",
+      }}
     >
-      <Titel center text="Das Team" spacing={{ bottom: "white-component-inner-half" }} color="purple" />
+      <Titel
+        center
+        text="Das Team"
+        spacing={{ bottom: "white-component-inner-half" }}
+        color="purple"
+      />
       <div className="container">
         <Person
           className="person"
@@ -38,7 +48,7 @@ const TeamWrapper = styled(SpaceWrapper)`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10%;
+    gap: var(--team-gap);
     .person {
       flex: 1 1 0;
     }
@@ -50,7 +60,12 @@ function Person({ img, text, name, jobTitle, right, ...props }) {
     <PersonWrapper img={img} right={right} {...props}>
       <div className="img" />
       <SpaceWrapper className="info-box">
-        <TextWithBackground spacing={{ bottom: 5 }} text={name} fontSize="2" />
+        <TextWithBackground
+          spacing={{ bottom: 5 }}
+          text={name}
+          fontSize="2"
+          className="name"
+        />
         <TextWithBackground
           spacing={{ bottom: 15 }}
           text={jobTitle}
@@ -67,8 +82,8 @@ const PersonWrapper = styled.div`
   flex-direction: ${(props) => (props.right ? "row-reverse" : "inherit")};
 
   .img {
-    min-width: 250px;
     flex: 1 1 0;
+    min-width: 250px;
     height: 500px;
     background: center / cover no-repeat url(${(props) => props.img});
   }
@@ -80,6 +95,10 @@ const PersonWrapper = styled.div`
     padding: ${(props) => (props.right ? "0  50px  50px 0" : "50px 0 0 50px ")};
     text-align: ${(props) => (props.right ? "right" : "left")};
     flex: 1 1 0;
+
+    .name {
+      white-space: nowrap;
+    }
     .text {
       font-size: var(--fs-4);
       color: var(--primary);

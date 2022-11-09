@@ -79,7 +79,7 @@ const KontaktWrapper = styled(SpaceWrapper)`
 function Info({ spacing, icon, text }) {
   return (
     <InfoWrapper spacing={spacing}>
-      <Icon name={icon} height="35px" />
+      <Icon name={icon} height="icon-m" />
       <div className="text">{text}</div>
     </InfoWrapper>
   );

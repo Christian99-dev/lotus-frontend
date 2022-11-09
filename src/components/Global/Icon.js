@@ -14,7 +14,6 @@ import Facebook from "../../media/icons/facebook.svg";
 import Instagram from "../../media/icons/instagram.svg";
 import Whatsapp from "../../media/icons/whatsapp.svg";
 
-
 export default function Icon({ name, height, color, ...props }) {
   let icon;
   if (name === "time") icon = Time;
@@ -30,6 +29,10 @@ export default function Icon({ name, height, color, ...props }) {
   if (name === "facebook") icon = Facebook;
   if (name === "instagram") icon = Instagram;
   if (name === "whatsapp") icon = Whatsapp;
+
+  height = isNaN(height)
+    ? (height = `var(--${height})`)
+    : (height = height + "px");
 
   return (
     <Wrapper src={icon} alt="icon" height={height} color={color} {...props} />

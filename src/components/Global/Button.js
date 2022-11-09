@@ -35,7 +35,7 @@ export default function Button({ color, text, spacing, ...props }) {
 }
 
 const Wrapper = styled.button`
-  padding: 15px 40px;
+  padding: var(--button-padding);
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   border-radius: 10px;
@@ -56,13 +56,5 @@ const Wrapper = styled.button`
     background-position: left bottom;
     transition: ease var(--transition-time) all;
     color: ${(props) => props.theme.hoverColor};
-  }
-
-  @media (max-width: 820px) {
-    padding: 12.5px 35px;
-  }
-
-  @media (max-width: 420px) {
-    padding: 10px 30px;
   }
 `;

@@ -22,11 +22,15 @@ const Top = () => (
       <div className="right">
         <Info
           text="max.mustermann@gmail.de"
-          iconHeight="20px"
+          iconHeight="icon-s"
           iconName="mail"
         />
-        <Info text="01567 / 482375" iconHeight="20px" iconName="phone" />
-        <Info text="Täglich von 8 - 22 Uhr" iconHeight="20px" iconName="time" />
+        <Info text="01567 / 482375" iconHeight="icon-s" iconName="phone" />
+        <Info
+          text="Täglich von 8 - 22 Uhr"
+          iconHeight="icon-s"
+          iconName="time"
+        />
       </div>
     </div>
   </TopWrapper>
@@ -34,7 +38,7 @@ const Top = () => (
 
 const TopWrapper = styled(SpaceWrapper)`
   display: flex;
-  height: var(--topbar-height);;
+  height: var(--topbar-height);
   background-color: var(--primary);
   flex-direction: column;
   justify-content: space-around;
@@ -76,7 +80,10 @@ const InfoWrapper = styled.div`
 const Bottom = () => {
   return (
     <BottomWrapper>
-      <SpaceWrapper spacing={{ top: "navbar-inner", bottom: "navbar-inner" }} className="links">
+      <SpaceWrapper
+        spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
+        className="links"
+      >
         <NavButton text="Home" className="active" />
         <NavButton text="Leistungen" />
         <NavButton text="Arbeit" />
@@ -85,7 +92,10 @@ const Bottom = () => {
         <NavButton text="Rezensionen" />
         <NavButton text="Impressum" />
       </SpaceWrapper>
-      <SpaceWrapper spacing={{ bottom: "navbar-inner" }} className="logo-container">
+      <SpaceWrapper
+        spacing={{ bottom: "navbar-inner" }}
+        className="logo-container"
+      >
         <img src={LogoText} alt="logo-text" />
       </SpaceWrapper>
     </BottomWrapper>

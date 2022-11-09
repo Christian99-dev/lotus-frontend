@@ -68,7 +68,7 @@ const Font = css`
   :root {
     --semibold: 600;
     --medium: 500;
-    ${FontSizeSheet(1.333, 20, 17, 14, 13, 12)}
+    ${FontSizeSheet(1.333, 20, 16, 14, 13, 12)}
   }
 `;
 

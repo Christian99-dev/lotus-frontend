@@ -10,20 +10,20 @@ export default function Footer() {
       <div className="col">
         <div className="head">Social Media</div>
         <div className="row icons">
-          <Icon name="facebook" height="20px" />
-          <Icon name="instagram" height="20px" />
-          <Icon name="whatsapp" height="20px" />
+          <Icon name="facebook" height="icon-s" />
+          <Icon name="instagram" height="icon-s" />
+          <Icon name="whatsapp" height="icon-s" />
         </div>
       </div>
 
       <div className="col">
         <div className="head"> Kontakt</div>
         <div className="row icon">
-          <Icon name="mail" height="20px" />
+          <Icon name="mail" height="icon-s" />
           max.mustermann@gmail.de
         </div>
         <div className="row icon">
-          <Icon name="phone" height="20px" />
+          <Icon name="phone" height="icon-s" />
           01237 / 32874
         </div>
       </div>

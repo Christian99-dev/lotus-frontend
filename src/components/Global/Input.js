@@ -10,10 +10,7 @@ export default function Input({ text, textarea, ...props }) {
 const Wrapper = styled.input`
   color: var(--primary);
   background-color: var(--secondary);
-  padding-left: 40px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 40px;
+  padding: var(--input-padding);
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   border-radius: 10px;
@@ -29,10 +26,7 @@ const Wrapper = styled.input`
 const TextareaWrapper = styled.textarea`
   color: var(--primary);
   background-color: var(--secondary);
-  padding-left: 40px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 40px;
+  padding: var(--input-padding);
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   border-radius: 10px;
