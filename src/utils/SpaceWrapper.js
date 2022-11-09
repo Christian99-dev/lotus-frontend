@@ -29,6 +29,7 @@ export default SpaceWrapper;
 const Asigne = (value) => {
   if(!value) return "0px"
   if(value === "border") return "var(--border)";
+  if(value === "verticalBorder") return "var(--verticalBorder)";
   if(value) return value + "px";
 }
 

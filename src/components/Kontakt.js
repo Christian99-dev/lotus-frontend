@@ -5,17 +5,17 @@ import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
 import Input from "./../components/Global/Input";
 import Button from "./Global/Button";
-import tempImg from "../media/images/maps.png";
-import bgImg from "../media/images/img3.png";
-import bgFilter from "../media/images/purple.png";
+import tempimg from "../media/images/maps.png";
+import bgimg from "../media/images/img3.png";
+import bgfilter from "../media/images/purple.png";
 
 export default function Kontakt() {
   return (
     <KontaktWrapper
       spacing={{ left: 150, right: 150, top: 150, bottom: 150 }}
-      tempImg={tempImg}
-      bgImg={bgImg}
-      bgFilter={bgFilter}
+      tempimg={tempimg}
+      bgimg={bgimg}
+      bgfilter={bgfilter}
     >
       <div className="left">
         <Title text="Kontaktieren sie uns" spacing={{ bottom: 50 }} />
@@ -44,8 +44,8 @@ export default function Kontakt() {
 const KontaktWrapper = styled(SpaceWrapper)`
   gap: 50px;
   display: flex;
-  background: center / cover no-repeat url(${(props) => props.bgFilter}),
-    center / cover no-repeat fixed url(${(props) => props.bgImg});
+  background: center / cover no-repeat url(${(props) => props.bgfilter}),
+    center / cover no-repeat fixed url(${(props) => props.bgimg});
 
   .left {
     flex: 1 1 0;
@@ -70,7 +70,7 @@ const KontaktWrapper = styled(SpaceWrapper)`
   }
 
   .right {
-    background: center / cover no-repeat url(${(props) => props.tempImg});
+    background: center / cover no-repeat url(${(props) => props.tempimg});
     flex: 1 1 0;
     border-radius: 10px;
   }

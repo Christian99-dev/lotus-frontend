@@ -3,12 +3,12 @@ import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
-import bgImg from "../media/images/img1.png";
-import bgFilter from "../media/images/grey.png";
+import bgimg from "../media/images/img1.png";
+import bgfilter from "../media/images/grey.png";
 
 export default function Carousel() {
   return (
-    <CarouselWrapper bgImg={bgImg} bgFilter={bgFilter}>
+    <CarouselWrapper bgImg={bgimg} bgFilter={bgfilter}>
       <TextWithBackground
         className="text1"
         text="Notfall? Rufen Sie uns Jetzt an!"
@@ -38,6 +38,7 @@ const CarouselWrapper = styled.div`
   .text2 {
     text-align: center;
   }
+  
   .buttons {
     display: flex;
     gap: 20px;

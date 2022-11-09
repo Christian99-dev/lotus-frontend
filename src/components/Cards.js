@@ -6,7 +6,7 @@ import Icon from "../components/Global/Icon";
 
 export default function Cards() {
   return (
-    <CardsWrapper spacing={{left: "border", right: "border", top: 100, bottom: 200}}>
+    <CardsWrapper spacing={{left: "border", right: "border", top:100, bottom: 200}}>
       <Title
         center
         text="Unsere Leistung"

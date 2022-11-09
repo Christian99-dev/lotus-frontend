@@ -5,11 +5,17 @@ import Testimonial from "../components/Testimonial";
 import Kontakt from "../components/Kontakt";
 import Panel from "../components/Panel";
 import Team from "../components/Team";
-import Layout from "../theme/globalStyles";
+import Layout from "../theme/layout";
+
+
+// import ResponsiveDebug from "../Debug/ResponsiveDebug";
+// import FontsDebug from "../Debug/FontsDebug";
 
 const IndexPage = () => {
   return (
     <Layout>
+      {/* <ResponsiveDebug/> */}
+      {/* <FontsDebug/> */}
       <Carousel/>
       <Cards/>
       <Panel/>
