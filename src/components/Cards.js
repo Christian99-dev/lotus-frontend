@@ -4,6 +4,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
+import Bubble from "./Global/Circle";
 
 export default function Cards() {
   return (
@@ -22,6 +23,7 @@ export default function Cards() {
         color="purple"
       />
       <div className="cards">
+        <Bubble />
         <Card
           text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
           title="Reinigen"
@@ -43,6 +45,7 @@ export default function Cards() {
 }
 
 const CardsWrapper = styled(SpaceWrapper)`
+  position: relative;
   .cards {
     display: flex;
     justify-content: space-between;

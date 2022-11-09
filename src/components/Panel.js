@@ -3,10 +3,11 @@ import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
 import bgImg from "./../media/images/img2.png";
+import { Parallax } from "react-parallax";
 
 export default function Panel() {
   return (
-    <PannelWrapper bgImg={bgImg}>
+    <PannelWrapper bgImage={bgImg} strength={200}>
       <SpaceWrapper
         spacing={{ top: 150, bottom: 150, left: "border", right: "border" }}
         className="box"
@@ -28,7 +29,7 @@ export default function Panel() {
   );
 }
 
-const PannelWrapper = styled.div`
+const PannelWrapper = styled(Parallax)`
   display: flex;
   .box {
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
