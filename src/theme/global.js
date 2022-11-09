@@ -2,13 +2,13 @@ import { createGlobalStyle } from "styled-components";
 import Font from "./font";
 import Spacing from "./border";
 import Color from "./color";
-import Scrollbar from "./scrollbar";
+import Components from "./components";
 
 const GlobalStyle = createGlobalStyle`
   ${Font};
   ${Spacing};
   ${Color};
-  ${Scrollbar};
+  ${Components}
 
   body {
     box-sizing: border-box;

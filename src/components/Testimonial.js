@@ -11,11 +11,11 @@ import TextWithBackground from "./Global/TextWithBackground";
 export default function Testimonial() {
   const comments = [<Comment />, <Comment />, <Comment />];
   return (
-    <TestimonialWrapper spacing={{ top: 100, bottom: 200 }}>
+    <TestimonialWrapper spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }}>
       <Titel
         text="Das sagen unsere Kunden"
         color="purple"
-        spacing={{ bottom: 100 }}
+        spacing={{ bottom: "white-component-inner-half" }}
         center
       />
       <MySwiper array={comments} />

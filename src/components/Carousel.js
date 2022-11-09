@@ -14,16 +14,16 @@ export default function Carousel() {
         text="Notfall? Rufen Sie uns Jetzt an!"
         fontSize="1"
         color="purple"
-        spacing={{ top: 200, bottom: 5 }}
+        spacing={{ top: "carousel-inner", bottom: "carousel-inner-2" }}
       />
       <TextWithBackground
         className="text2"
         text="01573 / 13485"
         fontSize="2"
         color="purple"
-        spacing={{ bottom: 40 }}
+        spacing={{ bottom: "carousel-inner-3" }}
       />
-      <SpaceWrapper className="buttons" spacing={{ bottom: 200 }}>
+      <SpaceWrapper className="buttons" spacing={{ bottom: "carousel-inner" }}>
         <Button text="Leistungen" color="purple" />
         <Button text="Über Uns" />
       </SpaceWrapper>
@@ -41,7 +41,7 @@ const CarouselWrapper = styled.div`
   
   .buttons {
     display: flex;
-    gap: 20px;
+    gap: var(--carousel-gap);
     justify-content: center;
   }
 `;

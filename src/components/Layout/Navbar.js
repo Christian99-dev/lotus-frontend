@@ -34,7 +34,7 @@ const Top = () => (
 
 const TopWrapper = styled(SpaceWrapper)`
   display: flex;
-  height: 50px;
+  height: var(--topbar-height);;
   background-color: var(--primary);
   flex-direction: column;
   justify-content: space-around;
@@ -76,7 +76,7 @@ const InfoWrapper = styled.div`
 const Bottom = () => {
   return (
     <BottomWrapper>
-      <SpaceWrapper spacing={{ top: 50, bottom: 50 }} className="links">
+      <SpaceWrapper spacing={{ top: "navbar-inner", bottom: "navbar-inner" }} className="links">
         <NavButton text="Home" className="active" />
         <NavButton text="Leistungen" />
         <NavButton text="Arbeit" />
@@ -85,7 +85,7 @@ const Bottom = () => {
         <NavButton text="Rezensionen" />
         <NavButton text="Impressum" />
       </SpaceWrapper>
-      <SpaceWrapper spacing={{ bottom: 50 }} className="logo-container">
+      <SpaceWrapper spacing={{ bottom: "navbar-inner" }} className="logo-container">
         <img src={LogoText} alt="logo-text" />
       </SpaceWrapper>
     </BottomWrapper>

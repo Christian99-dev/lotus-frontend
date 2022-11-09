@@ -12,7 +12,7 @@ import bgfilter from "../media/images/purple.png";
 export default function Kontakt() {
   return (
     <KontaktWrapper
-      spacing={{ left: 150, right: 150, top: 150, bottom: 150 }}
+      spacing={{ left: "border", right: "border", top: "contact-inner", bottom: "contact-inner" }}
       tempimg={tempimg}
       bgimg={bgimg}
       bgfilter={bgfilter}

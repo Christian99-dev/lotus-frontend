@@ -9,9 +9,9 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 export default function Team() {
   return (
     <TeamWrapper
-      spacing={{ left: "border", right: "border", top: 100, bottom: 200 }}
+      spacing={{ left: "border", right: "border", top: "white-component-inner-half", bottom: "white-component-inner" }}
     >
-      <Titel center text="Das Team" spacing={{ bottom: 100 }} color="purple" />
+      <Titel center text="Das Team" spacing={{ bottom: "white-component-inner-half" }} color="purple" />
       <div className="container">
         <Person
           className="person"

@@ -3,14 +3,22 @@ import Title from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import Icon from "../components/Global/Icon";
+import Scrollbar from "../theme/scrollbar";
 
 export default function Cards() {
   return (
-    <CardsWrapper spacing={{left: "border", right: "border", top:100, bottom: 200}}>
+    <CardsWrapper
+      spacing={{
+        left: "border",
+        right: "border",
+        top: "white-component-inner-half",
+        bottom: "white-component-inner",
+      }}
+    >
       <Title
         center
         text="Unsere Leistung"
-        spacing={{ bottom: 100 }}
+        spacing={{ bottom: "white-component-inner-half" }}
         color="purple"
       />
       <div className="cards">
@@ -42,12 +50,11 @@ const CardsWrapper = styled(SpaceWrapper)`
   }
 `;
 
-
 function Card({ title, text, icon }) {
   return (
     <CardWrapper>
       <div className="title">{title}</div>
-      <SpaceWrapper spacing={{top: 20, bottom: 20}} margin className="text scrollbar1">
+      <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
         {text}
       </SpaceWrapper>
       <Icon name={icon} height="50px" color="purple" className="icon" />
@@ -61,7 +68,6 @@ const CardWrapper = styled.div`
   border-radius: 20px;
   color: var(--primary);
   flex-basis: 23%;
-  
 
   .title {
     font-size: var(--fs-2);
@@ -74,9 +80,10 @@ const CardWrapper = styled.div`
     height: 150px;
     overflow: hidden;
     overflow-y: scroll;
+    ${Scrollbar("2px")}
   }
 
-  .icon{
+  .icon {
     display: block;
     margin: 0 auto;
   }
