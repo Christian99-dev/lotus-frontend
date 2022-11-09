@@ -12,6 +12,8 @@ const AnimationSvg = ({
   front,
   shiftY = 0,
   shiftStrenghtY = 0,
+  rotation = 0,
+  rotationStrenght = 0,
 }) => {
   let zIndex = front ? 99 : -99;
 
@@ -30,7 +32,7 @@ const AnimationSvg = ({
         bottom: bottom,
         left: left,
         zIndex: zIndex,
-        transform: `translateY(${shiftY * shiftStrenghtY + "vh"})`,
+        transform: `translateY(${shiftY * shiftStrenghtY + "vh"}) rotate(${rotation * rotationStrenght}deg)`,
       }}
     />
   );

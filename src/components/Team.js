@@ -5,6 +5,8 @@ import img2 from "./../media/images/person2.png";
 import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import TextWithBackground from "../components/Global/TextWithBackground";
+import Rectangles from "./Effects/Rectangles";
+import { Parallax } from "react-parallax";
 
 export default function Team() {
   return (
@@ -16,6 +18,7 @@ export default function Team() {
         bottom: "white-component-inner",
       }}
     >
+      <Rectangles />
       <Titel
         center
         text="Das Team"
@@ -57,9 +60,13 @@ const TeamWrapper = styled(SpaceWrapper)`
 `;
 
 function Person({ img, text, name, jobTitle, right, ...props }) {
+
+  let strength = right ? 125 : -125;
   return (
     <PersonWrapper img={img} right={right} {...props}>
-      <div className="img" />
+      <Parallax className="img" strength={strength} bgImage={img}>
+        <div />
+      </Parallax>
       <SpaceWrapper className="info-box">
         <TextWithBackground
           spacing={{ bottom: 5 }}
@@ -84,9 +91,10 @@ const PersonWrapper = styled.div`
 
   .img {
     flex: 1 1 0;
-    min-width: 250px;
-    height: 500px;
-    background: center / cover no-repeat url(${(props) => props.img});
+    > div {
+      min-width: 250px;
+      height: 500px;
+    }
   }
 
   .info-box {

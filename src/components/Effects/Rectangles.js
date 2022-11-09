@@ -3,57 +3,57 @@ import { Parallax } from "react-parallax";
 import React from "react";
 
 const Rectangles = () => {
-  const AllBubbels = (percentage) => (
+  const AllRectangles = (percentage) => (
     <>
       <AnimationSvg
-        svg="circle"
+        svg="rectangle"
         shiftY={percentage}
         shiftStrenghtY={10}
         size={200}
-        top="55%"
+        top="0%"
         left="8%"
+        rotation={percentage}
+        rotationStrenght={20}
       />
       <AnimationSvg
-        svg="circle"
+        svg="rectangle"
         shiftY={percentage}
         shiftStrenghtY={20}
         size={70}
         top="75%"
         left="8%"
+        rotation={percentage}
+        rotationStrenght={60}
       />
       <AnimationSvg
-        svg="circle"
+        svg="rectangle"
         shiftY={percentage}
-        shiftStrenghtY={10}
+        shiftStrenghtY={20}
         size={100}
         top="20%"
-        left="57%"
-        front
-      />
-      <AnimationSvg
-        svg="circle"
-        shiftY={percentage}
-        shiftStrenghtY={30}
-        size={50}
-        top="20%"
-        left="60%"
-      />
-      <AnimationSvg
-        svg="circle"
-        shiftY={percentage}
-        shiftStrenghtY={10}
-        top="5%"
         left="90%"
+        rotation={percentage}
+        rotationStrenght={60}
+      />
+            <AnimationSvg
+        svg="rectangle"
+        shiftY={percentage}
+        shiftStrenghtY={40}
+        size={100}
+        top="20%"
+        left="50%"
+        rotation={percentage}
+        rotationStrenght={-200}
       />
     </>
   );
   return (
     <Parallax
       style={{ position: "static" }}
-      renderLayer={(percentage) => AllBubbels(percentage - 0.5)}
+      renderLayer={(percentage) => AllRectangles(percentage - 0.5)}
       strength={200}
     />
   );
-}
+};
 
 export default Rectangles;
