@@ -4,7 +4,8 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
-import Bubble from "./Global/Circle";
+import AnimationSvg from "./Global/AnimationSvg";
+import { Parallax } from "react-parallax";
 
 export default function Cards() {
   return (
@@ -16,6 +17,11 @@ export default function Cards() {
         bottom: "white-component-inner",
       }}
     >
+      <Parallax
+        style={{ position: "static" }}
+        renderLayer={(percentage) => <Bubbels percentage={percentage} />}
+        strength={200}
+      />
       <Title
         center
         text="Unsere Leistung"
@@ -23,7 +29,6 @@ export default function Cards() {
         color="purple"
       />
       <div className="cards">
-        <Bubble />
         <Card
           text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
           title="Reinigen"
@@ -95,3 +100,16 @@ const CardWrapper = styled.div`
     margin-top: auto;
   }
 `;
+
+const Bubbels = ({percentage}) => {
+  percentage -= 0.5;
+  return (
+    <>
+      <AnimationSvg illu="circle" shiftY={percentage} shiftStrenghtY={10} size={200} top="55%" left="8%" />
+      <AnimationSvg illu="circle" shiftY={percentage} shiftStrenghtY={20} size={70} top="75%" left="8%" />
+      <AnimationSvg illu="circle" shiftY={percentage} shiftStrenghtY={10} size={100} top="20%" left="57%" front/>
+      <AnimationSvg illu="circle" shiftY={percentage} shiftStrenghtY={30} size={50} top="20%" left="60%" />
+      <AnimationSvg illu="circle" shiftY={percentage} shiftStrenghtY={10} top="5%" left="90%"/>
+    </>
+  );
+};
