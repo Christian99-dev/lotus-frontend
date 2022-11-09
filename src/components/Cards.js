@@ -4,7 +4,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
-import Bubbels from "./Global/Bubbels";
+import Bubbels from "./Effects/Bubbels";
 
 export default function Cards() {
   return (
