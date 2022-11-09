@@ -3,6 +3,7 @@ import Circle from "../../media/illu/circle.svg";
 import Rectangle from "../../media/illu/rectangle.svg";
 
 const AnimationSvg = ({
+  svg = "circle",
   size = 100,
   top = 0,
   right = 0,
@@ -10,14 +11,17 @@ const AnimationSvg = ({
   left = 0,
   front,
   shiftY = 0,
-  shiftStrenghtY = 0
+  shiftStrenghtY = 0,
 }) => {
   let zIndex = front ? 99 : -99;
 
-  let src = Circle;
+  let src;
+  if (svg === "circle") src = Circle;
+  if (svg === "rectangle") src = Rectangle;
   return (
     <img
       src={src}
+      alt="illu"
       style={{
         position: `absolute`,
         height: size,

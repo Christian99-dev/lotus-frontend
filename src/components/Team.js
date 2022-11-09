@@ -5,6 +5,7 @@ import img2 from "./../media/images/person2.png";
 import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import TextWithBackground from "../components/Global/TextWithBackground";
+import AnimationSvg from "./Global/AnimationSvg";
 
 export default function Team() {
   return (
@@ -44,6 +45,7 @@ export default function Team() {
 }
 
 const TeamWrapper = styled(SpaceWrapper)`
+  position: absolute;
   .container {
     display: flex;
     justify-content: space-between;
@@ -106,3 +108,15 @@ const PersonWrapper = styled.div`
     }
   }
 `;
+
+const Rectangles = ({percentage}) => {
+  percentage -= 0.5;
+  return (
+    <>
+      <AnimationSvg svg="rectangles" shiftY={percentage} shiftStrenghtY={10} size={200} top="55%" left="8%" />
+      <AnimationSvg svg="rectangles" shiftY={percentage} shiftStrenghtY={20} size={70} top="75%" left="8%" />
+      <AnimationSvg svg="rectangles" shiftY={percentage} shiftStrenghtY={10} size={100} top="20%" left="57%"/>
+      <AnimationSvg svg="rectangles" shiftY={percentage} shiftStrenghtY={30} size={50} top="20%" left="60%" />
+    </>
+  );
+};
