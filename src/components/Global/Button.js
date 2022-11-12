@@ -56,5 +56,6 @@ const Wrapper = styled.button`
     background-position: left bottom;
     transition: ease var(--transition-time) all;
     color: ${(props) => props.theme.hoverColor};
+    cursor: pointer;
   }
 `;

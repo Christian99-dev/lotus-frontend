@@ -105,8 +105,8 @@ const Components = css`
     ${Button_Input}
     ${Icon}
 
-    --white-component-inner: 150px;
-    --white-component-inner-half: 75px;
+    --white-component-inner: 200px;
+    --white-component-inner-half: 100px;
   }
 `;
 

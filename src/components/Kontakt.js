@@ -9,6 +9,7 @@ import tempimg from "../media/images/maps.png";
 import bgimg from "../media/images/img3.png";
 import bgfilter from "../media/images/purple.png";
 import { Parallax } from "react-parallax";
+import Maps from "./Global/Maps";
 
 export default function Kontakt() {
   return (
@@ -47,7 +48,9 @@ export default function Kontakt() {
               <Button text="Absenden" color="transparent" className="button" />
             </div>
           </div>
-          <div className="right"></div>
+          <div className="right">
+            <Maps />
+          </div>
         </SpaceWrapper>
       </div>
     </KontaktWrapper>
@@ -86,7 +89,8 @@ const KontaktWrapper = styled(Parallax)`
     }
 
     .right {
-      background: center / cover no-repeat url(${(props) => props.tempimg});
+      /* background: center / cover no-repeat url(${(props) =>
+        props.tempimg}); */
       flex: 1 1 0;
       border-radius: 10px;
     }
