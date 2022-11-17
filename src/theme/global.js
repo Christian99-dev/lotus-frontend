@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   ${Font};
   ${Spacing};
   ${Color};
-  ${Components}
+  ${Components};
 
   body {
     box-sizing: border-box;

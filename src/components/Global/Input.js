@@ -1,14 +1,15 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export default function Input({ text, textarea, ...props }) {
-  if (textarea) return <TextareaWrapper placeholder={text} {...props} />;
+export default function Input({ text, textarea, error, ...props }) {
+  if (textarea)
+    return <TextareaWrapper error={error} placeholder={text} {...props} />;
 
-  return <Wrapper placeholder={text} {...props} />;
+  return <Wrapper error={error} placeholder={text} {...props} />;
 }
 
-const Wrapper = styled.input`
-  color: var(--primary);
+const style = css`
+  color: ${props => !props.error ? "var(--primary)" : "red"};
   background-color: var(--secondary);
   padding: var(--input-padding);
   font-size: var(--fs-3);
@@ -21,21 +22,16 @@ const Wrapper = styled.input`
   ::placeholder {
     color: var(--primary-dim);
   }
+
+
+  
+`;
+
+const Wrapper = styled.input`
+  ${style}
 `;
 
 const TextareaWrapper = styled.textarea`
-  color: var(--primary);
-  background-color: var(--secondary);
-  padding: var(--input-padding);
-  font-size: var(--fs-3);
-  font-weight: var(--semibold);
-  border-radius: 10px;
-  outline: none;
-  border: none;
   font-family: inherit;
-  min-width: 0;
-
-  ::placeholder {
-    color: var(--primary-dim);
-  }
+  ${style}
 `;

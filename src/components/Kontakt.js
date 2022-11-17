@@ -38,7 +38,7 @@ export default function Kontakt() {
               spacing={{ bottom: 50 }}
             />
             <div className="form">
-              <Input text="Vorname" className="a" />
+              <Input text="Vorname" className="a" error />
               <Input text="Nachname" className="b" />
               <Input text="Nachricht" className="c" textarea />
               <Input text="Email" className="d" />

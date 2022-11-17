@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 import { device } from "./breakpoints";
-import { xPercentFrom } from "../utils/utils";
+import { xPercentFrom, reductionInPercentFromAtoB } from "../utils/utils";
 
 /**
  * base = 16
@@ -12,7 +12,7 @@ import { xPercentFrom } from "../utils/utils";
  * size =   2   => return "20px"
  * size =   3   => return "25px"
  */
- const CreateFontSize = (base, scale, size) => {
+const CreateFontSize = (base, scale, size) => {
   let out = base;
 
   if (size > 0) {
@@ -55,7 +55,6 @@ const FontSizeSheet = (scale, desktopPlus, desktop, laptop, tablet, mobile) => {
         ${CreateTypeScale(mobile, scale)}
       }
     }
-    
   `;
 };
 
@@ -73,4 +72,3 @@ const Font = css`
 `;
 
 export default Font;
-
