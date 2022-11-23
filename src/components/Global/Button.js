@@ -35,7 +35,10 @@ export default function Button({ color, text, spacing, ...props }) {
 }
 
 const Wrapper = styled.button`
-  padding: var(--button-padding);
+  padding-top: var(--button-padding-top);
+  padding-bottom: var(--button-padding-bottom);
+  padding-left: var(--button-padding-left);
+  padding-right: var(--button-padding-right);
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   border-radius: 10px;

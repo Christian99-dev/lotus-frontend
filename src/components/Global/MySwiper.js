@@ -27,6 +27,8 @@ const MySwiperWrapper = styled(Swiper)`
     bottom: 0 !important;
     .swiper-pagination-bullet {
       background-color: var(--primary);
+      height: 10px;
+      width: 10px;
     }
   }
   .swiper-button-next {

@@ -1,69 +1,25 @@
 import { css } from "styled-components";
-import { device } from "./breakpoints";
+import { responsiveVar } from "../utils/responsive";
 
 const Button_Input = css`
-  --button-padding: 15px 40px;
-  --input-padding: 15px 40px;
+  :root{
+    ${responsiveVar("button-padding-top", 15)}
+    ${responsiveVar("button-padding-bottom", 15)}
+    ${responsiveVar("button-padding-left", 40)}
+    ${responsiveVar("button-padding-right", 40)}
 
-  @media ${device.desktopPlus} {
-    --button-padding: 18px 48px;
-    --input-padding: 18px 48px;
-  }
-
-  @media ${device.laptop} {
-    --button-padding: 12px 32px;
-    --input-padding: 12px 32px;
-  }
-
-  @media ${device.tablet} {
-    --button-padding: 9.6px 25.6px;
-    --input-padding: 9.6px 25.6px;
-  }
-
-  @media ${device.mobile} {
-    --button-padding: 8.31px 20.48px;
-    --input-padding: 8.31px 20.48px;
+    ${responsiveVar("input-padding-top", 15)}
+    ${responsiveVar("input-padding-bottom", 15)}
+    ${responsiveVar("input-padding-left", 40)}
+    ${responsiveVar("input-padding-right", 40)}
   }
 `;
 
 const Icon = css`
-  --icon-s: 20px;
-  --icon-m: 35px;
-  --icon-l: 50px;
-
-  --stars: 25px;
-
-  @media ${device.desktopPlus} {
-    --icon-s: 24px;
-    --icon-m: 42px;
-    --icon-l: 60px;
-
-    --stars: 30px;
-  }
-
-  @media ${device.laptop} {
-    --icon-s: 16px;
-    --icon-m: 28px;
-    --icon-l: 40px;
-
-    --stars: 20px;
-  }
-
-  @media ${device.tablet} {
-    --icon-s: 12.8px;
-    --icon-m: 29.4px;
-    --icon-l: 32px;
-
-    --stars: 16px;
-  }
-
-  @media ${device.mobile} {
-    --icon-s: 10.24;
-    --icon-m: 23.52;
-    --icon-l: 25.6;
-
-    --stars: 12.8px;
-  }
+  ${responsiveVar("icon-s", 20)}
+  ${responsiveVar("icon-m", 35)}
+  ${responsiveVar("icon-l", 50)}
+  ${responsiveVar("stars", 25)}
 `;
 
 const Topbar = css`
@@ -82,7 +38,7 @@ const Carousel = css`
 `;
 
 const Kontakt = css`
-  --contact-inner: 150px;
+  ${responsiveVar("contact-inner", 150)}
 `;
 
 const Panel = css`

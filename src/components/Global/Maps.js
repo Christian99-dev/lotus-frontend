@@ -2,13 +2,12 @@ import React from "react";
 import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 import L from 'leaflet';
 import Marker_Icon from "../../media/icons/marker.svg";
-import styled from "styled-components";
 /**https://www.latlong.net/convert-address-to-lat-long.html */
 
 const Maps = () => {
-  const address = [50.143028, 8.159880];
+  const address = [50.143028, 8.15988];
   return (
-    <MapWrapper
+    <MapContainer
       center={address}
       zoom={16}
       scrollWheelZoom={true}
@@ -23,15 +22,12 @@ const Maps = () => {
           Taunusstein
         </Popup>
       </Marker>
-    </MapWrapper>
+    </MapContainer>
   );
 };
 
 export default Maps;
 
-const MapWrapper = styled(MapContainer)`
-
-`;
 const size = 2;
 const iconPerson = new L.Icon({
   iconUrl: Marker_Icon,
@@ -44,5 +40,3 @@ const iconPerson = new L.Icon({
   iconSize: new L.Point(50 * size, 50 * size),
   className:"marker-icon"
 });
-
-

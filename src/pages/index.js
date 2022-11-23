@@ -8,10 +8,7 @@ import Team from "../components/Team";
 import Layout from "../theme/layout";
 
 
-// import ResponsiveDebug from "../Debug/ResponsiveDebug";
-// import FontsDebug from "../Debug/FontsDebug";
-
-const IndexPage = () => {
+const IndexPage = () => {  
   return (
     <Layout>
       {/* <ResponsiveDebug/> */}

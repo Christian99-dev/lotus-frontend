@@ -1,8 +1,9 @@
 import { css } from "styled-components";
+import { responsiveVar } from "../utils/responsive";
 
 const Spacing = css`
     :root{
-        --border: 14%;
+        ${responsiveVar("border", 14, "%")}
     }
 
 `;

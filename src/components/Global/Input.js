@@ -11,7 +11,10 @@ export default function Input({ text, textarea, error, ...props }) {
 const style = css`
   color: ${props => !props.error ? "var(--primary)" : "red"};
   background-color: var(--secondary);
-  padding: var(--input-padding);
+  padding-top: var(--input-padding-top);
+  padding-bottom: var(--input-padding-bottom);
+  padding-left: var(--input-padding-left);
+  padding-right: var(--input-padding-right);
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   border-radius: 10px;

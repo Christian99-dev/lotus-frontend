@@ -1,6 +1,15 @@
 import { css } from "styled-components";
 import { device } from "./breakpoints";
-import { xPercentFrom, reductionInPercentFromAtoB } from "../utils/utils";
+import { scaleUp } from "../utils/utils";
+
+export const fontbase = {
+  mobile: 12,
+  tablet: 13,
+  laptop: 14,
+  desktop: 16,
+  desktopPlus: 20,
+  scale: 1.333,
+};
 
 /**
  * base = 16
@@ -14,15 +23,14 @@ import { xPercentFrom, reductionInPercentFromAtoB } from "../utils/utils";
  */
 const CreateFontSize = (base, scale, size) => {
   let out = base;
-
   if (size > 0) {
     for (let i = 1; i < size; i++) {
-      out += xPercentFrom(scale, out);
+      out += scaleUp(scale, out);
     }
   } else {
     size = size * -1 + 1;
     for (let i = 0; i < size; i++) {
-      out += xPercentFrom(1 / scale, out);
+      out += scaleUp(1 / scale, out);
     }
   }
 
@@ -67,7 +75,14 @@ const Font = css`
   :root {
     --semibold: 600;
     --medium: 500;
-    ${FontSizeSheet(1.333, 20, 16, 14, 13, 12)}
+    ${FontSizeSheet(
+      fontbase.scale,
+      fontbase.desktopPlus,
+      fontbase.desktop,
+      fontbase.laptop,
+      fontbase.tablet,
+      fontbase.mobile
+    )}
   }
 `;
 

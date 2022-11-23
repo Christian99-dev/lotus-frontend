@@ -9,7 +9,7 @@ import tempimg from "../media/images/maps.png";
 import bgimg from "../media/images/img3.png";
 import bgfilter from "../media/images/purple.png";
 import { Parallax } from "react-parallax";
-import Maps from "./Global/Maps";
+import MapsWrapper from "../components/Global/MapsWrapper";
 
 export default function Kontakt() {
   return (
@@ -49,7 +49,7 @@ export default function Kontakt() {
             </div>
           </div>
           <div className="right">
-            <Maps />
+            <MapsWrapper/>
           </div>
         </SpaceWrapper>
       </div>
