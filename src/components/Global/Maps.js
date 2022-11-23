@@ -28,15 +28,15 @@ const Maps = () => {
 
 export default Maps;
 
-const size = 2;
+const size = 64;
 const iconPerson = new L.Icon({
   iconUrl: Marker_Icon,
   iconRetinaUrl: Marker_Icon,
-  iconAnchor: new L.Point(25 * size, 50 * size),
-  popupAnchor: new L.Point(0, -40 * size),
+  iconAnchor: new L.Point(0.5 * size, 1 * size),
+  popupAnchor: new L.Point(0, -1 * size),
   shadowUrl: null,
   shadowSize: null,
   shadowAnchor: null,
-  iconSize: new L.Point(50 * size, 50 * size),
+  iconSize: new L.Point(1 * size, 1 * size),
   className:"marker-icon"
 });

@@ -7,7 +7,6 @@ import Panel from "../components/Panel";
 import Team from "../components/Team";
 import Layout from "../theme/layout";
 
-
 const IndexPage = () => {  
   return (
     <Layout>

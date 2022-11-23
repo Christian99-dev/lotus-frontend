@@ -33,7 +33,7 @@ export default function Panel() {
 
 const PannelWrapper = styled(Parallax)`
   display: flex;
-
+  
   .box {
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     background-color: var(--primary);
