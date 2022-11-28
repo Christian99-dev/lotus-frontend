@@ -59,24 +59,7 @@ const TopWrapper = styled(SpaceWrapper)`
   }
 `;
 
-const Info = ({ text, iconColor, iconName, iconHeight }) => (
-  <InfoWrapper>
-    <Icon height={iconHeight} name={iconName} color={iconColor} />
-    <div>{text}</div>
-  </InfoWrapper>
-);
-
-const InfoWrapper = styled.div`
-  font-size: var(--fs-4);
-  font-weight: var(--medium);
-  color: var(--secondary);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`;
-
 // Bottom
-
 const Bottom = () => {
   return (
     <BottomWrapper>
@@ -84,13 +67,13 @@ const Bottom = () => {
         spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
         className="links"
       >
-        <NavButton text="Home" className="active" />
-        <NavButton text="Leistungen" />
-        <NavButton text="Arbeit" />
-        <NavButton text="Das Team" />
-        <NavButton text="Kontakt" />
-        <NavButton text="Rezensionen" />
-        <NavButton text="Impressum" />
+        <NavButton duration={800} offset={-50} smooth to="carousel" text="Home" className="active" />
+        <NavButton duration={800} offset={-50} smooth to="cards" text="Leistungen" />
+        <NavButton duration={800} offset={-50} smooth to="panel" text="Arbeit" />
+        <NavButton duration={800} offset={-50} smooth to="team" text="Das Team" />
+        <NavButton duration={800} offset={-50} smooth to="contact" text="Kontakt" />
+        <NavButton duration={800} offset={-50} smooth to="testimonial" text="Rezensionen" />
+        <NavButton duration={800} offset={-50} smooth to="carousel" text="Impressum" />
       </SpaceWrapper>
       <SpaceWrapper
         spacing={{ bottom: "navbar-inner" }}
@@ -118,3 +101,21 @@ const BottomWrapper = styled.div`
     }
   }
 `;
+
+// info
+const Info = ({ text, iconColor, iconName, iconHeight }) => (
+  <InfoWrapper>
+    <Icon height={iconHeight} name={iconName} color={iconColor} />
+    <div>{text}</div>
+  </InfoWrapper>
+);
+
+const InfoWrapper = styled.div`
+  font-size: var(--fs-4);
+  font-weight: var(--medium);
+  color: var(--secondary);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
+

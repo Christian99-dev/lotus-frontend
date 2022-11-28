@@ -8,10 +8,10 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import MySwiper from "./Global/MySwiper";
 import TextWithBackground from "./Global/TextWithBackground";
 
-export default function Testimonial() {
+export default function Testimonial({...props}) {
   const comments = [<Comment />, <Comment />, <Comment />];
   return (
-    <TestimonialWrapper spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }}>
+    <TestimonialWrapper spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }} {...props}>
       <Titel
         text="Das sagen unsere Kunden"
         color="purple"

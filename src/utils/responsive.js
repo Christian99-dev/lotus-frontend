@@ -24,6 +24,7 @@ export const responsiveVar = (varname, base, end = "px") => {
   const MobileValue = addApercentToB(toMobile, TabletValue, true).toFixed(2);
 
   return css`
+
     ${"--" + varname + " : " + base + end + ";"}
     @media ${device.desktopPlus} {
       ${"--" + varname + " : " + DesktopPlusValue + end + ";"}

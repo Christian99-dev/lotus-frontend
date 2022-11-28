@@ -6,7 +6,7 @@ import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
 
-export default function Cards() {
+export default function Cards({...props}) {
   return (
     <CardsWrapper
       spacing={{
@@ -15,6 +15,7 @@ export default function Cards() {
         top: "white-component-inner-half",
         bottom: "white-component-inner",
       }}
+      {...props}
     >
       <Bubbels/>
       <Title
@@ -67,7 +68,7 @@ function Card({ title, text, icon }) {
 
 const CardWrapper = styled.div`
   background: var(--secondary);
-  padding: 50px;
+  padding: var(--cards-inner);
   border-radius: 20px;
   color: var(--primary);
   display: flex;

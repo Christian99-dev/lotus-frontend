@@ -7,9 +7,9 @@ import bgimg from "../media/images/img1.png";
 import bgfilter from "../media/images/grey.png";
 import { Parallax } from "react-parallax";
 
-export default function Carousel() {
+export default function Carousel({...props}) {
   return (
-    <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500}>
+    <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500} {...props}>
       <div className="filter">
         <TextWithBackground
           className="text1"

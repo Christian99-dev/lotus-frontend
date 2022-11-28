@@ -7,7 +7,7 @@ export const fontbase = {
   tablet: 13,
   laptop: 14,
   desktop: 16,
-  desktopPlus: 20,
+  desktopPlus: 18,
   scale: 1.333,
 };
 

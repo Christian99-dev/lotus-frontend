@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-scroll";
 
-export default function NavButton({ text, className }) {
-  return <Wrapper className={className}>{text}</Wrapper>;
+export default function NavButton({ text, className, ...props }) {
+  return <Wrapper className={className} {...props}>{text}</Wrapper>;
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   color: var(--primary);

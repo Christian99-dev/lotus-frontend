@@ -1,18 +1,18 @@
 import { css } from "styled-components";
 import { responsiveVar } from "../utils/responsive";
 
-const Button_Input = css`
-  :root{
-    ${responsiveVar("button-padding-top", 15)}
-    ${responsiveVar("button-padding-bottom", 15)}
-    ${responsiveVar("button-padding-left", 40)}
-    ${responsiveVar("button-padding-right", 40)}
+const Button = css`
+  ${responsiveVar("button-padding-top", 15)}
+  ${responsiveVar("button-padding-bottom", 15)}
+  ${responsiveVar("button-padding-left", 40)}
+  ${responsiveVar("button-padding-right", 40)}
+`;
 
-    ${responsiveVar("input-padding-top", 15)}
-    ${responsiveVar("input-padding-bottom", 15)}
-    ${responsiveVar("input-padding-left", 40)}
-    ${responsiveVar("input-padding-right", 40)}
-  }
+const Input = css`
+  ${responsiveVar("input-padding-top", 15)}
+  ${responsiveVar("input-padding-bottom", 15)}
+  ${responsiveVar("input-padding-left", 40)}
+  ${responsiveVar("input-padding-right", 40)}
 `;
 
 const Icon = css`
@@ -20,6 +20,10 @@ const Icon = css`
   ${responsiveVar("icon-m", 35)}
   ${responsiveVar("icon-l", 50)}
   ${responsiveVar("stars", 25)}
+`;
+
+const Cards = css`
+  ${responsiveVar("cards-inner", 50)}
 `;
 
 const Topbar = css`
@@ -31,10 +35,11 @@ const Navbar = css`
 `;
 
 const Carousel = css`
-  --carousel-inner: 200px;
-  --carousel-inner-2: 5px;
-  --carousel-inner-3: 40px;
-  --carousel-gap: 10px;
+  ${responsiveVar("carousel-inner", 200)}
+  ${responsiveVar("carousel-inner-2", 5)}
+  ${responsiveVar("carousel-inner-3", 40)}
+  ${responsiveVar("carousel-gap", 10)}
+
 `;
 
 const Kontakt = css`
@@ -42,7 +47,7 @@ const Kontakt = css`
 `;
 
 const Panel = css`
-  --pannel-inner: 150px;
+  ${responsiveVar("pannel-inner", 150)}
 `;
 
 const Team = css`
@@ -57,12 +62,13 @@ const Components = css`
     ${Kontakt}
     ${Panel}
     ${Team}
+    ${Cards}
 
-    ${Button_Input}
+    ${Button}
+    ${Input}
     ${Icon}
-
-    --white-component-inner: 200px;
-    --white-component-inner-half: 100px;
+    ${responsiveVar("white-component-inner", 200)}
+    ${responsiveVar("white-component-inner-half", 100)}
   }
 `;
 

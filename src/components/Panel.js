@@ -6,11 +6,11 @@ import bgImg from "./../media/images/img2.png";
 import { Parallax } from "react-parallax";
 import logo_transparent from "../media/illu/logo_transparent.svg";
 
-export default function Panel() {
+export default function Panel({...props}) {
   return (
-    <PannelWrapper bgImage={bgImg} strength={200}>
+    <PannelWrapper bgImage={bgImg} strength={200} {...props}>
       <SpaceWrapper
-        spacing={{ top: 150, bottom: 150, left: "border", right: "border" }}
+        spacing={{ top: "pannel-inner", bottom: "pannel-inner", left: "border", right: "border" }}
         className="box"
       >
         <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />

@@ -8,7 +8,7 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 import Rectangles from "./Effects/Rectangles";
 import { Parallax } from "react-parallax";
 
-export default function Team() {
+export default function Team({...props}) {
   return (
     <TeamWrapper
       spacing={{
@@ -17,6 +17,7 @@ export default function Team() {
         top: "white-component-inner-half",
         bottom: "white-component-inner",
       }}
+      {...props}
     >
       <Rectangles />
       <Titel

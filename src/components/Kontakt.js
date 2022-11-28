@@ -11,13 +11,14 @@ import bgfilter from "../media/images/purple.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
 
-export default function Kontakt() {
+export default function Kontakt({...props}) {
   return (
     <KontaktWrapper
       bgImage={bgimg}
       bgfilter={bgfilter}
       tempimg={tempimg}
       strength={500}
+      {...props}
     >
       <div className="filter">
         <SpaceWrapper
