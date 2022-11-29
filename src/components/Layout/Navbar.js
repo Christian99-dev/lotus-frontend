@@ -4,6 +4,9 @@ import NavButton from "../Global/NavButton";
 import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
+import { useRef, useEffect, useState } from "react";
+import Button from "../Global/Button";
+import { useGlobalState } from "../../utils/globalState";
 
 export default function Navbar() {
   return (
@@ -38,6 +41,7 @@ const Top = () => (
 
 const TopWrapper = styled(SpaceWrapper)`
   display: flex;
+  flex-wrap: wrap;
   height: var(--topbar-height);
   background-color: var(--primary);
   flex-direction: column;
@@ -54,50 +58,103 @@ const TopWrapper = styled(SpaceWrapper)`
 
     .right {
       display: flex;
-      gap: 50px;
+      gap: var(--topbar-gap-right);
     }
   }
 `;
 
 // Bottom
 const Bottom = () => {
+  const [state, dispatch] = useGlobalState();
+  const [stuck, setStuck] = useState(false);
+  const ref = useRef();
+  const classes = stuck ? "stuck" : "";
+  const navButtonSetting = { duration: 800, offset: -50, smooth: true };
+
+  /** NEXT STEP:
+   *
+   * Only shrink when carousel end is reached
+   * pass carousel ref through createContext
+   * test with elements in the middle of page
+   * you got this
+   */
+
+  useEffect(() => {
+    const cachedRef = ref.current;
+    const observer = new IntersectionObserver(
+      ([e]) => {
+        setStuck(!e.isIntersecting);
+      },
+      { threshold: 1 }
+    );
+    observer.observe(cachedRef);
+    return () => observer.unobserve(cachedRef);
+  }, [ref]);
+
   return (
-    <BottomWrapper>
-      <SpaceWrapper
-        spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
-        className="links"
-      >
-        <NavButton duration={800} offset={-50} smooth to="carousel" text="Home" className="active" />
-        <NavButton duration={800} offset={-50} smooth to="cards" text="Leistungen" />
-        <NavButton duration={800} offset={-50} smooth to="panel" text="Arbeit" />
-        <NavButton duration={800} offset={-50} smooth to="team" text="Das Team" />
-        <NavButton duration={800} offset={-50} smooth to="contact" text="Kontakt" />
-        <NavButton duration={800} offset={-50} smooth to="testimonial" text="Rezensionen" />
-        <NavButton duration={800} offset={-50} smooth to="carousel" text="Impressum" />
-      </SpaceWrapper>
-      <SpaceWrapper
-        spacing={{ bottom: "navbar-inner" }}
-        className="logo-container"
-      >
-        <img src={LogoText} alt="logo-text" />
-      </SpaceWrapper>
-    </BottomWrapper>
+    <>
+      <BottomWrapper className={classes}>
+        <SpaceWrapper
+          spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
+          className="links"
+        >
+          <Button
+            onClick={() => dispatch({ num: state.num + 1 })}
+            text="test"
+          />
+          <NavButton {...navButtonSetting} to="carousel" text="Home" />
+          <NavButton {...navButtonSetting} to="cards" text="Leistungen" />
+          <NavButton {...navButtonSetting} to="panel" text="Arbeit" />
+          <NavButton {...navButtonSetting} to="team" text="Das Team" />
+          <NavButton {...navButtonSetting} to="contact" text="Kontakt" />
+          <NavButton
+            {...navButtonSetting}
+            to="testimonial"
+            text="Rezensionen"
+          />
+          <NavButton {...navButtonSetting} to="carousel" text="Impressum" />
+        </SpaceWrapper>
+        <SpaceWrapper
+          spacing={{ bottom: "navbar-inner" }}
+          className="logo-container"
+        >
+          <img src={LogoText} alt="logo-text" />
+        </SpaceWrapper>
+      </BottomWrapper>
+    </>
   );
 };
 
 const BottomWrapper = styled.div`
-  background-color: var(--secondary);
+  position: sticky;
+  top: -1px;
+  z-index: 999999;
 
   .links {
+    background-color: var(--secondary);
     display: flex;
-    gap: 50px;
+    gap: var(--navbar-gap);
     justify-content: center;
   }
 
   .logo-container {
+    background-color: var(--secondary);
     img {
+      overflow-anchor: revert-layer;
+      transition: height 0.5s ease-out;
+      height: var(--navbar-logo-height);
       margin: 0 auto;
       display: block;
+    }
+  }
+
+  &.stuck {
+    transition: margin 1s ease;
+    .logo-container {
+      img {
+        transition: height 0.5s ease-in;
+        height: 10px;
+      }
     }
   }
 `;
@@ -118,4 +175,3 @@ const InfoWrapper = styled.div`
   gap: 10px;
   align-items: center;
 `;
-

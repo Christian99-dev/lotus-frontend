@@ -27,11 +27,14 @@ const Cards = css`
 `;
 
 const Topbar = css`
-  --topbar-height: 45px;
+  ${responsiveVar("topbar-height", 45)}
+  ${responsiveVar("topbar-gap-right", 50)}
 `;
 
 const Navbar = css`
-  --navbar-inner: 35px;
+  ${responsiveVar("navbar-inner", 35)}
+  ${responsiveVar("navbar-logo-height", 250)}
+  ${responsiveVar("navbar-gap", 50)}
 `;
 
 const Carousel = css`

@@ -3,7 +3,7 @@ import { device } from "../theme/breakpoints";
 import { fontbase } from "../theme/font";
 import { addApercentToB, xPercentFromAtoB } from "./utils";
 
-export const responsiveVar = (varname, base, end = "px") => {
+export const responsiveVar = (varname, base, end = "px", rate = 1) => {
   const toDesktopPlus = xPercentFromAtoB(
     fontbase.desktop,
     fontbase.desktopPlus
