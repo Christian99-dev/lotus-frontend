@@ -4,7 +4,6 @@ import NavButton from "../Global/NavButton";
 import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
-import { useRef } from "react";
 import { useGlobalState } from "../../utils/globalState";
 
 export default function Navbar() {
@@ -18,10 +17,8 @@ export default function Navbar() {
 
 // Top
 const Top = () => {
-  const ref = useRef();
-
   return (
-    <TopWrapper spacing={{ left: "border", right: "border" }} innerRef={ref}>
+    <TopWrapper spacing={{ left: "border", right: "border" }}>
       <div className="container">
         <div className="left">Lotus-Entwässerungstechnik</div>
         <div className="right">
@@ -68,7 +65,7 @@ const TopWrapper = styled(SpaceWrapper)`
 
 // Bottom
 const Bottom = () => {
-  const [state, dispatch] = useGlobalState();
+  const state = useGlobalState()[0];
   const classes = state.passedCards ? "stuck" : "";
   const navButtonSetting = { duration: 800, offset: -50, smooth: true };
 

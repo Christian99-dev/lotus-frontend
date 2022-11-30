@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
@@ -6,13 +7,12 @@ import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
 import bgfilter from "../media/images/grey.png";
 import { Parallax } from "react-parallax";
-import { useRef } from "react";
 import { useGlobalState } from "../utils/globalState";
 import { offset } from "../utils/utils";
 
 export default function Carousel({...props}) {
   const ref = useRef();
-  const [state, dispatch] = useGlobalState();
+  const dispatch = useGlobalState()[1];
   
   /** Intersection Observer */
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function Carousel({...props}) {
     );
     observer.observe(cachedRef);
     return () => observer.unobserve(cachedRef);
-  }, [ref]);
+  }, [ref, dispatch]);
 
   return (
     <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500} {...props}>
