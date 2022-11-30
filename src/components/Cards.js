@@ -6,7 +6,8 @@ import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
 
-export default function Cards({...props}) {
+
+const Cards = ({ ...props }) => {
   return (
     <CardsWrapper
       spacing={{
@@ -17,7 +18,7 @@ export default function Cards({...props}) {
       }}
       {...props}
     >
-      <Bubbels/>
+      <Bubbels />
       <Title
         center
         text="Unsere Leistung"
@@ -43,7 +44,7 @@ export default function Cards({...props}) {
       </div>
     </CardsWrapper>
   );
-}
+};
 
 const CardsWrapper = styled(SpaceWrapper)`
   position: relative;
@@ -97,3 +98,4 @@ const CardWrapper = styled.div`
   }
 `;
 
+export default Cards;

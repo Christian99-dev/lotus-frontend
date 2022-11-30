@@ -4,8 +4,7 @@ import NavButton from "../Global/NavButton";
 import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
-import { useRef, useEffect, useState } from "react";
-import Button from "../Global/Button";
+import { useRef } from "react";
 import { useGlobalState } from "../../utils/globalState";
 
 export default function Navbar() {
@@ -18,26 +17,30 @@ export default function Navbar() {
 }
 
 // Top
-const Top = () => (
-  <TopWrapper spacing={{ left: "border", right: "border" }}>
-    <div className="container">
-      <div className="left">Lotus-Entwässerungstechnik</div>
-      <div className="right">
-        <Info
-          text="max.mustermann@gmail.de"
-          iconHeight="icon-s"
-          iconName="mail"
-        />
-        <Info text="01567 / 482375" iconHeight="icon-s" iconName="phone" />
-        <Info
-          text="Täglich von 8 - 22 Uhr"
-          iconHeight="icon-s"
-          iconName="time"
-        />
+const Top = () => {
+  const ref = useRef();
+
+  return (
+    <TopWrapper spacing={{ left: "border", right: "border" }} innerRef={ref}>
+      <div className="container">
+        <div className="left">Lotus-Entwässerungstechnik</div>
+        <div className="right">
+          <Info
+            text="max.mustermann@gmail.de"
+            iconHeight="icon-s"
+            iconName="mail"
+          />
+          <Info text="01567 / 482375" iconHeight="icon-s" iconName="phone" />
+          <Info
+            text="Täglich von 8 - 22 Uhr"
+            iconHeight="icon-s"
+            iconName="time"
+          />
+        </div>
       </div>
-    </div>
-  </TopWrapper>
-);
+    </TopWrapper>
+  );
+};
 
 const TopWrapper = styled(SpaceWrapper)`
   display: flex;
@@ -66,30 +69,8 @@ const TopWrapper = styled(SpaceWrapper)`
 // Bottom
 const Bottom = () => {
   const [state, dispatch] = useGlobalState();
-  const [stuck, setStuck] = useState(false);
-  const ref = useRef();
-  const classes = stuck ? "stuck" : "";
+  const classes = state.passedCards ? "stuck" : "";
   const navButtonSetting = { duration: 800, offset: -50, smooth: true };
-
-  /** NEXT STEP:
-   *
-   * Only shrink when carousel end is reached
-   * pass carousel ref through createContext
-   * test with elements in the middle of page
-   * you got this
-   */
-
-  useEffect(() => {
-    const cachedRef = ref.current;
-    const observer = new IntersectionObserver(
-      ([e]) => {
-        setStuck(!e.isIntersecting);
-      },
-      { threshold: 1 }
-    );
-    observer.observe(cachedRef);
-    return () => observer.unobserve(cachedRef);
-  }, [ref]);
 
   return (
     <>
@@ -98,10 +79,6 @@ const Bottom = () => {
           spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
           className="links"
         >
-          <Button
-            onClick={() => dispatch({ num: state.num + 1 })}
-            text="test"
-          />
           <NavButton {...navButtonSetting} to="carousel" text="Home" />
           <NavButton {...navButtonSetting} to="cards" text="Leistungen" />
           <NavButton {...navButtonSetting} to="panel" text="Arbeit" />
@@ -127,7 +104,7 @@ const Bottom = () => {
 
 const BottomWrapper = styled.div`
   position: sticky;
-  top: -1px;
+  top: 0;
   z-index: 999999;
 
   .links {

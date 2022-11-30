@@ -1,7 +1,7 @@
 import React from "react";
 
 const defaultGlobalState = {
-  ref: null,
+  passedCards: false,
 };
 
 const globalStateContext = React.createContext(defaultGlobalState);

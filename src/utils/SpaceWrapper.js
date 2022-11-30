@@ -1,9 +1,9 @@
 import React from "react";
 
-const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
+const SpaceWrapper = ({ spacing, children, margin, center, innerRef, ...props }) => {
  
   // No Spacing declared - funnels children
-  if (!spacing) return <div {...props}>{children}</div>;
+  if (!spacing) return <div ref={innerRef} {...props}>{children}</div>;
 
   // Pixel
   const top = Asigne(spacing.top);
@@ -18,7 +18,7 @@ const SpaceWrapper = ({ spacing, children, margin, center, ...props }) => {
   if (center) style = { ...style, textAlign: "center" };
 
   return (
-    <div style={style} {...props}>
+    <div ref={innerRef} style={style} {...props}>
       {children}
     </div>
   );

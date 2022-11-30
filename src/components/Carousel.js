@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
@@ -6,11 +6,30 @@ import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
 import bgfilter from "../media/images/grey.png";
 import { Parallax } from "react-parallax";
+import { useRef } from "react";
+import { useGlobalState } from "../utils/globalState";
+import { offset } from "../utils/utils";
 
 export default function Carousel({...props}) {
+  const ref = useRef();
+  const [state, dispatch] = useGlobalState();
+  
+  /** Intersection Observer */
+  useEffect(() => {
+    const cachedRef = ref.current;
+    const observer = new IntersectionObserver(
+      (_) => {
+        dispatch({passedCards : window.pageYOffset > offset(cachedRef).top})
+      },
+      { threshold: 1 }
+    );
+    observer.observe(cachedRef);
+    return () => observer.unobserve(cachedRef);
+  }, [ref]);
+
   return (
     <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500} {...props}>
-      <div className="filter">
+      <div className="filter"  ref={ref}>
         <TextWithBackground
           className="text1"
           text="Notfall? Rufen Sie uns Jetzt an!"
