@@ -63,7 +63,7 @@ const TopWrapper = styled(SpaceWrapper)`
   }
 `;
 
-// Bottom
+// Bottom 
 const Bottom = () => {
   const state = useGlobalState()[0];
   const classes = state.passedCards ? "stuck" : "";

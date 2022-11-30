@@ -18,7 +18,7 @@ export default function Carousel({...props}) {
   useEffect(() => {
     const cachedRef = ref.current;
     const observer = new IntersectionObserver(
-      (_) => {
+      _ => {
         dispatch({passedCards : window.pageYOffset > offset(cachedRef).top})
       },
       { threshold: 1 }
