@@ -18,6 +18,14 @@ export default function Layout({ children }) {
             crossorigin=""
           />
           <script src={withPrefix("/script.js")} type="text/javascript" />
+          {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
+          <meta
+            name="viewport"
+            content="height=device-height, 
+                      width=device-width, initial-scale=1.0, 
+                      minimum-scale=1.0, maximum-scale=1.0, 
+                      user-scalable=no, target-densitydpi=device-dpi"
+          />
         </Helmet>
         <GlobalStyle />
         <Navbar />

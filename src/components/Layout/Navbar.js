@@ -19,7 +19,7 @@ const NavbarWrapper = styled.div`
   }
   @media ${device.tablet} {
     .mobile {
-      display: inherit;
+      display: block;
     }
 
     .desktop {

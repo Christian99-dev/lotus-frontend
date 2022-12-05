@@ -13,6 +13,7 @@ import StarEmpty from "../../media/icons/star-empty.svg";
 import Facebook from "../../media/icons/facebook.svg";
 import Instagram from "../../media/icons/instagram.svg";
 import Whatsapp from "../../media/icons/whatsapp.svg";
+import Close from "../../media/icons/close.svg";
 
 export default function Icon({ name, height, color, ...props }) {
   let icon;
@@ -29,6 +30,7 @@ export default function Icon({ name, height, color, ...props }) {
   if (name === "facebook") icon = Facebook;
   if (name === "instagram") icon = Instagram;
   if (name === "whatsapp") icon = Whatsapp;
+  if (name === "close") icon = Close;
 
   height = isNaN(height)
     ? (height = `var(--${height})`)

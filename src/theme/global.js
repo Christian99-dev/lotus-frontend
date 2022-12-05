@@ -5,6 +5,7 @@ import Color from "./color";
 import Components from "./components";
 
 const GlobalStyle = createGlobalStyle`
+
   ${Font};
   ${Spacing};
   ${Color};
