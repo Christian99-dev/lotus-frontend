@@ -19,7 +19,7 @@ export default function Navbar() {
 // Top
 const Top = () => {
   return (
-    <TopWrapper spacing={{ left: "border", right: "border" }}>
+    <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
         <div className="left">Lotus-Entwässerungstechnik</div>
         <div className="right">
@@ -67,8 +67,8 @@ const TopWrapper = styled(SpaceWrapper)`
 // Bottom
 const Bottom = () => {
   const state = useGlobalState()[0];
-  const classes = state.passedCards ? "stuck" : "";
-  const navButtonSetting = { duration: 800, offset: -100, smooth: true };
+  const classes = state.passedCarousel ? "stuck" : "";
+  const navButtonSetting = { duration: 800, offset: -20, smooth: true };
 
   return (
     <>

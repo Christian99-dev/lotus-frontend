@@ -19,7 +19,7 @@ export default function Carousel({...props}) {
     const cachedRef = ref.current;
     const observer = new IntersectionObserver(
       _ => {
-        dispatch({passedCards : window.pageYOffset > offset(cachedRef).top})
+        dispatch({passedCarousel : window.scrollY > offset(cachedRef).top})
       },
       { threshold: 1 }
     );

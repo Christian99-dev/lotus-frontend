@@ -1,7 +1,7 @@
 import React from "react";
 
 const defaultGlobalState = {
-  passedCards: false,
+  passedCarousel: false,
 };
 
 const globalStateContext = React.createContext(defaultGlobalState);
