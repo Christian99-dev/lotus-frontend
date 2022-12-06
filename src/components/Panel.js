@@ -9,12 +9,14 @@ import logo_transparent from "../media/illu/logo_transparent.svg";
 export default function Panel({...props}) {
   return (
     <PannelWrapper bgImage={bgImg} strength={200} {...props}>
+      {/* id anchor */}
+      <div id="panel"/>
       <SpaceWrapper
         spacing={{ top: "pannel-inner", bottom: "pannel-inner", left: "border", right: "border" }}
         className="box"
       >
         <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
-        <div className="text">
+        <div className="text" id="panel">
           <img className="logo" src={logo_transparent} alt="logo" />
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
           nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,

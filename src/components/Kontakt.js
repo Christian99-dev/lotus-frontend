@@ -20,6 +20,8 @@ export default function Kontakt({...props}) {
       strength={500}
       {...props}
     >
+      {/* id anchor */}
+      <div id="contact"/>
       <div className="filter">
         <SpaceWrapper
           spacing={{

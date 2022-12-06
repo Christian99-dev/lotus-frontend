@@ -5,6 +5,7 @@ import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
+import { navigationLinks } from "../../constants";
 
 export default function Navbar() {
   return (
@@ -63,11 +64,11 @@ const TopWrapper = styled(SpaceWrapper)`
   }
 `;
 
-// Bottom 
+// Bottom
 const Bottom = () => {
   const state = useGlobalState()[0];
   const classes = state.passedCards ? "stuck" : "";
-  const navButtonSetting = { duration: 800, offset: -50, smooth: true };
+  const navButtonSetting = { duration: 800, offset: -100, smooth: true };
 
   return (
     <>
@@ -76,17 +77,14 @@ const Bottom = () => {
           spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
           className="links"
         >
-          <NavButton {...navButtonSetting} to="carousel" text="Home" />
-          <NavButton {...navButtonSetting} to="cards" text="Leistungen" />
-          <NavButton {...navButtonSetting} to="panel" text="Arbeit" />
-          <NavButton {...navButtonSetting} to="team" text="Das Team" />
-          <NavButton {...navButtonSetting} to="contact" text="Kontakt" />
-          <NavButton
-            {...navButtonSetting}
-            to="testimonial"
-            text="Rezensionen"
-          />
-          <NavButton {...navButtonSetting} to="carousel" text="Impressum" />
+          {navigationLinks.map((navigation, key) => (
+            <NavButton
+              key={key}
+              {...navButtonSetting}
+              to={navigation.to}
+              text={navigation.name}
+            />
+          ))}
         </SpaceWrapper>
         <SpaceWrapper
           spacing={{ bottom: "navbar-inner" }}

@@ -29,6 +29,8 @@ export default function Carousel({...props}) {
 
   return (
     <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500} {...props}>
+      {/* id anchor */}
+      <div id="carousel"/>
       <div className="filter"  ref={ref}>
         <TextWithBackground
           className="text1"
