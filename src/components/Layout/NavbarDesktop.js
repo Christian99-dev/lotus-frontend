@@ -6,15 +6,15 @@ import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
 
-const NavbarDekstop = ({...props}) => {
+export default function Navbar() {
   return (
-    <div {...props}>
+    <>
       <Top />
       <Bottom />
-    </div>
+    </>
   );
-};
-  
+}
+
 // Top
 const Top = () => {
   return (
@@ -63,7 +63,7 @@ const TopWrapper = styled(SpaceWrapper)`
   }
 `;
 
-// Bottom
+// Bottom 
 const Bottom = () => {
   const state = useGlobalState()[0];
   const classes = state.passedCards ? "stuck" : "";
@@ -149,6 +149,3 @@ const InfoWrapper = styled.div`
   gap: 10px;
   align-items: center;
 `;
-
-
-export default NavbarDekstop;

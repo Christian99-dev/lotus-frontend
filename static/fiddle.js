@@ -1,0 +1,1 @@
+{navigationLinks.map(navigation => <NavButton {...navButtonSetting} to={navigation.to} text={navigation.name} />)}

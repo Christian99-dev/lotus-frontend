@@ -34,7 +34,7 @@ const NavbarWrapper = styled.div`
   .nav {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: var(--topbar-gap-right);;
     .navbutton {
       color: var(--secondary);
       font-size: var(--fs-2);

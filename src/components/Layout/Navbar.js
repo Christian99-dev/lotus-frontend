@@ -1,29 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import { device } from "../../theme/breakpoints";
+import { size } from "../../theme/breakpoints";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 import NavbarDekstop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
 
-export default function Navbar() {
-  return (
-    <NavbarWrapper>
-      <NavbarDekstop className="desktop" />
-      <NavbarMobile className="mobile" />
-    </NavbarWrapper>
-  );
-}
+const Navbar = () => useWindowDimensions().width > size.tablet ? <NavbarDekstop /> : <NavbarMobile />
+export default Navbar;
 
-const NavbarWrapper = styled.div`
-  .mobile {
-    display: none;
-  }
-  @media ${device.tablet} {
-    .mobile {
-      display: block;
-    }
-
-    .desktop {
-      display: none;
-    }
-  }
-`;
