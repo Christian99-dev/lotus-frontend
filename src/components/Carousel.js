@@ -4,6 +4,7 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
+import { device } from "../theme/breakpoints";
 
 export default function Carousel({ ...props }) {
   return (
@@ -36,6 +37,13 @@ export default function Carousel({ ...props }) {
 }
 
 const CarouselWrapper = styled.div`
+  @media ${device.tablet} {
+    padding-top: 50.34px;
+  }
+  @media ${device.mobile} {
+    padding-top: 47.47px;
+  }
+
   background-image: url(${bgimg});
   background-position: center;
   background-attachment: fixed;

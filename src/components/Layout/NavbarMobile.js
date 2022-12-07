@@ -26,16 +26,18 @@ export default NavbarMobile;
 
 // Navbar
 const Nav = ({ toggleNav }) => (
-  <NavWrapper>
+  <NavWrapper id="topbarMobile">
     <Icon name="menu" onClick={() => toggleNav()} />
     <div className="text">Home</div>
   </NavWrapper>
 );
 
 const NavWrapper = styled.div`
-  position: sticky;
+  position: fixed;
   z-index: 999999;
   top: 0;
+  left: 0;
+  right: 0;
   background-color: var(--primary);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -73,7 +75,9 @@ const Overlay = ({ open, toggleNav }) => {
               to={navigation.toMobile ? navigation.toMobile : navigation.to}
               text={navigation.name}
               className="navbutton"
-              onClick={() => {toggleNav()}}
+              onClick={() => {
+                toggleNav();
+              }}
             />
           </div>
         ))}

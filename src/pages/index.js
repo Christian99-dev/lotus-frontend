@@ -7,17 +7,18 @@ import Panel from "../components/Panel";
 import Team from "../components/Team";
 import Layout from "../theme/layout";
 
-const IndexPage = () => {  
+const IndexPage = () => {
   return (
     <Layout>
       {/* <ResponsiveDebug/> */}
       {/* <FontsDebug/> */}
-      <Carousel/>
-      <Cards/>
-      <Panel/>
-      <Team/>
-      <Kontakt/>
-      <Testimonial/>
+
+      <Carousel />
+      <Cards />
+      <Panel />
+      <Team />
+      <Kontakt />
+      <Testimonial />
     </Layout>
   );
 };
