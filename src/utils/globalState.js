@@ -1,7 +1,7 @@
 import React from "react";
 
 const defaultGlobalState = {
-  passedCarousel: false,
+  navbarStuck: false,
 };
 
 const globalStateContext = React.createContext(defaultGlobalState);

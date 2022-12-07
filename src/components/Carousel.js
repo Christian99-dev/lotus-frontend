@@ -1,41 +1,14 @@
-import React, { useEffect } from "react";
-import { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
-import bgfilter from "../media/images/grey.png";
-import { Parallax } from "react-parallax";
-import { useGlobalState } from "../utils/globalState";
-import { offset } from "../utils/utils";
 
 export default function Carousel({ ...props }) {
-  const ref = useRef();
-  const dispatch = useGlobalState()[1];
-
-  /** Intersection Observer */
-  useEffect(() => {
-    const cachedRef = ref.current;
-    const observer = new IntersectionObserver(
-      (_) => {
-        dispatch({ passedCarousel: window.scrollY > offset(cachedRef).top });
-      },
-      { threshold: 1 }
-    );
-    observer.observe(cachedRef);
-    return () => observer.unobserve(cachedRef);
-  }, [ref, dispatch]);
-
   return (
-    <CarouselWrapper
-      bgImage={bgimg}
-      bgFilter={bgfilter}
-      strength={500}
-      {...props}
-    >
-      {/* id anchor */}
-      <div className="filter" id="carousel" ref={ref}>
+    <CarouselWrapper {...props} id="carousel">
+      <div className="filter">
         <TextWithBackground
           className="text1"
           text="Notfall? Rufen Sie uns Jetzt an!"
@@ -62,7 +35,17 @@ export default function Carousel({ ...props }) {
   );
 }
 
-const CarouselWrapper = styled(Parallax)`
+const CarouselWrapper = styled.div`
+  background-image: url(${bgimg});
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .filter {
+    background-color: var(--background-filter-dark);
+  }
+
   .text1,
   .text2 {
     text-align: center;
@@ -72,9 +55,5 @@ const CarouselWrapper = styled(Parallax)`
     display: flex;
     gap: var(--carousel-gap);
     justify-content: center;
-  }
-
-  .filter {
-    background: center / cover no-repeat url(${(props) => props.bgFilter});
   }
 `;

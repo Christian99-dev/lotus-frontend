@@ -5,9 +5,7 @@ import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
 import Input from "./../components/Global/Input";
 import Button from "./Global/Button";
-import tempimg from "../media/images/maps.png";
 import bgimg from "../media/images/img3.png";
-import bgfilter from "../media/images/purple.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
 
@@ -15,8 +13,6 @@ export default function Kontakt({...props}) {
   return (
     <KontaktWrapper
       bgImage={bgimg}
-      bgfilter={bgfilter}
-      tempimg={tempimg}
       strength={500}
       {...props}
     >
@@ -62,7 +58,7 @@ export default function Kontakt({...props}) {
 
 const KontaktWrapper = styled(Parallax)`
   .filter {
-    background: center / cover no-repeat url(${(props) => props.bgfilter});
+    background: var(--background-filter-primary);
   }
 
   .wrapper {
@@ -92,8 +88,6 @@ const KontaktWrapper = styled(Parallax)`
     }
 
     .right {
-      /* background: center / cover no-repeat url(${(props) =>
-        props.tempimg}); */
       flex: 1 1 0;
       border-radius: 10px;
     }
