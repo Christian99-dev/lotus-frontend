@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 
+const navButtonSetting = { duration: 800, offset: -20, smooth: true };
+
 export default function NavButton({ text, className, ...props }) {
-  return <Wrapper className={className} {...props}>{text}</Wrapper>;
-}
+  return <Wrapper {...navButtonSetting} className={className} {...props} activeClass='active' spy={true}>{text}</Wrapper>;
+} 
 
 const Wrapper = styled(Link)`
   font-size: var(--fs-3);
@@ -34,7 +36,6 @@ const Wrapper = styled(Link)`
   }
 
   &.active:after {
-    color: red;
     width: 100%;
   }
 `;

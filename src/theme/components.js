@@ -37,6 +37,18 @@ const Navbar = css`
   ${responsiveVar("navbar-gap", 50)}
 `;
 
+const NavMobile = css`
+  ${responsiveVar("navmobile-overlay-gap-links", 50)}
+  ${responsiveVar("navmobile-overlay-gap-info", 25)}
+  ${responsiveVar("navmobile-overlay-gap-info-inner", 5)}
+  ${responsiveVar("navmobile-overlay-gap-big", 100)}
+  ${responsiveVar("navmobile-overlay-inner", 14, "%")}
+  ${responsiveVar("navmobile-overlay-logo-height", 250)}
+
+  ${responsiveVar("navmobile-bar-icon-height", 25)}
+  ${responsiveVar("navmobile-bar-padding", 15)}
+`;
+
 const Carousel = css`
   ${responsiveVar("carousel-inner", 200)}
   ${responsiveVar("carousel-inner-2", 5)}
@@ -61,6 +73,7 @@ const Components = css`
   :root {
     ${Topbar}
     ${Navbar}
+    ${NavMobile}
     ${Carousel}
     ${Kontakt}
     ${Panel}

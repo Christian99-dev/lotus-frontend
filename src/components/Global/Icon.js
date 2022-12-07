@@ -14,6 +14,7 @@ import Facebook from "../../media/icons/facebook.svg";
 import Instagram from "../../media/icons/instagram.svg";
 import Whatsapp from "../../media/icons/whatsapp.svg";
 import Close from "../../media/icons/close.svg";
+import Menu from "../../media/icons/menu.svg";
 
 export default function Icon({ name, height, color, ...props }) {
   let icon;
@@ -31,6 +32,7 @@ export default function Icon({ name, height, color, ...props }) {
   if (name === "instagram") icon = Instagram;
   if (name === "whatsapp") icon = Whatsapp;
   if (name === "close") icon = Close;
+  if (name === "menu") icon = Menu;
 
   height = isNaN(height)
     ? (height = `var(--${height})`)

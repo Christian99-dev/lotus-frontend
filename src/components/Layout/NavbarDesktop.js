@@ -5,7 +5,7 @@ import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
-import { navigationLinks } from "../../constants";
+import { info, navigationLinks } from "../../constants";
 
 export default function Navbar() {
   return (
@@ -23,17 +23,14 @@ const Top = () => {
       <div className="container">
         <div className="left">Lotus-Entwässerungstechnik</div>
         <div className="right">
-          <Info
-            text="max.mustermann@gmail.de"
-            iconHeight="icon-s"
-            iconName="mail"
-          />
-          <Info text="01567 / 482375" iconHeight="icon-s" iconName="phone" />
-          <Info
-            text="Täglich von 8 - 22 Uhr"
-            iconHeight="icon-s"
-            iconName="time"
-          />
+          {info.map((info, key) => (
+            <Info
+              key={key}
+              text={info.text}
+              iconHeight="icon-s"
+              iconName={info.icon}
+            />
+          ))}
         </div>
       </div>
     </TopWrapper>
@@ -68,7 +65,6 @@ const TopWrapper = styled(SpaceWrapper)`
 const Bottom = () => {
   const state = useGlobalState()[0];
   const classes = state.passedCarousel ? "stuck" : "";
-  const navButtonSetting = { duration: 800, offset: -20, smooth: true };
 
   return (
     <>
@@ -78,12 +74,7 @@ const Bottom = () => {
           className="links"
         >
           {navigationLinks.map((navigation, key) => (
-            <NavButton
-              key={key}
-              {...navButtonSetting}
-              to={navigation.to}
-              text={navigation.name}
-            />
+            <NavButton key={key} to={navigation.to} text={navigation.name} />
           ))}
         </SpaceWrapper>
         <SpaceWrapper
@@ -121,11 +112,10 @@ const BottomWrapper = styled.div`
   }
 
   &.stuck {
-    transition: margin 1s ease;
     .logo-container {
       img {
         transition: height 0.5s ease-in;
-        height: 10px;
+        height: 0px;
       }
     }
   }

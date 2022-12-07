@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useRef } from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
@@ -10,16 +10,16 @@ import { Parallax } from "react-parallax";
 import { useGlobalState } from "../utils/globalState";
 import { offset } from "../utils/utils";
 
-export default function Carousel({...props}) {
+export default function Carousel({ ...props }) {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
-  
+
   /** Intersection Observer */
   useEffect(() => {
     const cachedRef = ref.current;
     const observer = new IntersectionObserver(
-      _ => {
-        dispatch({passedCarousel : window.scrollY > offset(cachedRef).top})
+      (_) => {
+        dispatch({ passedCarousel: window.scrollY > offset(cachedRef).top });
       },
       { threshold: 1 }
     );
@@ -28,10 +28,14 @@ export default function Carousel({...props}) {
   }, [ref, dispatch]);
 
   return (
-    <CarouselWrapper bgImage={bgimg} bgFilter={bgfilter} strength={500} {...props}>
+    <CarouselWrapper
+      bgImage={bgimg}
+      bgFilter={bgfilter}
+      strength={500}
+      {...props}
+    >
       {/* id anchor */}
-      <div id="carousel"/>
-      <div className="filter"  ref={ref}>
+      <div className="filter" id="carousel" ref={ref}>
         <TextWithBackground
           className="text1"
           text="Notfall? Rufen Sie uns Jetzt an!"
