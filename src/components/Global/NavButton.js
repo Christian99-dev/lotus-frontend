@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
 
-const navButtonSetting = { duration: 800, offset: -20, smooth: true };
+const navButtonSetting = { duration: 800, offset: -90, smooth: true };
 
 export default function NavButton({ text, className, ...props }) {
   return <Wrapper {...navButtonSetting} className={className} {...props} activeClass='active' spy={true}>{text}</Wrapper>;

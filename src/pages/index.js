@@ -12,12 +12,12 @@ const IndexPage = () => {
     <Layout>
       {/* <ResponsiveDebug/> */}
       {/* <FontsDebug/> */}
-      <Carousel id="carousel"/>
-      <Cards id="cards"/>
-      <Panel id="panel"/>
-      <Team id="team"/>
-      <Kontakt id="contact"/>
-      <Testimonial id="testimonial"/>
+      <Carousel/>
+      <Cards/>
+      <Panel/>
+      <Team/>
+      <Kontakt/>
+      <Testimonial/>
     </Layout>
   );
 };

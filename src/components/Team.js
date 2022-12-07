@@ -8,42 +8,44 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 import Rectangles from "./Effects/Rectangles";
 import { Parallax } from "react-parallax";
 
-export default function Team({...props}) {
+export default function Team({ ...props }) {
   return (
-    <TeamWrapper
-      spacing={{
-        left: "border",
-        right: "border",
-        top: "white-component-inner-half",
-        bottom: "white-component-inner",
-      }}
-      {...props}
-    >
-      <Rectangles />
-      <Titel
-        center
-        text="Das Team"
-        spacing={{ bottom: "white-component-inner-half" }}
-        color="purple"
-      />
-      <div className="container">
-        <Person
-          className="person"
-          img={img1}
-          text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
-          jobTitle="Klempner"
-          name="Max Mustermann"
+    <div id="team">
+      <TeamWrapper
+        spacing={{
+          left: "border",
+          right: "border",
+          top: "white-component-inner-half",
+          bottom: "white-component-inner",
+        }}
+        {...props}
+      >
+        <Rectangles />
+        <Titel
+          center
+          text="Das Team"
+          spacing={{ bottom: "white-component-inner-half" }}
+          color="purple"
         />
-        <Person
-          className="person"
-          img={img2}
-          text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasodi naosdi nasodi nasod in wrwes"
-          jobTitle="Klempner"
-          name="Max Mustermann"
-          right
-        />
-      </div>
-    </TeamWrapper>
+        <div className="container">
+          <Person
+            className="person"
+            img={img1}
+            text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
+            jobTitle="Klempner"
+            name="Max Mustermann"
+          />
+          <Person
+            className="person"
+            img={img2}
+            text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasodi naosdi nasodi nasod in wrwes"
+            jobTitle="Klempner"
+            name="Max Mustermann"
+            right
+          />
+        </div>
+      </TeamWrapper>
+    </div>
   );
 }
 
@@ -61,7 +63,6 @@ const TeamWrapper = styled(SpaceWrapper)`
 `;
 
 function Person({ img, text, name, jobTitle, right, ...props }) {
-
   let strength = right ? 125 : -125;
   return (
     <PersonWrapper img={img} right={right} {...props}>

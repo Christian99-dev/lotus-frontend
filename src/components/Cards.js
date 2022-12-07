@@ -6,10 +6,10 @@ import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
 
-
 const Cards = ({ ...props }) => {
   return (
     <CardsWrapper
+      id="cards"
       spacing={{
         left: "border",
         right: "border",

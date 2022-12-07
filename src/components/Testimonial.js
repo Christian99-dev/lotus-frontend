@@ -11,7 +11,7 @@ import TextWithBackground from "./Global/TextWithBackground";
 export default function Testimonial({...props}) {
   const comments = [<Comment />, <Comment />, <Comment />];
   return (
-    <TestimonialWrapper spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }} {...props}>
+    <TestimonialWrapper id="testimonial" spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }} {...props}>
       <Titel
         text="Das sagen unsere Kunden"
         color="purple"

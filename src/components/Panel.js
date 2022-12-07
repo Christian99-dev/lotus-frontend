@@ -6,36 +6,42 @@ import bgImg from "./../media/images/img2.png";
 import { Parallax } from "react-parallax";
 import logo_transparent from "../media/illu/logo_transparent.svg";
 
-export default function Panel({...props}) {
+export default function Panel({ ...props }) {
   return (
-    <PannelWrapper bgImage={bgImg} strength={200} {...props}>
-      {/* id anchor */}
-      <div id="panel"/>
-      <SpaceWrapper
-        spacing={{ top: "pannel-inner", bottom: "pannel-inner", left: "border", right: "border" }}
-        className="box"
-      >
-        <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
-        <div className="text" id="panel">
-          <img className="logo" src={logo_transparent} alt="logo" />
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-        </div>
-      </SpaceWrapper>
-      <div className="img" />
-    </PannelWrapper>
+    <div id="panel">
+      <PannelWrapper bgImage={bgImg} strength={200} {...props}>
+        <SpaceWrapper
+          spacing={{
+            top: "pannel-inner",
+            bottom: "pannel-inner",
+            left: "border",
+            right: "border",
+          }}
+          className="box"
+        >
+          <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
+          <div className="text" id="panel">
+            <img className="logo" src={logo_transparent} alt="logo" />
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+            no sea
+          </div>
+        </SpaceWrapper>
+        <div className="img" />
+      </PannelWrapper>
+    </div>
   );
 }
 
 const PannelWrapper = styled(Parallax)`
   display: flex;
-  
+
   .box {
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     background-color: var(--primary);

@@ -5,7 +5,7 @@ export const navigationLinks = [
   { name: "Das Team", to: "team" },
   { name: "Kontakt", to: "contact" },
   { name: "Rezensionen", to: "testimonial" },
-  { name: "Impressum", to: "topbar" },
+  { name: "Impressum", to: "contact" },
 ];
 
 export const info = [
