@@ -5,6 +5,7 @@ import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { withPrefix } from "gatsby";
 import { GlobalStateProvider } from "../utils/globalState";
+import styled from "styled-components";
 
 export default function Layout({ children }) {
   return (
@@ -25,7 +26,7 @@ export default function Layout({ children }) {
                       width=device-width, initial-scale=1.0, 
                       minimum-scale=1.0, maximum-scale=1.0, 
                       user-scalable=no"
-                      // target-densitydpi=device-dpi
+            // target-densitydpi=device-dpi
           />
         </Helmet>
         <GlobalStyle />

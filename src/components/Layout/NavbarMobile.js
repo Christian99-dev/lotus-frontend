@@ -6,6 +6,7 @@ import NavButton from "../Global/NavButton";
 import LogoTransparent from "../../media/logo/logo-transparent.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
+import { device } from "../../theme/breakpoints";
 
 const NavbarMobile = () => {
   const [toggle, setToggle] = useState(false);
@@ -59,53 +60,51 @@ const NavWrapper = styled.div`
 const Overlay = ({ open, toggleNav }) => {
   return (
     <OverlayWrapper className={open ? "open" : "closed"}>
-      <div className="logo-wrapper">
-        <img src={LogoTransparent} alt="logo" className="logo" />
-      </div>
+      <img src={LogoTransparent} alt="logo" className="logo" />
       <Icon
         name="close"
         height="icon-l"
         className="closeButton"
         onClick={() => toggleNav()}
       />
-      <div className="nav">
-        {navigationLinks.map((navigation, key) => (
-          <div className="navbutton-wrapper" key={key}>
-            <NavButton
-              to={navigation.toMobile ? navigation.toMobile : navigation.to}
-              text={navigation.name}
-              className="navbutton"
-              onClick={() => {
-                toggleNav();
-              }}
+
+      <div className="scroll-wrapper">
+        <div className="nav">
+          {navigationLinks.map((navigation, key) => (
+            <div className="navbutton-wrapper" key={key}>
+              <NavButton
+                to={navigation.toMobile ? navigation.toMobile : navigation.to}
+                text={navigation.name}
+                className="navbutton"
+                onClick={() => {
+                  toggleNav();
+                }}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="info">
+          {info.map((info, key) => (
+            <Info
+              key={key}
+              text={info.text}
+              iconHeight="icon-s"
+              iconName={info.icon}
             />
-          </div>
-        ))}
-      </div>
-      <div className="info">
-        {info.map((info, key) => (
-          <Info
-            key={key}
-            text={info.text}
-            iconHeight="icon-s"
-            iconName={info.icon}
-          />
-        ))}
+          ))}
+        </div>
       </div>
     </OverlayWrapper>
   );
 };
 
 const OverlayWrapper = styled(SpaceWrapper)`
-  z-index: 999999;
+  z-index: 9999999;
   position: fixed;
-  overflow: scroll;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  max-height: 100vh;
-  padding: var(--navmobile-overlay-inner);
   text-align: center;
   background-color: var(--primary);
   transform: translateX(-100%);
@@ -117,38 +116,56 @@ const OverlayWrapper = styled(SpaceWrapper)`
   }
 
   .logo {
+    z-index: -1;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     height: var(--navmobile-overlay-logo-height);
   }
 
   .closeButton {
-    display: flex;
+    position: absolute;
+    top: var(--navmobile-overlay-inner);
+    left: var(--navmobile-overlay-inner);
   }
 
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: var(--navmobile-overlay-gap-links);
-    margin-bottom: var(--navmobile-overlay-gap-big);
-    .navbutton-wrapper {
-      .navbutton {
-        color: var(--secondary);
-        font-size: var(--fs-2);
-        &:after {
-          background-color: var(--secondary);
+  .scroll-wrapper {
+    overscroll-behavior: contain;
+    overflow: scroll;
+    margin: calc(var(--navmobile-overlay-inner) + var(--icon-l)) 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--navmobile-overlay-gap-links);
+      margin-bottom: var(--navmobile-overlay-gap-big);
+      .navbutton-wrapper {
+        .navbutton {
+          color: var(--secondary);
+          font-size: var(--fs-2);
+          &:after {
+            background-color: var(--secondary);
+          }
         }
       }
     }
-  }
 
-  .info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--navmobile-overlay-gap-info);
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--navmobile-overlay-gap-info);
+    }
   }
 `;
 

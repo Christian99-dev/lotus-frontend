@@ -9,7 +9,7 @@ import Layout from "../theme/layout";
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout style={{padding: "100px"}}>
       {/* <ResponsiveDebug/> */}
       {/* <FontsDebug/> */}
 
