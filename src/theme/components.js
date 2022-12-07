@@ -42,7 +42,7 @@ const NavMobile = css`
   ${responsiveVar("navmobile-overlay-gap-info", 25)}
   ${responsiveVar("navmobile-overlay-gap-info-inner", 5)}
   ${responsiveVar("navmobile-overlay-gap-big", 100)}
-  ${responsiveVar("navmobile-overlay-inner", 50)}
+  ${responsiveVar("navmobile-overlay-inner", 15)}
   ${responsiveVar("navmobile-overlay-logo-height", 25, "%")}
 
   ${responsiveVar("navmobile-bar-icon-height", 25)}

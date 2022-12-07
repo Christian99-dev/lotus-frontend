@@ -6,7 +6,6 @@ import NavButton from "../Global/NavButton";
 import LogoTransparent from "../../media/logo/logo-transparent.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
-import { device } from "../../theme/breakpoints";
 
 const NavbarMobile = () => {
   const [toggle, setToggle] = useState(false);
@@ -63,7 +62,7 @@ const Overlay = ({ open, toggleNav }) => {
       <img src={LogoTransparent} alt="logo" className="logo" />
       <Icon
         name="close"
-        height="icon-l"
+        height="icon-m"
         className="closeButton"
         onClick={() => toggleNav()}
       />
@@ -138,7 +137,7 @@ const OverlayWrapper = styled(SpaceWrapper)`
   .scroll-wrapper {
     overscroll-behavior: contain;
     overflow: scroll;
-    margin: calc(var(--navmobile-overlay-inner) + var(--icon-l)) 0;
+    margin: calc(var(--navmobile-overlay-inner) + var(--icon-m)) 0;
     position: absolute;
     top: 0;
     bottom: 0;
