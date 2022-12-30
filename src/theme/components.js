@@ -24,6 +24,8 @@ const Icon = css`
 
 const Cards = css`
   ${responsiveVar("cards-inner", 50)}
+  ${responsiveVar("cards-gap", 40)}
+  ${responsiveVar("cards-max-width", 250)}
 `;
 
 const Topbar = css`

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
+import { device } from "../theme/breakpoints";
 
 const Cards = ({ ...props }) => {
   return (
@@ -48,16 +49,41 @@ const Cards = ({ ...props }) => {
 
 const CardsWrapper = styled(SpaceWrapper)`
   position: relative;
+
   .cards {
     display: flex;
     justify-content: space-between;
-    gap: 5%;
+    gap: var(--cards-gap);
+
+    .card{
+      max-width: var(--cards-max-width);
+    }
+
+    @media ${device.laptop} {
+      flex-direction: column;
+      justify-content: center;
+
+      .card {
+        max-width: var(--cards-max-width);
+        margin-left: 10%;
+      }
+      .card:nth-child(2) {
+        margin-left: auto;
+        margin-right: 10%;
+      }
+    }
+
+    @media ${device.tablet} {
+      .card, .card:nth-child(2) {
+        margin: auto;
+      }
+    }
   }
 `;
 
 function Card({ title, text, icon }) {
   return (
-    <CardWrapper>
+    <CardWrapper className="card">
       <div className="title">{title}</div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
         {text}

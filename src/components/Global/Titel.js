@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
 export default function Titel({ text, color, spacing, center }) {
@@ -17,7 +18,6 @@ const Wrapper = styled.div`
     props.theme === "purple" ? "var(--primary);" : "var(--secondary);"};
   display: inline-block;
   position: relative;
-  
 
   &:after {
     content: "";
@@ -35,5 +35,15 @@ const Wrapper = styled.div`
   &:hover:after {
     transition: width 0.25s ease-out;
     width: 100%;
+  }
+
+  @media ${device.mobile} {
+    &:after {
+      display: none;
+    }
+
+    &:hover:after {
+      display: none;
+    }
   }
 `;

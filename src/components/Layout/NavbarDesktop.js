@@ -66,13 +66,16 @@ const TopWrapper = styled(SpaceWrapper)`
     }
 
     @media ${device.laptop} {
+
       flex-direction: column;
       text-align: center;
       gap: var(--topbar-inner-gap);
+      
       .right{
         text-align: center;
         justify-content: center;
       }
+      
     }
 
    
