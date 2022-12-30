@@ -27,7 +27,8 @@ const Cards = css`
 `;
 
 const Topbar = css`
-  ${responsiveVar("topbar-height", 45)}
+  ${responsiveVar("topbar-inner-gap", 20)}
+  ${responsiveVar("topbar-inner-padding", 10)}
   ${responsiveVar("topbar-gap-right", 50)}
 `;
 

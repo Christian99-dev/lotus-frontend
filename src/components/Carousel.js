@@ -15,7 +15,7 @@ export default function Carousel({ ...props }) {
           text="Notfall? Rufen Sie uns Jetzt an!"
           fontSize="1"
           color="purple"
-          spacing={{ top: "carousel-inner", bottom: "carousel-inner-2" }}
+          spacing={{ top: "carousel-inner", bottom: "carousel-inner-2", left:"border", right:"border" }}
         />
         <TextWithBackground
           className="text2"
@@ -36,7 +36,7 @@ export default function Carousel({ ...props }) {
   );
 }
 
-const CarouselWrapper = styled.div`
+const CarouselWrapper = styled(SpaceWrapper)`
   @media ${device.tablet} {
     padding-top: 50.34px;
   }

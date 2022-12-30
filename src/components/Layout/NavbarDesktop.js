@@ -9,6 +9,7 @@ import { info, navigationLinks } from "../../constants";
 import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { device } from "../../theme/breakpoints";
 
 export default function Navbar() {
   return (
@@ -33,6 +34,7 @@ const Top = () => {
               text={info.text}
               iconHeight="icon-s"
               iconName={info.icon}
+              className="info"
             />
           ))}
         </div>
@@ -43,15 +45,15 @@ const Top = () => {
 
 const TopWrapper = styled(SpaceWrapper)`
   display: flex;
-  flex-wrap: wrap;
-  height: var(--topbar-height);
   background-color: var(--primary);
   flex-direction: column;
   justify-content: space-around;
-
+  
   .container {
+    padding: var(--topbar-inner-padding);
     display: flex;
     justify-content: space-between;
+    
     .left {
       color: var(--secondary);
       font-size: var(--fs-3);
@@ -62,6 +64,18 @@ const TopWrapper = styled(SpaceWrapper)`
       display: flex;
       gap: var(--topbar-gap-right);
     }
+
+    @media ${device.laptop} {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--topbar-inner-gap);
+      .right{
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+   
   }
 `;
 
@@ -160,7 +174,7 @@ const BottomWrapper = styled.div`
 const Info = ({ text, iconColor, iconName, iconHeight }) => (
   <InfoWrapper>
     <Icon height={iconHeight} name={iconName} color={iconColor} />
-    <div>{text}</div>
+    <div className="text">{text}</div>
   </InfoWrapper>
 );
 
