@@ -5,21 +5,18 @@ import Titel from "./Global/Titel";
 import bgImg from "./../media/images/img2.png";
 import { Parallax } from "react-parallax";
 import logo_transparent from "../media/illu/logo_transparent.svg";
+import { device } from "../theme/breakpoints";
 
 export default function Panel({ ...props }) {
   return (
     <div id="panel">
       <PannelWrapper bgImage={bgImg} strength={200} {...props}>
-        <SpaceWrapper
-          spacing={{
-            top: "pannel-inner",
-            bottom: "pannel-inner",
-            left: "border",
-            right: "border",
-          }}
-          className="box"
-        >
-          <Titel text="Unsere Arbeit" spacing={{ bottom: 50 }} />
+        <SpaceWrapper className="box">
+          <Titel
+            text="Unsere Arbeit"
+            className="title"
+            spacing={{ bottom: 50 }}
+          />
           <div className="text" id="panel">
             <img className="logo" src={logo_transparent} alt="logo" />
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -40,12 +37,12 @@ export default function Panel({ ...props }) {
 }
 
 const PannelWrapper = styled(Parallax)`
-  display: flex;
-
   .box {
+    width: 50%;
+    box-sizing: border-box;
+    padding: var(--pannel-inner) var(--border);
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     background-color: var(--primary);
-    width: 25%;
     position: relative;
     .text {
       .logo {
@@ -59,9 +56,39 @@ const PannelWrapper = styled(Parallax)`
     }
   }
 
-  .img {
-    margin-left: -300px;
-    width: 75%;
-    background: center / cover no-repeat fixed url(${(props) => props.bgImg});
+  @media ${device.laptop} {
+    .box {
+      width: 65%;
+    }
+  }
+
+  @media ${device.tablet} {
+    .react-parallax-bgimage {
+      height: var(--pannel-height-mobile) !important;
+    }
+    height: var(--pannel-height-mobile);
+    .box {
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 100%);
+      width: 100%;
+      .text {
+        .logo {
+          position: absolute;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: auto;
+          top: 10%;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+        text-align: center;
+      }
+      .title {
+        text-align: center;
+      }
+      .logo {
+        left: 50%;
+      }
+    }
   }
 `;

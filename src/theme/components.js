@@ -66,6 +66,7 @@ const Kontakt = css`
 
 const Panel = css`
   ${responsiveVar("pannel-inner", 150)}
+  ${responsiveVar("pannel-height-mobile", 900)}
 `;
 
 const Team = css`

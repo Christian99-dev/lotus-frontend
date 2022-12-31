@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { device } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Titel({ text, color, spacing, center }) {
+export default function Titel({ text, color, spacing, center, className }) {
   return (
-    <SpaceWrapper center={center} spacing={spacing}>
+    <SpaceWrapper center={center} spacing={spacing} className={className}>
       <Wrapper theme={color}>{text}</Wrapper>
     </SpaceWrapper>
   );

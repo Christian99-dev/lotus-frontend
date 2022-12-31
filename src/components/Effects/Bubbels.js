@@ -43,7 +43,7 @@ const Rectangles = () => {
         shiftY={percentage}
         shiftStrenghtY={10}
         top="5%"
-        left="90%"
+        left="70%"
       />
     </>
   );

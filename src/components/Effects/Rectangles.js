@@ -31,7 +31,7 @@ const Rectangles = () => {
         shiftStrenghtY={20}
         size={100}
         top="20%"
-        left="90%"
+        left="60%"
         rotation={percentage}
         rotationStrenght={60}
       />
