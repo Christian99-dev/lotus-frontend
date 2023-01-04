@@ -35,9 +35,7 @@ const Comment = () => (
     <Stars spacing={{ top: 30, bottom: 30 }} />
     <SpaceWrapper spacing={{ bottom: 40 }} className="text">
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-      clita kasd gubergren, no sea takimata sanctus est
+      eirmod tempor invidunt 
     </SpaceWrapper>
   </CommentWrapper>
 );

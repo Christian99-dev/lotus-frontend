@@ -117,3 +117,8 @@ const PersonWrapper = styled.div`
     }
   }
 `;
+
+
+// const PersonMobile {
+
+// }

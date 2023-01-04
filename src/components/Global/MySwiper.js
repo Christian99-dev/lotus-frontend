@@ -6,12 +6,29 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export default function MySwiper({ array }) {
+export default function MySwiper({ array, cards }) {
+  if (cards)
+    return (
+      <MySwiperWrapper
+        autoHeight={true}
+        modules={[Pagination]}
+        pagination={{ clickable: true, dynamicBullets: true }}
+        loop={true}
+        slidesPerView={1}
+        spaceBetween={30}
+      >
+        {array.map((slide, key) => (
+            <SwiperSlide key={key}>{slide}</SwiperSlide>
+        ))}
+      </MySwiperWrapper>
+    );
+
   return (
     <MySwiperWrapper
+      autoHeight={true}
       modules={[Pagination, Navigation]}
-      pagination={{ clickable: true, dynamicBullets: true }}
       navigation={{ clickable: true }}
+      pagination={{ clickable: true, dynamicBullets: true }}
       loop={true}
       slidesPerView={1}
     >
@@ -24,7 +41,7 @@ export default function MySwiper({ array }) {
 
 const MySwiperWrapper = styled(Swiper)`
   .swiper-pagination {
-    bottom: 0 !important;
+    /* bottom: 0 !important; */
     .swiper-pagination-bullet {
       background-color: var(--primary);
       height: 10px;

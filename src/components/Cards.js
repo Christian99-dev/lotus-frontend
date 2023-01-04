@@ -5,15 +5,33 @@ import styled from "styled-components";
 import Icon from "../components/Global/Icon";
 import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
-import { device } from "../theme/breakpoints";
+import { device, size } from "../theme/breakpoints";
+import useWindowDimensions from "../utils/useWindowDimensions";
+import MySwiper from "../components/Global/MySwiper";
 
 const Cards = ({ ...props }) => {
+  const cardsJSX = [
+    <Card
+      text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
+      title="Reinigen"
+      icon="drop"
+    />,
+    <Card
+      text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
+      title="Reinigen"
+      icon="sync"
+    />,
+    <Card
+      text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu"
+      title="Reinigen"
+      icon="wrench"
+    />,
+  ];
+
   return (
     <CardsWrapper
       id="cards"
       spacing={{
-        left: "border",
-        right: "border",
         top: "white-component-inner-half",
         bottom: "white-component-inner",
       }}
@@ -26,23 +44,16 @@ const Cards = ({ ...props }) => {
         spacing={{ bottom: "white-component-inner-half" }}
         color="purple"
       />
-      <div className="cards">
-        <Card
-          text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
-          title="Reinigen"
-          icon="drop"
-        />
-        <Card
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
-          title="Reinigen"
-          icon="sync"
-        />
-        <Card
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu"
-          title="Reinigen"
-          icon="wrench"
-        />
-      </div>
+      {useWindowDimensions().width > size.tablet ? (
+        <SpaceWrapper
+          spacing={{ left: "border", right: "border" }}
+          className="cards"
+        >
+          {cardsJSX.map((child) => child)}
+        </SpaceWrapper>
+      ) : (
+        <MySwiper array={cardsJSX} cards></MySwiper>
+      )}
     </CardsWrapper>
   );
 };
@@ -55,7 +66,7 @@ const CardsWrapper = styled(SpaceWrapper)`
     justify-content: space-between;
     gap: var(--cards-gap);
 
-    .card{
+    .card {
       max-width: var(--cards-max-width);
     }
 
@@ -70,12 +81,6 @@ const CardsWrapper = styled(SpaceWrapper)`
       .card:nth-child(2) {
         margin-left: auto;
         margin-right: 10%;
-      }
-    }
-
-    @media ${device.tablet} {
-      .card, .card:nth-child(2) {
-        margin: auto;
       }
     }
   }
@@ -121,6 +126,11 @@ const CardWrapper = styled.div`
     display: block;
     margin: 0 auto;
     margin-top: auto;
+  }
+
+  @media ${device.laptop} {
+    max-width: 300px;
+    margin: 0 var(--border);
   }
 `;
 

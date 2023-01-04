@@ -6,7 +6,7 @@ const getWindowDimensions = typeof window !== "undefined" ? () => {
     width,
     height
   };
-} : () => {return {widht: 0, height: 0}};
+} : () => {return {width: 0, height: 0}};
 
 export default typeof window !== "undefined" ? function useWindowDimensions() {
 
