@@ -52,7 +52,7 @@ const Cards = ({ ...props }) => {
           {cardsJSX.map((child) => child)}
         </SpaceWrapper>
       ) : (
-        <MySwiper array={cardsJSX} cards></MySwiper>
+        <MySwiper array={cardsJSX} cards />
       )}
     </CardsWrapper>
   );
@@ -66,22 +66,9 @@ const CardsWrapper = styled(SpaceWrapper)`
     justify-content: space-between;
     gap: var(--cards-gap);
 
-    .card {
-      max-width: var(--cards-max-width);
-    }
-
     @media ${device.laptop} {
       flex-direction: column;
       justify-content: center;
-
-      .card {
-        max-width: var(--cards-max-width);
-        margin-left: 10%;
-      }
-      .card:nth-child(2) {
-        margin-left: auto;
-        margin-right: 10%;
-      }
     }
   }
 `;
@@ -115,22 +102,27 @@ const CardWrapper = styled.div`
   .text {
     font-size: var(--fs-4);
     font-weight: var(--medium);
-    /* height: 150px; */
-    /* overflow: hidden; */
-    /* overflow-y: scroll; */
-    /* ${Scrollbar("2px")} */
   }
 
   .icon {
-    /* justify-content: flex-end; */
     display: block;
     margin: 0 auto;
     margin-top: auto;
   }
 
   @media ${device.laptop} {
-    max-width: 300px;
     margin: 0 var(--border);
+    max-width: var(--cards-max-width-tablet);
+    margin-left: 10%;
+
+    :nth-child(2) {
+      margin-left: auto;
+      margin-right: 10%;
+    }
+  }
+
+  @media ${device.tablet} {
+    flex-basis: 100%;
   }
 `;
 

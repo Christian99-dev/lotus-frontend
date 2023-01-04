@@ -18,7 +18,7 @@ export default function MySwiper({ array, cards }) {
         spaceBetween={30}
       >
         {array.map((slide, key) => (
-            <SwiperSlide key={key}>{slide}</SwiperSlide>
+          <SwiperSlide key={key}>{slide}</SwiperSlide>
         ))}
       </MySwiperWrapper>
     );
@@ -40,6 +40,10 @@ export default function MySwiper({ array, cards }) {
 }
 
 const MySwiperWrapper = styled(Swiper)`
+  .swiper-slide {
+    justify-content: center;
+    display: flex;
+  }
   .swiper-pagination {
     /* bottom: 0 !important; */
     .swiper-pagination-bullet {
