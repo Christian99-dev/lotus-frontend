@@ -1,11 +1,8 @@
 import React from "react";
-import Navbar from "../components/Layout/Navbar";
-import Footer from "../components/Layout/Footer";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { withPrefix } from "gatsby";
 import { GlobalStateProvider } from "../utils/globalState";
-import styled from "styled-components";
 
 export default function Layout({ children }) {
   return (
@@ -30,9 +27,7 @@ export default function Layout({ children }) {
           />
         </Helmet>
         <GlobalStyle />
-        <Navbar />
         {children}
-        <Footer />
       </GlobalStateProvider>
     </>
   );

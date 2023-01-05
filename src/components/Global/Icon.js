@@ -16,7 +16,7 @@ import Whatsapp from "../../media/icons/whatsapp.svg";
 import Close from "../../media/icons/close.svg";
 import Menu from "../../media/icons/menu.svg";
 
-export default function Icon({ name, height, color, ...props }) {
+export default function Icon({ name, height, color, link, ...props }) {
   let icon;
   if (name === "time") icon = Time;
   if (name === "mail") icon = Mail;
@@ -38,6 +38,21 @@ export default function Icon({ name, height, color, ...props }) {
     ? (height = `var(--${height})`)
     : (height = height + "px");
 
+  console.log(link);
+  if (link)
+    return (
+      <a href={link}>
+        <Wrapper
+          className="isLink"
+          src={icon}
+          alt="icon"
+          height={height}
+          color={color}
+          {...props}
+        />
+      </a>
+    );
+
   return (
     <Wrapper src={icon} alt="icon" height={height} color={color} {...props} />
   );
@@ -51,4 +66,12 @@ const Wrapper = styled.img`
       : props.color === "yellow"
       ? "var(--yellow-filter);"
       : "var(--secondary-filter);"};
+
+  &.isLink {
+    transition: filter 0.1s ease;
+    :hover {
+      cursor: pointer;
+      filter: var(--pink-filter);
+    }
+  }
 `;

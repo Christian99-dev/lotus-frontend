@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-scroll";
+import { Link as GatsbyLink } from "gatsby";
 import styled from "styled-components";
 import { navButtonSetting } from "../../constants";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Button({ color, text, spacing, to, ...props }) {
+export default function Button({ color, text, spacing, to, link, ...props }) {
   const theme = {
     shadow: "none",
     color: "var(--primary)",
@@ -38,6 +39,15 @@ export default function Button({ color, text, spacing, to, ...props }) {
       </Link>
     );
   }
+
+  if (link)
+    return (
+      <GatsbyLink to={`${link}`}>
+        <SpaceWrapper spacing={spacing} {...props}>
+          <Wrapper theme={theme}>{text}</Wrapper>
+        </SpaceWrapper>
+      </GatsbyLink>
+    );
 
   return (
     <SpaceWrapper spacing={spacing} {...props}>

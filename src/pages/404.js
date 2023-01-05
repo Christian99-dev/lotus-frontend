@@ -1,50 +1,75 @@
-import * as React from "react"
-import { Link } from "gatsby"
-
-const pageStyles = {
-  color: "#232129",
-  padding: "96px",
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
-const headingStyles = {
-  marginTop: 0,
-  marginBottom: 64,
-  maxWidth: 320,
-}
-
-const paragraphStyles = {
-  marginBottom: 48,
-}
-const codeStyles = {
-  color: "#8A6534",
-  padding: 4,
-  backgroundColor: "#FFF4DB",
-  fontSize: "1.25rem",
-  borderRadius: 4,
-}
+import React from "react";
+import Footer from "../components/Layout/Footer";
+import { Top } from "../components/Layout/NavbarDesktop";
+import Layout from "../theme/layout";
+import Title from "../components/Global/Titel";
+import SpaceWrapper from "../utils/SpaceWrapper";
+import styled from "styled-components";
+import { device } from "../theme/breakpoints";
+import Button from "../components/Global/Button";
 
 const NotFoundPage = () => {
   return (
-    <main style={pageStyles}>
-      <h1 style={headingStyles}>Page not found</h1>
-      <p style={paragraphStyles}>
-        Sorry 😔, we couldn’t find what you were looking for.
-        <br />
-        {process.env.NODE_ENV === "development" ? (
-          <>
-            <br />
-            Try creating a page in <code style={codeStyles}>src/pages/</code>.
-            <br />
+    <Layout>
+      <NotFoundPageWrapper>
+        <Top />
+        <SpaceWrapper
+          spacing={{
+            left: "border",
+            right: "border",
+            top: "white-component-inner-half",
+            bottom: "white-component-inner-half",
+          }}
+        >
+          <Title
+            className="title"
+            text="Seite existiert nicht."
+            color="purple"
+            spacing={{ bottom: "white-component-inner-half" }}
+          />
+          <SpaceWrapper
+            className="button-container"
+            spacing={{
+              top: "white-component-inner-half",
+            }}
+          >
+            <Button className="button" text="Zurück zur Homepage" link="../" />
+          </SpaceWrapper>
+        </SpaceWrapper>
+        <div className="footer-container">
+          <Footer />
+        </div>
+      </NotFoundPageWrapper>
+    </Layout>
+  );
+};
 
-          </>
-        ) : null}
-        <br />
-        <Link to="/">Go home</Link>.
-      </p>
-    </main>
-  )
-}
+export default NotFoundPage;
 
-export default NotFoundPage
+const NotFoundPageWrapper = styled.div`
+  .text {
+    font-size: var(--fs-3);
+  }
 
-export const Head = () => <title>Not found</title>
+  .button-container {
+    display: flex;
+  }
+
+  .footer-container {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  @media ${device.tablet} {
+    text-align: center;
+    .button-container {
+      justify-content: center;
+    }
+
+    .footer-container {
+      position: unset;
+    }
+  }
+`;

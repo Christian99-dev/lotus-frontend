@@ -6,19 +6,20 @@ import Kontakt from "../components/Kontakt";
 import Panel from "../components/Panel";
 import Team from "../components/Team";
 import Layout from "../theme/layout";
+import Navbar from "../components/Layout/Navbar";
+import Footer from "../components/Layout/Footer";
 
 const IndexPage = () => {
   return (
     <Layout>
-      {/* <ResponsiveDebug/> */}
-      {/* <FontsDebug/> */}
-
+      <Navbar/>
       <Carousel />
       <Cards />
       <Panel />
       <Team />
       <Kontakt />
       <Testimonial />
+      <Footer/>
     </Layout>
   );
 };

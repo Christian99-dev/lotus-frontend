@@ -3,17 +3,23 @@ import styled from "styled-components";
 import Icon from "../Global/Icon";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
+import { Link } from "gatsby";
 export default function Footer() {
   return (
     <FooterWrapper
-      spacing={{ top: "footer-tb-border", bottom: "footer-tb-border", left: "border", right: "border" }}
+      spacing={{
+        top: "footer-tb-border",
+        bottom: "footer-tb-border",
+        left: "border",
+        right: "border",
+      }}
     >
       <div className="col">
         <div className="head">Social Media</div>
         <div className="row icons">
-          <Icon name="facebook" height="icon-s" />
-          <Icon name="instagram" height="icon-s" />
-          <Icon name="whatsapp" height="icon-s" />
+          <Icon name="facebook" height="icon-s" link="https://www.facebook.com" />
+          <Icon name="instagram" height="icon-s" link="https://www.instagram.com" />
+          <Icon name="whatsapp" height="icon-s" link="https://www.whatsapp.com" />
         </div>
       </div>
 
@@ -37,8 +43,10 @@ export default function Footer() {
 
       <div className="col">
         <div className="head">Rechtliches</div>
-        <div className="row">Impressum</div>
-        <div className="row">AGB</div>
+        <Link className="row" to="/impressum">
+          Impressum
+        </Link>
+        <Link className="row" to="/agb">AGB</Link>
       </div>
     </FooterWrapper>
   );
@@ -54,6 +62,16 @@ const FooterWrapper = styled(SpaceWrapper)`
     font-size: var(--fs-3);
     font-weight: var(--semibold);
     margin-bottom: var(--footer-inner-m);
+  }
+
+  a {
+    display: block;
+    text-decoration: none;
+    color: var(--secondary);
+    transition: color 0.1s ease;
+    :hover{
+      color: var(--pink);
+    }
   }
 
   .row {
@@ -82,7 +100,7 @@ const FooterWrapper = styled(SpaceWrapper)`
         gap: var(--footer-inner-m);
       }
 
-      &.icon{
+      &.icon {
         justify-content: center;
       }
     }

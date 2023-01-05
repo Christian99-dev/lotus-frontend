@@ -32,6 +32,9 @@ const Topbar = css`
   ${responsiveVar("topbar-inner-gap", 20)}
   ${responsiveVar("topbar-inner-padding", 10)}
   ${responsiveVar("topbar-gap-right", 50)}
+
+  ${responsiveVar("topbar-mobile-tb-border", 50)}
+  /* ${responsiveVar("topbar-inner-gap", 20)} */
 `;
 
 const Navbar = css`

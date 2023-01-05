@@ -22,7 +22,7 @@ export default function Navbar() {
 }
 
 // Top
-const Top = () => {
+export const Top = () => {
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
@@ -48,12 +48,12 @@ const TopWrapper = styled(SpaceWrapper)`
   background-color: var(--primary);
   flex-direction: column;
   justify-content: space-around;
-  
+
   .container {
     padding: var(--topbar-inner-padding);
     display: flex;
     justify-content: space-between;
-    
+
     .left {
       color: var(--secondary);
       font-size: var(--fs-3);
@@ -66,19 +66,25 @@ const TopWrapper = styled(SpaceWrapper)`
     }
 
     @media ${device.laptop} {
-
       flex-direction: column;
       text-align: center;
       gap: var(--topbar-inner-gap);
-      
-      .right{
+
+      .right {
         text-align: center;
         justify-content: center;
       }
-      
     }
 
-   
+    @media ${device.tablet} {
+      .right {
+        flex-direction: column;
+        align-items: center;
+        gap: calc(var(--topbar-gap-right) / 2);
+      }
+      gap: calc(var(--topbar-inner-gap) * 2);
+      padding: var(--topbar-mobile-tb-border);
+    }
   }
 `;
 
