@@ -6,7 +6,11 @@ import useWindowDimensions from "../../utils/useWindowDimensions";
 
 export default function Titel({ text, color, spacing, center, className }) {
   return (
-    <SpaceWrapper center={useWindowDimensions().width <= size.tablet || center} spacing={spacing} className={className}>
+    <SpaceWrapper
+      center={useWindowDimensions().width <= size.tablet || center}
+      spacing={spacing}
+      className={className}
+    >
       <Wrapper theme={color}>{text}</Wrapper>
     </SpaceWrapper>
   );
@@ -38,16 +42,15 @@ const Wrapper = styled.div`
     width: 100%;
   }
 
-  &:after{
+  &:after {
     justify-content: center;
     margin: 0 auto;
   }
 
-  @media ${device.mobile} {
-    &:after {
-      display: none;
-    }
+  @media ${device.tablet} {
+    text-decoration: underline;
 
+    &:after,
     &:hover:after {
       display: none;
     }
