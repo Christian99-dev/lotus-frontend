@@ -50,7 +50,6 @@ const NavMobile = css`
 
   ${responsiveVar("navmobile-bar-icon-height", 25)}
   ${responsiveVar("navmobile-bar-padding", 15)}
-
 `;
 
 const Carousel = css`
@@ -58,11 +57,11 @@ const Carousel = css`
   ${responsiveVar("carousel-inner-2", 5)}
   ${responsiveVar("carousel-inner-3", 40)}
   ${responsiveVar("carousel-gap", 10)}
-
 `;
 
 const Kontakt = css`
   ${responsiveVar("contact-inner", 150)}
+  ${responsiveVar("contact-maps-height-tablet", 400)}
 `;
 
 const Panel = css`
@@ -71,16 +70,20 @@ const Panel = css`
 `;
 
 const Team = css`
-   ${responsiveVar("team-gap", 20)}
-   ${responsiveVar("team-mobile-height", 500)}
-   ${responsiveVar("team-mobile-inner-padding", 30)}
-   ${responsiveVar("team-mobile-handle-width", 80)}
-   ${responsiveVar("team-person-max-width-tablet", 400)}
+  ${responsiveVar("team-gap", 20)}
+  ${responsiveVar("team-xs-space", 20)}
+  ${responsiveVar("team-s-space", 30)}
+  ${responsiveVar("team-m-space", 50)}
+  ${responsiveVar("team-mobile-height", 500)}
+  ${responsiveVar("team-mobile-inner-padding", 30)}
+  ${responsiveVar("team-mobile-handle-width", 80)}
+  ${responsiveVar("team-person-max-width-tablet", 400)}
 `;
 
 const Silder = css`
-${responsiveVar("slider-pagination-height", 40)}
+  ${responsiveVar("slider-pagination-height", 40)}
 `;
+
 
 const Components = css`
   :root {

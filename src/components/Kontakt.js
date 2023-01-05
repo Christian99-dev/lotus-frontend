@@ -8,6 +8,7 @@ import Button from "./Global/Button";
 import bgimg from "../media/images/img3.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
+import { device } from "../theme/breakpoints";
 
 export default function Kontakt({ ...props }) {
   return (
@@ -26,16 +27,20 @@ export default function Kontakt({ ...props }) {
             className="wrapper"
           >
             <div className="left">
-              <Title text="Kontaktieren sie uns" spacing={{ bottom: 50 }} />
+              <Title
+                className="title"
+                text="Kontaktieren sie uns"
+                spacing={{ bottom: "team-m-space" }}
+              />
               <Info
                 icon="phone"
                 text="01567 / 482375"
-                spacing={{ bottom: 30 }}
+                spacing={{ bottom: "team-s-space" }}
               />
               <Info
                 icon="location"
                 text="Neue Roßstr. 15, 66128 Saarbrücken"
-                spacing={{ bottom: 50 }}
+                spacing={{ bottom: "team-m-space" }}
               />
               <div className="form">
                 <Input text="Vorname" className="a" error />
@@ -68,14 +73,15 @@ const KontaktWrapper = styled(Parallax)`
   }
 
   .wrapper {
-    gap: 50px;
-    display: flex;
+    gap: var(--team-m-space);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
     .left {
       flex: 1 1 0;
       .form {
         display: grid;
-        gap: 20px;
+        gap: var(--team-xs-space);
         grid-template-columns: 1fr 1fr;
         .c,
         .d,
@@ -97,6 +103,35 @@ const KontaktWrapper = styled(Parallax)`
       flex: 1 1 0;
       border-radius: 10px;
     }
+
+    @media ${device.laptop} {
+      grid-template-columns: 60% 40%;
+    }
+
+    @media ${device.tablet} {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr var(--contact-maps-height-tablet);
+
+      .left {
+        .title {
+          text-align: center;
+        }
+
+        .form {
+          grid-template-columns: 1fr;
+          .a,
+          .b,
+          .c,
+          .d,
+          .e,
+          .f,
+          .g,
+          .button {
+            grid-column: unset;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -111,10 +146,17 @@ function Info({ spacing, icon, text }) {
 
 const InfoWrapper = styled(SpaceWrapper)`
   display: flex;
-  gap: 20px;
+  gap: var(--team-xs-space);
   .text {
     font-size: var(--fs-2);
     font-weight: var(--semibold);
     color: var(--secondary);
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    .text {
+      text-align: center;
+    }
   }
 `;
