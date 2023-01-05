@@ -7,18 +7,34 @@ import speech from "../media/icons/speech.svg";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import MySwiper from "./Global/MySwiper";
 import TextWithBackground from "./Global/TextWithBackground";
+import useWindowDimensions from "../utils/useWindowDimensions";
+import { size } from "../theme/breakpoints";
 
-export default function Testimonial({...props}) {
+export default function Testimonial({ ...props }) {
   const comments = [<Comment />, <Comment />, <Comment />];
   return (
-    <TestimonialWrapper id="testimonial" spacing={{ top: "white-component-inner-half", bottom: "white-component-inner" }} {...props}>
+    <TestimonialWrapper
+      id="testimonial"
+      spacing={{
+        top: "white-component-inner-half",
+        bottom: "white-component-inner",
+      }}
+      {...props}
+    >
       <Titel
         text="Das sagen unsere Kunden"
         color="purple"
-        spacing={{ bottom: "white-component-inner-half" }}
+        spacing={{
+          bottom: "white-component-inner-half",
+          left: "border",
+          right: "border"
+        }}
         center
       />
-      <MySwiper array={comments} />
+      <MySwiper
+        array={comments}
+        cards={useWindowDimensions().width <= size.tablet}
+      />
     </TestimonialWrapper>
   );
 }
@@ -32,10 +48,18 @@ const Comment = () => (
       <img className="speech" src={speech} alt="speech" />
     </div>
     <TextWithBackground text="Christian David" fontSize={3} />
-    <Stars spacing={{ top: 30, bottom: 30 }} />
-    <SpaceWrapper spacing={{ bottom: 40 }} className="text">
+    <Stars
+      spacing={{
+        top: "testimonial-stars-inner",
+        bottom: "testimonial-stars-inner",
+      }}
+    />
+    <SpaceWrapper
+      spacing={{ bottom: "testimonial-text-bottom" }}
+      className="text"
+    >
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt 
+      eirmod tempor invidunt
     </SpaceWrapper>
   </CommentWrapper>
 );
@@ -48,12 +72,13 @@ const CommentWrapper = styled.div`
     position: relative;
     .img {
       border: 5px solid white !important;
-      width: 200px !important;
-      height: 200px;
+      width: var(--testimonial-img-height) !important;
+      height: var(--testimonial-img-height);
       border-radius: 50%;
       object-fit: cover;
     }
     .speech {
+      height: calc(var(--testimonial-img-height) / 2);
       position: absolute;
       top: 0;
       bottom: 0;
@@ -87,6 +112,6 @@ const Stars = ({ ...props }) => (
 
 const StarWrapper = styled(SpaceWrapper)`
   display: flex;
-  gap: 20px;
+  gap: var(--testimonial-stars-gap);
   justify-content: center;
 `;

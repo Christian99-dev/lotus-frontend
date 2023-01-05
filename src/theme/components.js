@@ -85,6 +85,14 @@ const Silder = css`
   ${responsiveVar("slider-pagination-bullet-height", 10)}
 `;
 
+const Testimonial = css`
+${responsiveVar("testimonial-img-height", 200)}
+${responsiveVar("testimonial-stars-inner", 30)}
+${responsiveVar("testimonial-text-bottom", 40)}
+${responsiveVar("testimonial-stars-gap", 20)}
+
+`;
+
 
 const Components = css`
   :root {
@@ -97,6 +105,7 @@ const Components = css`
     ${Team}
     ${Cards}
     ${Silder}
+    ${Testimonial}
 
     ${Button}
     ${Input}
