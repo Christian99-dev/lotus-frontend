@@ -20,6 +20,7 @@ export default function MySwiper({ array, cards }) {
         {array.map((slide, key) => (
           <SwiperSlide key={key}>{slide}</SwiperSlide>
         ))}
+        <div className="pagination-bar"/>
       </MySwiperWrapper>
     );
 
@@ -59,5 +60,9 @@ const MySwiperWrapper = styled(Swiper)`
   .swiper-button-prev {
     left: var(--border);
     color: var(--primary);
+  }
+
+  .pagination-bar{
+    height: var(--slider-pagination-height);
   }
 `;

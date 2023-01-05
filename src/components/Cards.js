@@ -3,7 +3,6 @@ import Title from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import Icon from "../components/Global/Icon";
-import Scrollbar from "../theme/scrollbar";
 import Bubbels from "./Effects/Bubbels";
 import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
@@ -75,7 +74,7 @@ const CardsWrapper = styled(SpaceWrapper)`
 
 function Card({ title, text, icon }) {
   return (
-    <CardWrapper className="card">
+    <CardWrapper>
       <div className="title">{title}</div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
         {text}

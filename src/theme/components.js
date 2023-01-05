@@ -50,6 +50,7 @@ const NavMobile = css`
 
   ${responsiveVar("navmobile-bar-icon-height", 25)}
   ${responsiveVar("navmobile-bar-padding", 15)}
+
 `;
 
 const Carousel = css`
@@ -70,7 +71,14 @@ const Panel = css`
 `;
 
 const Team = css`
-  --team-gap: 5%;
+   ${responsiveVar("team-gap", 20)}
+   ${responsiveVar("team-mobile-height", 500)}
+   ${responsiveVar("team-mobile-inner-padding", 30)}
+   ${responsiveVar("team-mobile-handle-width", 80)}
+`;
+
+const Silder = css`
+${responsiveVar("slider-pagination-height", 40)}
 `;
 
 const Components = css`
@@ -83,6 +91,7 @@ const Components = css`
     ${Panel}
     ${Team}
     ${Cards}
+    ${Silder}
 
     ${Button}
     ${Input}
