@@ -209,7 +209,7 @@ const PersonMobile = ({ img, text, jobTitle, name }) => {
 
   return (
     <PersonWrapperMobile ref={containerRef}>
-      <img className="img" src={img} />
+      <img className="img" src={img} alt="img" />
       <div ref={overlayRef} className="overlay">
         <div className="handle" />
         <TextWithBackground text={name} fontSize="2" className="name" />

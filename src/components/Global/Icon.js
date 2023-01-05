@@ -38,7 +38,6 @@ export default function Icon({ name, height, color, link, ...props }) {
     ? (height = `var(--${height})`)
     : (height = height + "px");
 
-  console.log(link);
   if (link)
     return (
       <a href={link}>
