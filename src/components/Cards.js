@@ -9,23 +9,29 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import MySwiper from "../components/Global/MySwiper";
 
 const Cards = ({ ...props }) => {
-  const cardsJSX = [
-    <Card
-      text="Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
-      title="Reinigen"
-      icon="drop"
-    />,
-    <Card
-      text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin"
-      title="Reinigen"
-      icon="sync"
-    />,
-    <Card
-      text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu, Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidu"
-      title="Reinigen"
-      icon="wrench"
-    />,
+  const cardsData = [
+    {
+      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
+      title: "Reinigen",
+      icon: "drop",
+    },
+    {
+      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
+      title: "Reinigen",
+      icon: "sync",
+    },
+    {
+      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
+      title: "Reinigen",
+      icon: "wrench",
+    },
   ];
+
+  const createCardsJSXArray = (dataArray) => {
+    return dataArray.map(({ text, title, icon }, key) => (
+      <Card text={text} title={title} icon={icon} key={key} />
+    ))
+  }
 
   return (
     <CardsWrapper
@@ -48,10 +54,10 @@ const Cards = ({ ...props }) => {
           spacing={{ left: "border", right: "border" }}
           className="cards"
         >
-          {cardsJSX.map((child) => child)}
+          {createCardsJSXArray(cardsData)}
         </SpaceWrapper>
       ) : (
-        <MySwiper array={cardsJSX} cards />
+        <MySwiper array={createCardsJSXArray(cardsData)} cards />
       )}
     </CardsWrapper>
   );
