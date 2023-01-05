@@ -22,7 +22,7 @@ export default function Testimonial({ ...props }) {
       {...props}
     >
       <Titel
-        text="Das sagen unsere Kunden"
+        text="Unsere Kunden"
         color="purple"
         spacing={{
           bottom: "white-component-inner-half",

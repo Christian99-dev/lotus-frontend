@@ -38,6 +38,11 @@ const Wrapper = styled.div`
     width: 100%;
   }
 
+  &:after{
+    justify-content: center;
+    margin: 0 auto;
+  }
+
   @media ${device.mobile} {
     &:after {
       display: none;

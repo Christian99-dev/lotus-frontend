@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Icon from "../Global/Icon";
 import SpaceWrapper from "../../utils/SpaceWrapper";
+import { device } from "../../theme/breakpoints";
 export default function Footer() {
   return (
     <FooterWrapper
-      spacing={{ top: 50, bottom: 50, left: "border", right: "border" }}
+      spacing={{ top: "footer-tb-border", bottom: "footer-tb-border", left: "border", right: "border" }}
     >
       <div className="col">
         <div className="head">Social Media</div>
@@ -35,7 +36,7 @@ export default function Footer() {
       </div>
 
       <div className="col">
-        <div className="head"> Rechtliches</div>
+        <div className="head">Rechtliches</div>
         <div className="row">Impressum</div>
         <div className="row">AGB</div>
       </div>
@@ -52,7 +53,7 @@ const FooterWrapper = styled(SpaceWrapper)`
   .head {
     font-size: var(--fs-3);
     font-weight: var(--semibold);
-    margin-bottom: 20px;
+    margin-bottom: var(--footer-inner-m);
   }
 
   .row {
@@ -63,10 +64,27 @@ const FooterWrapper = styled(SpaceWrapper)`
 
     &.icon {
       display: flex;
-      gap: 10px;
+      gap: var(--footer-inner-s);
     }
     font-size: var(--fs-4);
     font-weight: var(--medium);
-    margin-top: 10px;
+    margin-top: var(--footer-inner-s);
+  }
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--footer-inner-l);
+
+    .row {
+      &.icons {
+        justify-content: center;
+        gap: var(--footer-inner-m);
+      }
+
+      &.icon{
+        justify-content: center;
+      }
+    }
   }
 `;

@@ -86,13 +86,18 @@ const Silder = css`
 `;
 
 const Testimonial = css`
-${responsiveVar("testimonial-img-height", 200)}
-${responsiveVar("testimonial-stars-inner", 30)}
-${responsiveVar("testimonial-text-bottom", 40)}
-${responsiveVar("testimonial-stars-gap", 20)}
-
+  ${responsiveVar("testimonial-img-height", 200)}
+  ${responsiveVar("testimonial-stars-inner", 30)}
+  ${responsiveVar("testimonial-text-bottom", 40)}
+  ${responsiveVar("testimonial-stars-gap", 20)}
 `;
 
+const Footer = css`
+  ${responsiveVar("footer-inner-s", 10)}
+  ${responsiveVar("footer-inner-m", 20)}
+${responsiveVar("footer-inner-l", 30)}
+${responsiveVar("footer-tb-border", 60)}
+`;
 
 const Components = css`
   :root {
@@ -106,6 +111,7 @@ const Components = css`
     ${Cards}
     ${Silder}
     ${Testimonial}
+    ${Footer}
 
     ${Button}
     ${Input}
