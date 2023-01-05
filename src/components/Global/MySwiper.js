@@ -49,17 +49,24 @@ const MySwiperWrapper = styled(Swiper)`
     /* bottom: 0 !important; */
     .swiper-pagination-bullet {
       background-color: var(--primary);
-      height: 10px;
-      width: 10px;
+      height: var(--slider-pagination-bullet-height);
+      width: var(--slider-pagination-bullet-height);
     }
   }
-  .swiper-button-next {
-    right: var(--border);
+  .swiper-button-next , .swiper-button-prev {
     color: var(--primary);
   }
+
+  .swiper-button-next {
+    right: var(--border);
+  }
+
   .swiper-button-prev {
     left: var(--border);
-    color: var(--primary);
+  }
+
+  .swiper-button-prev {
+    
   }
 
   .pagination-bar{

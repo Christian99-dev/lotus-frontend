@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { device } from "../../theme/breakpoints";
+import { device, size } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 export default function Titel({ text, color, spacing, center, className }) {
   return (
-    <SpaceWrapper center={center} spacing={spacing} className={className}>
+    <SpaceWrapper center={useWindowDimensions().width <= size.tablet || center} spacing={spacing} className={className}>
       <Wrapper theme={color}>{text}</Wrapper>
     </SpaceWrapper>
   );

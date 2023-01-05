@@ -82,6 +82,7 @@ const Team = css`
 
 const Silder = css`
   ${responsiveVar("slider-pagination-height", 40)}
+  ${responsiveVar("slider-pagination-bullet-height", 10)}
 `;
 
 

@@ -14,7 +14,6 @@ export default function Panel({ ...props }) {
         <SpaceWrapper className="box">
           <Titel
             text="Unsere Arbeit"
-            className="title"
             spacing={{ bottom: 50 }}
           />
           <div className="text" id="panel">
@@ -81,9 +80,6 @@ const PannelWrapper = styled(Parallax)`
           right: 0;
           bottom: 0;
         }
-        text-align: center;
-      }
-      .title {
         text-align: center;
       }
       .logo {

@@ -28,7 +28,6 @@ export default function Kontakt({ ...props }) {
           >
             <div className="left">
               <Title
-                className="title"
                 text="Kontaktieren sie uns"
                 spacing={{ bottom: "team-m-space" }}
               />
@@ -113,10 +112,6 @@ const KontaktWrapper = styled(Parallax)`
       grid-template-rows: 1fr var(--contact-maps-height-tablet);
 
       .left {
-        .title {
-          text-align: center;
-        }
-
         .form {
           grid-template-columns: 1fr;
           .a,
