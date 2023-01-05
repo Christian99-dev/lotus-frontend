@@ -12,3 +12,5 @@ export const info = [
   {text: "01567 / 482375", icon:"phone"},
   {text: "Täglich von 8 - 22 Uhr", icon:"time"},
 ]
+
+export const navButtonSetting = { duration: 400, offset: -20, smooth: true };

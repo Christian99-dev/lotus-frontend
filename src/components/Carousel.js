@@ -28,8 +28,8 @@ export default function Carousel({ ...props }) {
           className="buttons"
           spacing={{ bottom: "carousel-inner" }}
         >
-          <Button text="Leistungen" color="purple" />
-          <Button text="Über Uns" />
+          <Button text="Leistungen" color="purple" to="cards" />
+          <Button text="Kontakt" to="contact" />
         </SpaceWrapper>
       </div>
     </CarouselWrapper>

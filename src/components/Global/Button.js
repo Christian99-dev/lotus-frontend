@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-scroll";
 import styled from "styled-components";
+import { navButtonSetting } from "../../constants";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Button({ color, text, spacing, ...props }) {
+export default function Button({ color, text, spacing, to, ...props }) {
   const theme = {
     shadow: "none",
     color: "var(--primary)",
@@ -25,6 +27,16 @@ export default function Button({ color, text, spacing, ...props }) {
     theme.backgroundColor = "transparent";
     theme.hoverColor = "var(--primary)";
     theme.hoverBackgroundColor = "var(--secondary)";
+  }
+
+  if (to) {
+    return (
+      <Link to={to} {...navButtonSetting}>
+        <SpaceWrapper spacing={spacing} {...props}>
+          <Wrapper theme={theme}>{text}</Wrapper>
+        </SpaceWrapper>
+      </Link>
+    );
   }
 
   return (
