@@ -75,6 +75,7 @@ const Team = css`
    ${responsiveVar("team-mobile-height", 500)}
    ${responsiveVar("team-mobile-inner-padding", 30)}
    ${responsiveVar("team-mobile-handle-width", 80)}
+   ${responsiveVar("team-person-max-width-tablet", 400)}
 `;
 
 const Silder = css`

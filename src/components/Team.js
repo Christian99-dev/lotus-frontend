@@ -22,7 +22,7 @@ export default function Team({ ...props }) {
       name="Max Mustermann"
     />,
     <PersonMobile
-      img={img1}
+      img={img2}
       text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
       jobTitle="Klempner"
       name="Max Mustermann"
@@ -32,8 +32,6 @@ export default function Team({ ...props }) {
     <div id="team">
       <TeamWrapper
         spacing={{
-          left: "border",
-          right: "border",
           top: "white-component-inner-half",
           bottom: "white-component-inner",
         }}
@@ -43,12 +41,19 @@ export default function Team({ ...props }) {
         <Titel
           center
           text="Das Team"
-          spacing={{ bottom: "white-component-inner-half" }}
+          spacing={{
+            bottom: "white-component-inner-half",
+            left: "border",
+            right: "border",
+          }}
           color="purple"
         />
 
         {useWindowDimensions().width > size.tablet ? (
-          <div className="container-desktop">
+          <SpaceWrapper
+            className="container-desktop"
+            spacing={{ left: "border", right: "border" }}
+          >
             <Person
               img={img1}
               text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
@@ -62,9 +67,9 @@ export default function Team({ ...props }) {
               name="Max Mustermann"
               right
             />
-          </div>
+          </SpaceWrapper>
         ) : (
-          <MySwiper array={personsMobile} cards/>
+          <MySwiper array={personsMobile} cards />
         )}
       </TeamWrapper>
     </div>
@@ -223,7 +228,8 @@ const PersonWrapperMobile = styled.div`
   height: var(--team-mobile-height);
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: var(--team-person-max-width-tablet);
+  margin: 0 var(--border);
 
   .img {
     position: absolute;
