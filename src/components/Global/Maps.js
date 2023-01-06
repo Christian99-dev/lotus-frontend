@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
 import L from "leaflet";
 import Marker_Icon from "../../media/icons/marker.svg";
 /**https://www.latlong.net/convert-address-to-lat-long.html */
