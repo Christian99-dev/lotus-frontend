@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { info, navigationLinks } from "../../constants";
+import { info, navigationLinks } from "../../utils/constants";
 import Icon from "../Global/Icon";
 import NavButton from "../Global/NavButton";
 import LogoTransparent from "../../media/logo/logo-transparent.svg";

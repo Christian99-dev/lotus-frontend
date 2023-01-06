@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-scroll";
 import { Link as GatsbyLink } from "gatsby";
 import styled from "styled-components";
-import { navButtonSetting } from "../../constants";
+import { navButtonSetting } from "../../utils/constants";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
 export default function Button({ color, text, spacing, to, link, type, ...props }) {

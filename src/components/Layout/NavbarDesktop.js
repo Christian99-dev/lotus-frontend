@@ -5,7 +5,7 @@ import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
-import { info, navigationLinks } from "../../constants";
+import { info, navigationLinks } from "../../utils/constants";
 import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
 import { useEffect } from "react";

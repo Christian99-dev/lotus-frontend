@@ -10,6 +10,16 @@ const Form = () => {
   const onSubmit = (values, actions) => {
     toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
     actions.resetForm();
+
+    // emailjs.send("service_g3spsd7", "template_d6x4mtj", {
+    //   name: values.name,
+    //   lastname: values.lastname,
+    //   message: values.message,
+    //   email: values.email,
+    //   number: values.number,
+    //   street: values.street,
+    //   location: values.location,
+    // });
   };
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -123,21 +133,21 @@ const Form = () => {
 export default Form;
 
 const StyledToastContainer = styled(ToastContainer).attrs({
-    className: "toast-container",
-    toastClassName: "toast",
-    bodyClassName: "body",
-    progressClassName: "progress",
-  })`
-    /* .toast is passed to toastClassName */
-    .toast {
-      font-size: var(--fs-3);
-    }
-  
-    /* .body is passed to bodyClassName */
-    .body {
-    }
-  
-    /* .progress is passed to progressClassName */
-    .progress {
-    }
-  `;
+  className: "toast-container",
+  toastClassName: "toast",
+  bodyClassName: "body",
+  progressClassName: "progress",
+})`
+  /* .toast is passed to toastClassName */
+  .toast {
+    font-size: var(--fs-3);
+  }
+
+  /* .body is passed to bodyClassName */
+  .body {
+  }
+
+  /* .progress is passed to progressClassName */
+  .progress {
+  }
+`;

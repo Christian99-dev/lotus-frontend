@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-scroll";
-import { navButtonSetting } from "../../constants";
+import { navButtonSetting } from "../../utils/constants";
 
 
 export default function NavButton({ text, className, ...props }) {
