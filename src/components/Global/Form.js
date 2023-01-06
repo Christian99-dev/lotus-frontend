@@ -5,21 +5,31 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import styled from "styled-components";
+import emailjs from "emailjs-com";
+import { emailJSSettings } from "../../admin";
 
 const Form = () => {
   const onSubmit = (values, actions) => {
     toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
     actions.resetForm();
-
-    // emailjs.send("service_g3spsd7", "template_d6x4mtj", {
-    //   name: values.name,
-    //   lastname: values.lastname,
-    //   message: values.message,
-    //   email: values.email,
-    //   number: values.number,
-    //   street: values.street,
-    //   location: values.location,
-    // });
+    emailjs.send(
+      emailJSSettings().serviceID,
+      emailJSSettings().templateID,
+      {
+        name: values.name,
+        lastname: values.lastname,
+        message: values.message,
+        email: values.email,
+        number: values.number,
+        street: values.street,
+        location: values.location,
+      },
+      emailJSSettings().publicKey
+    ).then(result => {
+      console.log(result.text);
+    }, (error) => {
+      console.log(error.text);
+    })
   };
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
