@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { navButtonSetting } from "../../constants";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
-export default function Button({ color, text, spacing, to, link, ...props }) {
+export default function Button({ color, text, spacing, to, link, type, ...props }) {
   const theme = {
     shadow: "none",
     color: "var(--primary)",
@@ -34,7 +34,7 @@ export default function Button({ color, text, spacing, to, link, ...props }) {
     return (
       <Link to={to} {...navButtonSetting}>
         <SpaceWrapper spacing={spacing} {...props}>
-          <Wrapper theme={theme}>{text}</Wrapper>
+          <Wrapper type={type} theme={theme}>{text}</Wrapper>
         </SpaceWrapper>
       </Link>
     );
@@ -44,14 +44,14 @@ export default function Button({ color, text, spacing, to, link, ...props }) {
     return (
       <GatsbyLink to={`${link}`}>
         <SpaceWrapper spacing={spacing} {...props}>
-          <Wrapper theme={theme}>{text}</Wrapper>
+          <Wrapper type={type} theme={theme}>{text}</Wrapper>
         </SpaceWrapper>
       </GatsbyLink>
     );
 
   return (
     <SpaceWrapper spacing={spacing} {...props}>
-      <Wrapper theme={theme}>{text}</Wrapper>
+      <Wrapper type={type} theme={theme}>{text}</Wrapper>
     </SpaceWrapper>
   );
 }

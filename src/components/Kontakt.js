@@ -9,10 +9,56 @@ import bgimg from "../media/images/img3.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
 import { device } from "../theme/breakpoints";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Kontakt({ ...props }) {
+
+  const onSubmit = (values, actions) => {
+    toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
+    actions.resetForm();
+  };
+
+  const { values, handleChange, handleSubmit, errors } = useFormik({
+    initialValues: {
+      name: "",
+      lastname: "",
+      message: "",
+      email: "",
+      number: "",
+      street: "",
+      location: "",
+    },
+    validationSchema: yup.object().shape({
+      name: yup.string().required("Name darf nicht leer sein."),
+      lastname: yup.string().required("Nachname darf nicht leer sein."),
+      message: yup.string().required("Nachricht darf nicht leer sein."),
+      email: yup
+        .string()
+        .email("Bitte gültige Email eingeben.")
+        .required("Email darf nicht leer sein."),
+      number: yup.string().required("Nummer darf nicht leer sein."),
+      street: yup.string().required("Straße + Hausnummer darf nicht leer sein"),
+      location: yup.string().required("Plz + Ort darf nicht leer sein."),
+    }),
+    onSubmit
+  });
+
+  const checkErrors = () => {
+    if(errors.name) toast.error(errors.name, { theme: "colored" });
+    if(errors.lastname) toast.error(errors.lastname, { theme: "colored" });
+    if(errors.message) toast.error(errors.message, { theme: "colored" });
+    if(errors.email) toast.error(errors.email, { theme: "colored" });
+    if(errors.number) toast.error(errors.number, { theme: "colored" });
+    if(errors.street) toast.error(errors.street, { theme: "colored" });
+    if(errors.location) toast.error(errors.location, { theme: "colored" });
+  }
+  
   return (
     <div id="contact">
+      <StyledToastContainer />
       <KontaktWrapper bgImage={bgimg} strength={500} {...props}>
         {/* id anchor */}
         <div id="contact" />
@@ -41,24 +87,76 @@ export default function Kontakt({ ...props }) {
                 text="Neue Roßstr. 15, 66128 Saarbrücken"
                 spacing={{ bottom: "team-m-space" }}
               />
-              <div className="form">
-                <Input text="Vorname" className="a" error />
-                <Input text="Nachname" className="b" />
-                <Input text="Nachricht" className="c" textarea />
-                <Input text="Email" className="d" />
-                <Input text="Telefonnummer" className="e" />
-                <Input text="Straße + Hausnummer" className="f" />
-                <Input text="Plz + Ort" className="g" />
+
+              {/** FORM */}
+              <form className="form" onSubmit={handleSubmit}>
+                <Input
+                  value={values.name}
+                  onChange={handleChange}
+                  type="text"
+                  name="name"
+                  text="Vorname"
+                  className="a"
+                />
+                <Input
+                  value={values.lastname}
+                  onChange={handleChange}
+                  type="text"
+                  name="lastname"
+                  text="Nachname"
+                  className="b"
+                />
+                <Input
+                  value={values.message}
+                  onChange={handleChange}
+                  type="text"
+                  name="message"
+                  text="Nachricht"
+                  className="c"
+                  textarea
+                />
+                <Input
+                  value={values.email}
+                  onChange={handleChange}
+                  type="text"
+                  name="email"
+                  text="Email"
+                  className="d"
+                />
+                <Input
+                  value={values.number}
+                  onChange={handleChange}
+                  type="text"
+                  name="number"
+                  text="Telefonnummer"
+                  className="e"
+                />
+                <Input
+                  value={values.street}
+                  onChange={handleChange}
+                  type="text"
+                  name="street"
+                  text="Straße + Hausnummer"
+                  className="f"
+                />
+                <Input
+                  value={values.location}
+                  onChange={handleChange}
+                  type="text"
+                  name="location"
+                  text="Plz + Ort"
+                  className="g"
+                />
                 <Button
                   text="Absenden"
                   color="transparent"
                   className="button"
+                  type="submit"
+                  onClick={checkErrors}
                 />
-              </div>
+              </form>
             </div>
-            <div className="right">
-              <MapsWrapper />
-            </div>
+            <div className="right">{/* <MapsWrapper /> */}</div>
           </SpaceWrapper>
         </div>
       </KontaktWrapper>
@@ -67,6 +165,7 @@ export default function Kontakt({ ...props }) {
 }
 
 const KontaktWrapper = styled(Parallax)`
+
   .filter {
     background: var(--background-filter-primary);
   }
@@ -127,6 +226,27 @@ const KontaktWrapper = styled(Parallax)`
         }
       }
     }
+  }
+`;
+
+const StyledToastContainer = styled(ToastContainer).attrs({
+  className: "toast-container",
+  toastClassName: "toast",
+  bodyClassName: "body",
+  progressClassName: "progress",
+})`
+
+  /* .toast is passed to toastClassName */
+  .toast {
+    font-size: var(--fs-3);
+  }
+
+  /* .body is passed to bodyClassName */
+  .body {
+  }
+
+  /* .progress is passed to progressClassName */
+  .progress {
   }
 `;
 

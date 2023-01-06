@@ -121,7 +121,7 @@ const Bar = () => {
 const BarWrapper = styled.div`
   position: sticky;
   top: -1px;
-  z-index: 999999;
+  z-index: 99;
   .links {
     background-color: var(--secondary);
     display: flex;

@@ -14,8 +14,10 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@loadable/component": "^5.15.2",
     "babel-plugin-styled-components": "^2.0.7",
+    "formik": "^2.2.9",
     "gatsby": "^4.24.4",
     "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-sass": "^5.24.0",
@@ -23,17 +25,16 @@
     "leaflet": "^1.9.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-drag-drop-container": "^6.1.1",
     "react-helmet": "^6.1.0",
     "react-intersection-observer": "^9.4.1",
     "react-leaflet": "^4.1.0",
     "react-parallax": "^3.5.1",
     "react-scroll": "^1.8.8",
-    "react-spring": "^9.6.1",
+    "react-toastify": "^9.1.1",
     "react-tracked": "^1.7.10",
-    "react-use-gesture": "^9.1.3",
     "sass": "^1.55.0",
     "styled-components": "^5.3.6",
-    "swiper": "^8.4.4"
+    "swiper": "^8.4.4",
+    "yup": "^0.32.8"
   }
 }
