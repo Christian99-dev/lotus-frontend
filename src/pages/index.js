@@ -8,11 +8,11 @@ import Team from "../components/Team";
 import Layout from "../theme/layout";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
-import { getWelcome } from "../api/axios";
+import { getWilkommen } from "../api/axios";
 
 const IndexPage = () => {
 
-  getWelcome().then(res => {
+  getWilkommen().then(res => {
     console.log(res.data.attributes.subtext);
   })
 
