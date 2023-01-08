@@ -33,5 +33,18 @@ export async function getUnternehmen () {
     return axios.get(apiSettings().apiURL + "/unternehmens-informationen").then(response => response.data)
 }
 
+export async function getAGB () {
+    return axios.get(apiSettings().apiURL + "/agb").then(response => response.data)
+}
+
+export async function getImpressum () {
+    return axios.get(apiSettings().apiURL + "/impressum").then(response => response.data)
+}
+
+export async function getFooter () {
+    return axios.get(apiSettings().apiURL + "/footer").then(response => response.data)
+}
+
+
 
 
