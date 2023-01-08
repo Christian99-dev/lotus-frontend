@@ -8,19 +8,28 @@ import Team from "../components/Team";
 import Layout from "../theme/layout";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
-import { getWilkommen } from "../api/axios";
+import {
+  getArbeit,
+  getFooter,
+  getKontakt,
+  getLeistungen,
+  getRezensionen,
+  getTeam,
+  getUnternehmen,
+  getWilkommen,
+} from "../api/axios";
 
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar/>
+      <Navbar fetchData={getUnternehmen} />
       <Carousel fetchData={getWilkommen} />
-      <Cards />
-      <Panel />
-      <Team />
-      <Kontakt />
-      <Testimonial />
-      <Footer/>
+      <Cards fetchData={getLeistungen} />
+      <Panel fetchData={getArbeit} />
+      <Team fetchData={getTeam} />
+      <Kontakt fetchData={getKontakt} />
+      <Testimonial fetchData={getRezensionen} />
+      <Footer fetchData={getFooter} />
     </Layout>
   );
 };
