@@ -11,15 +11,10 @@ import Footer from "../components/Layout/Footer";
 import { getWilkommen } from "../api/axios";
 
 const IndexPage = () => {
-
-  getWilkommen().then(res => {
-    console.log(res.data.attributes.subtext);
-  })
-
   return (
     <Layout>
       <Navbar/>
-      <Carousel />
+      <Carousel fetchData={getWilkommen} />
       <Cards />
       <Panel />
       <Team />

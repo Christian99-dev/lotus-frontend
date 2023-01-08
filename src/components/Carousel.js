@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
@@ -6,20 +6,30 @@ import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
 import { device } from "../theme/breakpoints";
 
-export default function Carousel({ ...props }) {
+export default function Carousel({fetchData}) {
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+    })
+  }, [])
+
+  const {subtext, text} = data ? data : {subtext : "" , text:""};
+  
   return (
-    <CarouselWrapper {...props} id="carousel">
+    <CarouselWrapper id="carousel">
       <div className="filter">
         <TextWithBackground
           className="text1"
-          text="Notfall? Rufen Sie uns Jetzt an!"
+          text={text}
           fontSize="1"
           color="purple"
           spacing={{ top: "carousel-inner", bottom: "carousel-inner-2", left:"border", right:"border" }}
         />
         <TextWithBackground
           className="text2"
-          text="01573 / 13485"
+          text={subtext}
           fontSize="2"
           color="purple"
           spacing={{ bottom: "carousel-inner-3" }}
@@ -33,7 +43,7 @@ export default function Carousel({ ...props }) {
         </SpaceWrapper>
       </div>
     </CarouselWrapper>
-  );
+  )
 }
 
 const CarouselWrapper = styled(SpaceWrapper)`
