@@ -5,3 +5,9 @@ export function emailJSSettings () {
         publicKey:"XUOXht_mra-eJRci3"
     }
 }
+
+export function apiSettings() {
+    return {
+        apiURL:"https://lotus-backend-production.up.railway.app/api"
+    }
+}
