@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiSettings } from '../admin';
+import * as qs from "qs";
 
 export async function getWilkommen () {
     return axios.get(apiSettings().apiURL + "/welcome").then(response => response.data)
@@ -10,7 +11,14 @@ export async function getArbeit () {
 }
 
 export async function getHead () {
-    return axios.get(apiSettings().apiURL + "/head").then(response => response.data)
+    const query = qs.stringify(
+        {fields:['links', 'rechts']},
+        { encodeValuesOnly: true}
+    )
+
+    console.log(query)
+
+    return axios.get(apiSettings().apiURL + `/head?populate[rechts]`).then(response => response.data)
 }
 
 export async function getKontakt () {
@@ -30,7 +38,7 @@ export async function getTeam () {
 }
 
 export async function getUnternehmen () {
-    return axios.get(apiSettings().apiURL + "/unternehmens-informationen").then(response => response.data)
+    return axios.get(apiSettings().apiURL + "/unternehmen").then(response => response.data)
 }
 
 export async function getAGB () {

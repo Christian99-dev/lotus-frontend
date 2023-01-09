@@ -13,7 +13,7 @@ export default function Carousel({fetchData}) {
     fetchData().then((res) => {
       setData(res.data.attributes);
     })
-  }, [])
+  }, [fetchData])
 
   const {subtext, text} = data ? data : {subtext : "" , text:""};
   

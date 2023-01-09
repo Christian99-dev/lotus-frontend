@@ -4,11 +4,11 @@ import useWindowDimensions from "../../utils/useWindowDimensions";
 import NavbarDekstop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
 
-const Navbar = () => {
+const Navbar = ({fetchData}) => {
   return useWindowDimensions().width > size.tablet ? (
-    <NavbarDekstop />
+    <NavbarDekstop fetchData={fetchData} />
   ) : (
-    <NavbarMobile />
+    <NavbarMobile fetchData={fetchData} />
   );
 };
 export default Navbar;

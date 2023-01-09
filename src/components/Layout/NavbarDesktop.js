@@ -8,13 +8,13 @@ import { useGlobalState } from "../../utils/globalState";
 import { info, navigationLinks } from "../../utils/constants";
 import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { device } from "../../theme/breakpoints";
 
-export default function Navbar() {
+export default function Navbar({fetchData}) {
   return (
     <>
-      <Top />
+      <Top fetchData={fetchData} />
       <Bar />
       <Bottom />
     </>
@@ -22,7 +22,17 @@ export default function Navbar() {
 }
 
 // Top
-export const Top = () => {
+export const Top = ({fetchData}) => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      console.log(res);
+      setData(res);
+    })
+  }, [])
+
+  // console.log(data);
+
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">

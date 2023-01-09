@@ -11,6 +11,7 @@ import Footer from "../components/Layout/Footer";
 import {
   getArbeit,
   getFooter,
+  getHead,
   getKontakt,
   getLeistungen,
   getRezensionen,
@@ -22,14 +23,14 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar fetchData={getUnternehmen} />
+      <Navbar fetchData={getHead} />
       <Carousel fetchData={getWilkommen} />
-      <Cards fetchData={getLeistungen} />
-      <Panel fetchData={getArbeit} />
-      <Team fetchData={getTeam} />
-      <Kontakt fetchData={getKontakt} />
-      <Testimonial fetchData={getRezensionen} />
-      <Footer fetchData={getFooter} />
+      {/* <Cards fetchData={getLeistungen} /> */}
+      {/* <Panel fetchData={getArbeit} /> */}
+      {/* <Team fetchData={getTeam} /> */}
+      {/* <Kontakt fetchData={getKontakt} /> */}
+      {/* <Testimonial fetchData={getRezensionen} /> */}
+      {/* <Footer fetchData={getFooter} /> */}
     </Layout>
   );
 };

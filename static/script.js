@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+
+/*
 
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -6,3 +8,5 @@ import React, { useEffect, useState } from "react";
       setData(res.data.attributes);
     })
   }, [])
+
+  */
