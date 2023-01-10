@@ -5,35 +5,42 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
 import bgimg from "../media/images/img1.png";
 import { device } from "../theme/breakpoints";
+import Loader from "./Global/Loader";
 
-export default function Carousel({fetchData}) {
-
+export default function Carousel({ fetchData }) {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-    })
-  }, [fetchData])
+    });
+  }, [fetchData]);
 
-  const {subtext, text} = data ? data : {subtext : "" , text:""};
-  
   return (
     <CarouselWrapper id="carousel">
       <div className="filter">
         <TextWithBackground
           className="text1"
-          text={text}
+          text={data ? data.text : ""}
           fontSize="1"
           color="purple"
-          spacing={{ top: "carousel-inner", bottom: "carousel-inner-2", left:"border", right:"border" }}
+          spacing={{
+            top: "carousel-inner",
+            bottom: "carousel-inner-2",
+            left: "border",
+            right: "border",
+          }}
+          loading={!data}
         />
+
         <TextWithBackground
           className="text2"
-          text={subtext}
+          text={data ? data.subtext : ""}
           fontSize="2"
           color="purple"
           spacing={{ bottom: "carousel-inner-3" }}
+          loading={!data}
         />
+
         <SpaceWrapper
           className="buttons"
           spacing={{ bottom: "carousel-inner" }}
@@ -43,7 +50,7 @@ export default function Carousel({fetchData}) {
         </SpaceWrapper>
       </div>
     </CarouselWrapper>
-  )
+  );
 }
 
 const CarouselWrapper = styled(SpaceWrapper)`
@@ -65,8 +72,13 @@ const CarouselWrapper = styled(SpaceWrapper)`
   }
 
   .text1,
-  .text2 {
+  .text2,
+  .loader {
     text-align: center;
+  }
+
+  .loader {
+    margin: 0 auto;
   }
 
   .buttons {

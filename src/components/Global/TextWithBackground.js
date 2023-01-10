@@ -7,12 +7,13 @@ export default function TextWithBackground({
   color,
   fontSize,
   spacing,
+  loading,
   ...props
 }) {
   return (
     <SpaceWrapper spacing={spacing} {...props}>
-      <Wrapper theme={color} fontSize={`var(--fs-${fontSize})`}>
-        {text}
+      <Wrapper className={loading ? "loading" : ""} theme={color} fontSize={`var(--fs-${fontSize})`}>
+        {loading ? "loading...": text}
       </Wrapper>
     </SpaceWrapper>
   );
@@ -37,5 +38,10 @@ const Wrapper = styled.div`
       props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
     color: ${(props) =>
       props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
+  }
+
+  &.loading{
+    color: ${(props) =>
+    props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
 `;
