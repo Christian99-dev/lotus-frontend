@@ -26,8 +26,6 @@ export const Top = ({ fetchData }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
-
-      console.log(res)
       setData(res.data.attributes);
     });
   }, []);

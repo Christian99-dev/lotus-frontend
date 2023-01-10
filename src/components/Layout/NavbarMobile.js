@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { info, navigationLinks } from "../../utils/constants";
 import Icon from "../Global/Icon";
@@ -7,9 +7,8 @@ import LogoTransparent from "../../media/logo/logo-transparent.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
 
-const NavbarMobile = () => {
+const NavbarMobile = ({fetchData}) => {
   const [toggle, setToggle] = useState(false);
-
   const ToggleNav = () => {
     setToggle(!toggle);
   };
@@ -17,7 +16,7 @@ const NavbarMobile = () => {
   return (
     <>
       <Nav toggleNav={ToggleNav} />
-      <Overlay open={toggle} toggleNav={ToggleNav} />
+      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} />
     </>
   );
 };
@@ -56,7 +55,17 @@ const NavWrapper = styled.div`
 `;
 
 // overlay
-const Overlay = ({ open, toggleNav }) => {
+const Overlay = ({ open, toggleNav, fetchData }) => {
+
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+    });
+  }, []);
+
+  const { rechts } = data ? data : { rechts: [] };
+
   return (
     <OverlayWrapper className={open ? "open" : "closed"}>
       <img src={LogoTransparent} alt="logo" className="logo" />
@@ -83,12 +92,12 @@ const Overlay = ({ open, toggleNav }) => {
           ))}
         </div>
         <div className="info">
-          {info.map((info, key) => (
+          {rechts.map((data, key) => (
             <Info
               key={key}
-              text={info.text}
+              text={data.text.info}
               iconHeight="icon-s"
-              iconName={info.icon}
+              iconName={data.icon.icon}
             />
           ))}
         </div>
