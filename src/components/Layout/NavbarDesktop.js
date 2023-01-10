@@ -5,13 +5,13 @@ import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
-import { info, navigationLinks } from "../../utils/constants";
+import { navigationLinks } from "../../utils/constants";
 import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { device } from "../../theme/breakpoints";
 
-export default function Navbar({fetchData}) {
+export default function Navbar({ fetchData }) {
   return (
     <>
       <Top fetchData={fetchData} />
@@ -22,28 +22,28 @@ export default function Navbar({fetchData}) {
 }
 
 // Top
-export const Top = ({fetchData}) => {
+export const Top = ({ fetchData }) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
-      console.log(res);
-      setData(res);
-    })
-  }, [])
 
-  // console.log(data);
+      console.log(res)
+      setData(res.data.attributes);
+    });
+  }, []);
 
+  const { rechts, links } = data ? data : { rechts: [], links: {} };
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
-        <div className="left">Lotus-Entwässerungstechnik</div>
+        <div className="left">{links.info}</div>
         <div className="right">
-          {info.map((info, key) => (
+          {rechts.map((data, key) => (
             <Info
               key={key}
-              text={info.text}
+              text={data.text.info}
               iconHeight="icon-s"
-              iconName={info.icon}
+              iconName={data.icon.icon}
               className="info"
             />
           ))}
