@@ -33,8 +33,10 @@ const Topbar = css`
   ${responsiveVar("topbar-inner-padding", 10)}
   ${responsiveVar("topbar-gap-right", 50)}
 
-  ${responsiveVar("topbar-mobile-tb-border", 50)}
-  /* ${responsiveVar("topbar-inner-gap", 20)} */
+  ${responsiveVar("topbar-mobile-tb-border", 50)} /* ${responsiveVar(
+    "topbar-inner-gap",
+    20
+  )} */
 `;
 
 const Navbar = css`
@@ -102,6 +104,11 @@ ${responsiveVar("footer-inner-l", 30)}
 ${responsiveVar("footer-tb-border", 60)}
 `;
 
+const Loader = css`
+  ${responsiveVar("loader-width", 200)}
+`;
+
+
 const Components = css`
   :root {
     ${Topbar}
@@ -115,6 +122,7 @@ const Components = css`
     ${Silder}
     ${Testimonial}
     ${Footer}
+    ${Loader}
 
     ${Button}
     ${Input}

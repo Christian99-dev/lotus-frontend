@@ -10,6 +10,7 @@ import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { device } from "../../theme/breakpoints";
+import Loader from "../Global/Loader";
 
 export default function Navbar({ fetchData }) {
   return (
@@ -29,22 +30,26 @@ export const Top = ({ fetchData }) => {
       setData(res.data.attributes);
     });
   }, []);
-
-  const { rechts, links } = data ? data : { rechts: [], links: {} };
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
-        <div className="left">{links.info}</div>
+        {data ? (
+          <div className="left">{data.links.info}</div>
+        ) : (
+          <Loader text color="secondary" height="fs-3" />
+        )}
         <div className="right">
-          {rechts.map((data, key) => (
-            <Info
-              key={key}
-              text={data.text.info}
-              iconHeight="icon-s"
-              iconName={data.icon.icon}
-              className="info"
-            />
-          ))}
+          
+          {data ?
+            data.rechts.map((data, key) => (
+              <Info
+                key={key}
+                text={data.text.info}
+                iconHeight="icon-s"
+                iconName={data.icon.icon}
+                className="info"
+              />
+            )) : <Loader color="secondary" height="icon-s" iconAsHeight />}
         </div>
       </div>
     </TopWrapper>
@@ -81,6 +86,10 @@ const TopWrapper = styled(SpaceWrapper)`
       .right {
         text-align: center;
         justify-content: center;
+      }
+
+      .loader {
+        margin: 0 auto;
       }
     }
 
