@@ -1,3 +1,5 @@
+import { apiSettings } from "../admin";
+
 export const scaleUp = (percent, from) => from * percent - from;
 export const xPercentFromAtoB = (a, b) => Math.abs((b / a - 1) * 100);
 export const addApercentToB = (a, b, minus) => {
@@ -13,3 +15,7 @@ export const offset = (el) => {
     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
 };
+
+export const createImgUrl = (imgUrl) => {
+  return apiSettings().apiUrl + imgUrl;
+}

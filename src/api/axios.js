@@ -12,31 +12,25 @@ const createLink = (populationArray, apiID) => {
     }
   );
 
-  return apiSettings().apiURL + "/" + apiID + "?" + query;
+  return apiSettings().apiCallUrl + "/" + apiID + "?" + query;
 };
-
-async function getUnternehmenSingleInfo(name) {
-  return axios
-    .get(apiSettings().apiURL + `/unternehmen?fields[0]=${name}`)
-    .then((response) => response.data.data.attributes[`${name}`]);
-}
 
 export async function getWilkommen() {
   return axios
-    .get(apiSettings().apiURL + "/welcome")
+    .get(createLink(["text", "subtext", "hintergrund"],"welcome"))
     .then((response) => response.data);
 }
 
 export async function getArbeit() {
   return axios
-    .get(apiSettings().apiURL + "/arbeit")
+    .get(apiSettings().apiCallUrl + "/arbeit")
     .then((response) => response.data);
 }
 
 export async function getHead() {
   return axios
     .all([
-      axios.get(apiSettings().apiURL + `/unternehmen?`),
+      axios.get(apiSettings().apiCallUrl + `/unternehmen?`),
       axios.get(
         createLink(
           ["rechts", "rechts.icon", "rechts.text", "links", "links.info"],
@@ -63,48 +57,54 @@ export async function getHead() {
 
 export async function getKontakt() {
   return axios
-    .get(apiSettings().apiURL + "/kontakt")
+    .get(apiSettings().apiCallUrl + "/kontakt")
     .then((response) => response.data);
 }
 
 export async function getLeistungen() {
   return axios
-    .get(apiSettings().apiURL + "/leistungen")
+    .get(apiSettings().apiCallUrl + "/leistungen")
     .then((response) => response.data);
 }
 
 export async function getRezensionen() {
   return axios
-    .get(apiSettings().apiURL + "/rezensionen")
+    .get(apiSettings().apiCallUrl + "/rezensionen")
     .then((response) => response.data);
 }
 
 export async function getTeam() {
   return axios
-    .get(apiSettings().apiURL + "/team")
+    .get(apiSettings().apiCallUrl + "/team")
     .then((response) => response.data);
 }
 
 export async function getUnternehmen() {
   return axios
-    .get(apiSettings().apiURL + "/unternehmen")
+    .get(createLink(["logo", "logo_textless"],"unternehmen"))
     .then((response) => response.data);
 }
 
 export async function getAGB() {
   return axios
-    .get(apiSettings().apiURL + "/agb")
+    .get(apiSettings().apiCallUrl + "/agb")
     .then((response) => response.data);
 }
 
 export async function getImpressum() {
   return axios
-    .get(apiSettings().apiURL + "/impressum")
+    .get(apiSettings().apiCallUrl + "/impressum")
     .then((response) => response.data);
 }
 
 export async function getFooter() {
   return axios
-    .get(apiSettings().apiURL + "/footer")
+    .get(apiSettings().apiCallUrl + "/footer")
     .then((response) => response.data);
 }
+
+// async function getUnternehmenSingleInfo(name) {
+//   return axios
+//     .get(apiSettings().apiCallUrl + `/unternehmen?fields[0]=${name}`)
+//     .then((response) => response.data.data.attributes[`${name}`]);
+// }

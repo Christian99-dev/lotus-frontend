@@ -3,20 +3,22 @@ import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
-import bgimg from "../media/images/img1.png";
+import bgimg from "../media/images/purple.png";
 import { device } from "../theme/breakpoints";
-import Loader from "./Global/Loader";
+import { createImgUrl } from "../utils/utils";
+ 
 
 export default function Carousel({ fetchData }) {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
+      bgimg = createImgUrl(res.data.attributes.hintergrund.data.attributes.url);
     });
-  }, [fetchData]);
+  }, [fetchData]); 
 
   return (
-    <CarouselWrapper id="carousel">
+    <CarouselWrapper id="carousel" background={bgimg}>
       <div className="filter">
         <TextWithBackground
           className="text1"
@@ -61,7 +63,8 @@ const CarouselWrapper = styled(SpaceWrapper)`
     padding-top: 47.47px;
   }
 
-  background-image: url(${bgimg});
+  /* transition: background-image 0.2s ease; */
+  background-image: url(${props => props.background});
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;

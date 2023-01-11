@@ -1,18 +1,17 @@
 import React from "react";
-import { LineLoader } from "react-loaders-kit";
+import { LineLoader, SpinningCircleLoader } from "react-loaders-kit";
 import styled from "styled-components";
 import { device } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
 const Loader = ({ spinner, color, height, iconAsHeight, spacing, margin }) => {
-  const loaderProps = {
-    loading: true,
-    size: 400,
-    duration: 1,
-    colors: ["red", "red"],
-  };
 
-  if (spinner) return <LineLoader {...loaderProps} />;
+  if (spinner)
+    return (
+      <NormalLoader height={height}>
+        <SpinningCircleLoader loading={true} className="loader" />
+      </NormalLoader>
+    );
 
   return (
     <SpaceWrapper margin={margin} spacing={spacing}>
@@ -26,6 +25,26 @@ const Loader = ({ spinner, color, height, iconAsHeight, spacing, margin }) => {
 };
 
 export default Loader;
+
+const NormalLoader = styled.div`
+  > div {
+    display: inline;
+    > div {
+      background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.1) 33%,
+        var(--primary) 100%
+      );
+      margin: auto;
+      > div {
+        background: var(--secondary);
+      }
+    }
+    z-index: 99;
+    height: calc(var(--${(props) => props.height}) - 5px);
+    width: calc(var(--${(props) => props.height}) - 5px);
+  }
+`;
 
 const TextLoader = styled.div`
   background-color: var(--${(props) => props.color});

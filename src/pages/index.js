@@ -23,7 +23,7 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar fetchData={getHead} />
+      <Navbar fetchData={getHead} fetchDataWelcome={getWilkommen} fetchDataUnternehmen={getUnternehmen} />
       <Carousel fetchData={getWilkommen} />
       {/* <Cards fetchData={getLeistungen} /> */}
       {/* <Panel fetchData={getArbeit} /> */}

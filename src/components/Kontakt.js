@@ -3,8 +3,6 @@ import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
-import Input from "./../components/Global/Input";
-import Button from "./Global/Button";
 import bgimg from "../media/images/img3.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";

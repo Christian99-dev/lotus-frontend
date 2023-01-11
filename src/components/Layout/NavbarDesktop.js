@@ -1,23 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import NavButton from "../Global/NavButton";
-import LogoText from "../../media/logo/logo-text.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
 import { navigationLinks } from "../../utils/constants";
-import bgimg from "../../media/images/img1.png";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { device } from "../../theme/breakpoints";
 import Loader from "../Global/Loader";
+import { createImgUrl } from "../../utils/utils";
+import bgimg from "../../media/images/purple.png";
 
-export default function Navbar({ fetchData }) {
+export default function Navbar({ fetchData, fetchDataWelcome,fetchDataUnternehmen }) {
   return (
     <>
       <Top fetchData={fetchData} />
       <Bar />
-      <Bottom />
+      <Bottom fetchDataWelcome={fetchDataWelcome} fetchDataUnternehmen={fetchDataUnternehmen} />
     </>
   );
 }
@@ -29,7 +29,8 @@ export const Top = ({ fetchData }) => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
-  }, []);
+  }, [fetchData]);
+  
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
@@ -39,8 +40,7 @@ export const Top = ({ fetchData }) => {
           <Loader text color="secondary" height="fs-3" />
         )}
         <div className="right">
-          
-          {data ?
+          {data ? (
             data.rechts.map((data, key) => (
               <Info
                 key={key}
@@ -49,7 +49,10 @@ export const Top = ({ fetchData }) => {
                 iconName={data.icon.icon}
                 className="info"
               />
-            )) : <Loader color="secondary" height="icon-s" iconAsHeight />}
+            ))
+          ) : (
+            <Loader color="secondary" height="icon-s" iconAsHeight />
+          )}
         </div>
       </div>
     </TopWrapper>
@@ -148,12 +151,23 @@ const BarWrapper = styled.div`
 `;
 
 // Bottom
-const Bottom = () => {
+const Bottom = ({fetchDataWelcome, fetchDataUnternehmen}) => {
+  const [logo, setLogo] = useState(null);
+  useEffect(() => {
+    fetchDataWelcome().then((res) => {
+      bgimg = createImgUrl(res.data.attributes.hintergrund.data.attributes.url);
+    });
+
+    fetchDataUnternehmen().then((res) => {
+      setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
+    })
+  }, [fetchDataWelcome, fetchDataUnternehmen]);
+
   return (
-    <BottomWrapper className={useGlobalState()[0].navbarStuck ? "stuck" : ""}>
+    <BottomWrapper bgimg={bgimg} className={useGlobalState()[0].navbarStuck ? "stuck" : ""}>
       <div className="logo-container">
         <SpaceWrapper spacing={{ bottom: "navbar-inner" }} className="filter">
-          <img src={LogoText} alt="logo-text" />
+         {logo ? <img src={logo} alt="logo-text" /> : <Loader spinner height="navbar-logo-height"/>}
         </SpaceWrapper>
       </div>
     </BottomWrapper>
@@ -162,7 +176,7 @@ const Bottom = () => {
 
 const BottomWrapper = styled.div`
   .logo-container {
-    background-image: url(${bgimg});
+    background-image: url(${props => props.bgimg});
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -181,6 +195,10 @@ const BottomWrapper = styled.div`
       display: block;
       transition: opacity 0.5s ease;
       opacity: 1;
+    }
+
+    .loader{
+      margin: 0 auto;
     }
   }
 

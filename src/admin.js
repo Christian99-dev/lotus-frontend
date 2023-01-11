@@ -8,6 +8,7 @@ export function emailJSSettings () {
 
 export function apiSettings() {
     return {
-        apiURL:"https://lotus-backend-production.up.railway.app/api"
+        apiCallUrl:"https://lotus-backend-production.up.railway.app/api",
+        apiUrl: "https://lotus-backend-production.up.railway.app"
     }
 }
