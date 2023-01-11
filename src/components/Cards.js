@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
@@ -7,31 +7,22 @@ import Bubbels from "./Effects/Bubbels";
 import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MySwiper from "../components/Global/MySwiper";
+import Loader from "./Global/Loader";
 
-const Cards = ({ ...props }) => {
-  const cardsData = [
-    {
-      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
-      title: "Reinigen",
-      icon: "drop",
-    },
-    {
-      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
-      title: "Reinigen",
-      icon: "sync",
-    },
-    {
-      text: "Loremsss ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accu asopdion aion asoin",
-      title: "Reinigen",
-      icon: "wrench",
-    },
-  ];
+const Cards = ({ fetchData }) => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+      console.log(res.data.attributes);
+    });
+  }, []);
 
   const createCardsJSXArray = (dataArray) => {
-    return dataArray.map(({ text, title, icon }, key) => (
-      <Card text={text} title={title} icon={icon} key={key} />
-    ))
-  }
+    return dataArray.map(({ text, ueberschrift, icon }, key) => (
+      <Card text={text} title={ueberschrift} icon={icon.icon} key={key} />
+    ));
+  };
 
   return (
     <CardsWrapper
@@ -40,24 +31,43 @@ const Cards = ({ ...props }) => {
         top: "white-component-inner-half",
         bottom: "white-component-inner",
       }}
-      {...props}
     >
       <Bubbels />
-      <Title
-        center
-        text="Unsere Leistung"
-        spacing={{ bottom: "white-component-inner-half" }}
-        color="purple"
-      />
-      {useWindowDimensions().width > size.tablet ? (
-        <SpaceWrapper
-          spacing={{ left: "border", right: "border" }}
-          className="cards"
-        >
-          {createCardsJSXArray(cardsData)}
-        </SpaceWrapper>
+      {data ? (
+        <Title
+          center
+          text={data.ueberschrift}
+          spacing={{ bottom: "white-component-inner-half" }}
+          color="purple"
+        />
       ) : (
-        <MySwiper array={createCardsJSXArray(cardsData)} cards />
+        <Loader
+          title
+          color="primary"
+          spacing={{ bottom: "white-component-inner-half" }}
+        />
+      )}
+      {useWindowDimensions().width > size.tablet ? (
+        <>
+          {data ? (
+            <SpaceWrapper
+              spacing={{ left: "border", right: "border" }}
+              className="cards"
+            >
+              {createCardsJSXArray(data.leistungen)}
+            </SpaceWrapper>
+          ) : (
+            <Loader dots />
+          )}
+        </>
+      ) : (
+        <>
+          {data ? (
+            <MySwiper array={createCardsJSXArray(data.leistungen)} cards />
+          ) : (
+            <Loader dots />
+          )}
+        </>
       )}
     </CardsWrapper>
   );
@@ -74,6 +84,15 @@ const CardsWrapper = styled(SpaceWrapper)`
     @media ${device.laptop} {
       flex-direction: column;
       justify-content: center;
+    }
+
+    .loader {
+    }
+  }
+
+  .loader {
+    &.title {
+      margin: 0 auto;
     }
   }
 `;

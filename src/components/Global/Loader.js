@@ -1,22 +1,42 @@
 import React from "react";
-import { LineLoader, SpinningCircleLoader } from "react-loaders-kit";
+import { SpinningCircleLoader, DotsLoader } from "react-loaders-kit";
 import styled from "styled-components";
 import { device } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
+import { offset } from "../../utils/utils";
 
-const Loader = ({ spinner, color, height, iconAsHeight, spacing, margin }) => {
-
+const Loader = ({
+  title,
+  spinner,
+  color,
+  height,
+  iconAsHeight,
+  spacing,
+  margin,
+  dots,
+}) => {
+  if (dots) {
+    return (
+      <DotsLoaderWrapper margin={margin} spacing={spacing}>
+        <DotsLoader loading height={200} />
+      </DotsLoaderWrapper>
+    );
+  }
   if (spinner)
     return (
-      <NormalLoader height={height}>
-        <SpinningCircleLoader loading={true} className="loader" />
-      </NormalLoader>
+      <SpaceWrapper margin={margin} spacing={spacing}>
+        <NormalLoader height={height}>
+          <SpinningCircleLoader loading={true} className="loader" />
+        </NormalLoader>
+      </SpaceWrapper>
     );
 
   return (
     <SpaceWrapper margin={margin} spacing={spacing}>
       <TextLoader
-        className={`loader ${iconAsHeight ? "iconAsHeight" : ""}`}
+        className={`loader ${iconAsHeight ? "iconAsHeight" : ""} ${
+          title ? "title" : ""
+        }`}
         height={height}
         color={color}
       />
@@ -41,6 +61,7 @@ const NormalLoader = styled.div`
       }
     }
     z-index: 99;
+
     height: calc(var(--${(props) => props.height}) - 5px);
     width: calc(var(--${(props) => props.height}) - 5px);
   }
@@ -60,5 +81,33 @@ const TextLoader = styled.div`
 
   &.iconAsHeight {
     height: calc(var(--${(props) => props.height}));
+  }
+
+  &.title {
+    height: calc(var(--fs-1) + 18px);
+
+    @media ${device.desktopPlus} {
+      height: calc(var(--fs-1) + 20px);
+    }
+
+    @media ${device.laptop} {
+      height: calc(var(--fs-1) + 16px);
+    }
+
+    @media ${device.tablet} {
+      margin: 0 auto;
+      height: calc(var(--fs-1) + 15px);
+    }
+  }
+`;
+
+const DotsLoaderWrapper = styled(SpaceWrapper)`
+  > div {
+    margin: auto;
+    > div {
+      > div {
+        background: var(--primary);
+      }
+    }
   }
 `;

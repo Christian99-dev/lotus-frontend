@@ -63,7 +63,7 @@ export async function getKontakt() {
 
 export async function getLeistungen() {
   return axios
-    .get(apiSettings().apiCallUrl + "/leistungen")
+    .get(createLink(["leistungen", "leistungen.icon"], "leistungen"))
     .then((response) => response.data);
 }
 
