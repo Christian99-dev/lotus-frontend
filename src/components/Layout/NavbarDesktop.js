@@ -10,14 +10,14 @@ import { useEffect, useState } from "react";
 import { device } from "../../theme/breakpoints";
 import Loader from "../Global/Loader";
 import { createImgUrl } from "../../utils/utils";
-import bgimg from "../../media/images/purple.png";
+import defaultPurple from "../../media/images/purple.png";
 
-export default function Navbar({ fetchData, fetchDataWelcome,fetchDataUnternehmen }) {
+export default function Navbar({ fetchData }) {
   return (
     <>
       <Top fetchData={fetchData} />
       <Bar />
-      <Bottom fetchDataWelcome={fetchDataWelcome} fetchDataUnternehmen={fetchDataUnternehmen} />
+      <Bottom fetchData={fetchData} />
     </>
   );
 }
@@ -30,7 +30,7 @@ export const Top = ({ fetchData }) => {
       setData(res.data.attributes);
     });
   }, [fetchData]);
-  
+
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <div className="container">
@@ -151,23 +151,28 @@ const BarWrapper = styled.div`
 `;
 
 // Bottom
-const Bottom = ({fetchDataWelcome, fetchDataUnternehmen}) => {
+const Bottom = ({ fetchData }) => {
   const [logo, setLogo] = useState(null);
+  const [background, setBackground] = useState(defaultPurple);
   useEffect(() => {
-    fetchDataWelcome().then((res) => {
-      bgimg = createImgUrl(res.data.attributes.hintergrund.data.attributes.url);
-    });
-
-    fetchDataUnternehmen().then((res) => {
+    fetchData().then((res) => {
+      setBackground(createImgUrl(res.data.attributes.hintergrund.data.attributes.url));
       setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
-    })
-  }, [fetchDataWelcome, fetchDataUnternehmen]);
+    });
+  }, [fetchData]);
 
   return (
-    <BottomWrapper bgimg={bgimg} className={useGlobalState()[0].navbarStuck ? "stuck" : ""}>
+    <BottomWrapper
+      bgimg={background}
+      className={useGlobalState()[0].navbarStuck ? "stuck" : ""}
+    >
       <div className="logo-container">
         <SpaceWrapper spacing={{ bottom: "navbar-inner" }} className="filter">
-         {logo ? <img src={logo} alt="logo-text" /> : <Loader spinner height="navbar-logo-height"/>}
+          {logo ? (
+            <img src={logo} alt="logo-text" />
+          ) : (
+            <Loader spinner height="navbar-logo-height" />
+          )}
         </SpaceWrapper>
       </div>
     </BottomWrapper>
@@ -176,7 +181,7 @@ const Bottom = ({fetchDataWelcome, fetchDataUnternehmen}) => {
 
 const BottomWrapper = styled.div`
   .logo-container {
-    background-image: url(${props => props.bgimg});
+    background-image: url(${(props) => props.bgimg});
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -197,7 +202,7 @@ const BottomWrapper = styled.div`
       opacity: 1;
     }
 
-    .loader{
+    .loader {
       margin: 0 auto;
     }
   }

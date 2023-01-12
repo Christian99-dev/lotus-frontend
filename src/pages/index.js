@@ -10,8 +10,10 @@ import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
 import {
   getArbeit,
+  getArbeitModified,
   getFooter,
   getHead,
+  getHeadModified,
   getKontakt,
   getLeistungen,
   getRezensionen,
@@ -23,10 +25,10 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar fetchData={getHead} fetchDataWelcome={getWilkommen} fetchDataUnternehmen={getUnternehmen} />
+      <Navbar fetchData={getHeadModified} />
       <Carousel fetchData={getWilkommen} />
       <Cards fetchData={getLeistungen} />
-      <Panel fetchData={getArbeit} />
+      <Panel fetchData={getArbeitModified} />
       {/* <Team fetchData={getTeam} /> */}
       {/* <Kontakt fetchData={getKontakt} /> */}
       {/* <Testimonial fetchData={getRezensionen} /> */}

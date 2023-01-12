@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import {navigationLinks } from "../../utils/constants";
+import { navigationLinks } from "../../utils/constants";
 import Icon from "../Global/Icon";
 import NavButton from "../Global/NavButton";
-import LogoTransparent from "../../media/logo/logo-transparent.svg";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
 
-const NavbarMobile = ({fetchData ,fetchDataUnternehmen }) => {
+const NavbarMobile = ({ fetchData }) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
     setToggle(!toggle);
@@ -17,7 +16,7 @@ const NavbarMobile = ({fetchData ,fetchDataUnternehmen }) => {
   return (
     <>
       <Nav toggleNav={ToggleNav} />
-      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} fetchDataUnternehmen={fetchDataUnternehmen} />
+      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} />
     </>
   );
 };
@@ -56,17 +55,16 @@ const NavWrapper = styled.div`
 `;
 
 // overlay
-const Overlay = ({ open, toggleNav, fetchData, fetchDataUnternehmen }) => {
-
+const Overlay = ({ open, toggleNav, fetchData }) => {
   const [data, setData] = useState(null);
   const [logo, setLogo] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
+      setLogo(
+        createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
+      );
     });
-    fetchDataUnternehmen().then((res) => {
-      setLogo(createImgUrl(res.data.attributes.logo_textless.data.attributes.url));
-    })
   }, [fetchData]);
 
   const { rechts } = data ? data : { rechts: [] };

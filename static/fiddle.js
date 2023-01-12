@@ -27,3 +27,31 @@ function isEmpty(obj) {
       </MapContainer>
     );
   };
+
+  export async function getHead() {
+    return axios
+      .all([
+        axios.get(apiSettings().apiCallUrl + `/unternehmen?`),
+        axios.get(
+          createLink(
+            ["rechts", "rechts.icon", "rechts.text", "links", "links.info"],
+            "head"
+          )
+        ),
+      ])
+      .then(
+        axios.spread((unternehmen, data) => {
+          data.data.data.attributes.links.info =
+            unternehmen.data.data.attributes[
+              data.data.data.attributes.links.info
+            ];
+          for (let i = 0; i < data.data.data.attributes.rechts.length; i++)
+            data.data.data.attributes.rechts[i].text.info =
+              unternehmen.data.data.attributes[
+                data.data.data.attributes.rechts[i].text.info
+              ];
+  
+          return data.data;
+        })
+      );
+  }

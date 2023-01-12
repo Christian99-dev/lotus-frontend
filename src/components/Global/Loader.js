@@ -14,17 +14,18 @@ const Loader = ({
   spacing,
   margin,
   dots,
+  className
 }) => {
   if (dots) {
     return (
-      <DotsLoaderWrapper margin={margin} spacing={spacing}>
+      <DotsLoaderWrapper margin={margin} spacing={spacing} className={className}>
         <DotsLoader loading height={200} />
       </DotsLoaderWrapper>
     );
   }
   if (spinner)
     return (
-      <SpaceWrapper margin={margin} spacing={spacing}>
+      <SpaceWrapper margin={margin} spacing={spacing} className={className}>
         <NormalLoader height={height}>
           <SpinningCircleLoader loading={true} className="loader" />
         </NormalLoader>
@@ -32,7 +33,7 @@ const Loader = ({
     );
 
   return (
-    <SpaceWrapper margin={margin} spacing={spacing}>
+    <SpaceWrapper margin={margin} spacing={spacing} className={className}>
       <TextLoader
         className={`loader ${iconAsHeight ? "iconAsHeight" : ""} ${
           title ? "title" : ""

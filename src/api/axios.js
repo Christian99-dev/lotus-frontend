@@ -17,42 +17,27 @@ const createLink = (populationArray, apiID) => {
 
 export async function getWilkommen() {
   return axios
-    .get(createLink(["text", "subtext", "hintergrund"],"welcome"))
+    .get(createLink(["text", "subtext", "hintergrund"], "welcome"))
     .then((response) => response.data);
 }
 
 export async function getArbeit() {
-  return axios
-    .get(apiSettings().apiCallUrl + "/arbeit")
-    .then((response) => response.data);
+  return axios.get(createLink(["hintergrund"], "arbeit")).then((res) => {
+    return res.data;
+  });
 }
 
 export async function getHead() {
   return axios
-    .all([
-      axios.get(apiSettings().apiCallUrl + `/unternehmen?`),
-      axios.get(
-        createLink(
-          ["rechts", "rechts.icon", "rechts.text", "links", "links.info"],
-          "head"
-        )
-      ),
-    ])
-    .then(
-      axios.spread((unternehmen, data) => {
-        data.data.data.attributes.links.info =
-          unternehmen.data.data.attributes[
-            data.data.data.attributes.links.info
-          ];
-        for (let i = 0; i < data.data.data.attributes.rechts.length; i++)
-          data.data.data.attributes.rechts[i].text.info =
-            unternehmen.data.data.attributes[
-              data.data.data.attributes.rechts[i].text.info
-            ];
-
-        return data.data;
-      })
-    );
+    .get(
+      createLink(
+        ["rechts", "rechts.icon", "rechts.text", "links", "links.info"],
+        "head"
+      )
+    )
+    .then((res) => {
+      return res.data;
+    });
 }
 
 export async function getKontakt() {
@@ -81,7 +66,7 @@ export async function getTeam() {
 
 export async function getUnternehmen() {
   return axios
-    .get(createLink(["logo", "logo_textless"],"unternehmen"))
+    .get(createLink(["logo", "logo_textless"], "unternehmen"))
     .then((response) => response.data);
 }
 
@@ -103,8 +88,35 @@ export async function getFooter() {
     .then((response) => response.data);
 }
 
-// async function getUnternehmenSingleInfo(name) {
-//   return axios
-//     .get(apiSettings().apiCallUrl + `/unternehmen?fields[0]=${name}`)
-//     .then((response) => response.data.data.attributes[`${name}`]);
-// }
+/** Modified */
+
+export async function getArbeitModified() {
+  return axios.all([getArbeit(), getUnternehmen()]).then(
+    axios.spread((arbeit, unternehmen) => {
+      arbeit.data.attributes.logo_textless =
+        unternehmen.data.attributes.logo_textless;
+
+      return arbeit;
+    })
+  );
+}
+
+export async function getHeadModified() {
+  return axios.all([getHead(), getUnternehmen(), getWilkommen()]).then(
+    axios.spread((head, unternehmen, willkommen) => {
+      head.data.attributes.links.info =
+        unternehmen.data.attributes[head.data.attributes.links.info];
+
+      for (let i = 0; i < head.data.attributes.rechts.length; i++)
+        head.data.attributes.rechts[i].text.info =
+          unternehmen.data.attributes[head.data.attributes.rechts[i].text.info];
+
+      head.data.attributes.logo = unternehmen.data.attributes.logo;
+      head.data.attributes.logo_textless = unternehmen.data.attributes.logo_textless;
+
+      head.data.attributes.hintergrund = willkommen.data.attributes.hintergrund;
+
+      return head;
+    })
+  );
+}
