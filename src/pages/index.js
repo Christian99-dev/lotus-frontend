@@ -14,7 +14,7 @@ import {
   getFooter,
   getHead,
   getHeadModified,
-  getKontakt,
+  getKontaktModified,
   getLeistungen,
   getRezensionen,
   getTeam,
@@ -25,14 +25,14 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar fetchData={getHeadModified} />
-      <Carousel fetchData={getWilkommen} />
-      <Cards fetchData={getLeistungen} />
-      <Panel fetchData={getArbeitModified} />
-      <Team fetchData={getTeam} />
-      <Kontakt fetchData={getKontakt} />
-      <Testimonial fetchData={getRezensionen} />
-      <Footer fetchData={getFooter} />
+      {/* <Navbar fetchData={getHeadModified} /> */}
+      {/* <Carousel fetchData={getWilkommen} /> */}
+      {/* <Cards fetchData={getLeistungen} /> */}
+      {/* <Panel fetchData={getArbeitModified} /> */}
+      {/* <Team fetchData={getTeam} /> */}
+      {/* <Kontakt fetchData={getKontaktModified} /> */}
+      {/* <Testimonial fetchData={getRezensionen} /> */}
+      {/* <Footer fetchData={getFooter} /> */}
     </Layout>
   );
 };
