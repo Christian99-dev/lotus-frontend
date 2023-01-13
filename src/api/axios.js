@@ -60,7 +60,7 @@ export async function getRezensionen() {
 
 export async function getTeam() {
   return axios
-    .get(apiSettings().apiCallUrl + "/team")
+    .get(createLink(["mitarbeiter", "mitarbeiter.bild"], "team"))
     .then((response) => response.data);
 }
 

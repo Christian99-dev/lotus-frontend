@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import img1 from "./../media/images/person1.png";
 import img2 from "./../media/images/person2.png";
@@ -12,22 +12,18 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import { useEffect } from "react";
 import { useRef } from "react";
 import MySwiper from "../components/Global/MySwiper";
+import Loader from "./Global/Loader";
+import { createImgUrl } from "../utils/utils";
 
-export default function Team({ ...props }) {
-  const personsMobile = [
-    <PersonMobile
-      img={img1}
-      text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
-      jobTitle="Klempner"
-      name="Max Mustermann"
-    />,
-    <PersonMobile
-      img={img2}
-      text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
-      jobTitle="Klempner"
-      name="Max Mustermann"
-    />,
-  ];
+export default function Team({ fetchData }) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+    });
+  }, []);
+
+  console.log(data);
   return (
     <div id="team">
       <TeamWrapper
@@ -35,7 +31,6 @@ export default function Team({ ...props }) {
           top: "white-component-inner-half",
           bottom: "white-component-inner",
         }}
-        {...props}
       >
         <Rectangles />
         <Titel
@@ -50,26 +45,40 @@ export default function Team({ ...props }) {
         />
 
         {useWindowDimensions().width > size.tablet ? (
-          <SpaceWrapper
-            className="container-desktop"
-            spacing={{ left: "border", right: "border" }}
-          >
-            <Person
-              img={img1}
-              text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasonaosid nasodi naosdi nasodi nasod indi naosdi nasodi nasod in"
-              jobTitle="Klempner"
-              name="Max Mustermann"
-            />
-            <Person
-              img={img2}
-              text="aoifusb azubaus daius bdaiuasdjk asd naois dnaoisd naosid naosid nasodi naosdi nasodi nasod in naosid nasodi naosdi nasodi nasod in wrwes"
-              jobTitle="Klempner"
-              name="Max Mustermann"
-              right
-            />
-          </SpaceWrapper>
+          data ? (
+            <SpaceWrapper
+              className="container-desktop"
+              spacing={{ left: "border", right: "border" }}
+            >
+              {data.mitarbeiter.map((member, key) => {
+                return <Person
+                  key={key}
+                  img={createImgUrl(member.bild.data.attributes.url)}
+                  text={member.beschreibung}
+                  name={member.vorname + " " + member.nachname}
+                  jobTitle={member.berufsbezeichnung}
+                  right={key === 1}
+                />;
+              })}
+            </SpaceWrapper>
+          ) : (
+            <Loader dots />
+          )
+        ) : data ? (
+          <MySwiper
+            array={data.mitarbeiter.map((member, key) => {
+              return <PersonMobile
+                key={key}
+                img={createImgUrl(member.bild.data.attributes.url)}
+                text={member.beschreibung}
+                name={member.vorname + " " + member.nachname}
+                jobTitle={member.berufsbezeichnung}
+              />;
+            })}
+            cards
+          />
         ) : (
-          <MySwiper array={personsMobile} cards />
+          <Loader dots />
         )}
       </TeamWrapper>
     </div>

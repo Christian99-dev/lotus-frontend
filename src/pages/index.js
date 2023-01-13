@@ -29,10 +29,10 @@ const IndexPage = () => {
       <Carousel fetchData={getWilkommen} />
       <Cards fetchData={getLeistungen} />
       <Panel fetchData={getArbeitModified} />
-      {/* <Team fetchData={getTeam} /> */}
-      {/* <Kontakt fetchData={getKontakt} /> */}
-      {/* <Testimonial fetchData={getRezensionen} /> */}
-      {/* <Footer fetchData={getFooter} /> */}
+      <Team fetchData={getTeam} />
+      <Kontakt fetchData={getKontakt} />
+      <Testimonial fetchData={getRezensionen} />
+      <Footer fetchData={getFooter} />
     </Layout>
   );
 };
