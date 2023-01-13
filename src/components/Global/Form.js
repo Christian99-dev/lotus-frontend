@@ -8,7 +8,7 @@ import styled from "styled-components";
 import emailjs from "emailjs-com";
 import { emailJSSettings } from "../../admin";
 
-const Form = () => {
+const Form = ({ data }) => {
   const onSubmit = (values, actions) => {
     toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
     actions.resetForm();
@@ -66,7 +66,7 @@ const Form = () => {
     if (errors.street) toast.error(errors.street, { theme: "colored" });
     if (errors.location) toast.error(errors.location, { theme: "colored" });
   };
-
+  
   return (
     <>
       <StyledToastContainer />
@@ -76,7 +76,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="name"
-          text="Vorname"
+          text={data.vornamePlatzhalter}
           className="a"
         />
         <Input
@@ -84,7 +84,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="lastname"
-          text="Nachname"
+          text={data.nachnamePlatzhalter}
           className="b"
         />
         <Input
@@ -92,7 +92,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="message"
-          text="Nachricht"
+          text={data.nachrichtPlatzhalter}
           className="c"
           textarea
         />
@@ -101,7 +101,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="email"
-          text="Email"
+          text={data.emailPlatzhalter}
           className="d"
         />
         <Input
@@ -109,7 +109,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="number"
-          text="Telefonnummer"
+          text={data.nummerPlatzhalter}
           className="e"
         />
         <Input
@@ -117,7 +117,7 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="street"
-          text="Straße + Hausnummer"
+          text={data.strasseHausnummerPlatzhalter}
           className="f"
         />
         <Input
@@ -125,11 +125,11 @@ const Form = () => {
           onChange={handleChange}
           type="text"
           name="location"
-          text="Plz + Ort"
+          text={data.plzOrtPlatzhalter}
           className="g"
         />
         <Button
-          text="Absenden"
+          text={data.buttonPlatzhalter}
           color="transparent"
           className="button"
           type="submit"

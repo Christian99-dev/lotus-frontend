@@ -1,56 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
-import bgimg from "../media/images/img3.png";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
 import { device } from "../theme/breakpoints";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "./Global/Form";
+import { createImgUrl } from "../utils/utils";
+import Loader from "./Global/Loader";
 
-export default function Kontakt({ ...props }) {
+export default function Kontakt({ fetchData }) {
+  const [data, setData] = useState(null);
+  const [background, setBackground] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+      setBackground(
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
+      );
+    });
+  }, []);
 
   return (
     <div id="contact">
-
-      <KontaktWrapper bgImage={bgimg} strength={500} {...props}>
+      <KontaktWrapper bgImage={background} strength={500}>
         {/* id anchor */}
         <div id="contact" />
         <div className="filter">
-          <SpaceWrapper
-            spacing={{
-              left: "border",
-              right: "border",
-              top: "contact-inner",
-              bottom: "contact-inner",
-            }}
-            className="wrapper"
-          >
-            <div className="left">
-              <Title
-                text="Kontaktieren sie uns"
-                spacing={{ bottom: "team-m-space" }}
-              />
-              <Info
-                icon="phone"
-                text="01567 / 482375"
-                spacing={{ bottom: "team-s-space" }}
-              />
-              <Info
-                icon="location"
-                text="Neue Roßstr. 15, 66128 Saarbrücken"
-                spacing={{ bottom: "team-m-space" }}
-              />
+          {data ? (
+            <SpaceWrapper
+              spacing={{
+                left: "border",
+                right: "border",
+                top: "contact-inner",
+                bottom: "contact-inner",
+              }}
+              className="wrapper"
+            >
+              <div className="left">
+                <Title
+                  text={data.ueberschrift}
+                  spacing={{ bottom: "team-m-space" }}
+                />
+                <SpaceWrapper
+                  className="infos"
+                  spacing={{ bottom: "team-m-space" }}
+                >
+                  {data.infos.map((info, key) => {
+                    return (
+                      <Info
+                        icon={info.icon.icon}
+                        text={info.text.info}
+                        key={key}
+                      />
+                    );
+                  })}
+                </SpaceWrapper>
 
-              {/** FORM */}
-              <Form/>
-            </div>
-            <div className="right">
-              <MapsWrapper />
-            </div>
-          </SpaceWrapper>
+                {/** FORM */}
+                <Form data={data} />
+              </div>
+              <div className="right">
+                <MapsWrapper
+                  location={[data.mapLocation.lat, data.mapLocation.lng]}
+                />
+              </div>
+            </SpaceWrapper>
+          ) : (
+            <Loader
+              spinner
+              spacing={{ top: "contact-inner", bottom: "contact-inner" }}
+            />
+          )}
         </div>
       </KontaktWrapper>
     </div>
@@ -69,6 +92,12 @@ const KontaktWrapper = styled(Parallax)`
 
     .left {
       flex: 1 1 0;
+
+      .infos {
+        display: flex;
+        flex-direction: column;
+        gap: var(--team-s-space);
+      }
       .form {
         display: grid;
         gap: var(--team-xs-space);

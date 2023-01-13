@@ -1,6 +1,8 @@
 import axios from "axios";
 import { apiSettings } from "../admin";
 import * as qs from "qs";
+import Kontakt from "../components/Kontakt";
+import { create } from "yup/lib/Reference";
 
 const createLink = (populationArray, apiID) => {
   const query = qs.stringify(
@@ -42,7 +44,12 @@ export async function getHead() {
 
 export async function getKontakt() {
   return axios
-    .get(apiSettings().apiCallUrl + "/kontakt")
+    .get(
+      createLink(
+        ["infos", "infos.text", "infos.icon", "mapLocation", "hintergrund"],
+        "kontakt"
+      )
+    )
     .then((response) => response.data);
 }
 
@@ -112,11 +119,26 @@ export async function getHeadModified() {
           unternehmen.data.attributes[head.data.attributes.rechts[i].text.info];
 
       head.data.attributes.logo = unternehmen.data.attributes.logo;
-      head.data.attributes.logo_textless = unternehmen.data.attributes.logo_textless;
+      head.data.attributes.logo_textless =
+        unternehmen.data.attributes.logo_textless;
 
       head.data.attributes.hintergrund = willkommen.data.attributes.hintergrund;
 
       return head;
+    })
+  );
+}
+
+export async function getKontaktModified() {
+  return axios.all([getKontakt(), getUnternehmen()]).then(
+    axios.spread((kontakt, unternehmen) => {
+      for (let i = 0; i < kontakt.data.attributes.infos.length; i++)
+        kontakt.data.attributes.infos[i].text.info =
+          unternehmen.data.attributes[
+            kontakt.data.attributes.infos[i].text.info
+          ];
+
+      return kontakt;
     })
   );
 }

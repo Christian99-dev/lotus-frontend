@@ -3,7 +3,7 @@ import L from "leaflet";
 import Marker_Icon from "../../media/icons/marker.svg";
 /**https://www.latlong.net/convert-address-to-lat-long.html */
 
-const Maps = () => {
+const Maps = ({location}) => {
   useEffect(() => {
     const size = 64;
     const iconPerson = new L.Icon({
@@ -17,7 +17,7 @@ const Maps = () => {
       iconSize: new L.Point(1 * size, 1 * size),
       className: "marker-icon",
     });
-    const address = [50.143028, 8.15988];
+    const address = location;
     var container = L.DomUtil.get("map");
 
     if (container != null) {

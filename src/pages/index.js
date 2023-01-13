@@ -25,7 +25,7 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      {/* <Navbar fetchData={getHeadModified} /> */}
+      <Navbar fetchData={getHeadModified} />
       {/* <Carousel fetchData={getWilkommen} /> */}
       {/* <Cards fetchData={getLeistungen} /> */}
       {/* <Panel fetchData={getArbeitModified} /> */}

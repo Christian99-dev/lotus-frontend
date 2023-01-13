@@ -22,8 +22,6 @@ export default function Team({ fetchData }) {
       setData(res.data.attributes);
     });
   }, []);
-
-  console.log(data);
   return (
     <div id="team">
       <TeamWrapper

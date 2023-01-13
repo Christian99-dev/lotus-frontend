@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from "react";
 
-const MapsWrapper = () => {
+const MapsWrapper = ({location}) => {
   if (typeof window !== "undefined") {
     const Map = lazy(() => import("./Maps"));
     return (
       <Suspense>
-        <Map />
+        <Map location={location} />
       </Suspense>
     );
   }
