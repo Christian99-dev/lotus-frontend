@@ -61,7 +61,7 @@ export async function getLeistungen() {
 
 export async function getRezensionen() {
   return axios
-    .get(apiSettings().apiCallUrl + "/rezensionen")
+    .get(createLink(["rezensionen", "rezensionen.bild"], "rezensionen"))
     .then((response) => response.data);
 }
 
