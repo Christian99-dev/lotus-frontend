@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../Global/Icon";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
 import { Link } from "gatsby";
-export default function Footer() {
+import Loader from "../Global/Loader";
+import { icon } from "leaflet";
+export default function Footer({ fetchData }) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+    });
+  }, []);
+
   return (
     <FooterWrapper
       spacing={{
@@ -14,40 +23,62 @@ export default function Footer() {
         right: "border",
       }}
     >
-      <div className="col">
-        <div className="head">Social Media</div>
-        <div className="row icons">
-          <Icon name="facebook" height="icon-s" link="https://www.facebook.com" />
-          <Icon name="instagram" height="icon-s" link="https://www.instagram.com" />
-          <Icon name="whatsapp" height="icon-s" link="https://www.whatsapp.com" />
-        </div>
-      </div>
+      {data ? (
+        <>
+          <div className="col">
+            <div className="head">Social Media</div>
+            <div className="row icons">
+              {data.socials.map((icon, key) => {
+                return (
+                  <Icon
+                    name={icon.icon.icon}
+                    height="icon-s"
+                    link={icon.text}
+                    key={key}
+                  />
+                );
+              })}
+            </div>
+          </div>
 
-      <div className="col">
-        <div className="head"> Kontakt</div>
-        <div className="row icon">
-          <Icon name="mail" height="icon-s" />
-          max.mustermann@gmail.de
-        </div>
-        <div className="row icon">
-          <Icon name="phone" height="icon-s" />
-          01237 / 32874
-        </div>
-      </div>
+          <div className="col">
+            <div className="head"> Kontakt</div>
 
-      <div className="col">
-        <div className="head">Adresse</div>
-        <div className="row">Neue Roßstr. 15</div>
-        <div className="row">66128 Saarbrücken</div>
-      </div>
+            {data.kontakt.map((data, key) => {
+              return (
+                <div className="row icon" key={key}>
+                  <Icon name={data.icon.icon} height="icon-s" />
+                  {data.text.info}
+                </div>
+              );
+            })}
+          </div>
 
-      <div className="col">
-        <div className="head">Rechtliches</div>
-        <Link className="row" to="/impressum">
-          Impressum
-        </Link>
-        <Link className="row" to="/agb">AGB</Link>
-      </div>
+          <div className="col">
+            <div className="head">Adresse</div>
+
+            {data.adresse.map((data, key) => {
+              return (
+                <div className="row" key={key}>
+                  {data.info}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="col">
+            <div className="head">Rechtliches</div>
+            <Link className="row" to="/impressum">
+              Impressum
+            </Link>
+            <Link className="row" to="/agb">
+              AGB
+            </Link>
+          </div>
+        </>
+      ) : (
+        <Loader spinner className="loader" />
+      )}
     </FooterWrapper>
   );
 }
@@ -57,6 +88,10 @@ const FooterWrapper = styled(SpaceWrapper)`
   background-color: var(--primary);
   display: flex;
   justify-content: space-between;
+
+  .loader {
+    margin: 0 auto;
+  }
 
   .head {
     font-size: var(--fs-3);
@@ -69,7 +104,7 @@ const FooterWrapper = styled(SpaceWrapper)`
     text-decoration: none;
     color: var(--secondary);
     transition: color 0.1s ease;
-    :hover{
+    :hover {
       color: var(--pink);
     }
   }

@@ -12,6 +12,7 @@ import {
   getArbeit,
   getArbeitModified,
   getFooter,
+  getFooterModified,
   getHead,
   getHeadModified,
   getKontaktModified,
@@ -23,11 +24,6 @@ import {
 } from "../api/axios";
 
 const IndexPage = () => {
-
-  getHeadModified().then((res) => {
-    console.log(res);
-  })
-
   return (
     <Layout>
       {/* <Navbar fetchData={getHeadModified} /> */}
@@ -36,8 +32,8 @@ const IndexPage = () => {
       {/* <Panel fetchData={getArbeitModified} /> */}
       {/* <Team fetchData={getTeam} /> */}
       {/* <Kontakt fetchData={getKontaktModified} /> */}
-      <Testimonial fetchData={getRezensionen} />
-      <Footer fetchData={getFooter} />
+      {/* <Testimonial fetchData={getRezensionen} /> */}
+      <Footer fetchData={getFooterModified} />
     </Layout>
   );
 };

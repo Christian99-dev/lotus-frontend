@@ -91,7 +91,19 @@ export async function getImpressum() {
 
 export async function getFooter() {
   return axios
-    .get(apiSettings().apiCallUrl + "/footer")
+    .get(
+      createLink(
+        [
+          "adresse",
+          "socials",
+          "kontakt",
+          "socials.icon",
+          "kontakt.icon",
+          "kontakt.text",
+        ],
+        "footer"
+      )
+    )
     .then((response) => response.data);
 }
 
@@ -138,6 +150,24 @@ export async function getKontaktModified() {
           ];
 
       return kontakt;
+    })
+  );
+}
+
+export async function getFooterModified() {
+  return axios.all([getFooter(), getUnternehmen()]).then(
+    axios.spread((footer, unternehmen) => {
+      for (let i = 0; i < footer.data.attributes.kontakt.length; i++)
+        footer.data.attributes.kontakt[i].text.info =
+          unternehmen.data.attributes[
+            footer.data.attributes.kontakt[i].text.info
+          ];
+
+      for (let i = 0; i < footer.data.attributes.adresse.length; i++)
+        footer.data.attributes.adresse[i].info =
+          unternehmen.data.attributes[footer.data.attributes.adresse[i].info];
+
+      return footer;
     })
   );
 }
