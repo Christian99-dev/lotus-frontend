@@ -7,12 +7,13 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
+import { getHeadModified } from "../api/axios";
 
 const AgbPage = () => {
   return (
     <Layout>
       <AgbPageWrapper>
-        <Top />
+        <Top fetchData={getHeadModified}/>
         <SpaceWrapper
           spacing={{
             left: "border",

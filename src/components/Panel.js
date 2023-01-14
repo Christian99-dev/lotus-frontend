@@ -5,16 +5,18 @@ import Titel from "./Global/Titel";
 import { Parallax } from "react-parallax";
 import Loader from "./Global/Loader";
 import { device } from "../theme/breakpoints";
-import imgBg from "./../media/images/purple.png";
 import { createImgUrl } from "../utils/utils";
 
 export default function Panel({ fetchData }) {
   const [data, setData] = useState(null);
   const [logo, setLogo] = useState(null);
+  const [background, setBackground] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      imgBg = createImgUrl(res.data.attributes.hintergrund.data.attributes.url);
+      setBackground(
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
+      );
       setLogo(
         createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
       );
@@ -23,7 +25,7 @@ export default function Panel({ fetchData }) {
 
   return (
     <div id="panel">
-      <PannelWrapper bgImage={imgBg} strength={200}>
+      <PannelWrapper bgImage={background} strength={200}>
         <SpaceWrapper className="box">
           {data ? (
             <Titel text={data.ueberschrift} spacing={{ bottom: 50 }} />

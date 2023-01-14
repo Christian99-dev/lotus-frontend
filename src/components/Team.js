@@ -20,6 +20,7 @@ export default function Team({ fetchData }) {
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
+      console.log(res.data.attributes);
     });
   }, []);
   return (

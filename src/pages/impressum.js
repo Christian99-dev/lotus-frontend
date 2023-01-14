@@ -7,12 +7,13 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
+import { getHeadModified } from "../api/axios";
 
 const ImpressumPage = () => {
   return (
     <Layout>
       <ImpressumPageWrapper>
-        <Top />
+        <Top fetchData={getHeadModified} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -82,11 +83,7 @@ const ImpressumPage = () => {
               top: "white-component-inner-half",
             }}
           >
-            <Button
-              className="button"
-              text="Zurück zur Homepage"
-              link="../"
-            />
+            <Button className="button" text="Zurück zur Homepage" link="../" />
           </SpaceWrapper>
         </SpaceWrapper>
         <Footer />

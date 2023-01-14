@@ -23,16 +23,21 @@ import {
 } from "../api/axios";
 
 const IndexPage = () => {
+
+  getHeadModified().then((res) => {
+    console.log(res);
+  })
+
   return (
     <Layout>
       <Navbar fetchData={getHeadModified} />
-      {/* <Carousel fetchData={getWilkommen} /> */}
-      {/* <Cards fetchData={getLeistungen} /> */}
-      {/* <Panel fetchData={getArbeitModified} /> */}
-      {/* <Team fetchData={getTeam} /> */}
-      {/* <Kontakt fetchData={getKontaktModified} /> */}
-      {/* <Testimonial fetchData={getRezensionen} /> */}
-      {/* <Footer fetchData={getFooter} /> */}
+      <Carousel fetchData={getWilkommen} />
+      <Cards fetchData={getLeistungen} />
+      <Panel fetchData={getArbeitModified} />
+      <Team fetchData={getTeam} />
+      <Kontakt fetchData={getKontaktModified} />
+      <Testimonial fetchData={getRezensionen} />
+      <Footer fetchData={getFooter} />
     </Layout>
   );
 };

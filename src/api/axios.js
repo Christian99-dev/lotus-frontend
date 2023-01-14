@@ -102,7 +102,6 @@ export async function getArbeitModified() {
     axios.spread((arbeit, unternehmen) => {
       arbeit.data.attributes.logo_textless =
         unternehmen.data.attributes.logo_textless;
-
       return arbeit;
     })
   );
