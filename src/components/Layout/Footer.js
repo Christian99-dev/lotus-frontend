@@ -5,14 +5,13 @@ import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
 import { Link } from "gatsby";
 import Loader from "../Global/Loader";
-import { icon } from "leaflet";
 export default function Footer({ fetchData }) {
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
-  }, []);
+  }, [fetchData]);
 
   return (
     <FooterWrapper

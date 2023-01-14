@@ -12,14 +12,12 @@ import Loader from "./Global/Loader";
 import { createImgUrl } from "../utils/utils";
 
 export default function Testimonial({ fetchData }) {
-  const comments = [<Comment />, <Comment />, <Comment />];
-
   const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
-  }, []);
+  }, [fetchData]);
 
   const windowDim = useWindowDimensions().width;
   return (

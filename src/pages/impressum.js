@@ -7,7 +7,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
-import { getFooterModified, getHeadModified, getImpressum } from "../api/axios";
+import { getFooterModified, getHeadModified, getImpressum } from "../_api/axios";
 import Loader from "../components/Global/Loader";
 
 const ImpressumPage = () => {

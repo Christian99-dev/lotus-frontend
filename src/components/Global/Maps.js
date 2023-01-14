@@ -40,7 +40,7 @@ const Maps = ({location}) => {
     L.Marker.prototype.options.icon = iconPerson;
     var marker = L.marker(address).addTo(map);
     marker.bindPopup("Taunusstein").openPopup();
-  }, []);
+  }, [location]);
   return <div id="map" style={{ height: "100%", borderRadius: "10px", zIndex:"2" }} />;
 };
 

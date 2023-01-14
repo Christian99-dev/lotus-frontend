@@ -17,7 +17,7 @@ import {
   getRezensionen,
   getTeam,
   getWilkommen,
-} from "../api/axios";
+} from "../_api/axios";
 
 const IndexPage = () => {
   return (

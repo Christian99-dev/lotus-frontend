@@ -1,8 +1,6 @@
 import axios from "axios";
 import { apiSettings } from "../admin";
 import * as qs from "qs";
-import Kontakt from "../components/Kontakt";
-import { create } from "yup/lib/Reference";
 
 const createLink = (populationArray, apiID) => {
   const query = qs.stringify(

@@ -15,7 +15,7 @@ const Cards = ({ fetchData }) => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
-  }, []);
+  }, [fetchData]);
 
   const createCardsJSXArray = (dataArray) => {
     return dataArray.map(({ text, ueberschrift, icon }, key) => (

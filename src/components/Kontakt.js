@@ -21,7 +21,7 @@ export default function Kontakt({ fetchData }) {
         createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
       );
     });
-  }, []);
+  }, [fetchData]);
 
   return (
     <div id="contact">

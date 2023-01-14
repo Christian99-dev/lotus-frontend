@@ -3,7 +3,6 @@ import { SpinningCircleLoader, DotsLoader } from "react-loaders-kit";
 import styled from "styled-components";
 import { device } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
-import { offset } from "../../utils/utils";
 
 const Loader = ({
   title,

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import img1 from "./../media/images/person1.png";
-import img2 from "./../media/images/person2.png";
 import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import TextWithBackground from "../components/Global/TextWithBackground";
@@ -21,7 +19,7 @@ export default function Team({ fetchData }) {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
-  }, []);
+  }, [fetchData]);
   return (
     <div id="team">
       <TeamWrapper

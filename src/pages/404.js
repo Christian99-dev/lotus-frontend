@@ -11,7 +11,7 @@ import {
   getFooterModified,
   getHeadModified,
   getPageNotFound,
-} from "../api/axios";
+} from "../_api/axios";
 import Loader from "../components/Global/Loader";
 
 const NotFoundPage = () => {
@@ -64,9 +64,6 @@ const NotFoundPage = () => {
 export default NotFoundPage;
 
 const NotFoundPageWrapper = styled.div`
-  .text {
-    font-size: var(--fs-3);
-  }
 
   .button-container {
     display: flex;
