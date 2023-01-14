@@ -149,10 +149,14 @@ const Stars = ({ rating, spacing }) => {
       out.push(<Icon name="starFull" color="yellow" height="stars" key={i} />);
 
     if (hasHalf)
-      out.push(<Icon name="starHalf" color="yellow" height="stars" key={10 + 5} />);
+      out.push(
+        <Icon name="starHalf" color="yellow" height="stars" key={10 + 5} />
+      );
 
     for (let i = 0; i < nummOfEmpty; i++)
-      out.push(<Icon name="starEmpty" color="yellow" height="stars" key={i + 5} />);
+      out.push(
+        <Icon name="starEmpty" color="yellow" height="stars" key={i + 5} />
+      );
 
     return out;
   };
