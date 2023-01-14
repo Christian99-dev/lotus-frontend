@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../components/Layout/Footer";
 import { Top } from "../components/Layout/NavbarDesktop";
 import Layout from "../theme/layout";
@@ -7,12 +7,25 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
+import {
+  getFooterModified,
+  getHeadModified,
+  getPageNotFound,
+} from "../api/axios";
+import Loader from "../components/Global/Loader";
 
 const NotFoundPage = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    getPageNotFound().then((res) => {
+      setData(res.data.attributes);
+    });
+  }, []);
+
   return (
     <Layout>
       <NotFoundPageWrapper>
-        <Top />
+        <Top fetchData={getHeadModified} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -21,12 +34,16 @@ const NotFoundPage = () => {
             bottom: "white-component-inner-half",
           }}
         >
-          <Title
-            className="title"
-            text="Seite existiert nicht."
-            color="purple"
-            spacing={{ bottom: "white-component-inner-half" }}
-          />
+          {data ? (
+            <Title
+              className="title"
+              text={data.text}
+              color="purple"
+              spacing={{ bottom: "white-component-inner-half" }}
+            />
+          ) : (
+            <Loader title color="primary" />
+          )}
           <SpaceWrapper
             className="button-container"
             spacing={{
@@ -37,7 +54,7 @@ const NotFoundPage = () => {
           </SpaceWrapper>
         </SpaceWrapper>
         <div className="footer-container">
-          <Footer />
+          <Footer fetchData={getFooterModified} />
         </div>
       </NotFoundPageWrapper>
     </Layout>

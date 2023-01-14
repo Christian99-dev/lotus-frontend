@@ -107,6 +107,10 @@ export async function getFooter() {
     .then((response) => response.data);
 }
 
+export async function getPageNotFound() {
+  return axios.get(createLink([],"page-not-found")).then((res) => res.data)
+}
+
 /** Modified */
 
 export async function getArbeitModified() {

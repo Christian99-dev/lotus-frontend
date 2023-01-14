@@ -9,17 +9,13 @@ import Layout from "../theme/layout";
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
 import {
-  getArbeit,
   getArbeitModified,
-  getFooter,
   getFooterModified,
-  getHead,
   getHeadModified,
   getKontaktModified,
   getLeistungen,
   getRezensionen,
   getTeam,
-  getUnternehmen,
   getWilkommen,
 } from "../api/axios";
 

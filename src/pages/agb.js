@@ -44,7 +44,7 @@ const AgbPage = () => {
             />
           )}
 
-          <div className="text">{data ? data.text : <Loader dots />}</div>
+          <div className="main-text">{data ? data.text : <Loader dots />}</div>
           <SpaceWrapper
             className="button-container"
             spacing={{
@@ -64,7 +64,7 @@ const AgbPage = () => {
 export default AgbPage;
 
 const AgbPageWrapper = styled.div`
-  .text {
+  .main-text {
     font-size: var(--fs-3);
   }
 

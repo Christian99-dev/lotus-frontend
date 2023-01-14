@@ -156,7 +156,9 @@ const Bottom = ({ fetchData }) => {
   const [background, setBackground] = useState(defaultPurple);
   useEffect(() => {
     fetchData().then((res) => {
-      setBackground(createImgUrl(res.data.attributes.hintergrund.data.attributes.url));
+      setBackground(
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
+      );
       setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
     });
   }, [fetchData]);

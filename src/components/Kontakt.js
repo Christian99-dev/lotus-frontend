@@ -17,7 +17,6 @@ export default function Kontakt({ fetchData }) {
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      console.log(res.data.attributes);
       setBackground(
         createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
       );
