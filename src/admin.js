@@ -10,7 +10,7 @@ export function apiSettings() {
     return {
         // apiCallUrl:"https://lotus-backend-production.up.railway.app/api",
         // apiUrl: "https://lotus-backend-production.up.railway.app"
-        apiCallUrl:"http://localhost:1337/api",
-        apiUrl: "http://localhost:1337"
+        apiCallUrl:"https://lotus-backend-production-0130.up.railway.app/api",
+        apiUrl: "https://lotus-backend-production-0130.up.railway.app"
     }
 }
