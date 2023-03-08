@@ -17,7 +17,7 @@ const createLink = (populationArray, apiID) => {
 
 export async function getWilkommen() {
   return axios
-    .get(createLink(["text", "subtext", "hintergrund"], "welcome"))
+    .get(createLink(["text", "subtext", "hintergrund"], "wilkommen"))
     .then((response) => response.data);
 }
 
@@ -32,7 +32,7 @@ export async function getHead() {
     .get(
       createLink(
         ["rechts", "rechts.icon", "rechts.text", "links", "links.info"],
-        "head"
+        "header"
       )
     )
     .then((res) => {
