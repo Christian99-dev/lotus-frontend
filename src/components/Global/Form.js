@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Form = ({ data }) => {
   const onSubmit = (values, actions) => {
-    toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
+    
     actions.resetForm();
     send({
       name: values.name,
@@ -62,15 +62,13 @@ const Form = ({ data }) => {
       await axios.post(
         `${process.env.GATSBY_EMAIL_SERVER_URL}/send`,
         data
-      ).then(res => console.log(res));
-      console.log("Request successful!");
+      ).then(_ => {
+        toast.success("Ihre Nachricht wurde erfolgreich abgeschickt!", { theme: "colored" });
+      });
     } catch (error) {
-      if (error.response) {
-        console.log(error.reponse);
-      } else {
-        console.log(error.message);
-      }
+      toast.error("Server Fehler... versuchen Sie es später nochmal.", { theme: "colored" });
     }
+    console.log("test");
   }
 
   return (
