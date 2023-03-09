@@ -7,29 +7,44 @@ import { ToastContainer, toast } from "react-toastify";
 import styled from "styled-components";
 import emailjs from "emailjs-com";
 import { emailJSSettings } from "../../admin";
+import axios from "axios";
 
 const Form = ({ data }) => {
   const onSubmit = (values, actions) => {
     toast.success("Deine Nachricht wurde abgeschickt!", { theme: "colored" });
     actions.resetForm();
-    emailjs.send(
-      emailJSSettings().serviceID,
-      emailJSSettings().templateID,
-      {
-        name: values.name,
-        lastname: values.lastname,
-        message: values.message,
-        email: values.email,
-        number: values.number,
-        street: values.street,
-        location: values.location,
-      },
-      emailJSSettings().publicKey
-    ).then(result => {
-      // console.log(result.text);
-    }, (error) => {
-      // console.log(error.text);
-    })
+    send({
+      name: values.name,
+      lastname: values.lastname,
+      message: values.message,
+      email: values.email,
+      number: values.number,
+      street: values.street,
+      location: values.location
+    });
+    emailjs
+      .send(
+        emailJSSettings().serviceID,
+        emailJSSettings().templateID,
+        {
+          name: values.name,
+          lastname: values.lastname,
+          message: values.message,
+          email: values.email,
+          number: values.number,
+          street: values.street,
+          location: values.location,
+        },
+        emailJSSettings().publicKey
+      )
+      .then(
+        (result) => {
+          // console.log(result.text);
+        },
+        (error) => {
+          // console.log(error.text);
+        }
+      );
   };
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -66,7 +81,23 @@ const Form = ({ data }) => {
     if (errors.street) toast.error(errors.street, { theme: "colored" });
     if (errors.location) toast.error(errors.location, { theme: "colored" });
   };
-  
+
+  async function send(data) {
+    try {
+      await axios.post(
+        'http://localhost:5000/send',
+        data
+      ).then(res => console.log(res));
+      console.log("Request successful!");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.reponse.status);
+      } else {
+        console.log(error.message);
+      }
+    }
+  }
+
   return (
     <>
       <StyledToastContainer />
