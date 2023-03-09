@@ -5,8 +5,6 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import styled from "styled-components";
-import emailjs from "emailjs-com";
-import { emailJSSettings } from "../../admin";
 import axios from "axios";
 
 const Form = ({ data }) => {
@@ -22,29 +20,6 @@ const Form = ({ data }) => {
       street: values.street,
       location: values.location
     });
-    emailjs
-      .send(
-        emailJSSettings().serviceID,
-        emailJSSettings().templateID,
-        {
-          name: values.name,
-          lastname: values.lastname,
-          message: values.message,
-          email: values.email,
-          number: values.number,
-          street: values.street,
-          location: values.location,
-        },
-        emailJSSettings().publicKey
-      )
-      .then(
-        (result) => {
-          // console.log(result.text);
-        },
-        (error) => {
-          // console.log(error.text);
-        }
-      );
   };
 
   const { values, handleChange, handleSubmit, errors } = useFormik({
@@ -91,7 +66,7 @@ const Form = ({ data }) => {
       console.log("Request successful!");
     } catch (error) {
       if (error.response) {
-        console.log(error.reponse.status);
+        console.log(error.reponse);
       } else {
         console.log(error.message);
       }
