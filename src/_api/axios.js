@@ -1,5 +1,4 @@
 import axios from "axios";
-import { apiSettings } from "../admin";
 import * as qs from "qs";
 
 const createLink = (populationArray, apiID) => {
@@ -12,7 +11,7 @@ const createLink = (populationArray, apiID) => {
     }
   );
 
-  return apiSettings().apiCallUrl + "/" + apiID + "?" + query;
+  return process.env.GATSBY_API_SERVER_URL + "/api/" + apiID + "?" + query;
 };
 
 export async function getWilkommen() {
@@ -77,13 +76,13 @@ export async function getUnternehmen() {
 
 export async function getAGB() {
   return axios
-    .get(apiSettings().apiCallUrl + "/agb")
+    .get(process.env.GATSBY_API_SERVER_URL + "/api/agb")
     .then((response) => response.data);
 }
 
 export async function getImpressum() {
   return axios
-    .get(apiSettings().apiCallUrl + "/impressum")
+    .get(process.env.GATSBY_API_SERVER_URL + "/api/impressum")
     .then((response) => response.data);
 }
 

@@ -60,7 +60,7 @@ const Form = ({ data }) => {
   async function send(data) {
     try {
       await axios.post(
-        'http://localhost:5000/send',
+        `${process.env.GATSBY_EMAIL_SERVER_URL}/send`,
         data
       ).then(res => console.log(res));
       console.log("Request successful!");
