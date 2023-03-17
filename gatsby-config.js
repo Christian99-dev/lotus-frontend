@@ -1,12 +1,14 @@
 module.exports = {
   flags: {
-    DEV_SSR: false
+    DEV_SSR: false,
   },
   siteMetadata: {
     title: `Lotus Entwaesserungstechnik`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://www.yourdomain.tld`,
   },
-  plugins: ["gatsby-plugin-styled-components" , "gatsby-plugin-sass",
+  plugins: [
+    "gatsby-plugin-styled-components",
+    "gatsby-plugin-sass",
     {
       resolve: `gatsby-omni-font-loader`,
       options: {
@@ -18,7 +20,7 @@ module.exports = {
             file: `https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap`,
           },
         ],
-      }, 
+      },
     },
   ],
 };

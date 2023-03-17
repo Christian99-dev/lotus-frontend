@@ -15,7 +15,7 @@ export default function Layout({ children }) {
             integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
             crossorigin=""
           />
-          <script src={withPrefix("/script.js")} type="text/javascript" />
+          {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
           {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
           <meta
             name="viewport"
@@ -25,6 +25,8 @@ export default function Layout({ children }) {
                       user-scalable=no"
             // target-densitydpi=device-dpi
           />
+          {/* <meta name="icon" href="../assets/logo.png" /> */}
+          
         </Helmet>
         <GlobalStyle />
         {children}
