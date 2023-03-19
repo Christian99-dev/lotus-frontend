@@ -8,6 +8,7 @@ import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MySwiper from "../components/Global/MySwiper";
 import Loader from "./Global/Loader";
+import { parser } from "../utils/utils";
 
 const Cards = ({ fetchData }) => {
   const [data, setData] = useState(null);
@@ -101,7 +102,7 @@ function Card({ title, text, icon }) {
     <CardWrapper>
       <div className="title">{title}</div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
-        {text}
+        {parser(text)}
       </SpaceWrapper>
       <Icon name={icon} height="icon-l" color="purple" className="icon" />
     </CardWrapper>

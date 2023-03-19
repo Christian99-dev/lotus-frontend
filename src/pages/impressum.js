@@ -9,6 +9,7 @@ import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
 import { getFooterModified, getHeadModified, getImpressum } from "../_api/axios";
 import Loader from "../components/Global/Loader";
+import { parser } from "../utils/utils";
 
 const ImpressumPage = () => {
   const [data, setData] = useState(null);
@@ -44,7 +45,7 @@ const ImpressumPage = () => {
             />
           )}
 
-          <div className="main-text">{data ? data.text : <Loader dots />}</div>
+          <div className="main-text">{data ? parser(data.text) : <Loader dots />}</div>
           <SpaceWrapper
             className="button-container"
             spacing={{

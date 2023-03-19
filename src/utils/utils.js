@@ -1,3 +1,5 @@
+import ReactHtmlParser from "react-html-parser"
+
 export const scaleUp = (percent, from) => from * percent - from;
 export const xPercentFromAtoB = (a, b) => Math.abs((b / a - 1) * 100);
 export const addApercentToB = (a, b, minus) => {
@@ -17,3 +19,5 @@ export const offset = (el) => {
 export const createImgUrl = (imgUrl) => {
   return process.env.GATSBY_API_SERVER_URL + imgUrl;
 }
+
+export const parser = (input_str) => ReactHtmlParser(input_str);

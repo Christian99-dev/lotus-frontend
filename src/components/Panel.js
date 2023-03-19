@@ -5,7 +5,8 @@ import Titel from "./Global/Titel";
 import { Parallax } from "react-parallax";
 import Loader from "./Global/Loader";
 import { device } from "../theme/breakpoints";
-import { createImgUrl } from "../utils/utils";
+import { createImgUrl, parser } from "../utils/utils";
+
 
 export default function Panel({ fetchData }) {
   const [data, setData] = useState(null);
@@ -35,7 +36,7 @@ export default function Panel({ fetchData }) {
           {data ? (
             <div className="text" id="panel">
               {logo && <img className="logo" src={logo} alt="logo" />}
-              {data.text}
+              {parser(data.text)}
             </div>
           ) : (
             <Loader height="fs-3" color="secondary" className="center-loader" />

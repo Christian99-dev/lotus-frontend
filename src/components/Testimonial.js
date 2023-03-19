@@ -9,7 +9,7 @@ import TextWithBackground from "./Global/TextWithBackground";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { size } from "../theme/breakpoints";
 import Loader from "./Global/Loader";
-import { createImgUrl } from "../utils/utils";
+import { createImgUrl, parser } from "../utils/utils";
 
 export default function Testimonial({ fetchData }) {
   const [data, setData] = useState(null);
@@ -95,7 +95,7 @@ const Comment = ({ name, rating, img, text }) => (
       spacing={{ bottom: "testimonial-text-bottom" }}
       className="text"
     >
-      {text}
+      {parser(text)}
     </SpaceWrapper>
   </CommentWrapper>
 );

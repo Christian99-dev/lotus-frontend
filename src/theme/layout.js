@@ -1,8 +1,8 @@
 import React from "react";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
-import { withPrefix } from "gatsby";
 import { GlobalStateProvider } from "../utils/globalState";
+// import { withPrefix } from "gatsby";
 
 export default function Layout({ children }) {
   return (
@@ -15,18 +15,19 @@ export default function Layout({ children }) {
             integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
             crossorigin=""
           />
-          {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
-          {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
           <meta
             name="viewport"
             content="height=device-height, 
-                      width=device-width, initial-scale=1.0, 
-                      minimum-scale=1.0, maximum-scale=1.0, 
-                      user-scalable=no"
+            width=device-width, initial-scale=1.0, 
+            minimum-scale=1.0, maximum-scale=1.0, 
+            user-scalable=no"
             // target-densitydpi=device-dpi
           />
+
+          {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
+          {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
           {/* <meta name="icon" href="../assets/logo.png" /> */}
-          
+
         </Helmet>
         <GlobalStyle />
         {children}
