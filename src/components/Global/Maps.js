@@ -3,7 +3,7 @@ import L from "leaflet";
 import Marker_Icon from "../../media/icons/marker.svg";
 /**https://www.latlong.net/convert-address-to-lat-long.html */
 
-const Maps = ({location}) => {
+const Maps = ({location, speechBubbleText}) => {
   useEffect(() => {
     const size = 64;
     const iconPerson = new L.Icon({
@@ -39,7 +39,7 @@ const Maps = ({location}) => {
     ).addTo(map);
     L.Marker.prototype.options.icon = iconPerson;
     var marker = L.marker(address).addTo(map);
-    marker.bindPopup("Taunusstein").openPopup();
+    marker.bindPopup(speechBubbleText).openPopup();
   }, [location]);
   return <div id="map" style={{ height: "100%", borderRadius: "10px", zIndex:"2" }} />;
 };

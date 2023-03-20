@@ -19,6 +19,7 @@ export default function Kontakt({ fetchData }) {
 
   useEffect(() => {
     fetchData().then((res) => {
+      console.log(data);
       setData(res.data.attributes);
       setBackground([
         createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
@@ -69,6 +70,7 @@ export default function Kontakt({ fetchData }) {
               <div className="right">
                 <MapsWrapper
                   location={[data.mapLocation.lat, data.mapLocation.lng]}
+                  speechBubbleText={data.mapSpeechbubbleText.info}
                 />
               </div>
             </SpaceWrapper>

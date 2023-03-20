@@ -16,14 +16,21 @@ const createLink = (populationArray, apiID) => {
 
 export async function getWilkommen() {
   return axios
-    .get(createLink(["text", "subtext", "hintergrund", "hintergrundMobile"], "wilkommen"))
+    .get(
+      createLink(
+        ["text", "subtext", "hintergrund", "hintergrundMobile"],
+        "wilkommen"
+      )
+    )
     .then((response) => response.data);
 }
 
 export async function getArbeit() {
-  return axios.get(createLink(["hintergrund", "hintergrundMobile"], "arbeit")).then((res) => {
-    return res.data;
-  });
+  return axios
+    .get(createLink(["hintergrund", "hintergrundMobile"], "arbeit"))
+    .then((res) => {
+      return res.data;
+    });
 }
 
 export async function getHead() {
@@ -43,7 +50,15 @@ export async function getKontakt() {
   return axios
     .get(
       createLink(
-        ["infos", "infos.text", "infos.icon", "mapLocation", "hintergrund", "hintergrundMobile"],
+        [
+          "infos",
+          "infos.text",
+          "infos.icon",
+          "mapLocation",
+          "hintergrund",
+          "hintergrundMobile",
+          "mapSpeechbubbleText",
+        ],
         "kontakt"
       )
     )
@@ -64,7 +79,12 @@ export async function getRezensionen() {
 
 export async function getTeam() {
   return axios
-    .get(createLink(["mitarbeiter", "mitarbeiter.bild", "mitarbeiter.bildMobile"], "team"))
+    .get(
+      createLink(
+        ["mitarbeiter", "mitarbeiter.bild", "mitarbeiter.bildMobile"],
+        "team"
+      )
+    )
     .then((response) => response.data);
 }
 
@@ -105,7 +125,7 @@ export async function getFooter() {
 }
 
 export async function getPageNotFound() {
-  return axios.get(createLink([],"page-not-found")).then((res) => res.data)
+  return axios.get(createLink([], "page-not-found")).then((res) => res.data);
 }
 
 /** Modified */
@@ -149,6 +169,11 @@ export async function getKontaktModified() {
           unternehmen.data.attributes[
             kontakt.data.attributes.infos[i].text.info
           ];
+
+      kontakt.data.attributes.mapSpeechbubbleText.info =
+        unternehmen.data.attributes[
+          kontakt.data.attributes.mapSpeechbubbleText.info
+        ];
 
       return kontakt;
     })
