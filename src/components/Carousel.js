@@ -4,8 +4,10 @@ import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
 import defaultPurple from "../media/images/purple.png";
-import { device } from "../theme/breakpoints";
+import { device, size } from "../theme/breakpoints";
 import { createImgUrl } from "../utils/utils";
+import useWindowDimensions from "../utils/useWindowDimensions";
+
 
 export default function Carousel({ fetchData }) {
   const [data, setData] = useState(null);
@@ -13,14 +15,15 @@ export default function Carousel({ fetchData }) {
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      setBackground(
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
-      );
+      setBackground([
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
+        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
+      ]);
     });
   }, [fetchData]);
 
   return (
-    <CarouselWrapper id="carousel" background={background}>
+    <CarouselWrapper id="carousel" background={useWindowDimensions().width > size.tablet ? background[0] : background[1]}>
       <div className="filter">
         <TextWithBackground
           className="text1"

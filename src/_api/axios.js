@@ -16,12 +16,12 @@ const createLink = (populationArray, apiID) => {
 
 export async function getWilkommen() {
   return axios
-    .get(createLink(["text", "subtext", "hintergrund"], "wilkommen"))
+    .get(createLink(["text", "subtext", "hintergrund", "hintergrundMobile"], "wilkommen"))
     .then((response) => response.data);
 }
 
 export async function getArbeit() {
-  return axios.get(createLink(["hintergrund"], "arbeit")).then((res) => {
+  return axios.get(createLink(["hintergrund", "hintergrundMobile"], "arbeit")).then((res) => {
     return res.data;
   });
 }
@@ -43,7 +43,7 @@ export async function getKontakt() {
   return axios
     .get(
       createLink(
-        ["infos", "infos.text", "infos.icon", "mapLocation", "hintergrund"],
+        ["infos", "infos.text", "infos.icon", "mapLocation", "hintergrund", "hintergrundMobile"],
         "kontakt"
       )
     )
@@ -64,7 +64,7 @@ export async function getRezensionen() {
 
 export async function getTeam() {
   return axios
-    .get(createLink(["mitarbeiter", "mitarbeiter.bild"], "team"))
+    .get(createLink(["mitarbeiter", "mitarbeiter.bild", "mitarbeiter.bildMobile"], "team"))
     .then((response) => response.data);
 }
 

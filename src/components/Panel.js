@@ -4,20 +4,22 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
 import { Parallax } from "react-parallax";
 import Loader from "./Global/Loader";
-import { device } from "../theme/breakpoints";
+import { device, size } from "../theme/breakpoints";
 import { createImgUrl, parser } from "../utils/utils";
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 
 export default function Panel({ fetchData }) {
   const [data, setData] = useState(null);
   const [logo, setLogo] = useState(null);
-  const [background, setBackground] = useState(null);
+  const [background, setBackground] = useState([null]);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      setBackground(
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
-      );
+      setBackground([
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
+        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url)
+      ]);
       setLogo(
         createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
       );
@@ -26,7 +28,7 @@ export default function Panel({ fetchData }) {
 
   return (
     <div id="panel">
-      <PannelWrapper bgImage={background} strength={200}>
+      <PannelWrapper bgImage={useWindowDimensions().width > size.tablet ? background[0] : background[1]} strength={200}>
         <SpaceWrapper className="box">
           {data ? (
             <Titel text={data.ueberschrift} spacing={{ bottom: 50 }} />

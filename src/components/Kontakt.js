@@ -5,27 +5,31 @@ import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
 import { Parallax } from "react-parallax";
 import MapsWrapper from "../components/Global/MapsWrapper";
-import { device } from "../theme/breakpoints";
+import { device, size } from "../theme/breakpoints";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "./Global/Form";
 import { createImgUrl } from "../utils/utils";
 import Loader from "./Global/Loader";
+import useWindowDimensions from "../utils/useWindowDimensions";
+
 
 export default function Kontakt({ fetchData }) {
   const [data, setData] = useState(null);
-  const [background, setBackground] = useState(null);
+  const [background, setBackground] = useState([]);
+
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      setBackground(
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
-      );
+      setBackground([
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
+        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
+      ]);
     });
   }, [fetchData]);
 
   return (
     <div id="contact">
-      <KontaktWrapper bgImage={background} strength={500}>
+      <KontaktWrapper bgImage={useWindowDimensions().width > size.tablet ? background[0] : background[1]} strength={500}>
         {/* id anchor */}
         <div id="contact" />
         <div className="filter">

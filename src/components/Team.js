@@ -65,7 +65,7 @@ export default function Team({ fetchData }) {
             array={data.mitarbeiter.map((member, key) => {
               return <PersonMobile
                 key={key}
-                img={createImgUrl(member.bild.data.attributes.url)}
+                img={createImgUrl(member.bildMobile.data.attributes.url)}
                 text={member.beschreibung}
                 name={member.vorname + " " + member.nachname}
                 jobTitle={member.berufsbezeichnung}
