@@ -129,6 +129,19 @@ export async function getPageNotFound() {
 }
 
 /** Modified */
+export async function getWilkommenModified() {
+  return axios.all([getWilkommen(), getUnternehmen()]).then(
+    axios.spread((willkommen, unternehmen) => {
+      willkommen.data.attributes.text.info =
+        unternehmen.data.attributes[willkommen.data.attributes.text.info];
+
+      willkommen.data.attributes.subtext.info =
+        unternehmen.data.attributes[willkommen.data.attributes.subtext.info];
+
+      return willkommen;
+    })
+  );
+}
 
 export async function getArbeitModified() {
   return axios.all([getArbeit(), getUnternehmen()]).then(

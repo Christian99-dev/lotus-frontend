@@ -8,7 +8,6 @@ import { device, size } from "../theme/breakpoints";
 import { createImgUrl } from "../utils/utils";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
-
 export default function Carousel({ fetchData }) {
   const [data, setData] = useState(null);
   const [background, setBackground] = useState(defaultPurple);
@@ -27,7 +26,7 @@ export default function Carousel({ fetchData }) {
       <div className="filter">
         <TextWithBackground
           className="text1"
-          text={data ? data.text : ""}
+          text={data ? data.text.info : ""}
           fontSize="1"
           color="purple"
           spacing={{
@@ -41,7 +40,7 @@ export default function Carousel({ fetchData }) {
 
         <TextWithBackground
           className="text2"
-          text={data ? data.subtext : ""}
+          text={data ? data.subtext.info : ""}
           fontSize="2"
           color="purple"
           spacing={{ bottom: "carousel-inner-3" }}

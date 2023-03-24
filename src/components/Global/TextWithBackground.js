@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { validGermanPhoneNumber } from "../../utils/regex";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
 export default function TextWithBackground({
@@ -12,8 +13,18 @@ export default function TextWithBackground({
 }) {
   return (
     <SpaceWrapper spacing={spacing} {...props}>
-      <Wrapper className={loading ? "loading" : ""} theme={color} fontSize={`var(--fs-${fontSize})`}>
-        {loading ? "loading...": text}
+      <Wrapper
+        className={loading ? "loading" : ""}
+        theme={color}
+        fontSize={`var(--fs-${fontSize})`}
+      >
+        {loading ? (
+          "loading..."
+        ) : !validGermanPhoneNumber.test(text) ? (
+          text
+        ) : (
+          <a href={`tel:${text}`}>{text}</a>
+        )}
       </Wrapper>
     </SpaceWrapper>
   );
@@ -31,6 +42,12 @@ const Wrapper = styled.div`
   color: ${(props) =>
     props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
 
+  a {
+    color: ${(props) =>
+      props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
+    text-decoration: none;
+  }
+
   transition: all 0.2s;
   :hover {
     transition: all 0.2s;
@@ -40,8 +57,8 @@ const Wrapper = styled.div`
       props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
 
-  &.loading{
+  &.loading {
     color: ${(props) =>
-    props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
+      props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
 `;
