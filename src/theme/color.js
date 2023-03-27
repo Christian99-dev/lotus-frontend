@@ -14,7 +14,7 @@ const Color = css`
         --pink-filter: invert(94%) sepia(32%) saturate(2427%) hue-rotate(262deg) brightness(105%) contrast(117%);;
         --yellow: #FFC552;
         --yellow-filter: invert(94%) sepia(39%) saturate(4595%) hue-rotate(314deg) brightness(100%) contrast(101%);
-        --background-filter-dark: rgba(76, 68, 82, 0.5);
+        --background-filter-dark: rgba(76, 68, 82, 0.2);
         --background-filter-primary: rgba(140, 67, 207, 0.8);
     }
 `;
