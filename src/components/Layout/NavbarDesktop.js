@@ -149,7 +149,7 @@ const Bar = ({fetchData}) => {
 const BarWrapper = styled.div`
   position: sticky;
   top: -1px;
-  z-index: 99;
+  z-index: 999;
   .navbuttons {
     background-color: var(--secondary);
     /* backdrop-filter: blur(5px); */
