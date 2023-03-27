@@ -9,14 +9,20 @@ export default function TextWithBackground({
   fontSize,
   spacing,
   loading,
+  transparent,
   ...props
 }) {
+  let className = "";
+  if (loading) className += " loading";
+  if (transparent) className += " transparent";
+
   return (
     <SpaceWrapper spacing={spacing} {...props}>
       <Wrapper
-        className={loading ? "loading" : ""}
+        className={className}
         theme={color}
         fontSize={`var(--fs-${fontSize})`}
+        transparent={transparent}
       >
         {loading ? (
           "loading..."
@@ -39,6 +45,7 @@ const Wrapper = styled.div`
   font-weight: var(--semibold);
   background-color: ${(props) =>
     props.theme === "purple" ? "var(--primary)" : "var(--secondary)"};
+
   color: ${(props) =>
     props.theme === "purple" ? "var(--secondary)" : "var(--primary)"};
 
@@ -49,10 +56,12 @@ const Wrapper = styled.div`
   }
 
   transition: all 0.2s;
-  :hover, a:hover {
+  :hover,
+  a:hover {
     transition: all 0.2s;
     background-color: ${(props) =>
       props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
+
     color: ${(props) =>
       props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
@@ -60,5 +69,18 @@ const Wrapper = styled.div`
   &.loading {
     color: ${(props) =>
       props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
+  }
+
+  &.transparent {
+    background-color: ${(props) =>
+      props.theme === "purple" ? "var(--primary-dim)" : "var(--secondary-dim)"};
+
+    :hover,
+    a:hover {
+      background-color: ${(props) =>
+        props.theme !== "purple"
+          ? "var(--primary-dim)"
+          : "var(--secondary-dim)"};
+    }
   }
 `;

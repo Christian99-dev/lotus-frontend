@@ -9,6 +9,7 @@ const Color = css`
         --secondary: #FFE9FF;
         --secondary-filter: invert(100%) sepia(18%) saturate(7496%) hue-rotate(188deg) brightness(106%) contrast(106%);
         --secondary-transparent: rgba(255,244,255,0.7);
+        --secondary-dim: rgba(255,244,255,0.4);
         --pink: #FFB3FF;
         --pink-filter: invert(94%) sepia(32%) saturate(2427%) hue-rotate(262deg) brightness(105%) contrast(117%);;
         --yellow: #FFC552;

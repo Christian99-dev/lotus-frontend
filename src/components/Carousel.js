@@ -36,6 +36,7 @@ export default function Carousel({ fetchData }) {
             right: "border",
           }}
           loading={!data}
+          transparent
         />
 
         <TextWithBackground
@@ -45,6 +46,7 @@ export default function Carousel({ fetchData }) {
           color="purple"
           spacing={{ bottom: "carousel-inner-3" }}
           loading={!data}
+          transparent
         />
 
         <SpaceWrapper
