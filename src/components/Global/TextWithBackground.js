@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   }
 
   transition: all 0.2s;
-  :hover {
+  :hover, a:hover {
     transition: all 0.2s;
     background-color: ${(props) =>
       props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};

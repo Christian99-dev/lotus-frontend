@@ -16,7 +16,7 @@ export default function Navbar({ fetchData }) {
   return (
     <>
       <Top fetchData={fetchData} />
-      <Bar />
+      <Bar fetchData={fetchData} />
       <Bottom fetchData={fetchData} />
     </>
   );
@@ -109,9 +109,17 @@ const TopWrapper = styled(SpaceWrapper)`
 `;
 
 // Bar
-const Bar = () => {
+const Bar = ({fetchData}) => {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
+  const [background, setBackground] = useState(defaultPurple);
+  useEffect(() => {
+    fetchData().then((res) => {
+      setBackground(
+        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
+      );
+    });
+  }, [fetchData]);
 
   /** Intersection Observer */
   useEffect(() => {
@@ -125,10 +133,10 @@ const Bar = () => {
   }, [ref, dispatch]);
 
   return (
-    <BarWrapper ref={ref}>
+    <BarWrapper bgImage={background} ref={ref}>
       <SpaceWrapper
         spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
-        className="links"
+        className="navbuttons"
       >
         {navigationLinks.map((navigation, key) => (
           <NavButton key={key} to={navigation.to} text={navigation.name} />
@@ -142,8 +150,9 @@ const BarWrapper = styled.div`
   position: sticky;
   top: -1px;
   z-index: 99;
-  .links {
+  .navbuttons {
     background-color: var(--secondary);
+    /* backdrop-filter: blur(5px); */
     display: flex;
     gap: var(--navbar-gap);
     justify-content: center;
@@ -169,7 +178,7 @@ const Bottom = ({ fetchData }) => {
       className={useGlobalState()[0].navbarStuck ? "stuck" : ""}
     >
       <div className="logo-container">
-        <SpaceWrapper spacing={{ bottom: "navbar-inner" }} className="filter">
+        <SpaceWrapper spacing={{ top: "navbar-inner" }} className="filter">
           {logo ? (
             <img src={logo} alt="logo-text" />
           ) : (
@@ -190,7 +199,7 @@ const BottomWrapper = styled.div`
     background-size: cover;
 
     .filter {
-      background-color: var(--secondary);
+      background-color: var(--background-filter-dark);
       transition: background-color 0.5s ease;
     }
 
