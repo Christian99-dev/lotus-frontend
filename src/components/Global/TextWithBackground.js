@@ -73,14 +73,14 @@ const Wrapper = styled.div`
 
   &.transparent {
     background-color: ${(props) =>
-      props.theme === "purple" ? "var(--primary-dim)" : "var(--secondary-dim)"};
+      props.theme === "purple" ? "var(--primary-transparent)" : "var(--secondary-transparent)"};
 
     :hover,
     a:hover {
       background-color: ${(props) =>
         props.theme !== "purple"
-          ? "var(--primary-dim)"
-          : "var(--secondary-dim)"};
+          ? "var(--primary-transparent)"
+          : "var(--secondary-transparent)"};
     }
   }
 `;
