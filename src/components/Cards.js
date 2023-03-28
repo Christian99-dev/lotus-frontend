@@ -19,8 +19,8 @@ const Cards = ({ fetchData }) => {
   }, [fetchData]);
 
   const createCardsJSXArray = (dataArray) => {
-    return dataArray.map(({ text, ueberschrift, icon }, key) => (
-      <Card text={text} title={ueberschrift} icon={icon.icon} key={key} />
+    return dataArray.map(({ textPreview, ueberschrift, icon }, key) => (
+      <Card text={textPreview} title={ueberschrift} icon={icon.icon} key={key} />
     ));
   };
 
@@ -77,8 +77,14 @@ const CardsWrapper = styled(SpaceWrapper)`
   position: relative;
 
   .cards {
-    display: flex;
+    display: grid;
     justify-content: space-between;
+
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
     gap: var(--cards-gap);
 
     @media ${device.laptop} {
