@@ -65,6 +65,19 @@ const Cards = ({ fetchData }) => {
     });
   };
 
+  const calculateRows = (numObjects) => {
+    // Jede Reihe hat maximal 3 Objekte
+    const objectsPerRow = 3;
+    // Anzahl der vollständigen Reihen
+    const fullRows = Math.floor(numObjects / objectsPerRow);
+    // Anzahl der verbleibenden Objekte auf der letzten unvollständigen Reihe
+    const remainingObjects = numObjects % objectsPerRow;
+    // Anzahl der Reihen insgesamt
+    const totalRows = fullRows + (remainingObjects > 0 ? 1 : 0);
+    return totalRows;
+  }
+
+
   return (
     <React.Fragment>
       {data && createPopupJSXArray(data.leistungen, dispatch)}
@@ -74,6 +87,7 @@ const Cards = ({ fetchData }) => {
           top: "white-component-inner-half",
           bottom: "white-component-inner",
         }}
+        rowCount={data ? calculateRows(data.leistungen.length) : 1}
       >
         <Bubbels />
         {data ? (
@@ -128,7 +142,7 @@ const CardsWrapper = styled(SpaceWrapper)`
     justify-content: space-between;
 
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-rows: repeat(${props => props.rowCount}, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 
@@ -239,11 +253,11 @@ const PopupWrapper = styled.div`
   left: 0;
   right: 0;
 
-  z-index: 99999;
+  z-index: 9999;
   background-color: var(--background-filter-popup);
 
   .inner {
-    position: fixed;
+    position: absolute;
     top: var(--popup-border);
     left: var(--popup-border);
     bottom: var(--popup-border);
