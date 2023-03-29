@@ -1,6 +1,12 @@
 import { css } from "styled-components";
 import { responsiveVar } from "../utils/responsive";
 
+/** IMPROVMENT
+ * Make a funtktion where you can give an array of [{varname, px}]
+ * and add them like this, what happens in this file is unter der haube
+ * 
+ * for the next project only use, 5 10 15 20 40 60
+ */
 const Button = css`
   ${responsiveVar("button-padding-top", 15)}
   ${responsiveVar("button-padding-bottom", 15)}
@@ -32,11 +38,7 @@ const Topbar = css`
   ${responsiveVar("topbar-inner-gap", 20)}
   ${responsiveVar("topbar-inner-padding", 10)}
   ${responsiveVar("topbar-gap-right", 50)}
-
-  ${responsiveVar("topbar-mobile-tb-border", 50)} /* ${responsiveVar(
-    "topbar-inner-gap",
-    20
-  )} */
+  ${responsiveVar("topbar-mobile-tb-border", 50)} 
 `;
 
 const Navbar = css`
@@ -108,6 +110,10 @@ const Loader = css`
   ${responsiveVar("loader-width", 200)}
 `;
 
+const Popup = css`
+  ${responsiveVar("popup-border", 10, "%")}
+  ${responsiveVar("popup-inner", 5, "%")}
+`;
 
 const Components = css`
   :root {
@@ -123,6 +129,7 @@ const Components = css`
     ${Testimonial}
     ${Footer}
     ${Loader}
+    ${Popup}
 
     ${Button}
     ${Input}

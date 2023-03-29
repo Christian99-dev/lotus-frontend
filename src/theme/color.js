@@ -16,6 +16,7 @@ const Color = css`
         --yellow: #FFC552;
         --yellow-filter: invert(94%) sepia(39%) saturate(4595%) hue-rotate(314deg) brightness(100%) contrast(101%);
         --background-filter-dark: rgba(76, 68, 82, 0.2);
+        --background-filter-popup: rgba(76, 68, 82, 0.7);
         --background-filter-primary: rgba(140, 67, 207, 0.8);
     }
 `;

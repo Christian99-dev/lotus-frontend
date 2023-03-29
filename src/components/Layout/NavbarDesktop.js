@@ -109,7 +109,7 @@ const TopWrapper = styled(SpaceWrapper)`
 `;
 
 // Bar
-const Bar = ({fetchData}) => {
+const Bar = ({ fetchData }) => {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
   const [background, setBackground] = useState(defaultPurple);
@@ -125,7 +125,7 @@ const Bar = ({fetchData}) => {
   useEffect(() => {
     const cachedRef = ref.current;
     const observer = new IntersectionObserver(
-      ([e]) => dispatch({ navbarStuck: e.intersectionRatio < 1 }),
+      ([e]) => dispatch({ type: "SET_NAVBAR", value: e.intersectionRatio < 1 }),
       { threshold: [1] }
     );
     observer.observe(cachedRef);
