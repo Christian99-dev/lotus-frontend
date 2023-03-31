@@ -23,9 +23,10 @@ const Cards = ({ fetchData }) => {
           type: "ADD_POPUP",
           value: { popupID: leistung.id, open: false },
         });
+        return 1;
       });
     });
-  }, [fetchData]);
+  }, [fetchData, dispatch]);
 
   const createCardsJSXArray = (dataArray, dispatch) => {
     return dataArray.map(({ textPreview, ueberschrift, icon, id }) => (
@@ -105,7 +106,7 @@ const Cards = ({ fetchData }) => {
           top: "white-component-inner-half",
           bottom: "white-component-inner",
         }}
-        rowCount={data ? calculateRows(data.leistungen.length) : 1}
+        rowcount={data ? calculateRows(data.leistungen.length) : 1}
       >
         <Bubbels />
         {data ? (
@@ -160,7 +161,7 @@ const CardsWrapper = styled(SpaceWrapper)`
     justify-content: space-between;
 
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(${(props) => props.rowCount}, 1fr);
+    grid-template-rows: repeat(${(props) => props.rowcount}, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 
