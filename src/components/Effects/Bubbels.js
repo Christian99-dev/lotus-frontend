@@ -28,7 +28,6 @@ const Rectangles = () => {
         size={100}
         top="20%"
         left="57%"
-        front
       />
       <AnimationSvg
         svg="circle"

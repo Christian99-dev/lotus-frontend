@@ -113,6 +113,9 @@ const Loader = css`
 const Popup = css`
   ${responsiveVar("popup-border", 10, "%")}
   ${responsiveVar("popup-inner", 5, "%")}
+  ${responsiveVar("popup-inner-2", 10)}
+  ${responsiveVar("popup-inner-3", 40)}
+  ${responsiveVar("popup-icon-width", 200)}
 `;
 
 const Components = css`

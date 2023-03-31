@@ -6,6 +6,7 @@ const Color = css`
         --primary: #8C43CF;
         --primary-dim: rgba(140,67,207,0.40);
         --primary-transparent: rgba(140,67,207,0.7);
+        --primary-hard-transparent: rgba(140,67,207,0.9);
         --primary-filter: invert(37%) sepia(45%) saturate(6819%) hue-rotate(256deg) brightness(86%) contrast(86%);
         --secondary: #FFE9FF;
         --secondary-filter: invert(100%) sepia(18%) saturate(7496%) hue-rotate(188deg) brightness(106%) contrast(106%);
