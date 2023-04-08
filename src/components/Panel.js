@@ -56,7 +56,7 @@ const PannelWrapper = styled(Parallax)`
     box-sizing: border-box;
     padding: var(--pannel-inner) var(--border);
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
-    background-color: var(--primary);
+    background-color: var(--primary-transparent);
     position: relative;
     .text {
       .logo {
