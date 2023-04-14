@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import MySwiper from "../components/Global/MySwiper";
 import Loader from "./Global/Loader";
-import { createImgUrl, parser } from "../utils/utils";
+import { createImgUrl, Parser } from "../utils/utils";
 
 export default function Team({ fetchData }) {
   const [data, setData] = useState(null);
@@ -111,7 +111,7 @@ function Person({ img, text, name, jobTitle, right, ...props }) {
           text={jobTitle}
           fontSize="3"
         />
-        <div className="text">{parser(text)}</div>
+        <div className="text">{Parser(text)}</div>
       </SpaceWrapper>
     </PersonWrapper>
   );

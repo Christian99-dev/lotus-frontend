@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { device, size } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import useWindowDimensions from "../../utils/useWindowDimensions";
-import { parser } from "../../utils/utils";
+import { Parser } from "../../utils/utils";
 
 export default function Titel({ text, color, spacing, center, className }) {
   return (
@@ -12,7 +12,7 @@ export default function Titel({ text, color, spacing, center, className }) {
       spacing={spacing}
       className={className}
     >
-      <Wrapper theme={color}>{parser(text)}</Wrapper>
+      <Wrapper theme={color}>{Parser(text)}</Wrapper>
     </SpaceWrapper>
   );
 }

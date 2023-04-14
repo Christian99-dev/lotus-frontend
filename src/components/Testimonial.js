@@ -9,7 +9,7 @@ import TextWithBackground from "./Global/TextWithBackground";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { size } from "../theme/breakpoints";
 import Loader from "./Global/Loader";
-import { createImgUrl, parser } from "../utils/utils";
+import { createImgUrl, Parser } from "../utils/utils";
 
 export default function Testimonial({ fetchData }) {
   const [data, setData] = useState(null);
@@ -95,7 +95,7 @@ const Comment = ({ name, rating, img, text }) => (
       spacing={{ bottom: "testimonial-text-bottom" }}
       className="text"
     >
-      {parser(text)}
+      {Parser(text)}
     </SpaceWrapper>
   </CommentWrapper>
 );
@@ -137,7 +137,7 @@ const CommentWrapper = styled.div`
 `;
 
 const Stars = ({ rating, spacing }) => {
-  const parseRating = (rating) => {
+  const Parserating = (rating) => {
     let numOfFull = Math.floor(rating);
     let hasHalf = !Number.isInteger(rating);
     let nummOfEmpty = hasHalf ? 4 - Math.floor(rating) : 5 - Math.floor(rating);
@@ -159,8 +159,8 @@ const Stars = ({ rating, spacing }) => {
     return out;
   };
 
-  parseRating(rating);
-  return <StarWrapper spacing={spacing}>{parseRating(rating)}</StarWrapper>;
+  Parserating(rating);
+  return <StarWrapper spacing={spacing}>{Parserating(rating)}</StarWrapper>;
 };
 
 const StarWrapper = styled(SpaceWrapper)`

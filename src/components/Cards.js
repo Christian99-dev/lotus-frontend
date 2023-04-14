@@ -8,7 +8,7 @@ import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MySwiper from "../components/Global/MySwiper";
 import Loader from "./Global/Loader";
-import { parser, createImgUrl } from "../utils/utils";
+import { Parser, createImgUrl } from "../utils/utils";
 import { useGlobalState } from "../utils/globalState";
 
 const Cards = ({ fetchData }) => {
@@ -191,7 +191,7 @@ function Card({ title, text, icon, onClick }) {
         <div className="title">{title}</div>
       </div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
-        {parser(text)}
+        {Parser(text)}
       </SpaceWrapper>
       <Icon name={icon} height="icon-l" color="purple" className="icon" />
       <div className="cover">Mehr Erfahren</div>
@@ -321,7 +321,7 @@ function Popup({
           <div className="filter">
             <div className="top">
               <SpaceWrapper className="title">
-                {parser(ueberschrift)}
+                {Parser(ueberschrift)}
               </SpaceWrapper>
               <Icon
                 className="icon"
@@ -334,14 +334,14 @@ function Popup({
               className="subtitle"
               spacing={{ bottom: "popup-inner" }}
             >
-              {parser(subUeberschrift)}
+              {Parser(subUeberschrift)}
             </SpaceWrapper>
             <div tabIndex={0} ref={scrollref} className="scroll-container">
               <SpaceWrapper
                 spacing={{ bottom: "popup-inner" }}
                 className="text"
               >
-                {parser(text)}
+                {Parser(text)}
               </SpaceWrapper>
               {video && (
                 <video controls>

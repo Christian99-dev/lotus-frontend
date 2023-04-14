@@ -9,7 +9,7 @@ import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
 import { getAGB, getFooterModified, getHeadModified } from "../_api/axios";
 import Loader from "../components/Global/Loader";
-import { parser } from "../utils/utils";
+import { Parser } from "../utils/utils";
 
 const AgbPage = () => {
   const [data, setData] = useState(null);
@@ -45,7 +45,7 @@ const AgbPage = () => {
             />
           )}
 
-          <div className="main-text">{data ? parser(data.text) : <Loader dots />}</div>
+          <div className="main-text">{data ? Parser(data.text) : <Loader dots />}</div>
           <SpaceWrapper
             className="button-container"
             spacing={{
