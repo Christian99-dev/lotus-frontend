@@ -11,7 +11,7 @@ import Form from "./Global/Form";
 import { createImgUrl } from "../utils/utils";
 import Loader from "./Global/Loader";
 import useWindowDimensions from "../utils/useWindowDimensions";
-
+import { validGermanPhoneNumber } from "../utils/regex";
 
 export default function Kontakt({ fetchData }) {
   const [data, setData] = useState(null);
@@ -29,7 +29,14 @@ export default function Kontakt({ fetchData }) {
 
   return (
     <div id="contact">
-      <KontaktWrapper bgImage={useWindowDimensions().width > size.tablet ? background[0] : background[1]} strength={500}>
+      <KontaktWrapper
+        bgImage={
+          useWindowDimensions().width > size.tablet
+            ? background[0]
+            : background[1]
+        }
+        strength={500}
+      >
         {/* id anchor */}
         <div id="contact" />
         <div className="filter">
@@ -159,7 +166,14 @@ function Info({ spacing, icon, text }) {
   return (
     <InfoWrapper spacing={spacing}>
       <Icon name={icon} height="icon-m" />
-      <div className="text">{text}</div>
+
+      {!validGermanPhoneNumber.test(text) ? (
+        <div className="text">{text}</div>
+      ) : (
+        <a className="text" href={`tel:${text}`}>
+          {text}
+        </a>
+      )}
     </InfoWrapper>
   );
 }
@@ -171,6 +185,7 @@ const InfoWrapper = styled(SpaceWrapper)`
     font-size: var(--fs-2);
     font-weight: var(--semibold);
     color: var(--secondary);
+    text-decoration: none;
   }
 
   @media ${device.tablet} {

@@ -6,6 +6,7 @@ import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
+import { validGermanPhoneNumber } from "../../utils/regex";
 
 const NavbarMobile = ({ fetchData }) => {
   const [toggle, setToggle] = useState(false);
@@ -180,11 +181,14 @@ const OverlayWrapper = styled(SpaceWrapper)`
   }
 `;
 
-// info
 const Info = ({ text, iconColor, iconName, iconHeight }) => (
   <InfoWrapper>
     <Icon height={iconHeight} name={iconName} color={iconColor} />
-    <div>{text}</div>
+    {!validGermanPhoneNumber.test(text) ? (
+      <div>{text}</div>
+    ) : (
+      <a href={`tel:${text}`}>{text}</a>
+    )}
   </InfoWrapper>
 );
 
@@ -196,4 +200,9 @@ const InfoWrapper = styled.div`
   flex-direction: column;
   gap: var(--navmobile-overlay-gap-info-inner);
   align-items: center;
+
+  a{
+    color: var(--secondary);
+    text-decoration: none;
+  }
 `;

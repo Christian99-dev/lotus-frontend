@@ -5,6 +5,7 @@ import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
 import { Link } from "gatsby";
 import Loader from "../Global/Loader";
+import { validGermanPhoneNumber } from "../../utils/regex";
 export default function Footer({ fetchData }) {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -47,7 +48,15 @@ export default function Footer({ fetchData }) {
               return (
                 <div className="row icon" key={key}>
                   <Icon name={data.icon.icon} height="icon-s" />
-                  {data.text.info}
+
+                  {!validGermanPhoneNumber.test(data.text.info) ? (
+                    data.text.info
+                  ) : (
+                    <a href={`tel:${data.text.info}`}>{data.text.info}</a>
+                  )}
+
+
+                  
                 </div>
               );
             })}

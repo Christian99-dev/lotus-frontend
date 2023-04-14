@@ -11,6 +11,7 @@ import { device } from "../../theme/breakpoints";
 import Loader from "../Global/Loader";
 import { createImgUrl } from "../../utils/utils";
 import defaultPurple from "../../media/images/purple.png";
+import { validGermanPhoneNumber } from "../../utils/regex";
 
 export default function Navbar({ fetchData }) {
   return (
@@ -234,7 +235,11 @@ const BottomWrapper = styled.div`
 const Info = ({ text, iconColor, iconName, iconHeight }) => (
   <InfoWrapper>
     <Icon height={iconHeight} name={iconName} color={iconColor} />
-    <div className="text">{text}</div>
+    {!validGermanPhoneNumber.test(text) ? (
+      text
+    ) : (
+      <a href={`tel:${text}`}>{text}</a>
+    )}
   </InfoWrapper>
 );
 
@@ -245,4 +250,8 @@ const InfoWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  a{
+    color: var(--secondary);
+    text-decoration: none;
+  }
 `;
