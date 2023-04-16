@@ -74,6 +74,7 @@ const PannelWrapper = styled(Parallax)`
     }
 
     @media ${device.tablet} {
+      height: unset;
       .center-loader {
         div {
           margin: 0 auto;
