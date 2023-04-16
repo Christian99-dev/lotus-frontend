@@ -7,7 +7,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
-import { getAGB, getFooterModified, getHeadModified } from "../_api/axios";
+import { getAGB, getFooterModified, getHeadModified, getUnternehmen } from "../_api/axios";
 import Loader from "../components/Global/Loader";
 import { Parser } from "../utils/utils";
 
@@ -20,7 +20,7 @@ const AgbPage = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout fetchData={getUnternehmen}>
       <AgbPageWrapper>
         <Top fetchData={getHeadModified} />
         <SpaceWrapper

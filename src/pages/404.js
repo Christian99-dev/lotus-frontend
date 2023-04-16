@@ -11,6 +11,7 @@ import {
   getFooterModified,
   getHeadModified,
   getPageNotFound,
+  getUnternehmen
 } from "../_api/axios";
 import Loader from "../components/Global/Loader";
 
@@ -23,7 +24,7 @@ const NotFoundPage = () => {
   }, []);
 
   return (
-    <Layout>
+    <Layout fetchData={getUnternehmen}>
       <NotFoundPageWrapper>
         <Top fetchData={getHeadModified} />
         <SpaceWrapper
