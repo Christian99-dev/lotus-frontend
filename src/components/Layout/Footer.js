@@ -25,7 +25,7 @@ export default function Footer({ fetchData }) {
     >
       {data ? (
         <>
-          <div className="col">
+          {/* <div className="col">
             <div className="head">Social Media</div>
             <div className="row icons">
               {data.socials.map((icon, key) => {
@@ -39,7 +39,7 @@ export default function Footer({ fetchData }) {
                 );
               })}
             </div>
-          </div>
+          </div> */}
 
           <div className="col">
             <div className="head"> Kontakt</div>
@@ -95,7 +95,18 @@ const FooterWrapper = styled(SpaceWrapper)`
   color: var(--secondary);
   background-color: var(--primary);
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+
+  .col:nth-child(2) {
+    justify-self: center;
+  }
+
+  .col:nth-child(3) {
+    justify-self: end;
+  }
 
   .loader {
     margin: 0 auto;
