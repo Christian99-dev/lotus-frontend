@@ -188,7 +188,7 @@ function Card({ title, text, icon, onClick }) {
   return (
     <CardWrapper onClick={onClick}>
       <div className="top-grid">
-        <div className="title">{title}</div>
+        <div className="title">{Parser(title)}</div>
       </div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
         {Parser(text)}
