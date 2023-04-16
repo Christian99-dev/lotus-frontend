@@ -53,8 +53,14 @@ export default function Kontakt({ fetchData }) {
               <div className="left">
                 <Title
                   text={data.ueberschrift}
-                  spacing={{ bottom: "team-m-space" }}
+                  spacing={{ bottom: "team-xxs-space" }}
                 />
+                <SpaceWrapper
+                  className="subtitle"
+                  spacing={{ bottom: "team-m-space" }}
+                >
+                  So einfach kannst du uns erreichen
+                </SpaceWrapper>
                 <SpaceWrapper
                   className="infos"
                   spacing={{ bottom: "team-m-space" }}
@@ -104,6 +110,10 @@ const KontaktWrapper = styled(Parallax)`
 
     .left {
       flex: 1 1 0;
+
+      .subtitle{
+        color: var(--secondary);
+      }
 
       .infos {
         display: flex;

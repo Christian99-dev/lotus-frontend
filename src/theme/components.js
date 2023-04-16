@@ -78,6 +78,7 @@ const Panel = css`
 
 const Team = css`
   ${responsiveVar("team-gap", 20)}
+  ${responsiveVar("team-xxs-space", 10)}
   ${responsiveVar("team-xs-space", 20)}
   ${responsiveVar("team-s-space", 30)}
   ${responsiveVar("team-m-space", 50)}
