@@ -52,15 +52,19 @@ export default function Panel({ fetchData }) {
 
 const PannelWrapper = styled(Parallax)`
   .box {
+    height: 100vh;
     width: 50%;
     box-sizing: border-box;
     padding: var(--pannel-inner) var(--border);
     clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
     background-color: var(--primary-transparent);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     .text {
       .logo {
-        top: 10%;
+        top: 20%;
         left: 10%;
         position: absolute;
       }
