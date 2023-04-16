@@ -94,8 +94,6 @@ export default function Footer({ fetchData }) {
 const FooterWrapper = styled(SpaceWrapper)`
   color: var(--secondary);
   background-color: var(--primary);
-  display: flex;
-  /* justify-content: space-between; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
@@ -144,6 +142,7 @@ const FooterWrapper = styled(SpaceWrapper)`
   }
 
   @media ${device.tablet} {
+    display: flex;
     flex-direction: column;
     text-align: center;
     gap: var(--footer-inner-l);
