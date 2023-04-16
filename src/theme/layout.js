@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { GlobalStateProvider } from "../utils/globalState";
 // import { withPrefix } from "gatsby";
 
-export default function Layout({ children }) {
+export default function Layout({ children, fetchData }) {
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    fetchData().then((res) => {
+      setData(res.data.attributes);
+      console.log(res.data.attributes);
+    });
+  }, [fetchData]);
+
   return (
     <>
       <GlobalStateProvider>
@@ -23,6 +31,7 @@ export default function Layout({ children }) {
             user-scalable=no"
             // target-densitydpi=device-dpi
           />
+          {data && <title>{data.name}</title>}
 
           {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
           {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
