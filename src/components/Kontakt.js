@@ -111,7 +111,7 @@ const KontaktWrapper = styled(Parallax)`
     .left {
       flex: 1 1 0;
 
-      .subtitle{
+      .subtitle {
         color: var(--secondary);
       }
 
@@ -154,6 +154,9 @@ const KontaktWrapper = styled(Parallax)`
       grid-template-rows: 1fr var(--contact-maps-height-tablet);
 
       .left {
+        .subtitle {
+          text-align: center;
+        }
         .form {
           grid-template-columns: 1fr;
           .a,
