@@ -5,10 +5,11 @@ import { GlobalStateProvider } from "../utils/globalState";
 import { createImgUrl } from "../utils/utils";
 
 export default function Layout({ children, fetchData }) {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
+      console.log(res.data.attributes);
     });
   }, [fetchData]);
   return (
@@ -30,7 +31,7 @@ export default function Layout({ children, fetchData }) {
             // target-densitydpi=device-dpi
           />
           {data && <title>{data.name}</title>}
-          {data && <link rel="icon" href={createImgUrl(data.logo_textless.data.attributes.url)} />}
+          {data && <link rel="icon" href={createImgUrl(data.favicon.data.attributes.url)} />}
 
           {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
           {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
