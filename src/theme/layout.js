@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { GlobalStateProvider } from "../utils/globalState";
+import logo from "../assets/logo.png";
+import { createImgUrl } from "../utils/utils";
 
 export default function Layout({ children, fetchData }) {
   const [data, setData] = useState(null)
@@ -10,7 +12,6 @@ export default function Layout({ children, fetchData }) {
       setData(res.data.attributes);
     });
   }, [fetchData]);
-
   return (
     <>
       <GlobalStateProvider>
@@ -30,6 +31,7 @@ export default function Layout({ children, fetchData }) {
             // target-densitydpi=device-dpi
           />
           {data && <title>{data.name}</title>}
+          {data && <link rel="icon" href={createImgUrl(data.logo_textless.data.attributes.url)} />}
 
           {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
           {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
