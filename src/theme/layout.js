@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { GlobalStateProvider } from "../utils/globalState";
-// import { withPrefix } from "gatsby";
 
 export default function Layout({ children, fetchData }) {
   const [data, setData] = useState(null)
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      console.log(res.data.attributes);
     });
   }, [fetchData]);
 

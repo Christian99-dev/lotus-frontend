@@ -37,6 +37,7 @@
     "react-parallax": "^3.5.1",
     "react-scroll": "^1.8.8",
     "react-toastify": "^9.1.1",
+    "react-tooltip": "^5.11.1",
     "react-tracked": "^1.7.10",
     "sass": "^1.55.0",
     "styled-components": "^5.3.6",

@@ -119,6 +119,12 @@ const Popup = css`
   ${responsiveVar("popup-icon-width", 200)}
 `;
 
+const WhatsappTooltip = css`
+  ${responsiveVar("whatsapp-tooltip-qrcode-padding", 10)}
+  ${responsiveVar("whatsapp-tooltip-qrcode-height", 100)}
+`;
+
+
 const Components = css`
   :root {
     ${Topbar}
@@ -134,6 +140,7 @@ const Components = css`
     ${Footer}
     ${Loader}
     ${Popup}
+    ${WhatsappTooltip}
 
     ${Button}
     ${Input}

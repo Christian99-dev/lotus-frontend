@@ -7,11 +7,15 @@ import { useGlobalState } from "../../utils/globalState";
 import { navigationLinks } from "../../utils/constants";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
-import { device } from "../../theme/breakpoints";
+import { device, size } from "../../theme/breakpoints";
 import Loader from "../Global/Loader";
 import { createImgUrl } from "../../utils/utils";
 import defaultPurple from "../../media/images/purple.png";
 import { validGermanPhoneNumber } from "../../utils/regex";
+import WhatsappTooltipWrapper, {
+  WhatsappTooltip,
+} from "../Global/WhatsappTooltip";
+import useWindowDimensions from "../../utils/useWindowDimensions";
 
 export default function Navbar({ fetchData }) {
   return (
@@ -34,6 +38,7 @@ export const Top = ({ fetchData }) => {
 
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
+      <WhatsappTooltip />
       <div className="container">
         {data ? (
           <div className="left">{data.links.info}</div>
@@ -232,16 +237,25 @@ const BottomWrapper = styled.div`
 `;
 
 // info
-const Info = ({ text, iconColor, iconName, iconHeight }) => (
-  <InfoWrapper>
-    <Icon height={iconHeight} name={iconName} color={iconColor} />
-    {!validGermanPhoneNumber.test(text) ? (
-      text
-    ) : (
-      <a href={`tel:${text}`}>{text}</a>
-    )}
-  </InfoWrapper>
-);
+const Info = ({ text, iconColor, iconName, iconHeight }) => {
+  return (
+    <InfoWrapper>
+      {iconName === "whatsapp" ? (
+        <WhatsappTooltipWrapper>
+          <Icon height={iconHeight} name={iconName} color={iconColor} />
+        </WhatsappTooltipWrapper>
+      ) : (
+        <Icon height={iconHeight} name={iconName} color={iconColor} />
+      )}
+
+      {!validGermanPhoneNumber.test(text) ? (
+        text
+      ) : (
+        <a href={`tel:${text}`}>{text}</a>
+      )}
+    </InfoWrapper>
+  );
+};
 
 const InfoWrapper = styled.div`
   font-size: var(--fs-4);
@@ -250,8 +264,13 @@ const InfoWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  a{
+  a {
     color: var(--secondary);
     text-decoration: none;
+  }
+
+  .tooltip-wrapper {
+    text-align: center;
+    /* margin: 100px; */
   }
 `;

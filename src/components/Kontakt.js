@@ -12,6 +12,9 @@ import { createImgUrl } from "../utils/utils";
 import Loader from "./Global/Loader";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { validGermanPhoneNumber } from "../utils/regex";
+import WhatsappTooltipWrapper, {
+  WhatsappTooltip,
+} from "./Global/WhatsappTooltip";
 
 export default function Kontakt({ fetchData }) {
   const [data, setData] = useState(null);
@@ -29,6 +32,7 @@ export default function Kontakt({ fetchData }) {
 
   return (
     <div id="contact">
+      <WhatsappTooltip />
       <KontaktWrapper
         bgImage={
           useWindowDimensions().width > size.tablet
@@ -176,9 +180,16 @@ const KontaktWrapper = styled(Parallax)`
 `;
 
 function Info({ spacing, icon, text }) {
+  const width = useWindowDimensions().width;
   return (
     <InfoWrapper spacing={spacing}>
-      <Icon name={icon} height="icon-m" />
+      {icon === "whatsapp" && width > size.tablet ? (
+        <WhatsappTooltipWrapper>
+          <Icon name={icon} height="icon-m" />
+        </WhatsappTooltipWrapper>
+      ) : (
+        <Icon name={icon} height="icon-m" />
+      )}
 
       {!validGermanPhoneNumber.test(text) ? (
         <div className="text">{text}</div>

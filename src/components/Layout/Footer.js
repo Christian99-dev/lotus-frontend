@@ -6,6 +6,9 @@ import { device } from "../../theme/breakpoints";
 import { Link } from "gatsby";
 import Loader from "../Global/Loader";
 import { validGermanPhoneNumber } from "../../utils/regex";
+import WhatsappTooltipWrapper, {
+  WhatsappTooltip,
+} from "../Global/WhatsappTooltip";
 export default function Footer({ fetchData }) {
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -15,17 +18,19 @@ export default function Footer({ fetchData }) {
   }, [fetchData]);
 
   return (
-    <FooterWrapper
-      spacing={{
-        top: "footer-tb-border",
-        bottom: "footer-tb-border",
-        left: "border",
-        right: "border",
-      }}
-    >
-      {data ? (
-        <>
-          {/* <div className="col">
+    <>
+      <WhatsappTooltip />
+      <FooterWrapper
+        spacing={{
+          top: "footer-tb-border",
+          bottom: "footer-tb-border",
+          left: "border",
+          right: "border",
+        }}
+      >
+        {data ? (
+          <>
+            {/* <div className="col">
             <div className="head">Social Media</div>
             <div className="row icons">
               {data.socials.map((icon, key) => {
@@ -41,53 +46,57 @@ export default function Footer({ fetchData }) {
             </div>
           </div> */}
 
-          <div className="col">
-            <div className="head"> Kontakt</div>
+            <div className="col">
+              <div className="head"> Kontakt</div>
 
-            {data.kontakt.map((data, key) => {
-              return (
-                <div className="row icon" key={key}>
-                  <Icon name={data.icon.icon} height="icon-s" />
+              {data.kontakt.map((data, key) => {
+                return (
+                  <div className="row icon" key={key}>
+                    {data.icon.icon === "whatsapp" ? (
+                      <WhatsappTooltipWrapper>
+                        <Icon name={data.icon.icon} height="icon-s" />
+                      </WhatsappTooltipWrapper>
+                    ) : (
+                      <Icon name={data.icon.icon} height="icon-s" />
+                    )}
 
-                  {!validGermanPhoneNumber.test(data.text.info) ? (
-                    data.text.info
-                  ) : (
-                    <a href={`tel:${data.text.info}`}>{data.text.info}</a>
-                  )}
+                    {!validGermanPhoneNumber.test(data.text.info) ? (
+                      data.text.info
+                    ) : (
+                      <a href={`tel:${data.text.info}`}>{data.text.info}</a>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
 
+            <div className="col">
+              <div className="head">Adresse</div>
 
-                  
-                </div>
-              );
-            })}
-          </div>
+              {data.adresse.map((data, key) => {
+                return (
+                  <div className="row" key={key}>
+                    {data.info}
+                  </div>
+                );
+              })}
+            </div>
 
-          <div className="col">
-            <div className="head">Adresse</div>
-
-            {data.adresse.map((data, key) => {
-              return (
-                <div className="row" key={key}>
-                  {data.info}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="col">
-            <div className="head">Rechtliches</div>
-            <Link className="row" to="/impressum">
-              Impressum
-            </Link>
-            <Link className="row" to="/agb">
-              AGB
-            </Link>
-          </div>
-        </>
-      ) : (
-        <Loader spinner className="loader" />
-      )}
-    </FooterWrapper>
+            <div className="col">
+              <div className="head">Rechtliches</div>
+              <Link className="row" to="/impressum">
+                Impressum
+              </Link>
+              <Link className="row" to="/agb">
+                AGB
+              </Link>
+            </div>
+          </>
+        ) : (
+          <Loader spinner className="loader" />
+        )}
+      </FooterWrapper>
+    </>
   );
 }
 
@@ -96,7 +105,6 @@ const FooterWrapper = styled(SpaceWrapper)`
   background-color: var(--primary);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-
 
   .col:nth-child(2) {
     justify-self: center;
