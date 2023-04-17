@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import GlobalStyle from "./global";
 import { Helmet } from "react-helmet";
 import { GlobalStateProvider } from "../utils/globalState";
-import logo from "../assets/logo.png";
 import { createImgUrl } from "../utils/utils";
 
 export default function Layout({ children, fetchData }) {
