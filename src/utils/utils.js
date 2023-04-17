@@ -23,3 +23,8 @@ export const createImgUrl = (imgUrl) => {
 export const Parser = (text) => {
   return <div dangerouslySetInnerHTML={{ __html: text }} />
 };
+
+export const getNavigationNameFromKey = (navigationData, key) => {
+  // switch case(key) case "1" return navigationData[First] 
+  // switch case(key) case "2" return navigationData[Secound] 
+}

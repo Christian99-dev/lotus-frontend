@@ -15,13 +15,12 @@ import { validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
-import useWindowDimensions from "../../utils/useWindowDimensions";
 
-export default function Navbar({ fetchData }) {
+export default function Navbar({ fetchData, fetchNavigationData }) {
   return (
     <>
       <Top fetchData={fetchData} />
-      <Bar fetchData={fetchData} />
+      <Bar fetchData={fetchData} fetchNavigationData={fetchNavigationData} />
       <Bottom fetchData={fetchData} />
     </>
   );
@@ -115,17 +114,23 @@ const TopWrapper = styled(SpaceWrapper)`
 `;
 
 // Bar
-const Bar = ({ fetchData }) => {
+const Bar = ({ fetchData, fetchNavigationData }) => {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
   const [background, setBackground] = useState(defaultPurple);
+  const [navigationNames, setNavigationNames] = useState(null);
+
   useEffect(() => {
     fetchData().then((res) => {
       setBackground(
         createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
       );
     });
-  }, [fetchData]);
+
+    fetchNavigationData().then((res) => {
+      setNavigationNames(res.data.attributes);
+    });
+  }, [fetchData, fetchNavigationData]);
 
   /** Intersection Observer */
   useEffect(() => {
@@ -144,8 +149,8 @@ const Bar = ({ fetchData }) => {
         spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
         className="navbuttons"
       >
-        {navigationLinks.map((navigation, key) => (
-          <NavButton key={key} to={navigation.to} text={navigation.name} />
+        {navigationNames && navigationLinks.map((navigation, key) => (
+          <NavButton key={key} to={navigation.to} text={Object.values(navigationNames)[key]} />
         ))}
       </SpaceWrapper>
     </BarWrapper>

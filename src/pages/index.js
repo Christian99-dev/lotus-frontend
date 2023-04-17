@@ -17,13 +17,14 @@ import {
   getRezensionen,
   getTeam,
   getWilkommenModified,
-  getUnternehmen
+  getUnternehmen,
+  getNavigation
 } from "../_api/axios";
 
 const IndexPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
-      <Navbar fetchData={getHeadModified} />
+      <Navbar fetchData={getHeadModified} fetchNavigationData={getNavigation} />
       <Carousel fetchData={getWilkommenModified} />
       <Cards fetchData={getLeistungen} />
       <Panel fetchData={getArbeitModified} />

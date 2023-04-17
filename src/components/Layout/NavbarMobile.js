@@ -8,7 +8,7 @@ import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
 import { validGermanPhoneNumber } from "../../utils/regex";
 
-const NavbarMobile = ({ fetchData }) => {
+const NavbarMobile = ({ fetchData, fetchNavigationData }) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
     setToggle(!toggle);
@@ -17,7 +17,7 @@ const NavbarMobile = ({ fetchData }) => {
   return (
     <>
       <Nav toggleNav={ToggleNav} />
-      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} />
+      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} fetchNavigationData={fetchNavigationData} />
     </>
   );
 };
@@ -25,12 +25,14 @@ const NavbarMobile = ({ fetchData }) => {
 export default NavbarMobile;
 
 // Navbar
-const Nav = ({ toggleNav }) => (
-  <NavWrapper id="topbarMobile">
-    <Icon name="menu" onClick={() => toggleNav()} />
-    <div className="text">Home</div>
-  </NavWrapper>
-);
+const Nav = ({ toggleNav }) => {
+  return (
+    <NavWrapper id="topbarMobile">
+      <Icon name="menu" onClick={() => toggleNav()} />
+      <div className="text">Home</div>
+    </NavWrapper>
+  );
+};
 
 const NavWrapper = styled.div`
   position: fixed;
@@ -56,9 +58,10 @@ const NavWrapper = styled.div`
 `;
 
 // overlay
-const Overlay = ({ open, toggleNav, fetchData }) => {
+const Overlay = ({ open, toggleNav, fetchData , fetchNavigationData }) => {
   const [data, setData] = useState(null);
   const [logo, setLogo] = useState(null);
+  const [navigationNames, setNavigationNames] = useState(null);
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
@@ -66,7 +69,10 @@ const Overlay = ({ open, toggleNav, fetchData }) => {
         createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
       );
     });
-  }, [fetchData]);
+    fetchNavigationData().then((res) => {
+      setNavigationNames(res.data.attributes);
+    });
+  }, [fetchData , fetchNavigationData]);
 
   const { rechts } = data ? data : { rechts: [] };
 
@@ -82,11 +88,11 @@ const Overlay = ({ open, toggleNav, fetchData }) => {
 
       <div className="scroll-wrapper">
         <div className="nav">
-          {navigationLinks.map((navigation, key) => (
+          {navigationNames && navigationLinks.map((navigation, key) => (
             <div className="navbutton-wrapper" key={key}>
               <NavButton
                 to={navigation.toMobile ? navigation.toMobile : navigation.to}
-                text={navigation.name}
+                text={Object.values(navigationNames)[key]}
                 className="navbutton"
                 onClick={() => {
                   toggleNav();
@@ -201,7 +207,7 @@ const InfoWrapper = styled.div`
   gap: var(--navmobile-overlay-gap-info-inner);
   align-items: center;
 
-  a{
+  a {
     color: var(--secondary);
     text-decoration: none;
   }

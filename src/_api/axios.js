@@ -139,6 +139,10 @@ export async function getPageNotFound() {
   return axios.get(createLink([], "page-not-found")).then((res) => res.data);
 }
 
+export async function getNavigation() {
+  return axios.get(createLink([], "navigation")).then((res) => res.data);
+} 
+
 /** Modified */
 export async function getWilkommenModified() {
   return axios.all([getWilkommen(), getUnternehmen()]).then(
