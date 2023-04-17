@@ -121,7 +121,7 @@ const Popup = css`
 
 const WhatsappTooltip = css`
   ${responsiveVar("whatsapp-tooltip-qrcode-padding", 10)}
-  ${responsiveVar("whatsapp-tooltip-qrcode-height", 100)}
+  ${responsiveVar("whatsapp-tooltip-qrcode-height", 125)}
 `;
 
 

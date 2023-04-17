@@ -101,7 +101,7 @@ export async function getTeam() {
 
 export async function getUnternehmen() {
   return axios
-    .get(createLink(["logo", "logo_textless"], "unternehmen"))
+    .get(createLink(["logo", "logo_textless", "favicon" , "QR_Whatsapp"], "unternehmen"))
     .then((response) => response.data);
 }
 

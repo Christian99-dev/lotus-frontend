@@ -6,22 +6,30 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getUnternehmen } from "../../_api/axios";
+import { createImgUrl } from "../../utils/utils";
 
 const WhatsappTooltipWrapper = ({ children }) => {
   const [qrcode, setQrcode] = useState(QRDummy);
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    getUnternehmen().then((res) => {
+      setQrcode(createImgUrl(res.data.attributes.QR_Whatsapp.data.attributes.url));
+    });
+  }, [getUnternehmen]);
+  
   const tooltip = (
     <div className="tooltip">
-      <img className="qrcode" src={qrcode} alt="qr-code" />
+      {qrcode && <img className="qrcode" src={qrcode} alt="qr-code" />}
     </div>
   );
   return (
-      <div
-        data-tooltip-id="my-tooltip"
-        data-tooltip-html={ReactDOMServer.renderToStaticMarkup(tooltip)}
-      >
-        {children}
-      </div>
+    <div
+      data-tooltip-id="my-tooltip"
+      data-tooltip-html={ReactDOMServer.renderToStaticMarkup(tooltip)}
+    >
+      {children}
+    </div>
   );
 };
 export default WhatsappTooltipWrapper;
