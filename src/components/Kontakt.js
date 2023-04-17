@@ -23,6 +23,7 @@ export default function Kontakt({ fetchData }) {
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
+      console.log(res.data.attributes);
       setBackground([
         createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
         createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
@@ -63,7 +64,7 @@ export default function Kontakt({ fetchData }) {
                   className="subtitle"
                   spacing={{ bottom: "team-m-space" }}
                 >
-                  So einfach kannst du uns erreichen
+                  {data.subUeberschrift}
                 </SpaceWrapper>
                 <SpaceWrapper
                   className="infos"
