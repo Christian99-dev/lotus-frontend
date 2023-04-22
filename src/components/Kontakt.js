@@ -16,11 +16,16 @@ import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "./Global/WhatsappTooltip";
 
-export default function Kontakt({ fetchData }) {
+export default function Kontakt({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
   const [background, setBackground] = useState([]);
+  const [unternehmenData, setUnternehmenData] = useState(null);
 
   useEffect(() => {
+    fetchUnternehmenData().then((res) => {
+      setUnternehmenData(res.data.attributes);
+    })
+
     fetchData().then((res) => {
       setData(res.data.attributes);
       setBackground([
@@ -28,7 +33,7 @@ export default function Kontakt({ fetchData }) {
         createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
       ]);
     });
-  }, [fetchData]);
+  }, [fetchData, fetchUnternehmenData]);
 
   return (
     <div id="contact">
@@ -44,7 +49,7 @@ export default function Kontakt({ fetchData }) {
         {/* id anchor */}
         <div id="contact" />
         <div className="filter">
-          {data ? (
+          {data && unternehmenData ? (
             <SpaceWrapper
               spacing={{
                 left: "border",
@@ -75,6 +80,7 @@ export default function Kontakt({ fetchData }) {
                         icon={info.icon.icon}
                         text={info.text.info}
                         key={key}
+                        link={info.icon.icon === "whatsapp" && unternehmenData.whatsappLink}
                       />
                     );
                   })}
@@ -179,16 +185,17 @@ const KontaktWrapper = styled(Parallax)`
   }
 `;
 
-function Info({ spacing, icon, text }) {
+function Info({ spacing, icon, text, link }) {
+
   const width = useWindowDimensions().width;
   return (
     <InfoWrapper spacing={spacing}>
       {icon === "whatsapp" && width > size.tablet ? (
         <WhatsappTooltipWrapper>
-          <Icon name={icon} height="icon-m" />
+          <Icon name={icon} height="icon-m" link={link} />
         </WhatsappTooltipWrapper>
       ) : (
-        <Icon name={icon} height="icon-m" />
+        <Icon name={icon} height="icon-m" link={icon === "whatsapp" && link} />
       )}
 
       {!validGermanPhoneNumber.test(text) ? (
@@ -215,6 +222,9 @@ const InfoWrapper = styled(SpaceWrapper)`
   @media ${device.tablet} {
     flex-direction: column;
     .text {
+      text-align: center;
+    }
+    a{
       text-align: center;
     }
   }

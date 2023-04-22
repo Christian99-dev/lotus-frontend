@@ -9,7 +9,6 @@ export default function Layout({ children, fetchData }) {
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
-      console.log(res.data.attributes);
     });
   }, [fetchData]);
   return (

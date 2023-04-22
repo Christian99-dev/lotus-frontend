@@ -68,7 +68,6 @@ const Form = ({ data }) => {
     } catch (error) {
       toast.error("Server Fehler... versuchen Sie es später nochmal.", { theme: "colored" });
     }
-    console.log("test");
   }
 
   return (

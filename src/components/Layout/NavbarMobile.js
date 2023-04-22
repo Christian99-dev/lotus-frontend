@@ -8,7 +8,11 @@ import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
 import { validGermanPhoneNumber } from "../../utils/regex";
 
-const NavbarMobile = ({ fetchData, fetchNavigationData }) => {
+const NavbarMobile = ({
+  fetchData,
+  fetchNavigationData,
+  fetchUnternehmenData,
+}) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
     setToggle(!toggle);
@@ -17,7 +21,13 @@ const NavbarMobile = ({ fetchData, fetchNavigationData }) => {
   return (
     <>
       <Nav toggleNav={ToggleNav} />
-      <Overlay open={toggle} toggleNav={ToggleNav} fetchData={fetchData} fetchNavigationData={fetchNavigationData} />
+      <Overlay
+        open={toggle}
+        toggleNav={ToggleNav}
+        fetchData={fetchData}
+        fetchNavigationData={fetchNavigationData}
+        fetchUnternehmenData={fetchUnternehmenData}
+      />
     </>
   );
 };
@@ -58,11 +68,23 @@ const NavWrapper = styled.div`
 `;
 
 // overlay
-const Overlay = ({ open, toggleNav, fetchData , fetchNavigationData }) => {
+const Overlay = ({
+  open,
+  toggleNav,
+  fetchData,
+  fetchNavigationData,
+  fetchUnternehmenData,
+}) => {
   const [data, setData] = useState(null);
   const [logo, setLogo] = useState(null);
   const [navigationNames, setNavigationNames] = useState(null);
+  const [unternehmenData, setUnternehmenData] = useState(null);
+
   useEffect(() => {
+    fetchUnternehmenData().then((res) => {
+      setUnternehmenData(res.data.attributes);
+    });
+
     fetchData().then((res) => {
       setData(res.data.attributes);
       setLogo(
@@ -72,7 +94,7 @@ const Overlay = ({ open, toggleNav, fetchData , fetchNavigationData }) => {
     fetchNavigationData().then((res) => {
       setNavigationNames(res.data.attributes);
     });
-  }, [fetchData , fetchNavigationData]);
+  }, [fetchData, fetchNavigationData, fetchUnternehmenData]);
 
   const { rechts } = data ? data : { rechts: [] };
 
@@ -88,28 +110,33 @@ const Overlay = ({ open, toggleNav, fetchData , fetchNavigationData }) => {
 
       <div className="scroll-wrapper">
         <div className="nav">
-          {navigationNames && navigationLinks.map((navigation, key) => (
-            <div className="navbutton-wrapper" key={key}>
-              <NavButton
-                to={navigation.toMobile ? navigation.toMobile : navigation.to}
-                text={Object.values(navigationNames)[key]}
-                className="navbutton"
-                onClick={() => {
-                  toggleNav();
-                }}
-              />
-            </div>
-          ))}
+          {navigationNames &&
+            navigationLinks.map((navigation, key) => (
+              <div className="navbutton-wrapper" key={key}>
+                <NavButton
+                  to={navigation.toMobile ? navigation.toMobile : navigation.to}
+                  text={Object.values(navigationNames)[key]}
+                  className="navbutton"
+                  onClick={() => {
+                    toggleNav();
+                  }}
+                />
+              </div>
+            ))}
         </div>
         <div className="info">
-          {rechts.map((data, key) => (
-            <Info
-              key={key}
-              text={data.text.info}
-              iconHeight="icon-s"
-              iconName={data.icon.icon}
-            />
-          ))}
+          {unternehmenData &&
+            rechts.map((data, key) => {
+              return (
+                <Info
+                  key={key}
+                  text={data.text.info}
+                  iconHeight="icon-s"
+                  iconName={data.icon.icon}
+                  link={unternehmenData.whatsappLink}
+                />
+              );
+            })}
         </div>
       </div>
     </OverlayWrapper>
@@ -187,9 +214,14 @@ const OverlayWrapper = styled(SpaceWrapper)`
   }
 `;
 
-const Info = ({ text, iconColor, iconName, iconHeight }) => (
+const Info = ({ text, iconColor, iconName, iconHeight, link }) => (
   <InfoWrapper>
-    <Icon height={iconHeight} name={iconName} color={iconColor} />
+    <Icon
+      height={iconHeight}
+      name={iconName}
+      color={iconColor}
+      link={iconName === "whatsapp" && link}
+    />
     {!validGermanPhoneNumber.test(text) ? (
       <div>{text}</div>
     ) : (

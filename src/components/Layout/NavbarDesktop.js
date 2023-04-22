@@ -16,10 +16,10 @@ import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
 
-export default function Navbar({ fetchData, fetchNavigationData }) {
+export default function Navbar({ fetchData, fetchNavigationData, fetchUnternehmenData }) {
   return (
     <>
-      <Top fetchData={fetchData} />
+      <Top fetchData={fetchData} fetchUnternehmenData={fetchUnternehmenData} />
       <Bar fetchData={fetchData} fetchNavigationData={fetchNavigationData} />
       <Bottom fetchData={fetchData} />
     </>
@@ -27,12 +27,18 @@ export default function Navbar({ fetchData, fetchNavigationData }) {
 }
 
 // Top
-export const Top = ({ fetchData }) => {
+export const Top = ({ fetchData, fetchUnternehmenData }) => {
   const [data, setData] = useState(null);
+  const [unternehmenData, setUnternehmenData] = useState(null);
+
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
+
+    fetchUnternehmenData().then((res) => {
+      setUnternehmenData(res.data.attributes);
+    })
   }, [fetchData]);
 
   return (
@@ -45,7 +51,7 @@ export const Top = ({ fetchData }) => {
           <Loader text color="secondary" height="fs-3" />
         )}
         <div className="right">
-          {data ? (
+          {data && unternehmenData ? (
             data.rechts.map((data, key) => (
               <Info
                 key={key}
@@ -53,6 +59,7 @@ export const Top = ({ fetchData }) => {
                 iconHeight="icon-s"
                 iconName={data.icon.icon}
                 className="info"
+                whatsappLink={unternehmenData.whatsappLink}
               />
             ))
           ) : (
@@ -242,12 +249,12 @@ const BottomWrapper = styled.div`
 `;
 
 // info
-const Info = ({ text, iconColor, iconName, iconHeight }) => {
+const Info = ({ text, iconColor, iconName, iconHeight, whatsappLink }) => {
   return (
     <InfoWrapper>
       {iconName === "whatsapp" ? (
         <WhatsappTooltipWrapper>
-          <Icon height={iconHeight} name={iconName} color={iconColor} />
+          <Icon height={iconHeight} name={iconName} color={iconColor} link={whatsappLink} />
         </WhatsappTooltipWrapper>
       ) : (
         <Icon height={iconHeight} name={iconName} color={iconColor} />

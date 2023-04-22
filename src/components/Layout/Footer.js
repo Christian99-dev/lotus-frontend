@@ -9,13 +9,20 @@ import { validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
-export default function Footer({ fetchData }) {
+export default function Footer({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
+  const [unternehmenData, setUnternehmenData] = useState(null);
+
   useEffect(() => {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
   }, [fetchData]);
+
+  fetchUnternehmenData().then((res) => {
+    setUnternehmenData(res.data.attributes);
+  });
+
 
   return (
     <>
@@ -28,7 +35,7 @@ export default function Footer({ fetchData }) {
           right: "border",
         }}
       >
-        {data ? (
+        {data && unternehmenData ? (
           <>
             {/* <div className="col">
             <div className="head">Social Media</div>
@@ -54,7 +61,7 @@ export default function Footer({ fetchData }) {
                   <div className="row icon" key={key}>
                     {data.icon.icon === "whatsapp" ? (
                       <WhatsappTooltipWrapper>
-                        <Icon name={data.icon.icon} height="icon-s" />
+                        <Icon name={data.icon.icon} height="icon-s" link={unternehmenData.whatsappLink} />
                       </WhatsappTooltipWrapper>
                     ) : (
                       <Icon name={data.icon.icon} height="icon-s" />

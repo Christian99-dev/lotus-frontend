@@ -23,15 +23,15 @@ import {
 
 const IndexPage = () => {
   return (
-    <Layout fetchData={getUnternehmen}>
-      <Navbar fetchData={getHeadModified} fetchNavigationData={getNavigation} />
+    <Layout fetchData={getUnternehmen} >
+      <Navbar fetchData={getHeadModified} fetchNavigationData={getNavigation} fetchUnternehmenData={getUnternehmen} />
       <Carousel fetchData={getWilkommenModified} />
       <Cards fetchData={getLeistungen} />
       <Panel fetchData={getArbeitModified} />
       <Team fetchData={getTeam} />
-      <Kontakt fetchData={getKontaktModified} />
+      <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} />
       <Testimonial fetchData={getRezensionen} />
-      <Footer fetchData={getFooterModified} />
+      <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
     </Layout>
   );
 };
