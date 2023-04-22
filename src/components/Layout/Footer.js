@@ -5,7 +5,7 @@ import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
 import { Link } from "gatsby";
 import Loader from "../Global/Loader";
-import { validGermanPhoneNumber } from "../../utils/regex";
+import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
@@ -17,12 +17,11 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
     fetchData().then((res) => {
       setData(res.data.attributes);
     });
+
+    fetchUnternehmenData().then((res) => {
+      setUnternehmenData(res.data.attributes);
+    });
   }, [fetchData]);
-
-  fetchUnternehmenData().then((res) => {
-    setUnternehmenData(res.data.attributes);
-  });
-
 
   return (
     <>
@@ -61,16 +60,33 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
                   <div className="row icon" key={key}>
                     {data.icon.icon === "whatsapp" ? (
                       <WhatsappTooltipWrapper>
-                        <Icon name={data.icon.icon} height="icon-s" link={unternehmenData.whatsappLink} />
+                        <Icon
+                          name={data.icon.icon}
+                          height="icon-s"
+                          link={unternehmenData.whatsappLink}
+                        />
                       </WhatsappTooltipWrapper>
                     ) : (
-                      <Icon name={data.icon.icon} height="icon-s" />
+                      <Icon
+                        name={data.icon.icon}
+                        height="icon-s"
+                        link={
+                          data.icon.icon === "mail" &&
+                          validEmail.test(data.text.info) &&
+                          `mailto:${data.text.info}`
+                        }
+                      />
                     )}
 
-                    {!validGermanPhoneNumber.test(data.text.info) ? (
+                    {!validGermanPhoneNumber.test(data.text.info) &&
+                    !validEmail.test(data.text.info) ? (
                       data.text.info
-                    ) : (
+                    ) : validGermanPhoneNumber.test(data.text.info) ? (
                       <a href={`tel:${data.text.info}`}>{data.text.info}</a>
+                    ) : validEmail.test(data.text.info) ? (
+                      <a href={`mailto:${data.text.info}`}>{data.text.info}</a>
+                    ) : (
+                      data.text.info
                     )}
                   </div>
                 );

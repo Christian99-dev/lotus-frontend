@@ -11,12 +11,16 @@ import { device, size } from "../../theme/breakpoints";
 import Loader from "../Global/Loader";
 import { createImgUrl } from "../../utils/utils";
 import defaultPurple from "../../media/images/purple.png";
-import { validGermanPhoneNumber } from "../../utils/regex";
+import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
 
-export default function Navbar({ fetchData, fetchNavigationData, fetchUnternehmenData }) {
+export default function Navbar({
+  fetchData,
+  fetchNavigationData,
+  fetchUnternehmenData,
+}) {
   return (
     <>
       <Top fetchData={fetchData} fetchUnternehmenData={fetchUnternehmenData} />
@@ -38,7 +42,7 @@ export const Top = ({ fetchData, fetchUnternehmenData }) => {
 
     fetchUnternehmenData().then((res) => {
       setUnternehmenData(res.data.attributes);
-    })
+    });
   }, [fetchData]);
 
   return (
@@ -156,9 +160,14 @@ const Bar = ({ fetchData, fetchNavigationData }) => {
         spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
         className="navbuttons"
       >
-        {navigationNames && navigationLinks.map((navigation, key) => (
-          <NavButton key={key} to={navigation.to} text={Object.values(navigationNames)[key]} />
-        ))}
+        {navigationNames &&
+          navigationLinks.map((navigation, key) => (
+            <NavButton
+              key={key}
+              to={navigation.to}
+              text={Object.values(navigationNames)[key]}
+            />
+          ))}
       </SpaceWrapper>
     </BarWrapper>
   );
@@ -252,18 +261,32 @@ const BottomWrapper = styled.div`
 const Info = ({ text, iconColor, iconName, iconHeight, whatsappLink }) => {
   return (
     <InfoWrapper>
-      {iconName === "whatsapp" ? (
+      {validEmail.test(text) ? (
+        <Icon
+          height={iconHeight}
+          name={iconName}
+          color={iconColor}
+          link={`mailto:${text}`}
+        />
+      ) : iconName === "whatsapp" ? (
         <WhatsappTooltipWrapper>
-          <Icon height={iconHeight} name={iconName} color={iconColor} link={whatsappLink} />
+          <Icon
+            height={iconHeight}
+            name={iconName}
+            color={iconColor}
+            link={whatsappLink}
+          />
         </WhatsappTooltipWrapper>
       ) : (
         <Icon height={iconHeight} name={iconName} color={iconColor} />
       )}
 
-      {!validGermanPhoneNumber.test(text) ? (
+      {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
         text
-      ) : (
+      ) : validGermanPhoneNumber.test(text) ? (
         <a href={`tel:${text}`}>{text}</a>
+      ) : (
+        <a href={`mailto:${text}`}>{text}</a>
       )}
     </InfoWrapper>
   );

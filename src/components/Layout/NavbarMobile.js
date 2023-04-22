@@ -6,7 +6,7 @@ import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
-import { validGermanPhoneNumber } from "../../utils/regex";
+import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 
 const NavbarMobile = ({
   fetchData,
@@ -220,12 +220,17 @@ const Info = ({ text, iconColor, iconName, iconHeight, link }) => (
       height={iconHeight}
       name={iconName}
       color={iconColor}
-      link={iconName === "whatsapp" && link}
+      link={
+        (iconName === "whatsapp" && link) ||
+        (iconName === "mail" && validEmail.test(text) && `mailto:${text}`)
+      }
     />
-    {!validGermanPhoneNumber.test(text) ? (
+    {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
       <div>{text}</div>
-    ) : (
+    ) : validGermanPhoneNumber.test(text) ? (
       <a href={`tel:${text}`}>{text}</a>
+    ) : (
+      <a href={`mailto:${text}`}>{text}</a>
     )}
   </InfoWrapper>
 );

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { validGermanPhoneNumber } from "../../utils/regex";
+import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 
 export default function TextWithBackground({
@@ -26,10 +26,12 @@ export default function TextWithBackground({
       >
         {loading ? (
           "loading..."
-        ) : !validGermanPhoneNumber.test(text) ? (
+        ) : !validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
           text
-        ) : (
+        ) : validGermanPhoneNumber.test(text) ? (
           <a href={`tel:${text}`}>{text}</a>
+        ) : (
+          <a href={`mailto:${text}`}>{text}</a>
         )}
       </Wrapper>
     </SpaceWrapper>
@@ -73,7 +75,9 @@ const Wrapper = styled.div`
 
   &.transparent {
     background-color: ${(props) =>
-      props.theme === "purple" ? "var(--primary-transparent)" : "var(--secondary-transparent)"};
+      props.theme === "purple"
+        ? "var(--primary-transparent)"
+        : "var(--secondary-transparent)"};
 
     :hover,
     a:hover {
