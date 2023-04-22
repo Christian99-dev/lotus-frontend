@@ -22,7 +22,7 @@ const ImpressumPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
       <ImpressumPageWrapper>
-        <Top fetchData={getHeadModified} />
+        <Top fetchData={getHeadModified} fetchUnternehmenData={getUnternehmen} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -56,7 +56,7 @@ const ImpressumPage = () => {
             <Button className="button" text="Zurück zur Homepage" link="../" />
           </SpaceWrapper>
         </SpaceWrapper>
-        <Footer fetchData={getFooterModified} />
+        <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
       </ImpressumPageWrapper>
     </Layout>
   );

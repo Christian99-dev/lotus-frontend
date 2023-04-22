@@ -22,7 +22,7 @@ const AgbPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
       <AgbPageWrapper>
-        <Top fetchData={getHeadModified} />
+        <Top fetchData={getHeadModified} fetchUnternehmenData={getUnternehmen} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -56,7 +56,7 @@ const AgbPage = () => {
             <Button className="button" text="Zurück zur Homepage" link="../" />
           </SpaceWrapper>
         </SpaceWrapper>
-        <Footer fetchData={getFooterModified} />
+        <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
       </AgbPageWrapper>
     </Layout>
   );

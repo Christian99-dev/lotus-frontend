@@ -26,7 +26,7 @@ const NotFoundPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
       <NotFoundPageWrapper>
-        <Top fetchData={getHeadModified} />
+        <Top fetchData={getHeadModified} fetchUnternehmenData={getUnternehmen} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -55,7 +55,7 @@ const NotFoundPage = () => {
           </SpaceWrapper>
         </SpaceWrapper>
         <div className="footer-container">
-          <Footer fetchData={getFooterModified} />
+          <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
         </div>
       </NotFoundPageWrapper>
     </Layout>
