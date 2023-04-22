@@ -69,7 +69,7 @@ const PannelWrapper = styled(Parallax)`
         position: absolute;
       }
       color: var(--secondary);
-      font-size: var(--fs-4);
+      font-size: var(--fs-3);
       font-weight: var(--medium);
     }
 
