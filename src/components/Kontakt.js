@@ -4,7 +4,7 @@ import SpaceWrapper from "../utils/SpaceWrapper";
 import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
 import { Parallax } from "react-parallax";
-import MapsWrapper from "../components/Global/MapsWrapper";
+import Maps from "./Global/Maps";
 import { device, size } from "../theme/breakpoints";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "./Global/Form";
@@ -24,7 +24,7 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
   useEffect(() => {
     fetchUnternehmenData().then((res) => {
       setUnternehmenData(res.data.attributes);
-    })
+    });
 
     fetchData().then((res) => {
       setData(res.data.attributes);
@@ -80,7 +80,10 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
                         icon={info.icon.icon}
                         text={info.text.info}
                         key={key}
-                        link={info.icon.icon === "whatsapp" && unternehmenData.whatsappLink}
+                        link={
+                          info.icon.icon === "whatsapp" &&
+                          unternehmenData.whatsappLink
+                        }
                       />
                     );
                   })}
@@ -90,10 +93,7 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
                 <Form data={data} />
               </div>
               <div className="right">
-                <MapsWrapper
-                  location={[data.mapLocation.lat, data.mapLocation.lng]}
-                  speechBubbleText={data.mapSpeechbubbleText.info}
-                />
+                <Maps />
               </div>
             </SpaceWrapper>
           ) : (
@@ -186,7 +186,6 @@ const KontaktWrapper = styled(Parallax)`
 `;
 
 function Info({ spacing, icon, text, link }) {
-
   const width = useWindowDimensions().width;
   return (
     <InfoWrapper spacing={spacing}>
@@ -224,7 +223,7 @@ const InfoWrapper = styled(SpaceWrapper)`
     .text {
       text-align: center;
     }
-    a{
+    a {
       text-align: center;
     }
   }
