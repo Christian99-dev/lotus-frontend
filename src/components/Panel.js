@@ -70,7 +70,7 @@ const PannelWrapper = styled(Parallax)`
       }
       color: var(--secondary);
       font-size: var(--fs-3);
-      font-weight: var(--medium);
+      font-weight: var(--light);
     }
 
     @media ${device.tablet} {
