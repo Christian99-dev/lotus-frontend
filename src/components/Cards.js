@@ -155,7 +155,7 @@ const Cards = ({ fetchData }) => {
 
 const CardsWrapper = styled(SpaceWrapper)`
   position: relative;
-
+  background-color: white;
   .cards {
     display: grid;
     justify-content: space-between;

@@ -22,64 +22,69 @@ export default function Carousel({ fetchData }) {
   }, [fetchData]);
 
   return (
-    <CarouselWrapper id="carousel" background={useWindowDimensions().width > size.tablet ? background[0] : background[1]}>
-      <div className="filter">
-        <TextWithBackground
-          className="text1"
-          text={data ? data.text.info : ""}
-          fontSize="1"
-          color="purple"
-          spacing={{
-            top: "carousel-inner",
-            bottom: "carousel-inner-2",
-            left: "border",
-            right: "border",
-          }}
-          loading={!data}
-          transparent
-        />
-
-        <TextWithBackground
-          className="text2"
-          text={data ? data.subtext.info : ""}
-          fontSize="2"
-          color="purple"
-          spacing={{ bottom: "carousel-inner-3" }}
-          loading={!data}
-          transparent
-        />
-
-        <SpaceWrapper
-          className="buttons"
-          spacing={{ bottom: "carousel-inner" }}
-        >
-          <Button text="Leistungen" color="purple" to="cards" />
-          <Button text="Kontakt" to="contact" />
-        </SpaceWrapper>
-      </div>
+    <CarouselWrapper id="carousel">
+      <img
+        src={
+          useWindowDimensions().width > size.tablet
+            ? background[0]
+            : background[1]
+        }
+        alt="bg-img"
+      ></img>
+      <div className="filter"></div>
+      <TextWithBackground
+        className="text1"
+        text={data ? data.text.info : ""}
+        fontSize="1"
+        color="purple"
+        spacing={{
+          top: "carousel-inner",
+          bottom: "carousel-inner-2",
+          left: "border",
+          right: "border",
+        }}
+        loading={!data}
+        transparent
+      />
+      <TextWithBackground
+        className="text2"
+        text={data ? data.subtext.info : ""}
+        fontSize="2"
+        color="purple"
+        spacing={{ bottom: "carousel-inner-3" }}
+        loading={!data}
+        transparent
+      />
+      <SpaceWrapper className="buttons" spacing={{ bottom: "carousel-inner" }}>
+        <Button text="Leistungen" color="purple" to="cards" />
+        <Button text="Kontakt" to="contact" />
+      </SpaceWrapper>
     </CarouselWrapper>
   );
 }
 
 const CarouselWrapper = styled(SpaceWrapper)`
-  @media ${device.tablet} {
-    padding-top: 50.34px;
-  }
-  @media ${device.mobile} {
-    padding-top: 47.47px;
-  }
+  position: relative;
 
-  /* transition: background-image 0.2s ease; */
-  background-image: url(${(props) => props.background});
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+  img {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: 100%;
+    object-fit: cover;
+  }
   .filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
     background-color: var(--background-filter-dark);
+    z-index: -1;
   }
-
   .text1,
   .text2,
   .loader {
@@ -94,5 +99,12 @@ const CarouselWrapper = styled(SpaceWrapper)`
     display: flex;
     gap: var(--carousel-gap);
     justify-content: center;
+  }
+
+  @media ${device.tablet} {
+    padding-top: 50.34px;
+  }
+  @media ${device.mobile} {
+    padding-top: 47.47px;
   }
 `;
