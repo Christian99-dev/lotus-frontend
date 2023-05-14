@@ -20,10 +20,12 @@ import {
   getUnternehmen,
   getNavigation
 } from "../_api/axios";
+import Cookie from "../components/Global/Cookie";
 
 const IndexPage = () => {
   return (
     <Layout fetchData={getUnternehmen} >
+      <Cookie/>
       <Navbar fetchData={getHeadModified} fetchNavigationData={getNavigation} fetchUnternehmenData={getUnternehmen} />
       <Carousel fetchData={getWilkommenModified} />
       <Cards fetchData={getLeistungen} />
