@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 const CookieBanner = () => {
   return (
     <CookieConsent
-      enableDeclineButton
       location="bottom"
       buttonStyle={{
         paddingTop: "var(--button-padding-top)",
