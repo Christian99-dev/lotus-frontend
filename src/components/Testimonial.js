@@ -72,6 +72,7 @@ export default function Testimonial({ fetchData }) {
 }
 
 const TestimonialWrapper = styled(SpaceWrapper)`
+  background-color: white;
   .loader {
     margin: 0 auto;
   }

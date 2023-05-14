@@ -82,6 +82,7 @@ export default function Team({ fetchData }) {
 }
 
 const TeamWrapper = styled(SpaceWrapper)`
+  background-color: white;
   position: relative;
   .container-desktop {
     display: flex;
