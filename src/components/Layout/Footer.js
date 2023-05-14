@@ -108,7 +108,7 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
             <div className="col">
               <div className="head">Rechtliches</div>
               <Link className="row" to="/impressum">
-                Impressum
+                Impressum & Datenschutzerklärung
               </Link>
               <Link className="row" to="/agb">
                 AGB
