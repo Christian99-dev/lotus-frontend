@@ -6,6 +6,8 @@ import Icon from "./Icon";
 import styled from "styled-components";
 import { validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper from "../Global/WhatsappTooltip";
+import useWindowDimensions from "../../utils/useWindowDimensions";
+import {size} from "../../theme/breakpoints";
 
 const IconAndText = ({
   iconHeight,
@@ -18,6 +20,7 @@ const IconAndText = ({
   fontWeight,
   center,
 }) => {
+  const width = useWindowDimensions().width;
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -31,7 +34,7 @@ const IconAndText = ({
 
   if (data) {
     if (iconName === "mail") linkForIcon = `mailto:${data.email}`;
-    if (iconName === "whatsapp") linkForIcon = `tel:${data.whatsappLink}`;
+    if (iconName === "whatsapp") linkForIcon = `${data.whatsappLink}`;
     if (iconName === "time") linkForIcon = `tel:${data.nummer}`;
     if (iconName === "phone") linkForIcon = `tel:${data.nummer}`;
 
@@ -50,7 +53,7 @@ const IconAndText = ({
         fontWeight={fontWeight}
         center={center}
       >
-        {iconName === "whatsapp" ? (
+        {iconName === "whatsapp" && width > size.tablet ? (
           <WhatsappTooltipWrapper>
             <Icon name={iconName} height={iconHeight} link={linkForIcon} />
           </WhatsappTooltipWrapper>
