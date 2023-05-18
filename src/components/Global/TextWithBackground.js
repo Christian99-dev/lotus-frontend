@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import SpaceWrapper from "../../utils/SpaceWrapper";
+import Icon from "../Global/Icon";
 
 export default function TextWithBackground({
   text,
@@ -29,7 +30,10 @@ export default function TextWithBackground({
         ) : !validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
           text
         ) : validGermanPhoneNumber.test(text) ? (
-          <a href={`tel:${text}`}>{text}</a>
+          <>
+            <Icon name="phone" className="icon" />
+            <a href={`tel:${text}`}>{text}</a>
+          </>
         ) : (
           <a href={`mailto:${text}`}>{text}</a>
         )}
@@ -41,7 +45,16 @@ export default function TextWithBackground({
 const Wrapper = styled.div`
   padding: 1px;
   margin: 0px;
-  display: inline;
+  display: inline-block;
+
+  position: relative;
+  text-align: center; 
+
+  .icon {
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+  }
 
   font-size: ${(props) => props.fontSize};
   font-weight: var(--semibold);

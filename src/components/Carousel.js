@@ -29,6 +29,7 @@ export default function Carousel({ fetchData }) {
             ? background[0]
             : background[1]
         }
+        className="bg-img"
         alt="bg-img"
       ></img>
       <div className="filter"></div>
@@ -66,7 +67,7 @@ export default function Carousel({ fetchData }) {
 const CarouselWrapper = styled(SpaceWrapper)`
   position: relative;
 
-  img {
+  .bg-img {
     z-index: -1;
     position: fixed;
     top: 0;
