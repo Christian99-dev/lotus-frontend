@@ -20,7 +20,7 @@ import Open from "../../media/icons/open.svg";
 import Cash from "../../media/icons/cash.svg";
 
 export default function Icon({ name, height, color, link, ...props }) {
-  let icon;
+  let icon = Cash;
   if (name === "time") icon = Time;
   if (name === "mail") icon = Mail;
   if (name === "phone") icon = Phone;
