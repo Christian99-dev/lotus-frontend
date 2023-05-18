@@ -8,8 +8,9 @@ import { device, size } from "../theme/breakpoints";
 import { createImgUrl } from "../utils/utils";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
-export default function Carousel({ fetchData }) {
+export default function Carousel({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
+  const [logo, setLogo] = useState(null);
   const [background, setBackground] = useState(defaultPurple);
   useEffect(() => {
     fetchData().then((res) => {
@@ -19,7 +20,11 @@ export default function Carousel({ fetchData }) {
         createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
       ]);
     });
-  }, [fetchData]);
+
+    fetchUnternehmenData().then((res) => {
+      setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
+    });
+  }, [fetchData, fetchUnternehmenData]);
 
   return (
     <CarouselWrapper id="carousel">
@@ -32,14 +37,23 @@ export default function Carousel({ fetchData }) {
         className="bg-img"
         alt="bg-img"
       ></img>
+
       <div className="filter"></div>
+      <SpaceWrapper
+        spacing={{
+          top: "carousel-inner",
+        }}
+        className="logo-mobile"
+      >
+        <img src={logo} className="logo-mobile" alt="logo-mobile"></img>
+      </SpaceWrapper>
       <TextWithBackground
         className="text1"
         text={data ? data.text.info : ""}
         fontSize="1"
         color="purple"
         spacing={{
-          top: "carousel-inner",
+          top:"carousel-inner",
           bottom: "carousel-inner-2",
           left: "border",
           right: "border",
@@ -66,6 +80,16 @@ export default function Carousel({ fetchData }) {
 
 const CarouselWrapper = styled(SpaceWrapper)`
   position: relative;
+  .logo-mobile {
+    
+    display: none;
+    @media ${device.tablet} {
+      display: block;
+    }
+
+    margin: 0 auto;
+    height: var(--navbar-logo-height);
+  }
 
   .bg-img {
     z-index: -1;
@@ -77,6 +101,7 @@ const CarouselWrapper = styled(SpaceWrapper)`
     background-size: 100%;
     object-fit: cover;
   }
+
   .filter {
     position: absolute;
     top: 0;

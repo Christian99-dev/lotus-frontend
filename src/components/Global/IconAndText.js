@@ -16,7 +16,7 @@ const IconAndText = ({
   direction,
   textSize,
   fontWeight,
-  center
+  center,
 }) => {
   const [data, setData] = useState(null);
 
@@ -51,9 +51,7 @@ const IconAndText = ({
         center={center}
       >
         {iconName === "whatsapp" ? (
-
           <WhatsappTooltipWrapper>
-            {console.log("test")}
             <Icon name={iconName} height={iconHeight} link={linkForIcon} />
           </WhatsappTooltipWrapper>
         ) : (
