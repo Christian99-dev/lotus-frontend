@@ -15,6 +15,7 @@ import { validGermanPhoneNumber } from "../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "./Global/WhatsappTooltip";
+import IconAndText from "./Global/IconAndText";
 
 export default function Kontakt({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
@@ -35,6 +36,7 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
     });
   }, [fetchData, fetchUnternehmenData]);
 
+  const width = useWindowDimensions().width;
   return (
     <div id="contact">
       <WhatsappTooltip />
@@ -76,14 +78,15 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
                 >
                   {data.infos.map((info, key) => {
                     return (
-                      <Info
-                        icon={info.icon.icon}
+                      <IconAndText
+                        iconName={info.icon.icon}
                         text={info.text.info}
                         key={key}
-                        link={
-                          info.icon.icon === "whatsapp" &&
-                          unternehmenData.whatsappLink
-                        }
+                        gap="team-xs-space"
+                        direction={width > size.tablet && "row"}
+                        textSize="fs-2"
+                        fontWeight="semibold"
+                        iconHeight="icon-m"
                       />
                     );
                   })}

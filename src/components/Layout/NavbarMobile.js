@@ -6,7 +6,7 @@ import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
 import { createImgUrl } from "../../utils/utils";
-import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
+import IconAndText from "../Global/IconAndText";
 
 const NavbarMobile = ({
   fetchData,
@@ -128,12 +128,12 @@ const Overlay = ({
           {unternehmenData &&
             rechts.map((data, key) => {
               return (
-                <Info
-                  key={key}
+                <IconAndText
+                  key={key + 100}
                   text={data.text.info}
                   iconHeight="icon-s"
                   iconName={data.icon.icon}
-                  link={unternehmenData.whatsappLink}
+                  gap="navmobile-overlay-gap-info-inner"
                 />
               );
             })}
@@ -211,41 +211,5 @@ const OverlayWrapper = styled(SpaceWrapper)`
       flex-direction: column;
       gap: var(--navmobile-overlay-gap-info);
     }
-  }
-`;
-
-const Info = ({ text, iconColor, iconName, iconHeight, link }) => (
-  <InfoWrapper>
-    <Icon
-      height={iconHeight}
-      name={iconName}
-      color={iconColor}
-      link={
-        (iconName === "whatsapp" && link) ||
-        (iconName === "mail" && validEmail.test(text) && `mailto:${text}`)
-      }
-    />
-    {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
-      <div>{text}</div>
-    ) : validGermanPhoneNumber.test(text) ? (
-      <a href={`tel:${text}`}>{text}</a>
-    ) : (
-      <a href={`mailto:${text}`}>{text}</a>
-    )}
-  </InfoWrapper>
-);
-
-const InfoWrapper = styled.div`
-  font-size: var(--fs-3);
-  font-weight: var(--medium);
-  color: var(--secondary);
-  display: flex;
-  flex-direction: column;
-  gap: var(--navmobile-overlay-gap-info-inner);
-  align-items: center;
-
-  a {
-    color: var(--secondary);
-    text-decoration: none;
   }
 `;

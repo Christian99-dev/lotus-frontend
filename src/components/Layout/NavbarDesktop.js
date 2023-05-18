@@ -15,6 +15,7 @@ import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
+import IconAndText from "../Global/IconAndText";
 
 export default function Navbar({
   fetchData,
@@ -57,13 +58,16 @@ export const Top = ({ fetchData, fetchUnternehmenData }) => {
         <div className="right">
           {data && unternehmenData ? (
             data.rechts.map((data, key) => (
-              <Info
+              <IconAndText
                 key={key}
                 text={data.text.info}
                 iconHeight="icon-s"
                 iconName={data.icon.icon}
                 className="info"
                 whatsappLink={unternehmenData.whatsappLink}
+                textSize="fs-4"
+                direction="row"
+                gap=""
               />
             ))
           ) : (
@@ -257,55 +261,6 @@ const BottomWrapper = styled.div`
   }
 `;
 
-// info
-const Info = ({ text, iconColor, iconName, iconHeight, whatsappLink }) => {
-  return (
-    <InfoWrapper>
-      {validEmail.test(text) ? (
-        <Icon
-          height={iconHeight}
-          name={iconName}
-          color={iconColor}
-          link={`mailto:${text}`}
-        />
-      ) : iconName === "whatsapp" ? (
-        <WhatsappTooltipWrapper>
-          <Icon
-            height={iconHeight}
-            name={iconName}
-            color={iconColor}
-            link={whatsappLink}
-          />
-        </WhatsappTooltipWrapper>
-      ) : (
-        <Icon height={iconHeight} name={iconName} color={iconColor} />
-      )}
 
-      {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
-        text
-      ) : validGermanPhoneNumber.test(text) ? (
-        <a href={`tel:${text}`}>{text}</a>
-      ) : (
-        <a href={`mailto:${text}`}>{text}</a>
-      )}
-    </InfoWrapper>
-  );
-};
 
-const InfoWrapper = styled.div`
-  font-size: var(--fs-4);
-  font-weight: var(--medium);
-  color: var(--secondary);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  a {
-    color: var(--secondary);
-    text-decoration: none;
-  }
 
-  .tooltip-wrapper {
-    text-align: center;
-    /* margin: 100px; */
-  }
-`;

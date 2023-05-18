@@ -9,6 +9,7 @@ import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
+import IconAndText from "../Global/IconAndText";
 export default function Footer({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
   const [unternehmenData, setUnternehmenData] = useState(null);
@@ -36,59 +37,22 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
       >
         {data && unternehmenData ? (
           <>
-            {/* <div className="col">
-            <div className="head">Social Media</div>
-            <div className="row icons">
-              {data.socials.map((icon, key) => {
-                return (
-                  <Icon
-                    name={icon.icon.icon}
-                    height="icon-s"
-                    link={icon.text}
-                    key={key}
-                  />
-                );
-              })}
-            </div>
-          </div> */}
-
             <div className="col">
               <div className="head"> Kontakt</div>
 
               {data.kontakt.map((data, key) => {
                 return (
-                  <div className="row icon" key={key}>
-                    {data.icon.icon === "whatsapp" ? (
-                      <WhatsappTooltipWrapper>
-                        <Icon
-                          name={data.icon.icon}
-                          height="icon-s"
-                          link={unternehmenData.whatsappLink}
-                        />
-                      </WhatsappTooltipWrapper>
-                    ) : (
-                      <Icon
-                        name={data.icon.icon}
-                        height="icon-s"
-                        link={
-                          data.icon.icon === "mail" &&
-                          validEmail.test(data.text.info) &&
-                          `mailto:${data.text.info}`
-                        }
-                      />
-                    )}
-
-                    {!validGermanPhoneNumber.test(data.text.info) &&
-                    !validEmail.test(data.text.info) ? (
-                      data.text.info
-                    ) : validGermanPhoneNumber.test(data.text.info) ? (
-                      <a href={`tel:${data.text.info}`}>{data.text.info}</a>
-                    ) : validEmail.test(data.text.info) ? (
-                      <a href={`mailto:${data.text.info}`}>{data.text.info}</a>
-                    ) : (
-                      data.text.info
-                    )}
-                  </div>
+                  <IconAndText
+                    iconName={data.icon.icon}
+                    text={data.text.info}
+                    key={key}
+                    gap="footer-inner-s"
+                    textSize="fs-4"
+                    fontWeight="semibold"
+                    iconHeight="icon-s"
+                    direction="row"
+                    className="row icon"
+                  />
                 );
               })}
             </div>
