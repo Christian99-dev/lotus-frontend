@@ -29,13 +29,26 @@ export default function Layout({ children, fetchData }) {
             user-scalable=no"
             // target-densitydpi=device-dpi
           />
+          <script
+            id="usercentrics-cmp"
+            async
+            data-eu-mode="true"
+            data-settings-id="kQjO-dCNKLdpsJ"
+            src="https://app.eu.usercentrics.eu/browser-ui/latest/loader.js"
+          ></script>
+          <script type="application/javascript" src="https://sdp.eu.usercentrics.eu/latest/uc-block.bundle.js"></script>
+
           {data && <title>{data.name}</title>}
-          {data && <link rel="icon" href={createImgUrl(data.favicon.data.attributes.url)} />}
+          {data && (
+            <link
+              rel="icon"
+              href={createImgUrl(data.favicon.data.attributes.url)}
+            />
+          )}
 
           {/* <script src={withPrefix("/script.js")} type="text/javascript" /> */}
           {/* https://stackoverflow.com/questions/44679794/position-fixed-on-chrome-mobile-causing-element-to-move-on-scroll-up-down */}
           {/* <meta name="icon" href="../assets/logo.png" /> */}
-
         </Helmet>
         <GlobalStyle />
         {children}

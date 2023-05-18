@@ -77,6 +77,10 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
               <Link className="row" to="/agb">
                 AGB
               </Link>
+
+              <a className="row" href="javascript:UC_UI.showSecondLayer();">
+                Cookie-Einstellungen
+              </a>
             </div>
           </>
         ) : (
