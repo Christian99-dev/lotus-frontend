@@ -69,6 +69,7 @@ const Carousel = css`
 const Kontakt = css`
   ${responsiveVar("contact-inner", 150)}
   ${responsiveVar("contact-maps-height-tablet", 400)}
+  ${responsiveVar("contact-qr-code-height", 100)}
 `;
 
 const Panel = css`

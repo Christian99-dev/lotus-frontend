@@ -21,10 +21,14 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
   const [data, setData] = useState(null);
   const [background, setBackground] = useState([]);
   const [unternehmenData, setUnternehmenData] = useState(null);
+  const [qrCode, setQrCode] = useState(null);
 
   useEffect(() => {
     fetchUnternehmenData().then((res) => {
       setUnternehmenData(res.data.attributes);
+      setQrCode(
+        createImgUrl(res.data.attributes.QR_Whatsapp.data.attributes.url)
+      );
     });
 
     fetchData().then((res) => {
@@ -68,10 +72,22 @@ export default function Kontakt({ fetchData, fetchUnternehmenData }) {
                 />
                 <SpaceWrapper
                   className="subtitle"
-                  spacing={{ bottom: "team-m-space" }}
+                  spacing={{ bottom: "team-xxs-space" }}
                 >
                   {data.subUeberschrift}
                 </SpaceWrapper>
+
+                {qrCode && (
+                  <SpaceWrapper
+                    className="subtitle"
+                    spacing={{ bottom: "team-m-space" }}
+                  >
+                    <a href={unternehmenData.whatsappLink}>
+                      <img src={qrCode} className="qr-code" alt="qr-code" />
+                    </a>
+                  </SpaceWrapper>
+                )}
+
                 <SpaceWrapper
                   className="infos"
                   spacing={{ bottom: "team-m-space" }}
@@ -133,6 +149,11 @@ const KontaktWrapper = styled(Parallax)`
         flex-direction: column;
         gap: var(--team-s-space);
       }
+
+      .qr-code {
+        height: var(--contact-qr-code-height);
+      }
+
       .form {
         display: grid;
         gap: var(--team-xs-space);
