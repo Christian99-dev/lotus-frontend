@@ -1,18 +1,22 @@
 import { graphql, useStaticQuery } from "gatsby";
 
-const strapiGlobal = useStaticQuery(graphql`
-  {
-    strapiGlobal {
-      name: Name
-      nummer: Nummer
-      oeffnungszeiten: Oeffnungszeiten
-      plzOrt: PlzOrt
-      strasseHausnummer: StrasseHausnummer
-      volleAdresse: VolleAdresse
-      whatsappLink: WhatsappLink
-      email: Email
+function useGlobalParser() {
+  const {strapiGlobal} = useStaticQuery(graphql`
+    {
+      strapiGlobal {
+        Name
+        Nummer
+        Oeffnungszeiten
+        PlzOrt
+        StrasseHausnummer
+        VolleAdresse
+        WhatsappLink
+        Email
+      }
     }
-  }
-`);
+  `);
 
-export default () => strapiGlobal;
+  return (globalID) => strapiGlobal[globalID];
+}
+
+export default useGlobalParser;
