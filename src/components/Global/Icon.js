@@ -74,7 +74,7 @@ const Wrapper = styled.img`
 
   &.isLink {
     transition: filter 0.1s ease;
-    :hover {
+    &:hover {
       cursor: pointer;
       filter: var(--pink-filter);
     }

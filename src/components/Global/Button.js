@@ -77,7 +77,7 @@ const Wrapper = styled.button`
   background-size: 200% 100%;
   background-position: right bottom;
   transition: ease var(--transition-time) all;
-  :hover {
+  &:hover {
     background-position: left bottom;
     transition: ease var(--transition-time) all;
     color: ${(props) => props.theme.hoverColor};

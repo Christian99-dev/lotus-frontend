@@ -120,7 +120,7 @@ const FooterWrapper = styled(SpaceWrapper)`
     text-decoration: none;
     color: var(--secondary);
     transition: color 0.1s ease;
-    :hover {
+    &:hover {
       color: var(--pink);
     }
   }

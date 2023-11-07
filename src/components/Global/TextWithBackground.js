@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   }
 
   transition: all 0.2s;
-  :hover,
+  &:hover,
   a:hover {
     transition: all 0.2s;
     background-color: ${(props) =>
@@ -92,7 +92,7 @@ const Wrapper = styled.div`
         ? "var(--primary-transparent)"
         : "var(--secondary-transparent)"};
 
-    :hover,
+    &:hover,
     a:hover {
       background-color: ${(props) =>
         props.theme !== "purple"

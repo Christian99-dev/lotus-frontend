@@ -25,7 +25,7 @@ const style = css`
   outline: none;
   min-width: 0;
 
-  ::placeholder {
+  &::placeholder {
     color: var(--primary-dim);
   }
   

@@ -458,7 +458,7 @@ const PopupWrapper = styled.div`
       }
 
       .icon {
-        :hover {
+        &:hover {
           cursor: pointer;
         }
       }
