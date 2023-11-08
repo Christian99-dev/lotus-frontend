@@ -60,9 +60,7 @@ const Navbar = ({ fetchData, fetchNavigationData, fetchUnternehmenData }) => {
     />
   ) : (
     <NavbarMobile
-      fetchData={fetchData}
-      fetchNavigationData={fetchNavigationData}
-      fetchUnternehmenData={fetchUnternehmenData}
+      strapiHeader={strapiHeader}
     />
   );
 };

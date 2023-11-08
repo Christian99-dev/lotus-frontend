@@ -5,14 +5,11 @@ import Icon from "../Global/Icon";
 import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { useState } from "react";
-import { createImgUrl } from "../../utils/utils";
 import IconAndText from "../Global/IconAndText";
+import useGlobalData from "../../utils/useGlobalData";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const NavbarMobile = ({
-  fetchData,
-  fetchNavigationData,
-  fetchUnternehmenData,
-}) => {
+const NavbarMobile = ({ strapiHeader }) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
     setToggle(!toggle);
@@ -24,9 +21,7 @@ const NavbarMobile = ({
       <Overlay
         open={toggle}
         toggleNav={ToggleNav}
-        fetchData={fetchData}
-        fetchNavigationData={fetchNavigationData}
-        fetchUnternehmenData={fetchUnternehmenData}
+        strapiHeader={strapiHeader}
       />
     </>
   );
@@ -68,39 +63,20 @@ const NavWrapper = styled.div`
 `;
 
 // overlay
-const Overlay = ({
-  open,
-  toggleNav,
-  fetchData,
-  fetchNavigationData,
-  fetchUnternehmenData,
-}) => {
-  const [data, setData] = useState(null);
-  const [logo, setLogo] = useState(null);
-  const [navigationNames, setNavigationNames] = useState(null);
-  const [unternehmenData, setUnternehmenData] = useState(null);
-
-  useEffect(() => {
-    fetchUnternehmenData().then((res) => {
-      setUnternehmenData(res.data.attributes);
-    });
-
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-      setLogo(
-        createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
-      );
-    });
-    fetchNavigationData().then((res) => {
-      setNavigationNames(res.data.attributes);
-    });
-  }, [fetchData, fetchNavigationData, fetchUnternehmenData]);
-
-  const { rechts } = data ? data : { rechts: [] };
+const Overlay = ({ open, toggleNav, strapiHeader }) => {
+  const { rechts } = strapiHeader;
+  const {
+    parse,
+    data: { logoOhneText },
+  } = useGlobalData();
 
   return (
     <OverlayWrapper className={open ? "open" : "closed"}>
-      {logo && <img src={logo} alt="logo" className="logo" />}
+      <GatsbyImage
+        className="logo"
+        image={getImage(logoOhneText.localFile)}
+        alt={logoOhneText.alternativeText}
+      />
       <Icon
         name="close"
         height="icon-m"
@@ -110,33 +86,32 @@ const Overlay = ({
 
       <div className="scroll-wrapper">
         <div className="nav">
-          {navigationNames &&
-            navigationLinks.map((navigation, key) => (
-              <div className="navbutton-wrapper" key={key}>
-                <NavButton
-                  to={navigation.toMobile ? navigation.toMobile : navigation.to}
-                  text={Object.values(navigationNames)[key]}
-                  className="navbutton"
-                  onClick={() => {
-                    toggleNav();
-                  }}
-                />
-              </div>
-            ))}
+          {navigationLinks.map((navigation, key) => (
+            <div className="navbutton-wrapper" key={key}>
+              <NavButton
+                to={navigation.toMobile ? navigation.toMobile : navigation.to}
+                text={navigation.name}
+                className="navbutton"
+                onClick={() => {
+                  toggleNav();
+                }}
+              />
+            </div>
+          ))}
         </div>
         <div className="info">
-          {unternehmenData &&
-            rechts.map((data, key) => {
-              return (
-                <IconAndText
-                  key={key + 100}
-                  text={data.text.info}
-                  iconHeight="icon-s"
-                  iconName={data.icon.icon}
-                  gap="navmobile-overlay-gap-info-inner"
-                />
-              );
-            })}
+          {rechts.map((data, key) => {
+            console.log(data);
+            return (
+              <IconAndText
+                key={key + 100}
+                text={parse(data.global.globalID)}
+                iconHeight="icon-s"
+                iconName={data.icon.iconID}
+                gap="navmobile-overlay-gap-info-inner"
+              />
+            );
+          })}
         </div>
       </div>
     </OverlayWrapper>
@@ -163,15 +138,17 @@ const OverlayWrapper = styled(SpaceWrapper)`
   .logo {
     z-index: -1;
     position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    height: var(--navmobile-overlay-logo-height);
+
+    img {
+      margin: auto;
+      text-align: center;
+      width: auto;
+      height: var(--navmobile-overlay-logo-height);
+    }
   }
 
   .closeButton {

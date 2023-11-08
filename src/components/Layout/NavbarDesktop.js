@@ -178,7 +178,6 @@ const BottomWrapper = styled.div`
   }
 
   .logo {
-    margin: auto 0;
     width: 100%;
     img {
       margin: 0 auto;
