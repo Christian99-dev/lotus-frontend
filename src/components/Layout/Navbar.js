@@ -5,8 +5,8 @@ import NavbarDekstop from "./NavbarDesktop";
 import NavbarMobile from "./NavbarMobile";
 import { graphql, useStaticQuery } from "gatsby";
 
-const Navbar = ({ fetchData, fetchNavigationData, fetchUnternehmenData }) => {
-  const { strapiWillkommen, strapiGlobal, strapiHeader } =
+const Navbar = () => {
+  const { strapiWillkommen, strapiHeader } =
     useStaticQuery(graphql`
       {
         strapiWillkommen {
@@ -19,16 +19,6 @@ const Navbar = ({ fetchData, fetchNavigationData, fetchUnternehmenData }) => {
             }
           }
           hintergrundMobile: HintergrundMobile {
-            alternativeText
-            localFile {
-              childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED)
-              }
-            }
-          }
-        }
-        strapiGlobal {
-          logo: Logo {
             alternativeText
             localFile {
               childImageSharp {

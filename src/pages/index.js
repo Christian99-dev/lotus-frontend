@@ -23,12 +23,8 @@ import {
 const IndexPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
-      <Navbar
-        fetchData={getHeadModified}
-        fetchNavigationData={getNavigation}
-        fetchUnternehmenData={getUnternehmen}
-      />
-      <Carousel fetchData={getWilkommenModified} fetchUnternehmenData={getUnternehmen}/>
+      <Navbar />
+      <Carousel />
       {/* <Cards fetchData={getLeistungen} /> */}
       {/* <Panel fetchData={getArbeitModified} /> */}
       {/* <Team fetchData={getTeam} /> */}

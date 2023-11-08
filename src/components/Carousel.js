@@ -9,7 +9,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import useGlobalData from "../utils/useGlobalData";
 
-export default function Carousel({ fetchData, fetchUnternehmenData }) {
+export default function Carousel() {
   const { hintergrund, hintergrundMobile, untertitel, titel } =
     useStaticQuery(graphql`
       {
