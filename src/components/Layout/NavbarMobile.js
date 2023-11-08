@@ -101,7 +101,6 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
         </div>
         <div className="info">
           {rechts.map((data, key) => {
-            console.log(data);
             return (
               <IconAndText
                 key={key + 100}

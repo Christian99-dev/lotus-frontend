@@ -324,3 +324,7 @@ const { hintergrund, hintergrundMobile, untertitel, titel } =
       }
     }
   `).strapiWillkommen;
+
+
+
+  document.body.style.overflow = open ? "hidden" : "unset";

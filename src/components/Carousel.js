@@ -1,42 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Button from "../components/Global/Button";
-import defaultPurple from "../media/images/purple.png";
 import { device, size } from "../theme/breakpoints";
-import { createImgUrl } from "../utils/utils";
 import useWindowDimensions from "../utils/useWindowDimensions";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import useGlobalData from "../utils/useGlobalData";
 
 export default function Carousel({ fetchData, fetchUnternehmenData }) {
-  const [data, setData] = useState(null);
-  const [logo, setLogo] = useState(null);
-  const [background, setBackground] = useState(defaultPurple);
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-      setBackground([
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
-        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
-      ]);
-    });
+  const { hintergrund, hintergrundMobile, untertitel, titel } =
+    useStaticQuery(graphql`
+      {
+        strapiWillkommen {
+          hintergrund: Hintergrund {
+            alternativeText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+          }
+          hintergrundMobile: HintergrundMobile {
+            alternativeText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+          }
+          untertitel: Untertitel {
+            globalID
+          }
+          titel: Titel {
+            globalID
+          }
+        }
+      }
+    `).strapiWillkommen;
 
-    fetchUnternehmenData().then((res) => {
-      setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
-    });
-  }, [fetchData, fetchUnternehmenData]);
+  const {
+    data: { logo },
+    parse,
+  } = useGlobalData();
 
   return (
     <CarouselWrapper id="carousel">
-      <img
-        src={
-          useWindowDimensions().width > size.tablet
-            ? background[0]
-            : background[1]
-        }
-        className="bg-img"
-        alt="bg-img"
-      ></img>
+      {useWindowDimensions().width > size.tablet ? (
+        <GatsbyImage
+          image={getImage(hintergrund.localFile)}
+          alt={hintergrund.alternativeText}
+          className="bg-img"
+        />
+      ) : (
+        <GatsbyImage
+          image={getImage(hintergrundMobile.localFile)}
+          alt={hintergrundMobile.alternativeText}
+          className="bg-img"
+        />
+      )}
 
       <div className="filter"></div>
       <SpaceWrapper
@@ -45,29 +68,31 @@ export default function Carousel({ fetchData, fetchUnternehmenData }) {
         }}
         className="logo-mobile"
       >
-        <img src={logo} className="logo-mobile" alt="logo-mobile"></img>
+        <GatsbyImage
+          image={getImage(logo.localFile)}
+          alt={logo.alternativeText}
+          className="logo-mobile"
+        />
       </SpaceWrapper>
       <TextWithBackground
         className="text1"
-        text={data ? data.text.info : ""}
+        text={parse(titel.globalID)}
         fontSize="1"
         color="purple"
         spacing={{
-          top:"carousel-inner",
+          top: "carousel-inner",
           bottom: "carousel-inner-2",
           left: "border",
           right: "border",
         }}
-        loading={!data}
         transparent
       />
       <TextWithBackground
         className="text2"
-        text={data ? data.subtext.info : ""}
+        text={parse(untertitel.globalID)}
         fontSize="2"
         color="purple"
         spacing={{ bottom: "carousel-inner-3" }}
-        loading={!data}
         transparent
       />
       <SpaceWrapper className="buttons" spacing={{ bottom: "carousel-inner" }}>
@@ -81,14 +106,15 @@ export default function Carousel({ fetchData, fetchUnternehmenData }) {
 const CarouselWrapper = styled(SpaceWrapper)`
   position: relative;
   .logo-mobile {
-    
     display: none;
+    img{
+      margin: 0 auto;
+      height: var(--navbar-logo-height);
+      width: auto;
+    }
     @media ${device.tablet} {
       display: block;
     }
-
-    margin: 0 auto;
-    height: var(--navbar-logo-height);
   }
 
   .bg-img {

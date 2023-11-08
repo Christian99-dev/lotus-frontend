@@ -9,12 +9,10 @@ export default function TextWithBackground({
   color,
   fontSize,
   spacing,
-  loading,
   transparent,
   ...props
 }) {
   let className = "";
-  if (loading) className += " loading";
   if (transparent) className += " transparent";
 
   return (
@@ -25,9 +23,7 @@ export default function TextWithBackground({
         fontSize={`var(--fs-${fontSize})`}
         transparent={transparent}
       >
-        {loading ? (
-          "loading..."
-        ) : !validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
+        {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
           text
         ) : validGermanPhoneNumber.test(text) ? (
           <>
@@ -48,7 +44,7 @@ const Wrapper = styled.div`
   display: inline-block;
 
   position: relative;
-  text-align: center; 
+  text-align: center;
 
   .icon {
     position: relative;
@@ -77,11 +73,6 @@ const Wrapper = styled.div`
     background-color: ${(props) =>
       props.theme !== "purple" ? "var(--primary)" : "var(--secondary)"};
 
-    color: ${(props) =>
-      props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
-  }
-
-  &.loading {
     color: ${(props) =>
       props.theme !== "purple" ? "var(--secondary)" : "var(--primary)"};
   }
