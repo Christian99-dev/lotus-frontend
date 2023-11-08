@@ -3,19 +3,12 @@ import styled from "styled-components";
 import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
 import { navigationLinks } from "../../utils/constants";
 import { useRef } from "react";
-import { useEffect, useState } from "react";
-import { device, size } from "../../theme/breakpoints";
-import Loader from "../Global/Loader";
-import { createImgUrl } from "../../utils/utils";
-import defaultPurple from "../../media/images/purple.png";
-import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
-import WhatsappTooltipWrapper, {
-  WhatsappTooltip,
-} from "../Global/WhatsappTooltip";
+import { useEffect } from "react";
+import { device } from "../../theme/breakpoints";
+import { WhatsappTooltip } from "../Global/WhatsappTooltip";
 import IconAndText from "../Global/IconAndText";
 import useGlobalData from "../../utils/useGlobalData";
 
@@ -29,7 +22,6 @@ export default function Navbar({ strapiWillkommen, strapiHeader }) {
   );
 }
 
-// Top
 export const Top = ({ strapiHeader }) => {
   const { links, rechts } = strapiHeader;
   const globalData = useGlobalData().parse;
@@ -107,7 +99,6 @@ const TopWrapper = styled(SpaceWrapper)`
   }
 `;
 
-// Bar
 const Bar = () => {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
@@ -149,7 +140,6 @@ const BarWrapper = styled.div`
   }
 `;
 
-// Bottom
 const Bottom = ({ strapiWillkommen }) => {
   const { hintergrund } = strapiWillkommen;
   const { logo } = useGlobalData().data;
@@ -181,7 +171,7 @@ const BottomWrapper = styled.div`
     height: 100%;
     z-index: -2;
   }
-  
+
   .filter {
     background-color: var(--background-filter-dark);
     transition: background-color 0.5s ease;
