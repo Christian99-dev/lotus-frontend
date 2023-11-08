@@ -18,19 +18,23 @@ import {
   getTeam,
   getWilkommenModified,
   getUnternehmen,
-  getNavigation
+  getNavigation,
 } from "../_api/axios";
 const IndexPage = () => {
   return (
-    <Layout fetchData={getUnternehmen} >
-      <Navbar fetchData={getHeadModified} fetchNavigationData={getNavigation} fetchUnternehmenData={getUnternehmen} />
-      <Carousel fetchData={getWilkommenModified} fetchUnternehmenData={getUnternehmen}/>
-      <Cards fetchData={getLeistungen} />
-      <Panel fetchData={getArbeitModified} />
-      <Team fetchData={getTeam} />
-      <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} />
-      <Testimonial fetchData={getRezensionen} />
-      <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
+    <Layout fetchData={getUnternehmen}>
+      <Navbar
+        fetchData={getHeadModified}
+        fetchNavigationData={getNavigation}
+        fetchUnternehmenData={getUnternehmen}
+      />
+      {/* <Carousel fetchData={getWilkommenModified} fetchUnternehmenData={getUnternehmen}/> */}
+      {/* <Cards fetchData={getLeistungen} /> */}
+      {/* <Panel fetchData={getArbeitModified} /> */}
+      {/* <Team fetchData={getTeam} /> */}
+      {/* <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} /> */}
+      {/* <Testimonial fetchData={getRezensionen} /> */}
+      {/* <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} /> */}
     </Layout>
   );
 };

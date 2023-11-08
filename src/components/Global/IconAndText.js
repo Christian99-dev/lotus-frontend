@@ -1,13 +1,11 @@
 import React from "react";
-import { useEffect } from "react";
-import { getUnternehmen } from "../../_api/axios";
-import { useState } from "react";
 import Icon from "./Icon";
 import styled from "styled-components";
 import { validGermanPhoneNumber } from "../../utils/regex";
 import WhatsappTooltipWrapper from "../Global/WhatsappTooltip";
 import useWindowDimensions from "../../utils/useWindowDimensions";
-import {size} from "../../theme/breakpoints";
+import { size } from "../../theme/breakpoints";
+import useGlobalData from "../../utils/useGlobalData";
 
 const IconAndText = ({
   iconHeight,
@@ -21,55 +19,45 @@ const IconAndText = ({
   center,
 }) => {
   const width = useWindowDimensions().width;
-  const [data, setData] = useState(null);
 
-  useEffect(() => {
-    getUnternehmen().then((res) => {
-      setData(res.data.attributes);
-    });
-  }, [getUnternehmen]);
-
+  const data = useGlobalData().data;
   let linkForText = null;
   let linkForIcon = null;
 
-  if (data) {
-    if (iconName === "mail") linkForIcon = `mailto:${data.email}`;
-    if (iconName === "whatsapp") linkForIcon = `${data.whatsappLink}`;
-    if (iconName === "time") linkForIcon = `tel:${data.nummer}`;
-    if (iconName === "phone") linkForIcon = `tel:${data.nummer}`;
+  if (iconName === "mail") linkForIcon = `mailto:${data.Email}`;
+  if (iconName === "whatsapp") linkForIcon = `${data.WhatsappLink}`;
+  if (iconName === "time") linkForIcon = `tel:${data.Nummer}`;
+  if (iconName === "phone") linkForIcon = `tel:${data.Nummer}`;
 
-    if (text === data.email) linkForText = `mailto:${data.email}`;
-    if (validGermanPhoneNumber.test(text)) linkForText = `tel:${data.nummer}`;
-    if (text === data.oeffnungszeiten) linkForText = `tel:${data.nummer}`;
-  }
+  if (text === data.Email) linkForText = `mailto:${data.Email}`;
+  if (validGermanPhoneNumber.test(text)) linkForText = `tel:${data.Nummer}`;
+  if (text === data.Oeffnungszeiten) linkForText = `tel:${data.Nummer}`;
 
   return (
-    data && (
-      <IconAndTextWrapper
-        gap={gap}
-        className={className}
-        direction={direction}
-        textSize={textSize}
-        fontWeight={fontWeight}
-        center={center}
-      >
-        {iconName === "whatsapp" && width > size.tablet ? (
-          <WhatsappTooltipWrapper>
-            <Icon name={iconName} height={iconHeight} link={linkForIcon} />
-          </WhatsappTooltipWrapper>
-        ) : (
+    <IconAndTextWrapper
+      gap={gap}
+      className={className}
+      direction={direction}
+      textSize={textSize}
+      fontWeight={fontWeight}
+      center={center}
+    >
+      {iconName === "whatsapp" && width > size.tablet ? (
+        <WhatsappTooltipWrapper>
           <Icon name={iconName} height={iconHeight} link={linkForIcon} />
-        )}
+        </WhatsappTooltipWrapper>
+      ) : (
+        <Icon name={iconName} height={iconHeight} link={linkForIcon} />
+      )}
 
-        {linkForText ? (
-          <a href={linkForText} className="text">
-            {text}
-          </a>
-        ) : (
-          <div className="text">{text}</div>
-        )}
-      </IconAndTextWrapper>
-    )
+      {linkForText ? (
+        <a href={linkForText} className="text">
+          {text}
+        </a>
+      ) : (
+        <div className="text">{text}</div>
+      )}
+    </IconAndTextWrapper>
   );
 };
 

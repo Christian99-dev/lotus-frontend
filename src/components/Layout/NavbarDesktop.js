@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import NavButton from "../Global/NavButton";
 import SpaceWrapper from "../../utils/SpaceWrapper";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import Icon from "../Global/Icon";
 import { useGlobalState } from "../../utils/globalState";
 import { navigationLinks } from "../../utils/constants";
@@ -16,63 +17,41 @@ import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "../Global/WhatsappTooltip";
 import IconAndText from "../Global/IconAndText";
+import useGlobalData from "../../utils/useGlobalData";
 
-export default function Navbar({
-  fetchData,
-  fetchNavigationData,
-  fetchUnternehmenData,
-}) {
+export default function Navbar({ strapiWillkommen, strapiHeader }) {
   return (
     <>
-      <Top fetchData={fetchData} fetchUnternehmenData={fetchUnternehmenData} />
-      <Bar fetchData={fetchData} fetchNavigationData={fetchNavigationData} />
-      <Bottom fetchData={fetchData} />
+      <Top strapiHeader={strapiHeader} />
+      <Bar />
+      <Bottom strapiWillkommen={strapiWillkommen} />
     </>
   );
 }
 
 // Top
-export const Top = ({ fetchData, fetchUnternehmenData }) => {
-  const [data, setData] = useState(null);
-  const [unternehmenData, setUnternehmenData] = useState(null);
-
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-    });
-
-    fetchUnternehmenData().then((res) => {
-      setUnternehmenData(res.data.attributes);
-    });
-  }, [fetchData]);
-
+export const Top = ({ strapiHeader }) => {
+  const { links, rechts } = strapiHeader;
+  const globalData = useGlobalData().parse;
   return (
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <WhatsappTooltip />
       <div className="container">
-        {data ? (
-          <div className="left">{data.links.info}</div>
-        ) : (
-          <Loader text color="secondary" height="fs-3" />
-        )}
+        <div className="left">{globalData(links.globalID)}</div>
+
         <div className="right">
-          {data && unternehmenData ? (
-            data.rechts.map((data, key) => (
-              <IconAndText
-                key={key}
-                text={data.text.info}
-                iconHeight="icon-s"
-                iconName={data.icon.icon}
-                className="info"
-                whatsappLink={unternehmenData.whatsappLink}
-                textSize="fs-4"
-                direction="row"
-                gap=""
-              />
-            ))
-          ) : (
-            <Loader color="secondary" height="icon-s" iconAsHeight />
-          )}
+          {rechts.map((data, key) => (
+            <IconAndText
+              key={key}
+              text={globalData(data.global.globalID)}
+              iconHeight="icon-s"
+              iconName={data.icon.iconID}
+              className="info"
+              textSize="fs-4"
+              direction="row"
+              gap=""
+            />
+          ))}
         </div>
       </div>
     </TopWrapper>
@@ -129,23 +108,9 @@ const TopWrapper = styled(SpaceWrapper)`
 `;
 
 // Bar
-const Bar = ({ fetchData, fetchNavigationData }) => {
+const Bar = () => {
   const ref = useRef();
   const dispatch = useGlobalState()[1];
-  const [background, setBackground] = useState(defaultPurple);
-  const [navigationNames, setNavigationNames] = useState(null);
-
-  useEffect(() => {
-    fetchData().then((res) => {
-      setBackground(
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
-      );
-    });
-
-    fetchNavigationData().then((res) => {
-      setNavigationNames(res.data.attributes);
-    });
-  }, [fetchData, fetchNavigationData]);
 
   /** Intersection Observer */
   useEffect(() => {
@@ -159,19 +124,14 @@ const Bar = ({ fetchData, fetchNavigationData }) => {
   }, [ref, dispatch]);
 
   return (
-    <BarWrapper bgImage={background} ref={ref}>
+    <BarWrapper ref={ref}>
       <SpaceWrapper
         spacing={{ top: "navbar-inner", bottom: "navbar-inner" }}
         className="navbuttons"
       >
-        {navigationNames &&
-          navigationLinks.map((navigation, key) => (
-            <NavButton
-              key={key}
-              to={navigation.to}
-              text={Object.values(navigationNames)[key]}
-            />
-          ))}
+        {navigationLinks.map((navigation, key) => (
+          <NavButton key={key} to={navigation.to} text={navigation.name} />
+        ))}
       </SpaceWrapper>
     </BarWrapper>
   );
@@ -183,7 +143,6 @@ const BarWrapper = styled.div`
   z-index: 999;
   .navbuttons {
     background-color: var(--secondary);
-    /* backdrop-filter: blur(5px); */
     display: flex;
     gap: var(--navbar-gap);
     justify-content: center;
@@ -191,61 +150,54 @@ const BarWrapper = styled.div`
 `;
 
 // Bottom
-const Bottom = ({ fetchData }) => {
-  const [logo, setLogo] = useState(null);
-  const [background, setBackground] = useState(defaultPurple);
-  useEffect(() => {
-    fetchData().then((res) => {
-      setBackground(
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url)
-      );
-      setLogo(createImgUrl(res.data.attributes.logo.data.attributes.url));
-    });
-  }, [fetchData]);
+const Bottom = ({ strapiWillkommen }) => {
+  const { hintergrund } = strapiWillkommen;
+  const { logo } = useGlobalData().data;
 
   return (
-    <BottomWrapper
-      bgimg={background}
-      className={useGlobalState()[0].navbarStuck ? "stuck" : ""}
-    >
-      <div className="logo-container">
-        <SpaceWrapper spacing={{ top: "navbar-inner" }} className="filter">
-          {logo ? (
-            <img src={logo} alt="logo-text" />
-          ) : (
-            <Loader spinner height="navbar-logo-height" />
-          )}
-        </SpaceWrapper>
-      </div>
+    <BottomWrapper className={useGlobalState()[0].navbarStuck ? "stuck" : ""}>
+      <GatsbyImage
+        image={getImage(hintergrund.localFile)}
+        alt={hintergrund.alternativeText}
+        className="hintergrund"
+      />
+
+      <SpaceWrapper spacing={{ top: "navbar-inner" }} className="filter">
+        <GatsbyImage
+          image={getImage(logo.localFile)}
+          alt={logo.alternativeText}
+          className="logo"
+        />
+      </SpaceWrapper>
     </BottomWrapper>
   );
 };
 
 const BottomWrapper = styled.div`
-  .logo-container {
-    background-image: url(${(props) => props.bgimg});
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+  .hintergrund {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+  
+  .filter {
+    background-color: var(--background-filter-dark);
+    transition: background-color 0.5s ease;
+  }
 
-    .filter {
-      background-color: var(--background-filter-dark);
-      transition: background-color 0.5s ease;
-    }
-
+  .logo {
+    margin: auto 0;
+    width: 100%;
     img {
-      overflow-anchor: revert-layer;
-      transition: height 0.5s ease-out;
-      height: var(--navbar-logo-height);
       margin: 0 auto;
+      width: auto;
+      height: var(--navbar-logo-height);
+      overflow-anchor: revert-layer;
       display: block;
       transition: opacity 0.5s ease;
       opacity: 1;
-    }
-
-    .loader {
-      margin: 0 auto;
     }
   }
 
@@ -253,14 +205,12 @@ const BottomWrapper = styled.div`
     .filter {
       transition: background-color 0.5s ease;
       background-color: var(--background-filter-dark);
-      img {
-        transition: opacity 0.5s ease;
-        opacity: 0;
+      .logo {
+        img {
+          transition: opacity 0.5s ease;
+          opacity: 0 !important;
+        }
       }
     }
   }
 `;
-
-
-
-
