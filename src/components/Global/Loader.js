@@ -60,7 +60,6 @@ const NormalLoader = styled.div`
         background: var(--secondary);
       }
     }
-    z-index: 99;
 
     height: calc(var(--${(props) => props.height}) - 5px);
     width: calc(var(--${(props) => props.height}) - 5px);

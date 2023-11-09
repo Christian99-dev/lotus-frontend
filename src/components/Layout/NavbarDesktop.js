@@ -131,7 +131,7 @@ const Bar = () => {
 const BarWrapper = styled.div`
   position: sticky;
   top: -1px;
-  z-index: 999;
+  z-index: 100;
   .navbuttons {
     background-color: var(--secondary);
     display: flex;
@@ -169,7 +169,7 @@ const BottomWrapper = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: -80;
+    z-index: -100;
   }
 
   .filter {

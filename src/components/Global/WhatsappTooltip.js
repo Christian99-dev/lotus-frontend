@@ -42,7 +42,7 @@ export const WhatsappTooltip = () => (
 
 const Wrapper = styled.div`
   .react-tooltip {
-    z-index: 9999999;
+    z-index: 150;
     transition: opacity 0.2s ease;
     padding: var(--whatsapp-tooltip-qrcode-padding);
 

@@ -41,7 +41,7 @@ const Nav = ({ toggleNav }) => {
 
 const NavWrapper = styled.div`
   position: fixed;
-  z-index: 99;
+  z-index: 100;
   top: 0;
   left: 0;
   right: 0;
@@ -118,7 +118,7 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
 };
 
 const OverlayWrapper = styled(SpaceWrapper)`
-  z-index: 99999;
+  z-index: 300;
   position: fixed;
   top: 0;
   left: 0;
@@ -135,7 +135,7 @@ const OverlayWrapper = styled(SpaceWrapper)`
   }
 
   .logo {
-    z-index: -1;
+    z-index: 300;
     position: absolute;
     top: 0;
     left: 0;

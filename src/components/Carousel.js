@@ -135,7 +135,7 @@ const CarouselWrapper = styled(SpaceWrapper)`
     left: 0;
     bottom: 0;
     background-color: var(--background-filter-dark);
-    z-index: -1;
+    z-index: -99;
   }
   .text1,
   .text2,

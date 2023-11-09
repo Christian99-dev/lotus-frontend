@@ -332,7 +332,7 @@ const PopupWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 200;
   background-color: var(--background-filter-popup);
   overflow: hidden;
 
@@ -353,7 +353,7 @@ const PopupWrapper = styled.div`
     bottom: 0;
     margin: auto;
     width: var(--popup-icon-width);
-    z-index: 1001;
+    z-index: 201;
     opacity: 0.15;
   }
 
@@ -416,7 +416,7 @@ const PopupWrapper = styled.div`
           margin: 0 auto;
           display: block;
           position: relative;
-          z-index: 1002;
+          z-index: 202;
         }
       }
     }
