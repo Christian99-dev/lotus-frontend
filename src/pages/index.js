@@ -25,8 +25,8 @@ const IndexPage = () => {
     <Layout fetchData={getUnternehmen}>
       <Navbar />
       <Carousel />
-      <Cards fetchData={getLeistungen} />
-      {/* <Panel fetchData={getArbeitModified} /> */}
+      <Cards />
+      <Panel />
       {/* <Team fetchData={getTeam} /> */}
       {/* <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} /> */}
       {/* <Testimonial fetchData={getRezensionen} /> */}

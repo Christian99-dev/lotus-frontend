@@ -1,48 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
 import { Parallax } from "react-parallax";
-import Loader from "./Global/Loader";
-import { device, size } from "../theme/breakpoints";
-import { createImgUrl, Parser } from "../utils/utils";
-import useWindowDimensions from "../utils/useWindowDimensions";
+import { device } from "../theme/breakpoints";
+import { Parser } from "../utils/utils";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import useGlobalData from "../utils/useGlobalData";
 
+export default function Panel() {
+  const { text, ueberschrift, hintergrund } = useStaticQuery(graphql`
+    {
+      strapiPhilosophie {
+        text: Text
+        ueberschrift: Ueberschrift
+        hintergrund: Hintergrund {
+          alternativeText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED)
+            }
+          }
+        }
+      }
+    }
+  `).strapiPhilosophie;
 
-export default function Panel({ fetchData }) {
-  const [data, setData] = useState(null);
-  const [logo, setLogo] = useState(null);
-  const [background, setBackground] = useState([null]);
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-      setBackground([
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
-        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url)
-      ]);
-      setLogo(
-        createImgUrl(res.data.attributes.logo_textless.data.attributes.url)
-      );
-    });
-  }, [fetchData]);
+  const {
+    data: { logoOhneText },
+  } = useGlobalData();
 
   return (
     <div id="panel">
-      <PannelWrapper bgImage={useWindowDimensions().width > size.tablet ? background[0] : background[1]} strength={200}>
+      <PannelWrapper>
+        <GatsbyImage
+          image={getImage(hintergrund.localFile)}
+          alt={hintergrund.alternativeText}
+          className="background"
+        />
         <SpaceWrapper className="box">
-          {data ? (
-            <Titel text={data.ueberschrift} spacing={{ bottom: 50 }} />
-          ) : (
-            <Loader title color="secondary" spacing={{ bottom: 50 }} />
-          )}
-          {data ? (
-            <div className="text" id="panel">
-              {logo && <img className="logo" src={logo} alt="logo" />}
-              {Parser(data.text)}
-            </div>
-          ) : (
-            <Loader height="fs-3" color="secondary" className="center-loader" />
-          )}
+          <Titel text={ueberschrift} spacing={{ bottom: 50 }} />
+          <div className="text" id="panel">
+            <GatsbyImage
+              image={getImage(logoOhneText.localFile)}
+              alt={logoOhneText.alternativeText}
+              className="logo"
+            />
+            {Parser(text)}
+          </div>
         </SpaceWrapper>
         <div className="img" />
       </PannelWrapper>
@@ -51,6 +57,17 @@ export default function Panel({ fetchData }) {
 }
 
 const PannelWrapper = styled(Parallax)`
+  .background {
+    z-index: -80;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: 100%;
+    object-fit: cover;
+  }
+
   .box {
     height: 100vh;
     width: 50%;
@@ -107,6 +124,10 @@ const PannelWrapper = styled(Parallax)`
           left: 0;
           right: 0;
           bottom: 0;
+          max-width: 50%;
+          img{
+            height: auto;
+          }
         }
         text-align: center;
       }
