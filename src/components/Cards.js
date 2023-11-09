@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Title from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
@@ -7,79 +7,62 @@ import Bubbels from "./Effects/Bubbels";
 import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import MySwiper from "../components/Global/MySwiper";
-import Loader from "./Global/Loader";
-import { Parser, createImgUrl } from "../utils/utils";
-import { useGlobalState } from "../utils/globalState";
+import { graphql, useStaticQuery } from "gatsby";
+import { Parser } from "../utils/utils";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-const Cards = ({ fetchData }) => {
-  const [data, setData] = useState(null);
-  const [context, dispatch] = useGlobalState();
+const Cards = () => {
+  const { ueberschrift, leistungen } = useStaticQuery(graphql`
+    {
+      strapiLeistungen {
+        ueberschrift: Ueberschrift
+        leistungen: Leistungen {
+          hintergrund: Hintergrund {
+            alternativeText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+          }
+          text: Text
+          textVorschau: TextVorschau
+          ueberschrift: Ueberschrift
+          untertitel: Untertitel
+          icon: Icon {
+            iconID
+          }
+        }
+      }
+    }
+  `).strapiLeistungen;
 
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-      res.data.attributes.leistungen.map((leistung) => {
-        dispatch({
-          type: "ADD_POPUP",
-          value: { popupID: leistung.id, open: false },
-        });
-        return 1;
-      });
-    });
-  }, [fetchData, dispatch]);
+  const [modals, setModals] = useState(
+    new Array(leistungen.length).fill(false)
+  );
 
-  const createCardsJSXArray = (dataArray, dispatch) => {
-    return dataArray.map(({ textPreview, ueberschrift, icon, id }) => (
-      <Card
-        text={textPreview}
-        title={ueberschrift}
-        icon={icon.icon}
-        key={id}
-        onClick={() => {
-          dispatch({
-            type: "SET_POPUP_STATUS",
-            value: { popupID: id, open: true },
-          });
-        }}
-      />
-    ));
+  const openModal = (key) => {
+    const updatedModals = [...modals];
+    updatedModals[key] = true;
+    setModals(updatedModals);
   };
 
-  const getPopupById = (id) => {
-    return context.popups.find((popup) => popup.popupID === id);
+  const closeModal = (key) => {
+    const updatedModals = [...modals];
+    updatedModals[key] = false;
+    setModals(updatedModals);
   };
 
-  const createPopupJSXArray = (dataArray, dispatch) => {
-    return dataArray.map((leistung) => {
+  const createCardsJSXArray = (leistungen) => {
+    return leistungen.map((leistung, id) => {
+      const { textVorschau, ueberschrift, icon } = leistung;
       return (
-        <Popup
-          video={
-            leistung.video.data
-              ? createImgUrl(leistung.video.data.attributes.url)
-              : null
-          }
-          key={leistung.id}
-          open={getPopupById(leistung.id).open}
-          closePopup={() => {
-            dispatch({
-              type: "SET_POPUP_STATUS",
-              value: { popupID: leistung.id, open: false },
-            });
-          }}
-          text={leistung.text}
-          ueberschrift={leistung.ueberschrift}
-          subUeberschrift={leistung.untertitel}
-          icon={leistung.icon}
-          hintergrund={
-            leistung.background.data
-              ? createImgUrl(leistung.background.data.attributes.url)
-              : null
-          }
-          hintergrundMobile={
-            leistung.backgroundMobile.data
-              ? createImgUrl(leistung.backgroundMobile.data.attributes.url)
-              : null
-          }
+        <Card
+          text={textVorschau}
+          title={ueberschrift}
+          icon={icon.iconID}
+          key={id}
+          onClick={() => openModal(id)}
         />
       );
     });
@@ -99,54 +82,49 @@ const Cards = ({ fetchData }) => {
 
   return (
     <React.Fragment>
-      {data && createPopupJSXArray(data.leistungen, dispatch)}
+      {leistungen.map((leistung, id) => {
+        const { hintergrund, icon, text, ueberschrift, untertitel } = leistung;
+
+        return (
+          <Popup
+            key={id}
+            open={modals[id]}
+            closePopup={() => closeModal(id)}
+            text={text}
+            ueberschrift={ueberschrift}
+            subUeberschrift={untertitel}
+            icon={icon}
+            hintergrund={hintergrund}
+          />
+        );
+      })}
+
       <CardsWrapper
         id="cards"
         spacing={{
           top: "white-component-inner-half",
           bottom: "white-component-inner",
         }}
-        rowcount={data ? calculateRows(data.leistungen.length) : 1}
+        rowcount={calculateRows(leistungen.length)}
       >
         <Bubbels />
-        {data ? (
-          <Title
-            center
-            text={data.ueberschrift}
-            spacing={{ bottom: "white-component-inner-half" }}
-            color="purple"
-          />
-        ) : (
-          <Loader
-            title
-            color="primary"
-            spacing={{ bottom: "white-component-inner-half" }}
-          />
-        )}
+
+        <Title
+          center
+          text={ueberschrift}
+          spacing={{ bottom: "white-component-inner-half" }}
+          color="purple"
+        />
+
         {useWindowDimensions().width > size.tablet ? (
-          <>
-            {data ? (
-              <SpaceWrapper
-                spacing={{ left: "border", right: "border" }}
-                className="cards"
-              >
-                {createCardsJSXArray(data.leistungen, dispatch)}
-              </SpaceWrapper>
-            ) : (
-              <Loader dots />
-            )}
-          </>
+          <SpaceWrapper
+            spacing={{ left: "border", right: "border" }}
+            className="cards"
+          >
+            {createCardsJSXArray(leistungen)}
+          </SpaceWrapper>
         ) : (
-          <>
-            {data ? (
-              <MySwiper
-                array={createCardsJSXArray(data.leistungen, dispatch)}
-                cards
-              />
-            ) : (
-              <Loader dots />
-            )}
-          </>
+          <MySwiper array={createCardsJSXArray(leistungen)} cards />
         )}
       </CardsWrapper>
     </React.Fragment>
@@ -194,7 +172,7 @@ function Card({ title, text, icon, onClick }) {
         {Parser(text)}
       </SpaceWrapper>
       <Icon name={icon} height="icon-l" color="purple" className="icon" />
-      <div className="cover">Mehr Erfahren</div>
+      <div className="cover">Mehr erfahren</div>
     </CardWrapper>
   );
 }
@@ -255,7 +233,7 @@ const CardWrapper = styled.div`
   &:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease;
-    
+
     .cover {
       transition: opacity 0.2s ease;
       opacity: 1;
@@ -267,7 +245,7 @@ const CardWrapper = styled.div`
     max-width: var(--cards-max-width-tablet);
     margin-left: 10%;
 
-    :nth-child(2n) {
+    &:nth-child(2n) {
       margin-left: auto;
       margin-right: 10%;
     }
@@ -283,29 +261,24 @@ export default Cards;
 function Popup({
   open,
   closePopup,
-  hintergrund,
-  hintergrundMobile,
   text,
-  video,
   ueberschrift,
   subUeberschrift,
   icon,
+  hintergrund,
 }) {
-  const scrollref = useRef(null);
-  useEffect(() => {
-    if (open && scrollref.current) {
-      scrollref.current.focus();
-    }
-  }, [open]);
-
   return (
     open && (
-      <PopupWrapper
-        hintergrund={hintergrund}
-        hintergrundMobile={hintergrundMobile}
-      >
+      <PopupWrapper>
+        {hintergrund && (
+          <GatsbyImage
+            image={getImage(hintergrund.localFile)}
+            alt={hintergrund.alternativeText}
+            className="background"
+          />
+        )}
         <Icon
-          name={icon.icon}
+          name={icon.iconID}
           className="bigIcon"
           onClick={() => closePopup()}
         />
@@ -330,24 +303,21 @@ function Popup({
                 onClick={() => closePopup()}
               />
             </div>
-            <SpaceWrapper
-              className="subtitle"
-              spacing={{ bottom: "popup-inner" }}
-            >
-              {Parser(subUeberschrift)}
-            </SpaceWrapper>
-            <div tabIndex={0} ref={scrollref} className="scroll-container">
+            {
+              <SpaceWrapper
+                className="subtitle"
+                spacing={{ bottom: "popup-inner" }}
+              >
+                {subUeberschrift && Parser(subUeberschrift)}
+              </SpaceWrapper>
+            }
+            <div className="scroll-container">
               <SpaceWrapper
                 spacing={{ bottom: "popup-inner" }}
                 className="text"
               >
                 {Parser(text)}
               </SpaceWrapper>
-              {video && (
-                <video controls>
-                  <source src={video} type="video/mp4" />
-                </video>
-              )}
             </div>
           </div>
         </SpaceWrapper>
@@ -365,6 +335,15 @@ const PopupWrapper = styled.div`
   z-index: 1000;
   background-color: var(--background-filter-popup);
   overflow: hidden;
+
+  .background {
+    border-radius: 20px;
+    position: fixed;
+    top: var(--popup-border);
+    bottom: var(--popup-border);
+    left: var(--popup-border);
+    right: var(--popup-border);
+  }
 
   .bigIcon {
     position: absolute;
@@ -386,12 +365,6 @@ const PopupWrapper = styled.div`
     right: var(--popup-border);
     border-radius: 20px;
 
-    background: ${(props) =>
-      props.hintergrund ? `url(${props.hintergrund})` : "var(--primary)"};
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
     color: var(--secondary);
 
     .subtitle {
@@ -412,11 +385,10 @@ const PopupWrapper = styled.div`
       padding: var(--popup-inner);
 
       .scroll-container {
-        
         overflow-y: auto;
         overscroll-behavior: contain;
         display: block;
-        
+
         ::-webkit-scrollbar {
           width: 5px;
         }
