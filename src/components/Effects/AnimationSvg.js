@@ -15,7 +15,7 @@ const AnimationSvg = ({
   rotation = 0,
   rotationStrenght = 0,
 }) => {
-  let zIndex = front ? 99 : -99;
+  let zIndex = front ? 51 : 49;
 
   let src;
   if (svg === "circle") src = Circle;

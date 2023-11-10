@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
-import { Parallax } from "react-parallax";
 import { device } from "../theme/breakpoints";
 import { Parser } from "../utils/utils";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import useGlobalData from "../utils/useGlobalData";
+import ParallaxImage from "./Global/ParallaxImage";
 
 export default function Panel() {
   const { text, ueberschrift, hintergrund } = useStaticQuery(graphql`
@@ -32,40 +32,26 @@ export default function Panel() {
   } = useGlobalData();
 
   return (
-    <div id="panel">
-      <PannelWrapper>
-        <GatsbyImage
-          image={getImage(hintergrund.localFile)}
-          alt={hintergrund.alternativeText}
-          className="background"
-        />
-        <SpaceWrapper className="box">
-          <Titel text={ueberschrift} spacing={{ bottom: 50 }} />
-          <div className="text" id="panel">
-            <GatsbyImage
-              image={getImage(logoOhneText.localFile)}
-              alt={logoOhneText.alternativeText}
-              className="logo"
-            />
-            {Parser(text)}
-          </div>
-        </SpaceWrapper>
-        <div className="img" />
-      </PannelWrapper>
-    </div>
+    <PannelWrapper id="panel">
+      <ParallaxImage image={hintergrund} speed={-40} />
+      <SpaceWrapper className="box">
+        <Titel text={ueberschrift} spacing={{ bottom: 50 }} />
+        <div className="text" id="panel">
+          <GatsbyImage
+            image={getImage(logoOhneText.localFile)}
+            alt={logoOhneText.alternativeText}
+            className="logo"
+          />
+          {Parser(text)}
+        </div>
+      </SpaceWrapper>
+      <div className="img" />
+    </PannelWrapper>
   );
 }
 
-const PannelWrapper = styled(Parallax)`
-  .background {
-    position: absolute;
-    z-index: -90;
-    top: 0;
-    left: 0;
-    right: 0;
-    left: 0;
-    object-fit: cover;
-  }
+const PannelWrapper = styled.div`
+  position: relative;
   .box {
     height: 100vh;
     width: 50%;

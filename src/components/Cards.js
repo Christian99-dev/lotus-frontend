@@ -134,6 +134,7 @@ const Cards = () => {
 const CardsWrapper = styled(SpaceWrapper)`
   position: relative;
   background-color: white;
+  z-index: 0;
   .cards {
     display: grid;
     justify-content: space-between;
@@ -187,6 +188,7 @@ const CardWrapper = styled.div`
   flex-basis: 23%;
   flex-direction: column;
   position: relative;
+  z-index: 50;
 
   .title {
     font-size: var(--fs-2);

@@ -20,17 +20,20 @@ import {
   getUnternehmen,
   getNavigation,
 } from "../_api/axios";
+import { ParallaxProvider } from "react-scroll-parallax";
 const IndexPage = () => {
   return (
     <Layout fetchData={getUnternehmen}>
-      <Navbar />
-      <Carousel />
-      <Cards />
-      <Panel />
-      {/* <Team fetchData={getTeam} /> */}
-      {/* <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} /> */}
-      {/* <Testimonial fetchData={getRezensionen} /> */}
-      {/* <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} /> */}
+      <ParallaxProvider>
+        <Navbar />
+        <Carousel />
+        <Cards />
+        <Panel />
+        <Team fetchData={getTeam} />
+        {/* <Kontakt fetchData={getKontaktModified} fetchUnternehmenData={getUnternehmen} /> */}
+        {/* <Testimonial fetchData={getRezensionen} /> */}
+        {/* <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} /> */}
+      </ParallaxProvider>
     </Layout>
   );
 };
