@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Parallax = ({ children, strength = 40, fromBottom = false }) => {
+const Parallax = ({ children, strength = 400, fromBottom = false }) => {
   const containerRef = useRef(null);
 
   const calcPosition = (parallax, strength, fromBottom) => {
@@ -14,35 +14,28 @@ const Parallax = ({ children, strength = 40, fromBottom = false }) => {
       100,
       Math.max(0, (newPosition / height) * 100)
     );
-    if (fromBottom) return -((strength * progressReal) / 100) + strength;
-    return (strength * progressReal) / 100 ;
+    if (fromBottom) return -((strength * progressReal) / 100);
+    return (strength * progressReal) / 100 - strength;
   };
 
   const updatePos = () => {
-    containerRef.current.children[0].style.top =
-      containerRef.current.children[0].style.transform = `translateY(${calcPosition(
-        containerRef.current,
-        strength,
-        fromBottom
-      )}px)`;
-  };
-
-  const handleScroll = () => {
-    if (containerRef.current) {
-      updatePos();
-    }
+    containerRef.current.children[0].style.transform = `translateY(${calcPosition(
+      containerRef.current,
+      strength,
+      fromBottom
+    )}px)`;
   };
 
   useEffect(() => {
     updatePos();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", updatePos);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", updatePos);
     };
   }, []);
 
   return (
-    <ParallaxStyle strenght={strength} ref={containerRef}>
+    <ParallaxStyle strength={strength} ref={containerRef}>
       {children}
     </ParallaxStyle>
   );
@@ -50,26 +43,15 @@ const Parallax = ({ children, strength = 40, fromBottom = false }) => {
 
 export default Parallax;
 
-const ParallaxStyle = styled.div.attrs((props) => ({
-  style: {
-    background: props.background,
-  },
-  pos: props.pos,
-  strenght: props.strenght,
-}))`
+const ParallaxStyle = styled.div`
+  overflow: hidden;
   position: absolute;
-  background-color: salmon;
-  z-index: -99;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   > * {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 0, 0.5);
-    height: ${(props) => `calc(${props.strenght}px + 100%)`};
+    height: ${(props) => `calc(${props.strength}px + 100%)`};
+    width: 100%;
   }
 `;
