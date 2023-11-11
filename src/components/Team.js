@@ -11,15 +11,10 @@ import { useRef } from "react";
 import MySwiper from "../components/Global/MySwiper";
 import { createImgUrl, Parser } from "../utils/utils";
 import { graphql, useStaticQuery } from "gatsby";
+import Parallax from "./Global/Parallax";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-export default function Team({ fetchData }) {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-    });
-  }, [fetchData]);
-
+export default function Team() {
   const { ueberschrift, personen } = useStaticQuery(graphql`
     {
       strapiTeam {
@@ -61,8 +56,7 @@ export default function Team({ fetchData }) {
           color="purple"
         />
 
-        {/* {useWindowDimensions().width > size.tablet ? ( */}
-        {true? (
+        {useWindowDimensions().width > size.tablet ? (
           <SpaceWrapper
             className="container-desktop"
             spacing={{ left: "border", right: "border" }}
@@ -82,13 +76,13 @@ export default function Team({ fetchData }) {
           </SpaceWrapper>
         ) : (
           <MySwiper
-            array={data.mitarbeiter.map((member, key) => {
+            array={personen.map((member, key) => {
               return (
                 <PersonMobile
                   key={key}
-                  img={createImgUrl(member.bildMobile.data.attributes.url)}
+                  img={member.bild}
                   text={member.beschreibung}
-                  name={member.vorname + " " + member.nachname}
+                  name={member.name}
                   jobTitle={member.berufsbezeichnung}
                 />
               );
@@ -119,12 +113,12 @@ function Person({ img, text, name, jobTitle, right, ...props }) {
   return (
     <PersonWrapper right={right} {...props}>
       <div className="image-wrapper">
-        {/* <ParallaxImage
-          speed={right ? 20 : -20}
-          image={img}
-          zIndex={50}
-          objPosition="bottom right"
-        /> */}
+        <Parallax strength={150} fromBottom={right}>
+          <GatsbyImage
+            image={getImage(img.localFile)}
+            alt={img.alternativeText}
+          />
+        </Parallax>
       </div>
       <SpaceWrapper className="info-box">
         <TextWithBackground
@@ -148,11 +142,11 @@ const PersonWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   flex: 1 1 0;
-  
+
   .image-wrapper {
-    border: 1px solid black;
+    min-width: 250px;
+    height: 500px;
     position: relative;
-    overflow: hidden;
   }
 
   @media ${device.laptop} {
@@ -186,7 +180,7 @@ const PersonWrapper = styled.div`
   }
 `;
 
-const PersonMobile = ({ img, text, jobTitle, name }) => {
+const PersonMobile = ({ img, text, name, jobTitle }) => {
   const overlayRef = useRef(null);
   const containerRef = useRef(null);
   const isClicked = useRef(false);
@@ -240,7 +234,15 @@ const PersonMobile = ({ img, text, jobTitle, name }) => {
 
   return (
     <PersonWrapperMobile ref={containerRef}>
-      <img className="img" src={img} alt="img" />
+
+        <GatsbyImage
+          image={getImage(img.localFile)}
+          alt={img.alternativeText}
+          class="img"
+          imgStyle={{zIndex: 100}}
+          style
+        />
+    
       <div ref={overlayRef} className="overlay">
         <div className="handle" />
         <TextWithBackground text={name} fontSize="2" className="name" />
@@ -261,20 +263,19 @@ const PersonWrapperMobile = styled.div`
   overflow: hidden;
   width: var(--team-person-max-width-tablet);
   margin: 0 var(--border);
+  z-index: 50;
 
   .img {
-    position: absolute;
-    height: 100%;
+    height: var(--team-mobile-height);
     width: 100%;
-    z-index: 0;
-    object-fit: cover;
+    z-index: 51;
   }
 
   .overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 53;
     top: 300px;
     border-radius: 20px 20px 0 0;
     padding: var(--team-mobile-inner-padding);
