@@ -4,14 +4,14 @@ import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import Rectangles from "./Effects/Rectangles";
-import { Parallax } from "react-parallax";
+import ParallaxImage from "./Global/ParallaxImage";
 import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { useEffect } from "react";
 import { useRef } from "react";
 import MySwiper from "../components/Global/MySwiper";
-import Loader from "./Global/Loader";
 import { createImgUrl, Parser } from "../utils/utils";
+import { graphql, useStaticQuery } from "gatsby";
 
 export default function Team({ fetchData }) {
   const [data, setData] = useState(null);
@@ -20,6 +20,28 @@ export default function Team({ fetchData }) {
       setData(res.data.attributes);
     });
   }, [fetchData]);
+
+  const { ueberschrift, personen } = useStaticQuery(graphql`
+    {
+      strapiTeam {
+        ueberschrift: Ueberschrift
+        personen: Personen {
+          berufsbezeichnung: Berufsbezeichnung
+          beschreibung: Beschreibung
+          name: Name
+          bild: Bild {
+            alternativeText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+          }
+        }
+      }
+    }
+  `).strapiTeam;
+
   return (
     <div id="team">
       <TeamWrapper
@@ -31,7 +53,7 @@ export default function Team({ fetchData }) {
         <Rectangles />
         <Titel
           center
-          text="Das Team"
+          text={ueberschrift}
           spacing={{
             bottom: "white-component-inner-half",
             left: "border",
@@ -41,40 +63,38 @@ export default function Team({ fetchData }) {
         />
 
         {useWindowDimensions().width > size.tablet ? (
-          data ? (
-            <SpaceWrapper
-              className="container-desktop"
-              spacing={{ left: "border", right: "border" }}
-            >
-              {data.mitarbeiter.map((member, key) => {
-                return <Person
+          <SpaceWrapper
+            className="container-desktop"
+            spacing={{ left: "border", right: "border" }}
+          >
+            {personen.map((member, key) => {
+              return (
+                <Person
                   key={key}
-                  img={createImgUrl(member.bild.data.attributes.url)}
+                  img={member.bild}
+                  text={member.beschreibung}
+                  name={member.name}
+                  jobTitle={member.berufsbezeichnung}
+                  right={key === 1}
+                />
+              );
+            })}
+          </SpaceWrapper>
+        ) : (
+          <MySwiper
+            array={data.mitarbeiter.map((member, key) => {
+              return (
+                <PersonMobile
+                  key={key}
+                  img={createImgUrl(member.bildMobile.data.attributes.url)}
                   text={member.beschreibung}
                   name={member.vorname + " " + member.nachname}
                   jobTitle={member.berufsbezeichnung}
-                  right={key === 1}
-                />;
-              })}
-            </SpaceWrapper>
-          ) : (
-            <Loader dots />
-          )
-        ) : data ? (
-          <MySwiper
-            array={data.mitarbeiter.map((member, key) => {
-              return <PersonMobile
-                key={key}
-                img={createImgUrl(member.bildMobile.data.attributes.url)}
-                text={member.beschreibung}
-                name={member.vorname + " " + member.nachname}
-                jobTitle={member.berufsbezeichnung}
-              />;
+                />
+              );
             })}
             cards
           />
-        ) : (
-          <Loader dots />
         )}
       </TeamWrapper>
     </div>
@@ -96,10 +116,17 @@ const TeamWrapper = styled(SpaceWrapper)`
 `;
 
 function Person({ img, text, name, jobTitle, right, ...props }) {
-  let strength = right ? 125 : -125;
   return (
-    <PersonWrapper img={img} right={right} {...props}>
-      <Parallax className="img" strength={strength} bgImage={img} />
+    <PersonWrapper right={right} {...props}>
+      <div className="image-wrapper">
+        <ParallaxImage
+          speed={right ? 20 : -20}
+          image={img}
+          zIndex={50}
+          objPosition="bottom right"
+        />
+        
+      </div>
       <SpaceWrapper className="info-box">
         <TextWithBackground
           spacing={{ bottom: 5 }}
@@ -123,16 +150,13 @@ const PersonWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   flex: 1 1 0;
 
-  @media ${device.laptop} {
-    grid-template-columns: ${(props) => (props.right ? "45% 55%" : "55% 45%")};
+  .image-wrapper {
+    overflow: hidden;
+    position: relative;
   }
 
-  .img {
-    flex: 1 1 0;
-    > div {
-      min-width: 250px;
-      height: 500px;
-    }
+  @media ${device.laptop} {
+    grid-template-columns: ${(props) => (props.right ? "45% 55%" : "55% 45%")};
   }
 
   .info-box {
