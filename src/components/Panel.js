@@ -8,6 +8,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import useGlobalData from "../utils/useGlobalData";
 import ParallaxImage from "./Global/ParallaxImage";
+import Parallax from "./Global/Parallax";
 
 export default function Panel() {
   const { text, ueberschrift, hintergrund } = useStaticQuery(graphql`
@@ -33,7 +34,12 @@ export default function Panel() {
 
   return (
     <PannelWrapper id="panel">
-      <ParallaxImage image={hintergrund} speed={-40} />
+      <Parallax strength={400}>
+        <GatsbyImage
+          image={getImage(hintergrund.localFile)}
+          alt={hintergrund.alternativeText}
+        />
+      </Parallax>
       <SpaceWrapper className="box">
         <Titel text={ueberschrift} spacing={{ bottom: 50 }} />
         <div className="text" id="panel">
@@ -45,7 +51,6 @@ export default function Panel() {
           {Parser(text)}
         </div>
       </SpaceWrapper>
-      <div className="img" />
     </PannelWrapper>
   );
 }
