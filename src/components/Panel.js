@@ -7,7 +7,6 @@ import { Parser } from "../utils/utils";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import useGlobalData from "../utils/useGlobalData";
-import ParallaxImage from "./Global/ParallaxImage";
 import Parallax from "./Global/Parallax";
 
 export default function Panel() {

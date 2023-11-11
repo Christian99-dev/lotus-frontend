@@ -4,7 +4,6 @@ import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import TextWithBackground from "../components/Global/TextWithBackground";
 import Rectangles from "./Effects/Rectangles";
-import ParallaxImage from "./Global/ParallaxImage";
 import { device, size } from "../theme/breakpoints";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { useEffect } from "react";
@@ -62,7 +61,8 @@ export default function Team({ fetchData }) {
           color="purple"
         />
 
-        {useWindowDimensions().width > size.tablet ? (
+        {/* {useWindowDimensions().width > size.tablet ? ( */}
+        {true? (
           <SpaceWrapper
             className="container-desktop"
             spacing={{ left: "border", right: "border" }}
@@ -119,13 +119,12 @@ function Person({ img, text, name, jobTitle, right, ...props }) {
   return (
     <PersonWrapper right={right} {...props}>
       <div className="image-wrapper">
-        <ParallaxImage
+        {/* <ParallaxImage
           speed={right ? 20 : -20}
           image={img}
           zIndex={50}
           objPosition="bottom right"
-        />
-        
+        /> */}
       </div>
       <SpaceWrapper className="info-box">
         <TextWithBackground
@@ -149,10 +148,11 @@ const PersonWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   flex: 1 1 0;
-
+  
   .image-wrapper {
-    overflow: hidden;
+    border: 1px solid black;
     position: relative;
+    overflow: hidden;
   }
 
   @media ${device.laptop} {
@@ -171,6 +171,7 @@ const PersonWrapper = styled.div`
     .name {
       white-space: nowrap;
     }
+
     .text {
       font-size: var(--fs-4);
       color: var(--primary);
