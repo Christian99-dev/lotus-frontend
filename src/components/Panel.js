@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Titel from "./Global/Titel";
-import { device } from "../theme/breakpoints";
+import { device, size } from "../theme/breakpoints";
 import { Parser } from "../utils/utils";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import useGlobalData from "../utils/useGlobalData";
 import Parallax from "./Global/Parallax";
+import useWindowDimensions from "../utils/useWindowDimensions";
 
 export default function Panel() {
   const { text, ueberschrift, hintergrund } = useStaticQuery(graphql`
@@ -33,7 +34,7 @@ export default function Panel() {
 
   return (
     <PannelWrapper id="panel">
-      <Parallax strength={400}>
+      <Parallax strength={size.tablet > useWindowDimensions().width ? 200 : 400}>
         <GatsbyImage
           image={getImage(hintergrund.localFile)}
           alt={hintergrund.alternativeText}
