@@ -29,7 +29,7 @@ export const Top = ({ strapiHeader }) => {
     <TopWrapper spacing={{ left: "border", right: "border" }} id="topbar">
       <WhatsappTooltip />
       <div className="container">
-        <div className="left">{globalData(links.globalID)}</div>
+        <h1 className="left">{globalData(links.globalID)}</h1>
 
         <div className="right">
           {rechts.map((data, key) => (
@@ -51,6 +51,10 @@ export const Top = ({ strapiHeader }) => {
 };
 
 const TopWrapper = styled(SpaceWrapper)`
+  h2, h1 , h3 , h4 , p{
+    all: unset;
+  }
+  
   display: flex;
   background-color: var(--primary);
   flex-direction: column;

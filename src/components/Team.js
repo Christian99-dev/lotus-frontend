@@ -126,13 +126,15 @@ function Person({ img, text, name, jobTitle, right, ...props }) {
           text={name}
           fontSize="2"
           className="name"
+          tag="h3"
         />
         <TextWithBackground
           spacing={{ bottom: 15 }}
           text={jobTitle}
           fontSize="3"
+          tag="h4"
         />
-        <div className="text">{Parser(text)}</div>
+        <div className="text">{Parser(text, "p")}</div>
       </SpaceWrapper>
     </PersonWrapper>
   );
@@ -245,13 +247,13 @@ const PersonMobile = ({ img, text, name, jobTitle }) => {
     
       <div ref={overlayRef} className="overlay">
         <div className="handle" />
-        <TextWithBackground text={name} fontSize="2" className="name" />
+        <TextWithBackground text={name} fontSize="2" className="name" tag="h3" />
         <TextWithBackground
           spacing={{ bottom: 10 }}
           text={jobTitle}
-          fontSize="3"
+          fontSize="3" tag="h4"
         />
-        <div className="text">{text}</div>
+        <p className="text">{text}</p>
       </div>
     </PersonWrapperMobile>
   );

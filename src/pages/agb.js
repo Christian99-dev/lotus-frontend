@@ -11,15 +11,14 @@ import { graphql, useStaticQuery } from "gatsby";
 import { SeoHeader } from "../components/Global/SeoHeader";
 
 const AgbPage = () => {
-
   const { agb, ueberschrift } = useStaticQuery(graphql`
-  {
-    strapiAgb {
-      agb: AGB
-      ueberschrift: Ueberschrift
+    {
+      strapiAgb {
+        agb: AGB
+        ueberschrift: Ueberschrift
+      }
     }
-  }
-`).strapiAgb;
+  `).strapiAgb;
 
   return (
     <Layout>
@@ -67,7 +66,10 @@ const AgbPage = () => {
 export default AgbPage;
 
 const AgbPageWrapper = styled.div`
+  
+
   .main-text {
+    all: revert;
     font-size: var(--fs-3);
   }
 
@@ -83,5 +85,4 @@ const AgbPageWrapper = styled.div`
   }
 `;
 
-export const Head = () => <SeoHeader endung="agb" />
-
+export const Head = () => <SeoHeader endung="agb" />;

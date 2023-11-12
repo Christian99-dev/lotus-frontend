@@ -88,7 +88,7 @@ const Comment = ({ name, rating, img, text }) => (
       />
       <img className="speech" src={speech} alt="speech" />
     </div>
-    <TextWithBackground text={name} fontSize={3} />
+    <TextWithBackground text={name} fontSize={3} tag="h3" />
     <Stars
       spacing={{
         top: "testimonial-stars-inner",
@@ -100,7 +100,7 @@ const Comment = ({ name, rating, img, text }) => (
       spacing={{ bottom: "testimonial-text-bottom" }}
       className="text"
     >
-      {text}
+      <p>{text}</p>
     </SpaceWrapper>
   </CommentWrapper>
 );

@@ -170,10 +170,10 @@ function Card({ title, text, icon, onClick }) {
   return (
     <CardWrapper onClick={onClick}>
       <div className="top-grid">
-        <div className="title">{Parser(title)}</div>
+        <h3 className="title">{Parser(title)}</h3>
       </div>
       <SpaceWrapper spacing={{ top: 20, bottom: 20 }} margin className="text">
-        {Parser(text)}
+        {Parser(text, "p")}
       </SpaceWrapper>
       <Icon name={icon} height="icon-l" color="purple" className="icon" />
       <div className="cover">Mehr erfahren</div>
@@ -193,7 +193,13 @@ const CardWrapper = styled.div`
   position: relative;
   z-index: 50;
 
+  p {
+    margin: 0;
+  }
+
   .title {
+    padding: 0;
+    margin: 0%;
     font-size: var(--fs-2);
     text-align: left;
     font-weight: var(--semibold);
@@ -299,7 +305,7 @@ function Popup({
           <div className="filter">
             <div className="top">
               <SpaceWrapper className="title">
-                {Parser(ueberschrift)}
+                {Parser(ueberschrift, "h3")}
               </SpaceWrapper>
               <Icon
                 className="icon"
@@ -313,7 +319,7 @@ function Popup({
                 className="subtitle"
                 spacing={{ bottom: "popup-inner" }}
               >
-                {subUeberschrift && Parser(subUeberschrift)}
+                {subUeberschrift && Parser(subUeberschrift, "h4")}
               </SpaceWrapper>
             }
             <div className="scroll-container">
@@ -321,7 +327,7 @@ function Popup({
                 spacing={{ bottom: "popup-inner" }}
                 className="text"
               >
-                {Parser(text)}
+                {Parser(text, "p")}
               </SpaceWrapper>
             </div>
           </div>
@@ -332,6 +338,11 @@ function Popup({
 }
 
 const PopupWrapper = styled.div`
+  h4,
+  h3,
+  p {
+    all: unset;
+  }
   position: fixed;
   top: 0;
   bottom: 0;

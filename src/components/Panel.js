@@ -50,7 +50,7 @@ export default function Panel() {
             alt={logoOhneText.alternativeText}
             className="logo"
           />
-          {Parser(text)}
+          {Parser(text, "p")}
         </div>
       </SpaceWrapper>
     </PannelWrapper>
@@ -58,6 +58,9 @@ export default function Panel() {
 }
 
 const PannelWrapper = styled.section`
+   p{
+    all: unset;
+  }
   position: relative;
   .box {
     height: 100vh;

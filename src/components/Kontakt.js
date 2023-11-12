@@ -90,7 +90,7 @@ export default function Kontakt() {
                 className="subtitle"
                 spacing={{ bottom: "team-xxs-space" }}
               >
-                {subUeberschrift}
+                <p>{subUeberschrift}</p>
               </SpaceWrapper>
 
               <SpaceWrapper

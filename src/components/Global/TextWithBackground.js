@@ -5,6 +5,7 @@ import SpaceWrapper from "../../utils/SpaceWrapper";
 import Icon from "../Global/Icon";
 
 export default function TextWithBackground({
+  tag = "div",
   text,
   color,
   fontSize,
@@ -24,7 +25,13 @@ export default function TextWithBackground({
         transparent={transparent}
       >
         {!validGermanPhoneNumber.test(text) && !validEmail.test(text) ? (
-          text
+          <>
+            {tag === "h2" && <h2>{text}</h2>}
+            {tag === "h3" && <h3>{text}</h3>}
+            {tag === "h4" && <h4>{text}</h4>}
+            {tag === "p" && <p>{text}</p>}
+            {tag === "div" && text}
+          </>
         ) : validGermanPhoneNumber.test(text) ? (
           <>
             <Icon name="phone" className="icon" />
@@ -39,6 +46,9 @@ export default function TextWithBackground({
 }
 
 const Wrapper = styled.div`
+  h2, h1 , h3 , h4 , p{
+    all: unset;
+  }
   padding: 1px;
   margin: 0px;
   display: inline-block;

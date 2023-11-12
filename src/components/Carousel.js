@@ -75,6 +75,7 @@ export default function Carousel() {
         />
       </SpaceWrapper>
       <TextWithBackground
+        tag="p"
         className="text1"
         text={parse(titel.globalID)}
         fontSize="1"
@@ -88,6 +89,7 @@ export default function Carousel() {
         transparent="true"
       />
       <TextWithBackground
+        tag="p"
         className="text2"
         text={parse(untertitel.globalID)}
         fontSize="2"

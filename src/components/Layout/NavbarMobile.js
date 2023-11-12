@@ -15,9 +15,11 @@ const NavbarMobile = ({ strapiHeader }) => {
     setToggle(!toggle);
   };
 
+  const { parse } = useGlobalData();
+
   return (
     <>
-      <Nav toggleNav={ToggleNav} />
+      <Nav toggleNav={ToggleNav} name={parse(strapiHeader.links.globalID)} />
       <Overlay
         open={toggle}
         toggleNav={ToggleNav}
@@ -30,16 +32,19 @@ const NavbarMobile = ({ strapiHeader }) => {
 export default NavbarMobile;
 
 // Navbar
-const Nav = ({ toggleNav }) => {
+const Nav = ({ toggleNav, name }) => {
   return (
     <NavWrapper id="topbarMobile">
       <Icon name="menu" onClick={() => toggleNav()} />
-      <div className="text">Home</div>
+      <h1 className="text">{name}</h1>
     </NavWrapper>
   );
 };
 
 const NavWrapper = styled.div`
+  h2, h1 , h3 , h4 , p{
+    all: unset;
+  }
   position: fixed;
   z-index: 100;
   top: 0;

@@ -12,12 +12,14 @@ export default function Titel({ text, color, spacing, center, className }) {
       spacing={spacing}
       className={className}
     >
-      <Wrapper theme={color}>{Parser(text)}</Wrapper>
+      <Wrapper theme={color}>{text}</Wrapper>
     </SpaceWrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.h2`
+  padding: 0;
+  margin: 0;
   font-size: var(--fs-1);
   font-weight: var(--semibold);
   color: ${(props) =>
