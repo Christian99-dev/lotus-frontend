@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Icon from "../Global/Icon";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import { device } from "../../theme/breakpoints";
-import { Link } from "gatsby";
-import Loader from "../Global/Loader";
-import { validEmail, validGermanPhoneNumber } from "../../utils/regex";
-import WhatsappTooltipWrapper, {
-  WhatsappTooltip,
-} from "../Global/WhatsappTooltip";
+import { Link, graphql, useStaticQuery } from "gatsby";
+import { WhatsappTooltip } from "../Global/WhatsappTooltip";
 import IconAndText from "../Global/IconAndText";
-export default function Footer({ fetchData, fetchUnternehmenData }) {
-  const [data, setData] = useState(null);
-  const [unternehmenData, setUnternehmenData] = useState(null);
+import useGlobalData from "../../utils/useGlobalData";
 
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-    });
+export default function Footer() {
+  const { adressSpalte, kontaktSpalte } = useStaticQuery(graphql`
+    {
+      strapiFooter {
+        adressSpalte: AdressSpalte {
+          globalID
+        }
+        kontaktSpalte: KontaktSpalte {
+          global: Global {
+            globalID
+          }
+          icon: Icon {
+            iconID
+          }
+        }
+      }
+    }
+  `).strapiFooter;
 
-    fetchUnternehmenData().then((res) => {
-      setUnternehmenData(res.data.attributes);
-    });
-  }, [fetchData]);
+  const { parse } = useGlobalData();
 
   return (
     <>
@@ -35,57 +39,50 @@ export default function Footer({ fetchData, fetchUnternehmenData }) {
           right: "border",
         }}
       >
-        {data && unternehmenData ? (
-          <>
-            <div className="col">
-              <div className="head"> Kontakt</div>
+        <div className="col">
+          <div className="head">Kontakt</div>
 
-              {data.kontakt.map((data, key) => {
-                return (
-                  <IconAndText
-                    iconName={data.icon.icon}
-                    text={data.text.info}
-                    key={key}
-                    gap="footer-inner-s"
-                    textSize="fs-4"
-                    fontWeight="semibold"
-                    iconHeight="icon-s"
-                    direction="row"
-                    className="row icon"
-                  />
-                );
-              })}
-            </div>
+          {kontaktSpalte.map((data, key) => {
+            return (
+              <IconAndText
+                iconName={data.icon.iconID}
+                text={parse(data.global.globalID)}
+                key={key}
+                gap="footer-inner-s"
+                textSize="fs-4"
+                fontWeight="semibold"
+                iconHeight="icon-s"
+                direction="row"
+                className="row icon"
+              />
+            );
+          })}
+        </div>
 
-            <div className="col">
-              <div className="head">Adresse</div>
+        <div className="col">
+          <div className="head">Adresse</div>
+          {adressSpalte.map((data, key) => {
+            return (
+              <div className="row" key={key}>
+                {parse(data.globalID)}
+              </div>
+            );
+          })}
+        </div>
 
-              {data.adresse.map((data, key) => {
-                return (
-                  <div className="row" key={key}>
-                    {data.info}
-                  </div>
-                );
-              })}
-            </div>
+        <div className="col">
+          <div className="head">Rechtliches</div>
+          <Link className="row" to="/impressum">
+            Impressum & Datenschutzerklärung
+          </Link>
+          <Link className="row" to="/agb">
+            AGB
+          </Link>
 
-            <div className="col">
-              <div className="head">Rechtliches</div>
-              <Link className="row" to="/impressum">
-                Impressum & Datenschutzerklärung
-              </Link>
-              <Link className="row" to="/agb">
-                AGB
-              </Link>
-
-              <a className="row" href="javascript:UC_UI.showSecondLayer();">
-                Cookie-Einstellungen
-              </a>
-            </div>
-          </>
-        ) : (
-          <Loader spinner className="loader" />
-        )}
+          <a className="row" href="javascript:UC_UI.showSecondLayer();">
+            Cookie-Einstellungen
+          </a>
+        </div>
       </FooterWrapper>
     </>
   );

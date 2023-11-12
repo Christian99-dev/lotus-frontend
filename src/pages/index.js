@@ -29,12 +29,9 @@ const IndexPage = () => {
       <Cards />
       <Panel />
       <Team />
-      <Kontakt/>
-      <Testimonial fetchData={getRezensionen} />
-      <Footer
-        fetchData={getFooterModified}
-        fetchUnternehmenData={getUnternehmen}
-      />
+      <Kontakt />
+      <Testimonial />
+      <Footer />
     </Layout>
   );
 };

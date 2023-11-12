@@ -8,16 +8,30 @@ import MySwiper from "./Global/MySwiper";
 import TextWithBackground from "./Global/TextWithBackground";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { size } from "../theme/breakpoints";
-import Loader from "./Global/Loader";
-import { createImgUrl, Parser } from "../utils/utils";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-export default function Testimonial({ fetchData }) {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-    });
-  }, [fetchData]);
+export default function Testimonial() {
+  const { ueberschrift, rezensionen } = useStaticQuery(graphql`
+    {
+      strapiRezensionen {
+        ueberschrift: Ueberschrift
+        rezensionen: Rezensionen {
+          bewertung: Bewertung
+          name: Name
+          text: Text
+          bild: Bild {
+            alternativeText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
+          }
+        }
+      }
+    }
+  `).strapiRezensionen;
 
   const windowDim = useWindowDimensions().width;
   return (
@@ -28,45 +42,30 @@ export default function Testimonial({ fetchData }) {
         bottom: "white-component-inner",
       }}
     >
-      {data ? (
-        <Titel
-          text="Das sagen unsere Kunden"
-          color="purple"
-          spacing={{
-            bottom: "white-component-inner-half",
-            left: "border",
-            right: "border",
-          }}
-          center
-        />
-      ) : (
-        <Loader
-          title
-          spacing={{
-            bottom: "white-component-inner-half",
-            left: "border",
-            right: "border",
-          }}
-          color="primary"
-        />
-      )}
-      {data ? (
-        <MySwiper
-          array={data.rezensionen.map((comment) => {
-            return (
-              <Comment
-                text={comment.text}
-                img={createImgUrl(comment.bild.data.attributes.url)}
-                name={comment.vorname + " " + comment.nachname}
-                rating={comment.bewertung}
-              />
-            );
-          })}
-          cards={windowDim <= size.tablet}
-        />
-      ) : (
-        <Loader dots />
-      )}
+      <Titel
+        text={ueberschrift}
+        color="purple"
+        spacing={{
+          bottom: "white-component-inner-half",
+          left: "border",
+          right: "border",
+        }}
+        center
+      />
+
+      <MySwiper
+        array={rezensionen.map((comment) => {
+          return (
+            <Comment
+              text={comment.text}
+              img={comment.bild}
+              name={comment.name}
+              rating={comment.bewertung}
+            />
+          );
+        })}
+        cards={windowDim <= size.tablet}
+      />
     </TestimonialWrapper>
   );
 }
@@ -81,7 +80,11 @@ const TestimonialWrapper = styled(SpaceWrapper)`
 const Comment = ({ name, rating, img, text }) => (
   <CommentWrapper>
     <div className="img-container">
-      <img className="img" src={img} alt="img" />
+      <GatsbyImage
+        image={getImage(img.localFile)}
+        alt={img.alternativeText}
+        className="img"
+      />
       <img className="speech" src={speech} alt="speech" />
     </div>
     <TextWithBackground text={name} fontSize={3} />
@@ -96,7 +99,7 @@ const Comment = ({ name, rating, img, text }) => (
       spacing={{ bottom: "testimonial-text-bottom" }}
       className="text"
     >
-      {Parser(text)}
+      {text}
     </SpaceWrapper>
   </CommentWrapper>
 );
