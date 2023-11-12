@@ -12,6 +12,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 const NavbarMobile = ({ strapiHeader }) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
+    console.log("toggle")
     setToggle(!toggle);
   };
 
@@ -69,6 +70,8 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
     parse,
     data: { logoOhneText },
   } = useGlobalData();
+
+  document.body.style.overflow = open ? "hidden" : "unset";
 
   return (
     <OverlayWrapper className={open ? "open" : "closed"}>
@@ -151,6 +154,7 @@ const OverlayWrapper = styled(SpaceWrapper)`
   }
 
   .closeButton {
+    z-index: 301;
     position: absolute;
     top: var(--navmobile-overlay-inner);
     left: var(--navmobile-overlay-inner);
