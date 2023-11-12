@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Titel from "./Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
@@ -9,7 +9,7 @@ import useWindowDimensions from "../utils/useWindowDimensions";
 import { useEffect } from "react";
 import { useRef } from "react";
 import MySwiper from "../components/Global/MySwiper";
-import { createImgUrl, Parser } from "../utils/utils";
+import { Parser } from "../utils/utils";
 import { graphql, useStaticQuery } from "gatsby";
 import Parallax from "./Global/Parallax";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
