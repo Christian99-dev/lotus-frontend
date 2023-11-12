@@ -42,14 +42,16 @@ const Cards = () => {
   );
 
   const openModal = (key) => {
-    document?.body.style.overflow = "hidden";
+    if (typeof document !== 'undefined')
+      document.body.style.overflow = "hidden";
     const updatedModals = [...modals];
     updatedModals[key] = true;
     setModals(updatedModals);
   };
 
   const closeModal = (key) => {
-    document?.body.style.overflow = "unset";
+    if (typeof document !== 'undefined')
+      document.body.style.overflow = "unset";
     const updatedModals = [...modals];
     updatedModals[key] = false;
     setModals(updatedModals);

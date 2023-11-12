@@ -10,9 +10,10 @@ export const addApercentToB = (a, b, minus) => {
 };
 export const offset = (el) => {
   if (window === "undefined") return 0;
+  if (typeof document === 'undefined') return 0;
   var rect = el.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document?.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document?.documentElement.scrollTop;
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
 };
 

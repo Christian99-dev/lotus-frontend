@@ -196,13 +196,15 @@ const PersonMobile = ({ img, text, name, jobTitle }) => {
 
     const onMouseDown = (e) => {
       isClicked.current = true;
-      document?.body.style.overflow = "hidden";
+      if (typeof document !== 'undefined')
+        document.body.style.overflow = "hidden";
       coords.current.startY = e.clientY ? e.clientY : e.touches[0].clientY;
     };
 
     const onMouseUp = (e) => {
       isClicked.current = false;
-      document?.body.style.overflow = "unset";
+      if (typeof document !== 'undefined')
+        document.body.style.overflow = "unset";
       coords.current.lastY = overlay.offsetTop;
     };
 
