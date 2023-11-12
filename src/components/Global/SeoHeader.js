@@ -43,6 +43,7 @@ export const SeoHeader = ({ endung, children }) => {
         data-settings-id="kQjO-dCNKLdpsJ"
         src="https://app.eu.usercentrics.eu/browser-ui/latest/loader.js"
       ></script>
+
       <script
         type="application/javascript"
         src="https://sdp.eu.usercentrics.eu/latest/uc-block.bundle.js"

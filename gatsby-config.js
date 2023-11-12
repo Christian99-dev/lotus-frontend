@@ -4,9 +4,21 @@ require("dotenv").config({
 
 module.exports = {
   plugins: [
-    "gatsby-plugin-styled-components",
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        minify: true,
+      }
+    },
     `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
+    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-zopfli',
+      options: {
+        extensions: ['css', 'html', 'js', 'svg', "py"]
+      }
+    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
