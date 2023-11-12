@@ -1,0 +1,55 @@
+name: 🚀 Build and Deploy Gatsby App - Production
+
+on:
+  push:
+    branches:
+      - production 
+
+  repository_dispatch:
+    types:
+      - strapi-production
+
+concurrency:
+  group: environment-production
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: 📦 Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        ref: production
+
+    - name: 📌 Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20
+
+    - name: ⚙️ Install Dependencies
+      run: npm install
+
+    - name: 📝 Create Environment Variables
+      run: |
+        echo "GATSBY_BACKEND_API_TOKEN=${{ secrets.BACKEND_API_TOKEN }}" >> .env.production
+        echo "GATSBY_BACKEND_URL=${{ secrets.BACKEND_URL }}" >> .env.production
+        echo "GATSBY_EMAIL_FORWARD_URL=${{ secrets.EMAIL_FORWARD_URL }}" >> .env.production
+        echo "GATSBY_EMAIL_FORWARD_KEY=${{ secrets.EMAIL_FORWARD_KEY }}" >> .env.production
+
+
+    - name: 🏗️ Build Gatsby App for Production
+      run: npm run build  
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: ${{ secrets.FTP_PORT }}
+        protocol: ftps
+        local-dir: "public/"
+        server-dir: "public_html/"
