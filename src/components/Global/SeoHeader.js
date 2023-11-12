@@ -29,13 +29,24 @@ export const SeoHeader = ({ endung, children }) => {
   `);
 
   const { webseitenUrl, webseitenTitel, favicon } = strapiSeo;
-  const can = endung !== "index" ? webseitenUrl + "/" + endung : webseitenUrl
+  const can = endung !== "index" ? webseitenUrl + "/" + endung : webseitenUrl;
 
   return (
     <>
       <title>
         {strapiSeo[endung].title} | {webseitenTitel}
       </title>
+      <script
+        id="usercentrics-cmp"
+        async
+        data-eu-mode="true"
+        data-settings-id="kQjO-dCNKLdpsJ"
+        src="https://app.eu.usercentrics.eu/browser-ui/latest/loader.js"
+      ></script>
+      <script
+        type="application/javascript"
+        src="https://sdp.eu.usercentrics.eu/latest/uc-block.bundle.js"
+      ></script>
       <meta name="description" content={strapiSeo[endung].desc} />
       <link rel="stylesheet" type="text/css" href="/fonts/fontface.css" />
       <link rel="icon" href={favicon.localFile.url} />
