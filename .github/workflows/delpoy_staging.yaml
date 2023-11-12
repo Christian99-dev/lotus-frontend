@@ -31,6 +31,17 @@ jobs:
     - name: ⚙️ Install Dependencies
       run: npm install
 
+    - name: logging
+      run : |
+        echo ${{ secrets.BACKEND_API_TOKEN }}
+        echo ${{ secrets.BACKEND_URL }}
+        echo ${{ secrets.EMAIL_FORWARD_URL }}
+        echo ${{ secrets.EMAIL_FORWARD_KEY }}
+        echo ${{ secrets.FTP_SERVER }}
+        echo ${{ secrets.FTP_USERNAME }}
+        echo ${{ secrets.FTP_PASSWORD }}
+        echo ${{ secrets.FTP_PORT }}
+
     - name: 📝 Create Environment Variables
       run: |
         echo "GATSBY_BACKEND_API_TOKEN=${{ secrets.BACKEND_API_TOKEN }}" >> .env.production
