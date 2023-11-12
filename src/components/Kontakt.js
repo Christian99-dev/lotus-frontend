@@ -180,7 +180,6 @@ const KontaktWrapper = styled.div`
         text-align: center;
         img {
           width: min-content;
-          margin: 0 auto;
         }
       }
 
@@ -214,9 +213,15 @@ const KontaktWrapper = styled.div`
     }
 
     @media ${device.tablet} {
+      .qr-code {
+        img {
+          margin: 0 auto;
+        }
+      }
+
       grid-template-columns: 1fr;
       grid-template-rows: 1fr var(--contact-maps-height-tablet);
-      .whatsapplink-wrapper{
+      .whatsapplink-wrapper {
         text-align: center;
       }
       .left {
