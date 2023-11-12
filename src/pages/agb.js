@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Footer from "../components/Layout/Footer";
-import { Top } from "../components/Layout/NavbarDesktop";
 import Layout from "../theme/layout";
 import Title from "../components/Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import styled from "styled-components";
 import { device } from "../theme/breakpoints";
 import Button from "../components/Global/Button";
-import { getAGB, getFooterModified, getHeadModified, getUnternehmen } from "../_api/axios";
-import Loader from "../components/Global/Loader";
 import { Parser } from "../utils/utils";
+import { graphql, useStaticQuery } from "gatsby";
+import { SeoHeader } from "../components/Global/SeoHeader";
 
 const AgbPage = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    getAGB().then((res) => {
-      setData(res.data.attributes);
-    });
-  }, []);
+
+  const { agb, ueberschrift } = useStaticQuery(graphql`
+  {
+    strapiAgb {
+      agb: AGB
+      ueberschrift: Ueberschrift
+    }
+  }
+`).strapiAgb;
 
   return (
-    <Layout fetchData={getUnternehmen}>
+    <Layout>
       <AgbPageWrapper>
-        <Top fetchData={getHeadModified} fetchUnternehmenData={getUnternehmen} />
         <SpaceWrapper
           spacing={{
             left: "border",
@@ -30,22 +31,23 @@ const AgbPage = () => {
             top: "white-component-inner-half",
           }}
         >
-          {data ? (
-            <Title
-              className="title"
-              text={data.ueberschrift}
-              color="purple"
-              spacing={{ bottom: "white-component-inner-half" }}
-            />
-          ) : (
-            <Loader
-              title
-              color="primary"
-              spacing={{ bottom: "white-component-inner-half" }}
-            />
-          )}
+          <Title
+            className="title"
+            text={ueberschrift}
+            color="purple"
+            spacing={{ bottom: "white-component-inner-half" }}
+          />
+          <SpaceWrapper
+            className="button-container"
+            spacing={{
+              bottom: "white-component-inner-half",
+              top: "white-component-inner-half",
+            }}
+          >
+            <Button className="button" text="Zurück zur Homepage" link="../" />
+          </SpaceWrapper>
 
-          <div className="main-text">{data ? Parser(data.text) : <Loader dots />}</div>
+          <div className="main-text">{Parser(agb)}</div>
           <SpaceWrapper
             className="button-container"
             spacing={{
@@ -56,7 +58,7 @@ const AgbPage = () => {
             <Button className="button" text="Zurück zur Homepage" link="../" />
           </SpaceWrapper>
         </SpaceWrapper>
-        <Footer fetchData={getFooterModified} fetchUnternehmenData={getUnternehmen} />
+        <Footer />
       </AgbPageWrapper>
     </Layout>
   );
@@ -80,3 +82,6 @@ const AgbPageWrapper = styled.div`
     }
   }
 `;
+
+export const Head = () => <SeoHeader endung="agb" />
+

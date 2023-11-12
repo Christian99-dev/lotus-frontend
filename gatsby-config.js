@@ -48,7 +48,7 @@ module.exports = {
           {
             singularName: "seo",
             queryParams: {
-              populate: ["Homepage", "ImpressumUndDatenschutz"],
+              populate: ["Homepage", "ImpressumUndDatenschutz", "favicon", "Agb"],
             },
           },
           {
