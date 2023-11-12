@@ -5,11 +5,89 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
 import styled from "styled-components";
-import axios from "axios";
+import { graphql, useStaticQuery } from "gatsby";
+import messageFormarter from "../../utils/messageFormater";
 
-const Form = ({ data }) => {
+const Form = () => {
+  const {
+    strapiKontakt: {
+      emailPlatzhalter,
+      nachnamePlatzhalter,
+      nachrichtPlatzhalter,
+      nummerPlatzhalter,
+      plzOrtPlatzhalter,
+      strasseHausnummerPlatzhalter,
+      vornamePlatzhalter,
+      button,
+    },
+    strapiFormularPopups: {
+      bitteWartenPopup,
+      emailPopup,
+      emailUngueltigPopup,
+      fehlerPopup,
+      nachnamePopup,
+      nachrichtAbgeschicktPopup,
+      nachrichtPopup,
+      plzOrtPopup,
+      strasseHausnummerPopup,
+      telefonnummerPopup,
+      vornamePopup,
+    },
+    strapiFormularAusgangsMail: { betreff, empfaenger, format },
+  } = useStaticQuery(graphql`
+    {
+      strapiKontakt {
+        button: Button
+        emailPlatzhalter: EmailPlatzhalter
+        googleMapsLink: GoogleMapsLink
+        nachnamePlatzhalter: NachnamePlatzhalter
+        nachrichtPlatzhalter: NachrichtPlatzhalter
+        nummerPlatzhalter: NummerPlatzhalter
+        plzOrtPlatzhalter: PlzOrtPlatzhalter
+        strasseHausnummerPlatzhalter: StrasseHausnummerPlatzhalter
+        subUeberschrift: SubUeberschrift
+        ueberschrift: Ueberschrift
+        vornamePlatzhalter: VornamePlatzhalter
+        hintergrund: Hintergrund {
+          alternativeText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED)
+            }
+          }
+        }
+        informationsZeilen: InformationsZeilen {
+          Global {
+            globalID
+          }
+          Icon {
+            iconID
+          }
+        }
+      }
+      strapiFormularPopups {
+        bitteWartenPopup: BitteWartenPopup
+        emailPopup: EmailPopup
+        emailUngueltigPopup: EmailUngueltigPopup
+        fehlerPopup: FehlerPopup
+        nachnamePopup: NachnamePopup
+        nachrichtAbgeschicktPopup: NachrichtAbgeschicktPopup
+        nachrichtPopup: NachrichtPopup
+        plzOrtPopup: PlzOrtPopup
+        strasseHausnummerPopup: StrasseHausnummerPopup
+        telefonnummerPopup: TelefonnummerPopup
+        vornamePopup: VornamePopup
+      }
+
+      strapiFormularAusgangsMail {
+        betreff: Betreff
+        empfaenger: Empfaenger
+        format: NachrichtenFormat
+      }
+    }
+  `);
+
   const onSubmit = (values, actions) => {
-    
     actions.resetForm();
     send({
       name: values.name,
@@ -18,7 +96,7 @@ const Form = ({ data }) => {
       email: values.email,
       number: values.number,
       street: values.street,
-      location: values.location
+      location: values.location,
     });
   };
 
@@ -33,21 +111,19 @@ const Form = ({ data }) => {
       location: "",
     },
     validationSchema: yup.object().shape({
-      name: yup.string().required("Name darf nicht leer sein."),
-      lastname: yup.string().required("Nachname darf nicht leer sein."),
-      message: yup.string().required("Nachricht darf nicht leer sein."),
-      email: yup
-        .string()
-        .email("Bitte gültige Email eingeben.")
-        .required("Email darf nicht leer sein."),
-      number: yup.string().required("Nummer darf nicht leer sein."),
-      street: yup.string().required("Straße + Hausnummer darf nicht leer sein"),
-      location: yup.string().required("Plz + Ort darf nicht leer sein."),
+      name: yup.string().required(vornamePopup),
+      lastname: yup.string().required(nachnamePopup),
+      message: yup.string().required(nachrichtPopup),
+      email: yup.string().email(emailUngueltigPopup).required(emailPopup),
+      number: yup.string().required(telefonnummerPopup),
+      street: yup.string().required(strasseHausnummerPopup),
+      location: yup.string().required(plzOrtPopup),
     }),
     onSubmit,
   });
 
   const checkErrors = () => {
+    toast.dismiss();
     if (errors.name) toast.error(errors.name, { theme: "colored" });
     if (errors.lastname) toast.error(errors.lastname, { theme: "colored" });
     if (errors.message) toast.error(errors.message, { theme: "colored" });
@@ -57,18 +133,62 @@ const Form = ({ data }) => {
     if (errors.location) toast.error(errors.location, { theme: "colored" });
   };
 
-  async function send(data) {
-    try {
-      await axios.post(
-        `${process.env.GATSBY_EMAIL_SERVER_URL}/send`,
-        data
-      ).then(_ => {
-        toast.success("Ihre Nachricht wurde erfolgreich abgeschickt!", { theme: "colored" });
+  const send = ({
+    name,
+    lastname,
+    message,
+    email,
+    number,
+    street,
+    location,
+  }) => {
+    toast.info(bitteWartenPopup, {
+      theme: "colored",
+    });
+
+    fetch(process.env.GATSBY_EMAIL_FORWARD_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        subject: betreff,
+        message: messageFormarter(
+          name,
+          lastname,
+          message,
+          email,
+          number,
+          street,
+          location,
+          format
+        ),
+        from: email,
+        to: empfaenger,
+        key: process.env.GATSBY_EMAIL_FORWARD_KEY,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error();
+        }
+      })
+      .then((_) => {
+        toast.dismiss();
+        toast.success(nachrichtAbgeschicktPopup, {
+          theme: "colored",
+        });
+      })
+      .catch((_) => {
+        toast.dismiss();
+        toast.success(fehlerPopup, {
+          theme: "colored",
+          type: "error",
+        });
       });
-    } catch (error) {
-      toast.error("Server Fehler... versuchen Sie es später nochmal.", { theme: "colored" });
-    }
-  }
+  };
 
   return (
     <>
@@ -79,7 +199,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="name"
-          text={data.vornamePlatzhalter}
+          text={vornamePlatzhalter}
           className="a"
         />
         <Input
@@ -87,7 +207,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="lastname"
-          text={data.nachnamePlatzhalter}
+          text={nachnamePlatzhalter}
           className="b"
         />
         <Input
@@ -95,7 +215,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="message"
-          text={data.nachrichtPlatzhalter}
+          text={nachrichtPlatzhalter}
           className="c"
           textarea
         />
@@ -104,7 +224,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="email"
-          text={data.emailPlatzhalter}
+          text={emailPlatzhalter}
           className="d"
         />
         <Input
@@ -112,7 +232,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="number"
-          text={data.nummerPlatzhalter}
+          text={nummerPlatzhalter}
           className="e"
         />
         <Input
@@ -120,7 +240,7 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="street"
-          text={data.strasseHausnummerPlatzhalter}
+          text={strasseHausnummerPlatzhalter}
           className="f"
         />
         <Input
@@ -128,11 +248,11 @@ const Form = ({ data }) => {
           onChange={handleChange}
           type="text"
           name="location"
-          text={data.plzOrtPlatzhalter}
+          text={plzOrtPlatzhalter}
           className="g"
         />
         <Button
-          text={data.buttonPlatzhalter}
+          text={button}
           color="transparent"
           className="button"
           type="submit"

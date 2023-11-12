@@ -28,11 +28,8 @@ const IndexPage = () => {
       <Carousel />
       <Cards />
       <Panel />
-      <Team fetchData={getTeam} />
-      <Kontakt
-        fetchData={getKontaktModified}
-        fetchUnternehmenData={getUnternehmen}
-      />
+      <Team />
+      <Kontakt/>
       <Testimonial fetchData={getRezensionen} />
       <Footer
         fetchData={getFooterModified}

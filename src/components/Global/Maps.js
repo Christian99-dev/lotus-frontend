@@ -1,10 +1,19 @@
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 
 const Maps = () => {
+  const { googleMapsLink } = useStaticQuery(graphql`
+    {
+      strapiKontakt {
+        googleMapsLink: GoogleMapsLink
+      }
+    }
+  `).strapiKontakt;
+
   return (
     <MapsWrapper
-      src={process.env.GATSBY_GOOGLE_MAPS_LINK}
+      src={googleMapsLink}
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
     ></MapsWrapper>

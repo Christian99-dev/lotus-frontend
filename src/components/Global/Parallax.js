@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Parallax = ({ children, strength = 400, fromBottom = false }) => {
+const Parallax = ({ children, strength = 400, fromBottom = false, className }) => {
   const containerRef = useRef(null);
 
   const calcPosition = (parallax, strength, fromBottom) => {
@@ -35,7 +35,7 @@ const Parallax = ({ children, strength = 400, fromBottom = false }) => {
   }, []);
 
   return (
-    <ParallaxStyle strength={strength} ref={containerRef}>
+    <ParallaxStyle className={className} strength={strength} ref={containerRef}>
       {children}
     </ParallaxStyle>
   );

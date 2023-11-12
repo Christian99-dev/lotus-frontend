@@ -1,135 +1,159 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
-import { Parallax } from "react-parallax";
+import Parallax from "./Global/Parallax";
 import Maps from "./Global/Maps";
 import { device, size } from "../theme/breakpoints";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "./Global/Form";
-import { createImgUrl } from "../utils/utils";
-import Loader from "./Global/Loader";
 import useWindowDimensions from "../utils/useWindowDimensions";
 import { validGermanPhoneNumber } from "../utils/regex";
 import WhatsappTooltipWrapper, {
   WhatsappTooltip,
 } from "./Global/WhatsappTooltip";
 import IconAndText from "./Global/IconAndText";
+import { graphql, useStaticQuery } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import useGlobalData from "../utils/useGlobalData";
 
-export default function Kontakt({ fetchData, fetchUnternehmenData }) {
-  const [data, setData] = useState(null);
-  const [background, setBackground] = useState([]);
-  const [unternehmenData, setUnternehmenData] = useState(null);
-  const [qrCode, setQrCode] = useState(null);
+export default function Kontakt() {
+  const {
+    strapiGlobal: { qrCode, whatsappLink },
+    strapiKontakt: {
+      subUeberschrift,
+      ueberschrift,
+      hintergrund,
+      informationsZeilen,
+    },
+  } = useStaticQuery(graphql`
+    {
+      strapiGlobal {
+        whatsappLink: WhatsappLink
+        qrCode: WhatsappQRCode {
+          alternativeText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED)
+            }
+          }
+        }
+      }
+      strapiKontakt {
+        subUeberschrift: SubUeberschrift
+        ueberschrift: Ueberschrift
+        hintergrund: Hintergrund {
+          alternativeText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: CONSTRAINED)
+            }
+          }
+        }
+        informationsZeilen: InformationsZeilen {
+          global: Global {
+            globalID
+          }
+          icon: Icon {
+            iconID
+          }
+        }
+      }
+    }
+  `);
 
-  useEffect(() => {
-    fetchUnternehmenData().then((res) => {
-      setUnternehmenData(res.data.attributes);
-      setQrCode(
-        createImgUrl(res.data.attributes.QR_Whatsapp.data.attributes.url)
-      );
-    });
-
-    fetchData().then((res) => {
-      setData(res.data.attributes);
-      setBackground([
-        createImgUrl(res.data.attributes.hintergrund.data.attributes.url),
-        createImgUrl(res.data.attributes.hintergrundMobile.data.attributes.url),
-      ]);
-    });
-  }, [fetchData, fetchUnternehmenData]);
-
-  const width = useWindowDimensions().width;
+  const { width } = useWindowDimensions();
+  const { parse } = useGlobalData();
   return (
     <div id="contact">
       <WhatsappTooltip />
-      <KontaktWrapper
-        bgImage={
-          useWindowDimensions().width > size.tablet
-            ? background[0]
-            : background[1]
-        }
-        strength={500}
-      >
-        {/* id anchor */}
-        <div id="contact" />
+      <KontaktWrapper>
         <div className="filter">
-          {data && unternehmenData ? (
-            <SpaceWrapper
-              spacing={{
-                left: "border",
-                right: "border",
-                top: "contact-inner",
-                bottom: "contact-inner",
-              }}
-              className="wrapper"
-            >
-              <div className="left">
-                <Title
-                  text={data.ueberschrift}
-                  spacing={{ bottom: "team-xxs-space" }}
-                />
-                <SpaceWrapper
-                  className="subtitle"
-                  spacing={{ bottom: "team-xxs-space" }}
-                >
-                  {data.subUeberschrift}
-                </SpaceWrapper>
-
-                {qrCode && (
-                  <SpaceWrapper
-                    className="subtitle"
-                    spacing={{ bottom: "team-m-space" }}
-                  >
-                    <a href={unternehmenData.whatsappLink}>
-                      <img src={qrCode} className="qr-code" alt="qr-code" />
-                    </a>
-                  </SpaceWrapper>
-                )}
-
-                <SpaceWrapper
-                  className="infos"
-                  spacing={{ bottom: "team-m-space" }}
-                >
-                  {data.infos.map((info, key) => {
-                    return (
-                      <IconAndText
-                        iconName={info.icon.icon}
-                        text={info.text.info}
-                        key={key}
-                        gap="team-xs-space"
-                        direction={width > size.tablet && "row"}
-                        textSize="fs-2"
-                        fontWeight="semibold"
-                        iconHeight="icon-m"
-                      />
-                    );
-                  })}
-                </SpaceWrapper>
-
-                {/** FORM */}
-                <Form data={data} />
-              </div>
-              <div className="right">
-                <Maps />
-              </div>
-            </SpaceWrapper>
-          ) : (
-            <Loader
-              spinner
-              spacing={{ top: "contact-inner", bottom: "contact-inner" }}
+          <Parallax strength={400} className="background">
+            <GatsbyImage
+              image={getImage(hintergrund.localFile)}
+              alt={hintergrund.alternativeText}
             />
-          )}
+          </Parallax>
+          <SpaceWrapper
+            spacing={{
+              left: "border",
+              right: "border",
+              top: "contact-inner",
+              bottom: "contact-inner",
+            }}
+            className="wrapper"
+          >
+            <div className="left">
+              <Title
+                text={ueberschrift}
+                spacing={{ bottom: "team-xxs-space" }}
+              />
+              <SpaceWrapper
+                className="subtitle"
+                spacing={{ bottom: "team-xxs-space" }}
+              >
+                {subUeberschrift}
+              </SpaceWrapper>
+
+              <SpaceWrapper
+                className="whatsapplink-wrapper"
+                spacing={{ bottom: "team-m-space" }}
+              >
+                <a href={whatsappLink}>
+                  <GatsbyImage
+                    image={getImage(qrCode.localFile)}
+                    alt={qrCode.alternativeText}
+                    className="qr-code"
+                  />
+                </a>
+              </SpaceWrapper>
+
+              <SpaceWrapper
+                className="infos"
+                spacing={{ bottom: "team-m-space" }}
+              >
+                {informationsZeilen.map((info, key) => {
+                  console.log(info);
+                  return (
+                    <IconAndText
+                      iconName={info.icon.iconID}
+                      text={parse(info.global.globalID)}
+                      key={key}
+                      gap="team-xs-space"
+                      direction={width > size.tablet && "row"}
+                      textSize="fs-2"
+                      fontWeight="semibold"
+                      iconHeight="icon-m"
+                    />
+                  );
+                })}
+              </SpaceWrapper>
+
+              {/** FORM */}
+              <Form />
+            </div>
+            <div className="right">
+              <Maps />
+            </div>
+          </SpaceWrapper>
         </div>
       </KontaktWrapper>
     </div>
   );
 }
 
-const KontaktWrapper = styled(Parallax)`
+const KontaktWrapper = styled.div`
   .filter {
+    position: relative;
     background: var(--background-filter-primary);
+    .background {
+      z-index: -100;
+      img {
+        z-index: -100;
+      }
+    }
   }
 
   .wrapper {
@@ -151,7 +175,13 @@ const KontaktWrapper = styled(Parallax)`
       }
 
       .qr-code {
+        cursor: pointer;
         height: var(--contact-qr-code-height);
+        text-align: center;
+        img {
+          width: min-content;
+          margin: 0 auto;
+        }
       }
 
       .form {
@@ -186,7 +216,9 @@ const KontaktWrapper = styled(Parallax)`
     @media ${device.tablet} {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr var(--contact-maps-height-tablet);
-
+      .whatsapplink-wrapper{
+        text-align: center;
+      }
       .left {
         .subtitle {
           text-align: center;
