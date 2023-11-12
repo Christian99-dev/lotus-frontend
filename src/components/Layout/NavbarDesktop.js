@@ -39,7 +39,7 @@ export const Top = ({ strapiHeader }) => {
               iconHeight="icon-s"
               iconName={data.icon.iconID}
               className="info"
-              textSize="fs-4"
+              textsize="fs-4"
               direction="row"
               gap=""
             />

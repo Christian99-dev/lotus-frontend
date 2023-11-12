@@ -69,7 +69,7 @@ export default function Team() {
                   text={member.beschreibung}
                   name={member.name}
                   jobTitle={member.berufsbezeichnung}
-                  right={key === 1}
+                  right={key === 1 ? "true" : null}
                 />
               );
             })}

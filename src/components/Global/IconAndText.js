@@ -14,7 +14,7 @@ const IconAndText = ({
   gap,
   className,
   direction,
-  textSize,
+  textsize,
   fontWeight,
   center,
 }) => {
@@ -38,7 +38,7 @@ const IconAndText = ({
       gap={gap}
       className={className}
       direction={direction}
-      textSize={textSize}
+      textsize={textsize}
       fontWeight={fontWeight}
       center={center}
     >
@@ -73,7 +73,7 @@ const IconAndTextWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
 
-  ${(props) => props.textSize && `font-size: var(--${props.textSize});`}
+  ${(props) => props.textsize && `font-size: var(--${props.textsize});`}
   ${(props) => props.direction && `flex-direction: ${props.direction};`}
   ${(props) => props.gap && `gap: var(--${props.gap});`}
   ${(props) => props.fontWeight && `font-weight: var(--${props.fontWeight});`}

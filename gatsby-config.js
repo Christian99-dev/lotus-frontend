@@ -3,10 +3,6 @@ require("dotenv").config({
 });
 
 module.exports = {
-  siteMetadata: {
-    title: `Lotus Entwaesserungstechnik`,
-    siteUrl: `https://www.yourdomain.tld`,
-  },
   plugins: [
     "gatsby-plugin-styled-components",
     `gatsby-plugin-image`,
@@ -19,6 +15,13 @@ module.exports = {
           placeholder: `blurred`,
           breakpoints: [411, 768, 1400, 1921],
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-preload-fonts`,
+      options: {
+        formats: ["woff2"],
+        usePreload: true,
       },
     },
     {

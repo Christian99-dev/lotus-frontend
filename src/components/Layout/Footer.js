@@ -49,7 +49,7 @@ export default function Footer() {
                 text={parse(data.global.globalID)}
                 key={key}
                 gap="footer-inner-s"
-                textSize="fs-4"
+                textsize="fs-4"
                 fontWeight="semibold"
                 iconHeight="icon-s"
                 direction="row"
@@ -79,9 +79,9 @@ export default function Footer() {
             AGB
           </Link>
           {/* eslint-disable-next-line*/}
-          <a className="row" href="javascript:UC_UI.showSecondLayer();">
+          <div className="row" onClick={() => UC_UI.showSecondLayer()}>
             Cookie-Einstellungen
-          </a>
+          </div>
         </div>
       </FooterWrapper>
     </>

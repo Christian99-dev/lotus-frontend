@@ -15,7 +15,7 @@ const Maps = () => {
     <MapsWrapper
       src={googleMapsLink}
       loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
+      referrerPolicy="no-referrer-when-downgrade"
     ></MapsWrapper>
   );
 };

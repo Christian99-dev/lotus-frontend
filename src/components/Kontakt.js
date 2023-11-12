@@ -118,7 +118,7 @@ export default function Kontakt() {
                       key={key}
                       gap="team-xs-space"
                       direction={width > size.tablet && "row"}
-                      textSize="fs-2"
+                      textsize="fs-2"
                       fontWeight="semibold"
                       iconHeight="icon-m"
                     />

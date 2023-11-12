@@ -85,7 +85,7 @@ export default function Carousel() {
           left: "border",
           right: "border",
         }}
-        transparent
+        transparent="true"
       />
       <TextWithBackground
         className="text2"
@@ -93,7 +93,7 @@ export default function Carousel() {
         fontSize="2"
         color="purple"
         spacing={{ bottom: "carousel-inner-3" }}
-        transparent
+        transparent="true"
       />
       <SpaceWrapper className="buttons" spacing={{ bottom: "carousel-inner" }}>
         <Button text="Leistungen" color="purple" to="cards" />
