@@ -34,10 +34,10 @@ jobs:
 
     - name: 📝 Create Environment Variables
       run: |
-        echo "GATSBY_BACKEND_API_TOKEN=${{ secrets.BACKEND_API_TOKEN }}" >> .env.production
-        echo "GATSBY_BACKEND_URL=${{ secrets.BACKEND_URL }}" >> .env.production
-        echo "GATSBY_EMAIL_FORWARD_URL=${{ secrets.EMAIL_FORWARD_URL }}" >> .env.production
-        echo "GATSBY_EMAIL_FORWARD_KEY=${{ secrets.EMAIL_FORWARD_KEY }}" >> .env.production
+        echo "GATSBY_BACKEND_API_TOKEN=${{ secrets.GATSBY_BACKEND_API_TOKEN }}" >> .env.production
+        echo "GATSBY_BACKEND_URL=${{ secrets.GATSBY_BACKEND_URL }}" >> .env.production
+        echo "GATSBY_EMAIL_FORWARD_URL=${{ secrets.GATSBY_EMAIL_FORWARD_URL }}" >> .env.production
+        echo "GATSBY_EMAIL_FORWARD_KEY=${{ secrets.GATSBY_EMAIL_FORWARD_KEY }}" >> .env.production
 
 
     - name: 🏗️ Build Gatsby App for Production
