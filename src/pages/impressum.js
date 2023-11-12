@@ -1,6 +1,5 @@
 import React from "react";
 import Footer from "../components/Layout/Footer";
-import { Top } from "../components/Layout/NavbarDesktop";
 import Layout from "../theme/layout";
 import Title from "../components/Global/Titel";
 import SpaceWrapper from "../utils/SpaceWrapper";

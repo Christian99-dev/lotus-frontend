@@ -78,7 +78,7 @@ export default function Footer() {
           <Link className="row" to="/agb">
             AGB
           </Link>
-
+          {/* eslint-disable-next-line*/}
           <a className="row" href="javascript:UC_UI.showSecondLayer();">
             Cookie-Einstellungen
           </a>

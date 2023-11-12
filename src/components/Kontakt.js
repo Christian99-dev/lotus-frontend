@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import SpaceWrapper from "../utils/SpaceWrapper";
-import Icon from "./Global/Icon";
 import Title from "./Global/Titel";
 import Parallax from "./Global/Parallax";
 import Maps from "./Global/Maps";
@@ -9,10 +8,7 @@ import { device, size } from "../theme/breakpoints";
 import "react-toastify/dist/ReactToastify.css";
 import Form from "./Global/Form";
 import useWindowDimensions from "../utils/useWindowDimensions";
-import { validGermanPhoneNumber } from "../utils/regex";
-import WhatsappTooltipWrapper, {
-  WhatsappTooltip,
-} from "./Global/WhatsappTooltip";
+import { WhatsappTooltip } from "./Global/WhatsappTooltip";
 import IconAndText from "./Global/IconAndText";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -241,50 +237,6 @@ const KontaktWrapper = styled.div`
           }
         }
       }
-    }
-  }
-`;
-
-function Info({ spacing, icon, text, link }) {
-  const width = useWindowDimensions().width;
-  return (
-    <InfoWrapper spacing={spacing}>
-      {icon === "whatsapp" && width > size.tablet ? (
-        <WhatsappTooltipWrapper>
-          <Icon name={icon} height="icon-m" link={link} />
-        </WhatsappTooltipWrapper>
-      ) : (
-        <Icon name={icon} height="icon-m" link={icon === "whatsapp" && link} />
-      )}
-
-      {!validGermanPhoneNumber.test(text) ? (
-        <div className="text">{text}</div>
-      ) : (
-        <a className="text" href={`tel:${text}`}>
-          {text}
-        </a>
-      )}
-    </InfoWrapper>
-  );
-}
-
-const InfoWrapper = styled(SpaceWrapper)`
-  display: flex;
-  gap: var(--team-xs-space);
-  .text {
-    font-size: var(--fs-2);
-    font-weight: var(--semibold);
-    color: var(--secondary);
-    text-decoration: none;
-  }
-
-  @media ${device.tablet} {
-    flex-direction: column;
-    .text {
-      text-align: center;
-    }
-    a {
-      text-align: center;
     }
   }
 `;

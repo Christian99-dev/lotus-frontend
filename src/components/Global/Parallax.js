@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const Parallax = ({ children, strength = 400, fromBottom = false, className }) => {
@@ -18,13 +18,13 @@ const Parallax = ({ children, strength = 400, fromBottom = false, className }) =
     return (strength * progressReal) / 100 - strength;
   };
 
-  const updatePos = () => {
+  const updatePos = useCallback(() => {
     containerRef.current.children[0].style.transform = `translateY(${calcPosition(
       containerRef.current,
       strength,
       fromBottom
     )}px)`;
-  };
+  }, [containerRef, strength, fromBottom]);
 
   useEffect(() => {
     updatePos();
@@ -32,7 +32,7 @@ const Parallax = ({ children, strength = 400, fromBottom = false, className }) =
     return () => {
       window.removeEventListener("scroll", updatePos);
     };
-  }, []);
+  }, [updatePos]);
 
   return (
     <ParallaxStyle className={className} strength={strength} ref={containerRef}>

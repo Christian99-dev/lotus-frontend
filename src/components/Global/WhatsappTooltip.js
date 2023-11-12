@@ -3,7 +3,6 @@ import ReactDOMServer from "react-dom/server";
 import styled from "styled-components";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { graphql, useStaticQuery } from "gatsby";
 
 const WhatsappTooltipWrapper = ({ children }) => {
