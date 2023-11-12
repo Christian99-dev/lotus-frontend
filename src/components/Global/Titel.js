@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { device, size } from "../../theme/breakpoints";
 import SpaceWrapper from "../../utils/SpaceWrapper";
 import useWindowDimensions from "../../utils/useWindowDimensions";
-import { Parser } from "../../utils/utils";
 
 export default function Titel({ text, color, spacing, center, className }) {
   return (
