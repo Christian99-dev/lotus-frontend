@@ -123,6 +123,12 @@ const FooterWrapper = styled(SpaceWrapper)`
   }
 
   .row {
+    cursor: pointer;
+    transition: color 0.1s ease;
+    &:hover {
+      color: var(--pink);
+    }
+
     &.icons {
       display: flex;
       justify-content: space-between;
