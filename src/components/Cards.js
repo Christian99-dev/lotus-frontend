@@ -108,6 +108,7 @@ const Cards = () => {
           bottom: "white-component-inner",
         }}
         rowcount={calculateRows(leistungen.length)}
+        section={"true"}
       >
         <Bubbels />
 

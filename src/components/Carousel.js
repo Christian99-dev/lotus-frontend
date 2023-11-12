@@ -46,7 +46,7 @@ export default function Carousel() {
   } = useGlobalData();
 
   return (
-    <CarouselWrapper id="carousel">
+    <CarouselWrapper id="carousel" section={"true"}>
       {useWindowDimensions().width > size.tablet ? (
         <GatsbyImage
           image={getImage(hintergrund.localFile)}

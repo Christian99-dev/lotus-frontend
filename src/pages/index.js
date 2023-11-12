@@ -13,11 +13,15 @@ import { SeoHeader } from "../components/Global/SeoHeader";
 const IndexPage = () => {
   return (
     <Layout>
-      <Navbar />
-      <Carousel />
-      <Cards />
-      <Panel />
-      <Team />
+      <header>
+        <Navbar />
+      </header>
+      <main>
+        <Carousel />
+        <Cards />
+        <Panel />
+        <Team />
+      </main>
       <Kontakt />
       <Testimonial />
       <Footer />
@@ -27,4 +31,4 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <SeoHeader endung="index" />
+export const Head = () => <SeoHeader endung="index" />;

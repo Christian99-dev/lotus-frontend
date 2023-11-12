@@ -41,6 +41,7 @@ export default function Testimonial() {
         top: "white-component-inner-half",
         bottom: "white-component-inner",
       }}
+      section={"true"}
     >
       <Titel
         text={ueberschrift}

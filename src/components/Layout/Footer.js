@@ -29,7 +29,7 @@ export default function Footer() {
   const { parse } = useGlobalData();
 
   return (
-    <>
+    <footer>
       <WhatsappTooltip />
       <FooterWrapper
         spacing={{
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
       </FooterWrapper>
-    </>
+    </footer>
   );
 }
 

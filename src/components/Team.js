@@ -37,7 +37,7 @@ export default function Team() {
   `).strapiTeam;
 
   return (
-    <div id="team">
+    <section id="team">
       <TeamWrapper
         spacing={{
           top: "white-component-inner-half",
@@ -91,7 +91,7 @@ export default function Team() {
           />
         )}
       </TeamWrapper>
-    </div>
+    </section>
   );
 }
 

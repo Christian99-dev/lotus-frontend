@@ -34,7 +34,9 @@ export default function Panel() {
 
   return (
     <PannelWrapper id="panel">
-      <Parallax strength={size.tablet > useWindowDimensions().width ? 200 : 400}>
+      <Parallax
+        strength={size.tablet > useWindowDimensions().width ? 200 : 400}
+      >
         <GatsbyImage
           image={getImage(hintergrund.localFile)}
           alt={hintergrund.alternativeText}
@@ -55,7 +57,7 @@ export default function Panel() {
   );
 }
 
-const PannelWrapper = styled.div`
+const PannelWrapper = styled.section`
   position: relative;
   .box {
     height: 100vh;

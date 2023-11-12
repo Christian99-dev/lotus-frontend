@@ -128,7 +128,7 @@ const Bar = () => {
   );
 };
 
-const BarWrapper = styled.div`
+const BarWrapper = styled.nav`
   position: sticky;
   top: -1px;
   z-index: 100;

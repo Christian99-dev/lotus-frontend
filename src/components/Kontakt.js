@@ -62,7 +62,7 @@ export default function Kontakt() {
   const { width } = useWindowDimensions();
   const { parse } = useGlobalData();
   return (
-    <div id="contact">
+    <section id="contact">
       <WhatsappTooltip />
       <KontaktWrapper>
         <div className="filter">
@@ -117,7 +117,7 @@ export default function Kontakt() {
                       text={parse(info.global.globalID)}
                       key={key}
                       gap="team-xs-space"
-                      direction={width > size.tablet && "row"}
+                      direction={width > size.tablet ? "row" : null}
                       textsize="fs-2"
                       fontWeight="semibold"
                       iconHeight="icon-m"
@@ -135,7 +135,7 @@ export default function Kontakt() {
           </SpaceWrapper>
         </div>
       </KontaktWrapper>
-    </div>
+    </section>
   );
 }
 

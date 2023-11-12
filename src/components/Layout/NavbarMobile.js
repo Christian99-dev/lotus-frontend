@@ -12,7 +12,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 const NavbarMobile = ({ strapiHeader }) => {
   const [toggle, setToggle] = useState(false);
   const ToggleNav = () => {
-    console.log("toggle")
     setToggle(!toggle);
   };
 
@@ -88,7 +87,7 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
       />
 
       <div className="scroll-wrapper">
-        <div className="nav">
+        <nav className="nav">
           {navigationLinks.map((navigation, key) => (
             <div className="navbutton-wrapper" key={key}>
               <NavButton
@@ -101,7 +100,7 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
               />
             </div>
           ))}
-        </div>
+        </nav>
         <div className="info">
           {rechts.map((data, key) => {
             return (
