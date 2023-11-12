@@ -75,7 +75,7 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
     data: { logoOhneText },
   } = useGlobalData();
 
-  document.body.style.overflow = open ? "hidden" : "unset";
+  document?.body.style.overflow = open ? "hidden" : "unset";
 
   return (
     <OverlayWrapper className={open ? "open" : "closed"}>
