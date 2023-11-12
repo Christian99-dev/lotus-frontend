@@ -1,26 +1,31 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
-import QRDummy from "../../media/images/QR1.jpg";
 import styled from "styled-components";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
-import { useEffect } from "react";
-import { useState } from "react";
-import { getUnternehmen } from "../../_api/axios";
-import { createImgUrl } from "../../utils/utils";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { graphql, useStaticQuery } from "gatsby";
 
 const WhatsappTooltipWrapper = ({ children }) => {
-  const [qrcode, setQrcode] = useState(QRDummy);
-
-  useEffect(() => {
-    getUnternehmen().then((res) => {
-      setQrcode(createImgUrl(res.data.attributes.QR_Whatsapp.data.attributes.url));
-    });
-  }, [getUnternehmen]);
-  
+  const { qrCode } = useStaticQuery(graphql`
+    {
+      strapiGlobal {
+        qrCode: WhatsappQRCode {
+          alternativeText
+          localFile {
+            url
+          }
+        }
+      }
+    }
+  `).strapiGlobal;
   const tooltip = (
     <div className="tooltip">
-      {qrcode && <img className="qrcode" src={qrcode} alt="qr-code" />}
+      <img
+        src={qrCode.localFile.url}
+        alt={qrCode.alternativeText}
+        className="qrcode"
+      />
     </div>
   );
   return (

@@ -29,7 +29,6 @@ export const SeoHeader = ({ endung, children }) => {
   `);
 
   const { webseitenUrl, webseitenTitel, favicon } = strapiSeo;
-  console.log(strapiSeo)
   const can = endung !== "index" ? webseitenUrl + "/" + endung : webseitenUrl
 
   return (

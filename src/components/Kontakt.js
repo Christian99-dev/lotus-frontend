@@ -115,7 +115,6 @@ export default function Kontakt() {
                 spacing={{ bottom: "team-m-space" }}
               >
                 {informationsZeilen.map((info, key) => {
-                  console.log(info);
                   return (
                     <IconAndText
                       iconName={info.icon.iconID}
