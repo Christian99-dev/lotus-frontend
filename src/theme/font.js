@@ -34,19 +34,19 @@ const Font = css`
       --fs-1: 33.16px;
     --fs-2: 18.66px;
     --fs-3: 14.00px;
-    --fs-4: 10.50px;
+    --fs-4: 12px;
     }
     @media ${device.tablet} {
       --fs-1: 30.79px;
     --fs-2: 17.33px;
     --fs-3: 13.00px;
-    --fs-4: 9.75px;
+    --fs-4: 12px;
     }
     @media ${device.mobile} {
       --fs-1: 28.42px;
     --fs-2: 16.00px;
     --fs-3: 12.00px;
-    --fs-4: 9.00px;
+    --fs-4: 12px;
     }
   }
 `;
