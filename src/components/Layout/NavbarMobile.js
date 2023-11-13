@@ -19,7 +19,9 @@ const NavbarMobile = ({ strapiHeader }) => {
 
   return (
     <>
-      <Nav toggleNav={ToggleNav} name={parse(strapiHeader.links.globalID)} />
+      <header>
+        <Nav toggleNav={ToggleNav} name={parse(strapiHeader.links.globalID)} />
+      </header>
       <Overlay
         open={toggle}
         toggleNav={ToggleNav}
@@ -42,7 +44,11 @@ const Nav = ({ toggleNav, name }) => {
 };
 
 const NavWrapper = styled.div`
-  h2, h1 , h3 , h4 , p{
+  h2,
+  h1,
+  h3,
+  h4,
+  p {
     all: unset;
   }
   position: fixed;
@@ -75,7 +81,7 @@ const Overlay = ({ open, toggleNav, strapiHeader }) => {
     data: { logoOhneText },
   } = useGlobalData();
 
-  if (typeof document !== 'undefined')
+  if (typeof document !== "undefined")
     document.body.style.overflow = open ? "hidden" : "unset";
 
   return (

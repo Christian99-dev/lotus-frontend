@@ -15,7 +15,9 @@ import useGlobalData from "../../utils/useGlobalData";
 export default function Navbar({ strapiWillkommen, strapiHeader }) {
   return (
     <>
-      <Top strapiHeader={strapiHeader} />
+      <header>
+        <Top strapiHeader={strapiHeader} />
+      </header>
       <Bar />
       <Bottom strapiWillkommen={strapiWillkommen} />
     </>
@@ -51,10 +53,14 @@ export const Top = ({ strapiHeader }) => {
 };
 
 const TopWrapper = styled(SpaceWrapper)`
-  h2, h1 , h3 , h4 , p{
+  h2,
+  h1,
+  h3,
+  h4,
+  p {
     all: unset;
   }
-  
+
   display: flex;
   background-color: var(--primary);
   flex-direction: column;

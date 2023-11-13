@@ -13,9 +13,7 @@ import { SeoHeader } from "../components/Global/SeoHeader";
 const IndexPage = () => {
   return (
     <Layout>
-      <header>
-        <Navbar />
-      </header>
+      <Navbar />
       <main>
         <Carousel />
         <Cards />
