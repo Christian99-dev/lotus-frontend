@@ -32,7 +32,7 @@ export default function Button({ color, text, spacing, to, link, type, ...props 
 
   if (to) {
     return (
-      <Link to={to} {...navButtonSetting}>
+      <Link to={to} {...navButtonSetting} href="#">
         <SpaceWrapper spacing={spacing} {...props}>
           <Wrapper type={type} theme={theme}>{text}</Wrapper>
         </SpaceWrapper>
