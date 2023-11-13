@@ -36,21 +36,6 @@ export const SeoHeader = ({ endung, children }) => {
       <title>
         {strapiSeo[endung].title} | {webseitenTitel}
       </title>
-
-      <link rel="preconnect" href="//app.eu.usercentrics.eu" />
-      <link rel="preconnect" href="//api.eu.usercentrics.eu" />
-      <link rel="preconnect" href="//sdp.eu.usercentrics.eu" />
-      <link
-        rel="preload"
-        href="//app.eu.usercentrics.eu/browser-ui/latest/loader.js"
-        as="script"
-      />
-      <link
-        rel="preload"
-        href="//sdp.eu.usercentrics.eu/latest/uc-block.bundle.js"
-        as="script"
-      />
-
       <script
         id="usercentrics-cmp"
         async
