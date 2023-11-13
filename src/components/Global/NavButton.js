@@ -5,10 +5,11 @@ import { navButtonSetting } from "../../utils/constants";
 
 
 export default function NavButton({ text, className, ...props }) {
-  return <Wrapper {...navButtonSetting} className={className} {...props} activeClass='active' spy={true}>{text}</Wrapper>;
+  return <Wrapper {...navButtonSetting} className={className} {...props} activeClass='active' href="#" spy={true}>{text}</Wrapper>;
 } 
 
 const Wrapper = styled(Link)`
+text-decoration: none;
   font-size: var(--fs-3);
   font-weight: var(--semibold);
   color: var(--primary);
