@@ -37,6 +37,7 @@ export const SeoHeader = ({ endung, children }) => {
         {strapiSeo[endung].title} | {webseitenTitel}
       </title>
       <script
+        rel="preconnect"
         id="usercentrics-cmp"
         async
         data-eu-mode="true"
@@ -45,6 +46,7 @@ export const SeoHeader = ({ endung, children }) => {
       ></script>
 
       <script
+        rel="preconnect"
         type="application/javascript"
         src="https://sdp.eu.usercentrics.eu/latest/uc-block.bundle.js"
       ></script>
