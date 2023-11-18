@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Icon from "./Global/Icon";
 import Titel from "./Global/Titel";
-import speech from "../media/icons/speech.svg";
 import SpaceWrapper from "../utils/SpaceWrapper";
 import MySwiper from "./Global/MySwiper";
 import TextWithBackground from "./Global/TextWithBackground";
@@ -86,7 +85,7 @@ const Comment = ({ name, rating, img, text }) => (
         alt={img.alternativeText}
         className="img"
       />
-      <img className="speech" src={speech} alt="speech" />
+      <img className="speech" src="icons/speech.svg" alt="speech" />
     </div>
     <TextWithBackground text={name} fontSize={3} tag="h3" />
     <Stars
@@ -149,16 +148,16 @@ const Stars = ({ rating, spacing }) => {
     let out = [];
 
     for (let i = 0; i < numOfFull; i++)
-      out.push(<Icon name="starFull" color="yellow" height="stars" key={i} />);
+      out.push(<Icon name="star-full" color="yellow" height="stars" key={i} />);
 
     if (hasHalf)
       out.push(
-        <Icon name="starHalf" color="yellow" height="stars" key={10 + 5} />
+        <Icon name="star-half" color="yellow" height="stars" key={10 + 5} />
       );
 
     for (let i = 0; i < nummOfEmpty; i++)
       out.push(
-        <Icon name="starEmpty" color="yellow" height="stars" key={i + 5} />
+        <Icon name="star-empty" color="yellow" height="stars" key={i + 5} />
       );
 
     return out;

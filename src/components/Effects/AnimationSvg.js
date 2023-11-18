@@ -1,6 +1,4 @@
 import React from "react";
-import Circle from "../../media/illu/circle.svg";
-import Rectangle from "../../media/illu/rectangle.svg";
 
 const AnimationSvg = ({
   svg = "circle",
@@ -18,8 +16,8 @@ const AnimationSvg = ({
   let zIndex = 0;
 
   let src;
-  if (svg === "circle") src = Circle;
-  if (svg === "rectangle") src = Rectangle;
+  if (svg === "circle") src = "illu/circle.svg";
+  if (svg === "rectangle") src = "illu/rectangle.svg";
   return (
     <img
       src={src}
